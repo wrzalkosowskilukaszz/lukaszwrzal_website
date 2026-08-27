@@ -1,0 +1,133 @@
+import { ImageResponse } from "next/og";
+
+import { t } from "@/lib/i18n";
+import { LOCALES, type Locale } from "@/lib/types";
+
+export const alt = "Lukasz Wrzal — Creative Designer & AI Director";
+export const size = { width: 1200, height: 630 };
+export const contentType = "image/png";
+
+export function generateStaticParams() {
+  return LOCALES.map((locale) => ({ locale }));
+}
+
+/** The six disciplines, in the order they appear on the work index. */
+const SPECTRUM = [
+  { hue: "#3C2CC2", n: 7 },  // Identity
+  { hue: "#0F8B7E", n: 5 },  // Product
+  { hue: "#C2761B", n: 4 },  // Brand
+  { hue: "#2563EB", n: 4 },  // Web
+  { hue: "#C026A3", n: 4 },  // AI
+  { hue: "#E4572E", n: 6 },  // Illustrations
+];
+
+/**
+ * Every link shared during a job hunt renders as this card — the most-seen
+ * surface on the site, and previously a bare title.
+ *
+ * Deliberately built from flat colour rather than the site's aurora: Satori
+ * renders blur as hard bands and flattens layered gradients, and a card
+ * viewed at 500px wide in a chat preview wants sharpness, not atmosphere.
+ * The spine is the real portfolio — six disciplines, weighted by how many
+ * projects each holds.
+ */
+export default async function Image({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const l = (LOCALES.includes(locale as Locale) ? locale : "en") as Locale;
+
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          background: "#071A31",
+        }}
+      >
+        {/* Discipline spine: each band's height is that category's share. */}
+        <div style={{ display: "flex", flexDirection: "column", width: 22 }}>
+          {SPECTRUM.map((s) => (
+            <div key={s.hue} style={{ display: "flex", flexGrow: s.n, background: s.hue }} />
+          ))}
+        </div>
+
+        <div
+          style={{
+            flexGrow: 1,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            padding: "68px 72px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              fontFamily: "monospace",
+              fontSize: 21,
+              letterSpacing: 5,
+              color: "rgba(255,255,255,0.55)",
+            }}
+          >
+            TAKEALUKE.STUDIO
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 26 }}>
+            <div
+              style={{
+                display: "flex",
+                fontSize: 82,
+                lineHeight: 1.02,
+                letterSpacing: -3.5,
+                color: "#FFFFFF",
+                maxWidth: 900,
+              }}
+            >
+              Lukasz Wrzal
+            </div>
+            <div
+              style={{
+                display: "flex",
+                fontSize: 38,
+                lineHeight: 1.15,
+                letterSpacing: -1,
+                color: "#5EE7C5",
+              }}
+            >
+              Creative Designer &amp; AI Director
+            </div>
+            <div
+              style={{
+                display: "flex",
+                fontSize: 27,
+                lineHeight: 1.35,
+                color: "rgba(255,255,255,0.7)",
+                maxWidth: 800,
+              }}
+            >
+              {t(l, "heroLedeA")}
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              fontFamily: "monospace",
+              fontSize: 21,
+              letterSpacing: 3,
+              color: "rgba(255,255,255,0.55)",
+            }}
+          >
+            THIRTY PROJECTS · WARSAW · AVAILABLE FOR NEW WORK
+          </div>
+        </div>
+      </div>
+    ),
+    size,
+  );
+}

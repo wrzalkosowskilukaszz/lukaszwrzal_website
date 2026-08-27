@@ -1,0 +1,46 @@
+/* ==========================================================================
+   Type scale and category colour — added in the 2026 redesign.
+   Sits alongside brand/tokens.css, which stays untouched: the navy, the
+   aurora alphas and the radii are all still exactly the approved values.
+   ========================================================================== */
+
+:root {
+  /* ---- Type scale -------------------------------------------------------
+     Five steps plus a mono label. Replaces the nine drifting sizes the
+     first build accumulated — six of which sat inside a 6px band all doing
+     the same job. Every step is a clear jump from its neighbour.          */
+  --t-xl:    clamp(2.5rem, 6vw, 4.8rem);      /* page + section display    */
+  --t-lg:    clamp(1.7rem, 3.4vw, 3rem);      /* statements, next-project  */
+  --t-md:    clamp(1.15rem, 1.9vw, 1.5rem);   /* sub-heads, tile names     */
+  --t-base:  clamp(1rem, 1.2vw, 1.125rem);    /* body and lede             */
+  --t-sm:    0.875rem;                        /* meta, captions, small UI  */
+  --t-label: 0.6875rem;                       /* mono eyebrow, uppercase   */
+
+  /* ---- Line heights, paired to the step above -------------------------- */
+  --lh-xl:   0.96;
+  --lh-lg:   1.1;
+  --lh-md:   1.28;
+  --lh-base: 1.65;
+  --lh-sm:   1.5;
+
+  /* ---- Category colour --------------------------------------------------
+     One hue per discipline, so a visitor reads the shape of the practice
+     without hovering anything. Used SMALL — a 7px dot and a mono word —
+     so it disappears behind a photograph rather than fighting it.
+     The aurora is the one place these are allowed to be large.           */
+  --c-identity:      #3C2CC2;
+  --c-product:       #0F8B7E;
+  --c-brand:         #C2761B;
+  --c-web:           #2563EB;
+  --c-ai:            #C026A3;
+  --c-illustrations: #E4572E;
+
+  /* Zero-alpha pairs, for the aurora's radial falloff. Never `transparent`
+     — that is rgba(0,0,0,0) and greys the edge. */
+  --c-identity-0:      rgba(60, 44, 194, 0);
+  --c-product-0:       rgba(15, 139, 126, 0);
+  --c-brand-0:         rgba(194, 118, 27, 0);
+  --c-web-0:           rgba(37, 99, 235, 0);
+  --c-ai-0:            rgba(192, 38, 163, 0);
+  --c-illustrations-0: rgba(228, 87, 46, 0);
+}

@@ -1,3 +1,9 @@
+/* Editorial, mixed scale. Replaces twelve uniform tiles.
+
+   Scale carries meaning: the lead project is large because it is the best
+   work, and saying so is an act of editing. Twelve things at equal weight
+   says the opposite. */
+
 .stage {
   position: relative;
   width: min(var(--lw-stage-max), 100% - 48px);
@@ -23,20 +29,17 @@
   padding: clamp(3rem, 6vw, 5.5rem) 0 clamp(1.75rem, 3.5vw, 2.75rem);
 }
 
-.title {
-  font-size: clamp(2.2rem, 4.6vw, 4.4rem);
-  line-height: 1.12;
-}
-
-.showAllWrap { text-align: right; }
+.showAllWrap { text-align: right; flex: none; }
 
 .showAll {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  font-size: 20px;
+  font-family: var(--lw-font-display);
+  font-variation-settings: "opsz" 24;
+  font-size: var(--t-md);
   font-weight: 700;
-  letter-spacing: var(--lw-title-track);
+  letter-spacing: -0.02em;
 }
 .showAll svg { transition: transform 220ms var(--lw-ease-playful); }
 .showAll:hover svg { transform: translateX(3px); }
@@ -48,26 +51,35 @@
   background: var(--lw-ink);
 }
 
-/* Three explicit columns. The offset middle column is what gives the bento
-   its rhythm. Column fr values are spring-driven on hover. */
+/* Six spans across twelve columns. Three scales, deliberate asymmetry. */
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(12, 1fr);
   gap: var(--lw-gap-row) var(--lw-gap-col);
-  align-items: start;
 }
 
-.col { display: grid; gap: var(--lw-gap-row); min-width: 0; }
-.col:nth-child(2) { padding-top: clamp(0px, 4vw, 80px); }
+.cell { min-width: 0; }
 
-.tall { height: clamp(280px, 32vw, 646px); }
-.short { height: clamp(200px, 20vw, 406px); }
+.lead   { grid-column: span 8; height: clamp(320px, 38vw, 620px); }
+.stack  { grid-column: span 4; display: grid; gap: var(--lw-gap-row); }
+.stack .cell { height: clamp(150px, 18vw, 295px); }
+.wide   { grid-column: span 7; height: clamp(220px, 25vw, 400px); }
+.narrow { grid-column: span 5; height: clamp(220px, 25vw, 400px); }
 
-/* Below the bento's comfortable width the three columns stop working.
-   Collapse to one column at the short height and drop the hover claim.
-   Mobile needs proper design attention — flagged in the handoff. */
-@media (max-width: 900px) {
-  .grid { grid-template-columns: 1fr !important; }
-  .col:nth-child(2) { padding-top: 0; }
-  .tall, .short { height: clamp(220px, 56vw, 400px); }
+/* Lead tile earns bigger type. */
+.lead :global(.tileName) { font-size: var(--t-lg); }
+
+@media (max-width: 1000px) {
+  .lead, .wide, .narrow { grid-column: span 12; }
+  .stack { grid-column: span 12; grid-template-columns: 1fr 1fr; }
+  .lead { height: clamp(260px, 46vw, 420px); }
+  .wide, .narrow { height: clamp(200px, 34vw, 320px); }
+  .stack .cell { height: clamp(160px, 26vw, 240px); }
+}
+
+@media (max-width: 620px) {
+  .stack { grid-template-columns: 1fr; }
+  .head { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .showAllWrap { text-align: left; }
+  .rule { margin-left: 0; }
 }

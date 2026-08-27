@@ -1,16 +1,39 @@
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  width: min(1000px, 100% - 40px);
+  margin: clamp(6.5rem, 10vw, 8.5rem) auto 0;
+  font-family: var(--lw-font-mono);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: var(--lw-label-track);
+  text-transform: uppercase;
+  color: var(--lw-muted);
+  transition: color var(--lw-dur-quick) var(--lw-ease-out);
+}
+.backLink:hover { color: var(--lw-ink); }
+
+.backArrow {
+  display: inline-flex;
+  transform: rotate(180deg);
+  transition: transform 260ms var(--lw-ease-playful);
+}
+.backLink:hover .backArrow { transform: rotate(180deg) translateX(3px); }
+
 .hero {
   width: min(1000px, 100% - 40px);
   margin-inline: auto;
-  padding: clamp(7rem, 11vw, 9.875rem) 0 clamp(2rem, 4vw, 3rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(2rem, 4vw, 3rem);
   text-align: center;
 }
 .title {
   margin: 14px 0 18px;
-  font-size: clamp(2.5rem, 5.4vw, 4.5rem);
+  font-size: var(--t-xl);
   line-height: 1.1;
 }
 .lede {
-  font-size: clamp(1.05rem, 1.5vw, 1.5rem);
+  font-size: var(--t-md);
   line-height: 1.4;
   color: rgb(69, 69, 69);
 }
@@ -34,12 +57,12 @@
 }
 .metaLabel {
   font-family: var(--lw-font-mono);
-  font-size: 11px;
+  font-size: var(--t-label);
   letter-spacing: var(--lw-label-track);
   text-transform: uppercase;
   color: var(--lw-muted);
 }
-.metaValue { margin-top: 7px; font-size: 15px; font-weight: 500; }
+.metaValue { margin-top: 7px; font-size: var(--t-sm); font-weight: 500; }
 
 .section {
   width: min(var(--lw-read-max), 100% - 48px);
@@ -49,7 +72,7 @@
 .statement {
   max-width: 24ch;
   margin: 14px 0 clamp(2rem, 4vw, 3rem);
-  font-size: clamp(1.7rem, 3.4vw, 3rem);
+  font-size: var(--t-lg);
   font-weight: 500;
   line-height: 1.14;
   letter-spacing: var(--lw-display-track);
@@ -60,7 +83,7 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: clamp(1.5rem, 4vw, 3.5rem);
 }
-.columns p { font-size: 1.0625rem; line-height: 1.7; color: var(--lw-muted); }
+.columns p { font-size: var(--t-base); line-height: 1.7; color: var(--lw-muted); }
 
 .pair {
   display: grid;
@@ -70,7 +93,7 @@
   margin: clamp(2.5rem, 5vw, 4rem) auto 0;
 }
 
-.body { max-width: 60ch; font-size: 1.0625rem; line-height: 1.7; color: var(--lw-muted); }
+.body { max-width: 60ch; font-size: var(--t-base); line-height: 1.7; color: var(--lw-muted); }
 
 .motionSlot {
   width: min(var(--lw-content-max), 100% - 40px);
@@ -108,7 +131,7 @@
   margin-top: 16px;
 }
 .nextName {
-  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-size: var(--t-xl);
   font-weight: 500;
   line-height: 1.1;
   letter-spacing: var(--lw-display-track);

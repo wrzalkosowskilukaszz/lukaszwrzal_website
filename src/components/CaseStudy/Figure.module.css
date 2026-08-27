@@ -31,7 +31,7 @@
   -webkit-backdrop-filter: blur(12px) saturate(1.5);
   box-shadow: var(--lw-shadow-float);
   color: var(--lw-ink);
-  font-size: 13px;
+  font-size: var(--t-sm);
   font-weight: 500;
   opacity: 0;
   transform: translateY(6px);
@@ -46,7 +46,7 @@
 .caption {
   margin-top: 12px;
   font-family: var(--lw-font-mono);
-  font-size: 11px;
+  font-size: var(--t-label);
   letter-spacing: var(--lw-label-track);
   text-transform: uppercase;
   color: var(--lw-muted);

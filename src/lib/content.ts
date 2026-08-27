@@ -1,10 +1,13 @@
 import projectsData from "@/content/projects.json";
 
+import { imagesFor } from "./images";
+import { headlineStat } from "./placeholder";
 import type {
   Category,
   Locale,
   LocalisedProject,
   Project,
+  ProjectCard,
   ProjectsFile,
 } from "./types";
 import { CATEGORIES } from "./types";
@@ -45,6 +48,27 @@ export function getLocalisedProject(
 ): LocalisedProject | undefined {
   const p = getProject(slug);
   return p ? localise(p, locale) : undefined;
+}
+
+/** The lean shape a tile or index row needs — nothing else crosses the wire. */
+export function toCard(project: Project, locale: Locale): ProjectCard {
+  const copy = locale === "pl" ? project.pl : project.en;
+  const stat = headlineStat(copy);
+  return {
+    slug: project.slug,
+    cat: project.cat,
+    year: project.year,
+    title: copy.title,
+    desc: copy.desc,
+    ...(stat ? { stat } : {}),
+    ...(imagesFor(project.slug)["01"]
+      ? { image: imagesFor(project.slug)["01"] }
+      : {}),
+  };
+}
+
+export function getCards(locale: Locale): ProjectCard[] {
+  return PROJECTS.map((p) => toCard(p, locale));
 }
 
 /** Homepage bento shows the first twelve. */

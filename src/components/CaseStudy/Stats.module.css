@@ -6,7 +6,7 @@
 }
 
 .value {
-  font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+  font-size: var(--t-lg);
   font-weight: 500;
   line-height: 1.05;
   letter-spacing: var(--lw-display-track);
@@ -15,7 +15,7 @@
 
 .label {
   margin-top: 8px;
-  font-size: 14px;
+  font-size: var(--t-sm);
   line-height: 1.5;
   color: var(--lw-muted);
 }

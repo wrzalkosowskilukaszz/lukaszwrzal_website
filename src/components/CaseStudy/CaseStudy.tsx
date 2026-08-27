@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 
 import { Aurora } from "@/components/Aurora/Aurora";
 import { ArrowRight } from "@/components/icons/Arrows";
+import { Reveal } from "@/components/Reveal";
 import { useReveal } from "@/hooks/useReveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { t } from "@/lib/i18n";
@@ -24,7 +25,7 @@ const SLOTS: FigureKey[] = [
 
 export interface CaseStudyProps {
   project: LocalisedProject;
-  next: LocalisedProject;
+  next: { slug: string; title: string };
   locale: Locale;
   /** slot -> image url. Empty until real assets land. */
   images: Partial<Record<FigureKey, string>>;
@@ -86,13 +87,24 @@ export function CaseStudy({ project, next, locale, images }: CaseStudyProps) {
     <>
       <Spine chapters={chapters} />
 
+      {/* A case study offered only "next project" — no way back to the index
+          you arrived from, and on mobile the nav had no route either. */}
+      <Link href={`/${locale}/work`} className={styles.backLink}>
+        <span className={styles.backArrow} aria-hidden="true">
+          <ArrowRight />
+        </span>
+        {t(locale, "allWork")}
+      </Link>
+
       <header className={styles.hero}>
         <p className={`lw-eyebrow ${styles.rise}`} data-edit={ed("eyebrow")}>{copy.eyebrow}</p>
         <h1 className={`${styles.title} ${styles.rise}`} data-edit={ed("title")}>{copy.title}</h1>
         <p className={`${styles.lede} ${styles.rise}`} data-edit={ed("lede")}>{copy.lede}</p>
       </header>
 
-      <div className={styles.keyVisual}>
+      {/* Destination of the tile morph. The name is unique per page, and the
+          tile only claims it for the duration of the transition. */}
+      <div className={styles.keyVisual} style={{ viewTransitionName: "project-media" }}>
         {fig("01", { stage: true, height: "clamp(340px, 50vw, 700px)", parallax: 0.1 })}
       </div>
 
@@ -105,7 +117,7 @@ export function CaseStudy({ project, next, locale, images }: CaseStudyProps) {
         ))}
       </div>
 
-      <section className={styles.section} id="brief">
+      <Reveal><section className={styles.section} id="brief">
         <p className="lw-eyebrow">{t(locale, "sectionBrief")}</p>
         <h2 className={styles.statement} data-edit={ed("statement")}>{copy.statement}</h2>
         <div className={styles.columns}>
@@ -113,7 +125,7 @@ export function CaseStudy({ project, next, locale, images }: CaseStudyProps) {
             <p key={i} data-edit={ed(`brief.${i}`)}>{para}</p>
           ))}
         </div>
-      </section>
+      </section></Reveal>
 
       <div className={styles.pair}>
         {fig("02", { height: "clamp(220px, 24vw, 340px)" })}
@@ -127,11 +139,11 @@ export function CaseStudy({ project, next, locale, images }: CaseStudyProps) {
         figures={[images["04"], images["05"], images["06"], images["07"]]}
       />
 
-      <section className={styles.section} id="system">
+      <Reveal><section className={styles.section} id="system">
         <p className="lw-eyebrow">{t(locale, "sectionSystem")}</p>
         <h2 className={styles.statement} data-edit={ed("system.statement")}>{copy.system?.statement}</h2>
         <p className={styles.body} data-edit={ed("system.body")}>{copy.system?.body}</p>
-      </section>
+      </section></Reveal>
 
       <div style={{ marginTop: "clamp(2.5rem, 5vw, 4rem)" }}>
         <PlateStrip
@@ -157,7 +169,7 @@ export function CaseStudy({ project, next, locale, images }: CaseStudyProps) {
         ) : null}
       </div>
 
-      <section className={styles.section} id="outcome">
+      <Reveal><section className={styles.section} id="outcome">
         <p className="lw-eyebrow">{t(locale, "sectionOutcome")}</p>
         <h2 className={styles.statement} data-edit={ed("outcome.statement")}>{copy.outcome?.statement}</h2>
         <div className={styles.columns}>
@@ -165,15 +177,15 @@ export function CaseStudy({ project, next, locale, images }: CaseStudyProps) {
             <p key={i} data-edit={ed(`outcome.body.${i}`)}>{para}</p>
           ))}
         </div>
-        {copy.stats?.length ? <Stats stats={copy.stats} locale={locale} /> : null}
-      </section>
+        {copy.stats.length ? <Stats stats={copy.stats} locale={locale} /> : null}
+      </section></Reveal>
 
       <footer className={styles.next}>
         <Aurora />
         <div className={styles.nextInner}>
           <p className="lw-eyebrow">{t(locale, "nextProject")}</p>
           <Link href={`/${locale}/work/${next.slug}`} className={styles.nextLink}>
-            <span className={styles.nextName}>{next.copy.title}</span>
+            <span className={styles.nextName}>{next.title}</span>
             <span className={styles.nextDisc} aria-hidden="true">
               <ArrowRight size={18} />
             </span>

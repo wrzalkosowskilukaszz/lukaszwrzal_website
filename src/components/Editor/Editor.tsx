@@ -25,6 +25,10 @@ export function Editor() {
   /** Uploads are namespaced per project, so only case studies take drops. */
   const slug = pathname.match(/^\/(?:en|pl)\/work\/([a-z0-9-]+)\/?$/)?.[1];
 
+  /* Editability is a property of the route, not something to discover from
+     the DOM — only case-study pages carry copy and image slots. */
+  const editable = Boolean(slug);
+
   const [tone, setTone] = useState<Tone>("idle");
   const [message, setMessage] = useState("No changes");
   const edits = useRef<Map<string, string>>(new Map());
@@ -208,10 +212,33 @@ export function Editor() {
     return () => window.removeEventListener("beforeunload", warn);
   }, [on]);
 
-  if (!on) return null;
+  const enter = () => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("edit", "1");
+    window.location.href = url.toString();
+  };
+
+  if (!on) {
+    return (
+      <button type="button" className={styles.launcher} onClick={enter}>
+        <span className={styles.pip} aria-hidden="true" />
+        Edit content
+      </button>
+    );
+  }
+
+  const nothingHere = !editable;
 
   return (
-    <div className={styles.bar} role="toolbar" aria-label="Content editor">
+    <>
+      {nothingHere ? (
+        <p className={styles.hint}>
+          Nothing on this page is editable yet. Open any project from{" "}
+          <b>Work</b> — that is where the copy and all twelve image slots live.
+        </p>
+      ) : null}
+
+      <div className={styles.bar} role="toolbar" aria-label="Content editor">
       <span className={styles.status} data-tone={tone}>{message}</span>
 
       <button
@@ -222,6 +249,10 @@ export function Editor() {
       >
         Save
       </button>
+
+      {editable ? (
+        <span className={styles.scope}>12 image slots</span>
+      ) : null}
 
       <button
         type="button"
@@ -234,6 +265,7 @@ export function Editor() {
       >
         Done
       </button>
-    </div>
+      </div>
+    </>
   );
 }

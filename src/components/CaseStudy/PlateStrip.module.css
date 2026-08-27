@@ -41,7 +41,7 @@
 .hint {
   margin-top: 12px;
   font-family: var(--lw-font-mono);
-  font-size: 11px;
+  font-size: var(--t-label);
   letter-spacing: var(--lw-label-track);
   text-transform: uppercase;
   color: var(--lw-muted);

@@ -1,19 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { ArrowRight } from "@/components/icons/Arrows";
+import { resolveThrow } from "./throw";
+import { useTitleRoll } from "./useTitleRoll";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { t } from "@/lib/i18n";
 import { subscribe } from "@/lib/raf";
 import { Spring, clamp01 } from "@/lib/spring";
-import type { Locale, LocalisedProject } from "@/lib/types";
+import type { Locale, ProjectCard } from "@/lib/types";
 
 import styles from "./HeroReel.module.css";
 
 export interface HeroReelProps {
-  projects: LocalisedProject[];
+  projects: ProjectCard[];
   locale: Locale;
 }
 
@@ -30,6 +32,23 @@ export function HeroReel({ projects, locale }: HeroReelProps) {
   const activeRef = useRef(0);
   const [active, setActive] = useState(0);
   const reduced = useReducedMotion();
+
+  /* Every input — scroll, drag, keys, segment clicks — resolves to a scroll
+     position. The reel's state is always derived from the scroll, so the
+     scroll never stops being the scroll. */
+  const goTo = useCallback(
+    (i: number) => {
+      const track = trackRef.current;
+      if (!track) return;
+      const clamped = Math.max(0, Math.min(count - 1, i));
+      const per = (track.offsetHeight - window.innerHeight) / count;
+      window.scrollTo({
+        top: track.offsetTop + per * (clamped + 0.5),
+        behavior: reduced ? "auto" : "smooth",
+      });
+    },
+    [count, reduced],
+  );
 
   useEffect(() => {
     const track = trackRef.current;
@@ -54,6 +73,64 @@ export function HeroReel({ projects, locale }: HeroReelProps) {
 
     frame.addEventListener("pointermove", onMove, { passive: true });
     frame.addEventListener("pointerleave", onLeave, { passive: true });
+
+    /* Drag with a velocity throw. Threshold 60px, or a flick over 0.6 px/ms.
+       touch-action: pan-y on the frame means a vertical swipe still scrolls
+       the page normally — only horizontal intent is claimed. */
+    let dragging = false;
+    let startX = 0;
+    let startT = 0;
+    let lastX = 0;
+    let lastT = 0;
+
+    const onDown = (e: PointerEvent) => {
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      dragging = true;
+      startX = lastX = e.clientX;
+      startT = lastT = performance.now();
+    };
+
+    const onDrag = (e: PointerEvent) => {
+      if (!dragging) return;
+      lastX = e.clientX;
+      lastT = performance.now();
+    };
+
+    const onUp = () => {
+      if (!dragging) return;
+      dragging = false;
+      const direction = resolveThrow(lastX - startX, lastT - startT);
+      if (direction === 0) return;
+      goTo(activeRef.current + direction);
+    };
+
+    frame.addEventListener("pointerdown", onDown);
+    frame.addEventListener("pointermove", onDrag, { passive: true });
+    window.addEventListener("pointerup", onUp);
+    window.addEventListener("pointercancel", onUp);
+
+    /* Arrow keys, but only while the reel is actually on screen — otherwise
+       they would hijack arrow scrolling everywhere else on the page. */
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+      // e.target is not always an Element — a keydown with nothing focused
+      // can land on document or window, neither of which has closest().
+      const target = e.target;
+      if (
+        target instanceof Element &&
+        target.closest("input, textarea, [contenteditable]")
+      ) {
+        return;
+      }
+
+      const r = frame.getBoundingClientRect();
+      const onScreen = r.bottom > 0 && r.top < window.innerHeight;
+      if (!onScreen) return;
+
+      e.preventDefault();
+      goTo(activeRef.current + (e.key === "ArrowRight" ? 1 : -1));
+    };
+    window.addEventListener("keydown", onKey);
 
     const stop = subscribe((dt) => {
       const rect = track.getBoundingClientRect();
@@ -108,10 +185,18 @@ export function HeroReel({ projects, locale }: HeroReelProps) {
       stop();
       frame.removeEventListener("pointermove", onMove);
       frame.removeEventListener("pointerleave", onLeave);
+      frame.removeEventListener("pointerdown", onDown);
+      frame.removeEventListener("pointermove", onDrag);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onUp);
+      window.removeEventListener("keydown", onKey);
     };
-  }, [count, reduced]);
+  }, [count, reduced, goTo]);
 
   const current = projects[active];
+  const titleRef = useTitleRoll(
+    current ? `${current.title} — ${current.desc}` : "",
+  );
 
   return (
     <section
@@ -145,17 +230,9 @@ export function HeroReel({ projects, locale }: HeroReelProps) {
                   key={p.slug}
                   type="button"
                   className={styles.segment}
-                  aria-label={p.copy.title}
+                  aria-label={p.title}
                   aria-current={i === active ? "true" : undefined}
-                  onClick={() => {
-                    const track = trackRef.current;
-                    if (!track) return;
-                    const per = (track.offsetHeight - window.innerHeight) / count;
-                    window.scrollTo({
-                      top: track.offsetTop + per * (i + 0.5),
-                      behavior: reduced ? "auto" : "smooth",
-                    });
-                  }}
+                  onClick={() => goTo(i)}
                 >
                   <span
                     className={styles.segmentFill}
@@ -166,9 +243,7 @@ export function HeroReel({ projects, locale }: HeroReelProps) {
             </div>
 
             <span className={styles.titleWrap}>
-              <span className={styles.title} key={current?.slug}>
-                {current?.copy.title} — {current?.copy.desc}
-              </span>
+              <span className={styles.title} ref={titleRef} />
             </span>
 
             <Link href={`/${locale}/work/${current?.slug}`} className={styles.cta}>

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { Footer } from "@/components/Footer/Footer";
-import { WorkGrid } from "@/components/WorkGrid/WorkGrid";
-import { getLocalisedProjects } from "@/lib/content";
+import { WorkBrowser } from "@/components/WorkGrid/WorkBrowser";
+import { getCards } from "@/lib/content";
 import { t } from "@/lib/i18n";
 import { LOCALES, type Locale } from "@/lib/types";
 
@@ -35,7 +35,7 @@ export default async function WorkPage({
   if (!LOCALES.includes(locale as Locale)) notFound();
   const l = locale as Locale;
 
-  const projects = getLocalisedProjects(l);
+  const projects = getCards(l);
 
   return (
     <>
@@ -45,7 +45,7 @@ export default async function WorkPage({
         <p className={styles.lede}>{t(l, "workLede")}</p>
       </header>
 
-      <WorkGrid projects={projects} locale={l} />
+      <WorkBrowser projects={projects} locale={l} />
 
       <Footer locale={l} />
     </>

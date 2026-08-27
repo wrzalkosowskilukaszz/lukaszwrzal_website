@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { CaseStudy } from "@/components/CaseStudy/CaseStudy";
 import { getLocalisedProject, getProjects } from "@/lib/content";
+import { realStats } from "@/lib/placeholder";
 import { imagesFor } from "@/lib/images";
 import { LOCALES, type Locale } from "@/lib/types";
 
@@ -50,11 +51,19 @@ export default async function ProjectPage({
   const project = getLocalisedProject(slug, l);
   if (!project) notFound();
 
-  const next = getLocalisedProject(project.nextSlug, l) ?? project;
+  // Unwritten outcomes are authoring prompts, not content — drop them here
+  // rather than filtering at render, so they never reach the browser.
+  const clean = {
+    ...project,
+    copy: { ...project.copy, stats: realStats(project.copy.stats) },
+  };
+
+  const nextProject = getLocalisedProject(project.nextSlug, l) ?? project;
+  const next = { slug: nextProject.slug, title: nextProject.copy.title };
 
   return (
     <CaseStudy
-      project={project}
+      project={clean}
       next={next}
       locale={l}
       images={imagesFor(slug)}

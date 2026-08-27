@@ -9,5 +9,6 @@ export function ClockStarter() {
   useEffect(() => {
     startClock();
   }, []);
+
   return null;
 }

@@ -16,3 +16,8 @@ const MANIFEST = manifest as Manifest;
 export function imagesFor(slug: string): Partial<Record<FigureKey, string>> {
   return MANIFEST[slug] ?? {};
 }
+
+/** The whole manifest, for surfaces that show many projects at once. */
+export function allImages(): Manifest {
+  return MANIFEST;
+}

@@ -51,6 +51,9 @@ export const CHROME = {
     workLede:
       "Brand systems, product interfaces, print and packaging. Everything I can show publicly.",
     filterAll: "All",
+    viewIndex: "Index",
+    viewGrid: "Grid",
+    viewGroup: "View as",
 
     // Case study
     chapterBrief: "Brief",
@@ -69,6 +72,7 @@ export const CHROME = {
     drag: "Drag",
     closeEsc: "Close · esc",
     nextProject: "Next project",
+    allWork: "All work",
     previousImage: "Previous image",
     nextImage: "Next image",
 
@@ -125,6 +129,9 @@ export const CHROME = {
     workLede:
       "Systemy marki, interfejsy produktów, druk i opakowania. Wszystko, co mogę pokazać publicznie.",
     filterAll: "Wszystkie",
+    viewIndex: "Lista",
+    viewGrid: "Siatka",
+    viewGroup: "Widok",
 
     chapterBrief: "Brief",
     chapterProcess: "Proces",
@@ -142,6 +149,7 @@ export const CHROME = {
     drag: "Przeciągnij",
     closeEsc: "Zamknij · esc",
     nextProject: "Następny projekt",
+    allWork: "Wszystkie projekty",
     previousImage: "Poprzedni obraz",
     nextImage: "Następny obraz",
 
