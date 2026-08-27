@@ -39,6 +39,7 @@ export function Editor() {
   const setStatus = (t: Tone, m: string) => { setTone(t); setMessage(m); };
 
   const [panelOpen, setPanelOpen] = useState(false);
+  const [shielding, setShielding] = useState(false);
   const [order, setOrder] = useState<SectionKind[] | null>(null);
 
   /** Read the order actually on the page, so the panel always starts truthful. */
@@ -166,7 +167,30 @@ export function Editor() {
     };
   }, [on]);
 
-  /* Drag an image onto any media slot. */
+  const upload = useCallback(
+    async (file: File, slot: string) => {
+      if (!slug) return;
+      setStatus("saving", `Uploading ${file.name}…`);
+      const body = new FormData();
+      body.append("file", file);
+      body.append("slug", slug);
+      body.append("slot", slot);
+      try {
+        const res = await fetch("/api/upload", { method: "POST", body });
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error ?? "Upload failed");
+        setStatus("saved", `Saved slot ${slot} · ${(json.bytes / 1024 / 1024).toFixed(1)}MB`);
+        router.refresh();
+      } catch (err) {
+        setStatus("error", err instanceof Error ? err.message : "Upload failed");
+      }
+    },
+    [slug, router],
+  );
+
+  /* Drop an image on a slot — or click one and pick a file. Drag-only was
+     the whole problem: miss by a few pixels and the browser opened the file
+     instead, which reads as "nothing happens". */
   useEffect(() => {
     if (!on || !slug) return;
 
@@ -179,45 +203,77 @@ export function Editor() {
     const leave = (e: DragEvent) => {
       delete (e.currentTarget as HTMLElement).dataset.drop;
     };
-    const drop = async (e: DragEvent) => {
+    const drop = (e: DragEvent) => {
       e.preventDefault();
+      e.stopPropagation();
       const el = e.currentTarget as HTMLElement;
       delete el.dataset.drop;
-
+      setShielding(false);
       const file = e.dataTransfer?.files?.[0];
       const slot = el.dataset.slot;
-      if (!file || !slot) return;
+      if (file && slot) void upload(file, slot);
+    };
 
-      setStatus("saving", `Uploading ${file.name}…`);
-      const body = new FormData();
-      body.append("file", file);
-      body.append("slug", slug);
-      body.append("slot", slot);
+    /* Click a slot and pick a file — no dragging required. */
+    const picker = document.createElement("input");
+    picker.type = "file";
+    picker.accept = "image/*,video/mp4,video/webm";
+    picker.style.display = "none";
+    document.body.appendChild(picker);
+    let pending: string | null = null;
+    const onPicked = () => {
+      const file = picker.files?.[0];
+      if (file && pending) void upload(file, pending);
+      picker.value = "";
+    };
+    picker.addEventListener("change", onPicked);
 
-      try {
-        const res = await fetch("/api/upload", { method: "POST", body });
-        const json = await res.json();
-        if (!res.ok) throw new Error(json.error ?? "Upload failed");
-        setStatus("saved", `Saved ${slot} · ${(json.bytes / 1024 / 1024).toFixed(1)}MB`);
-        router.refresh();
-      } catch (err) {
-        setStatus("error", err instanceof Error ? err.message : "Upload failed");
-      }
+    const click = (e: MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      pending = (e.currentTarget as HTMLElement).dataset.slot ?? null;
+      picker.click();
     };
 
     for (const el of slots) {
+      el.dataset.filled = el.querySelector("img") ? "true" : "false";
       el.addEventListener("dragover", over);
       el.addEventListener("dragleave", leave);
       el.addEventListener("drop", drop);
+      el.addEventListener("click", click);
     }
+
+    /* A file dropped anywhere else must not navigate the page away. */
+    const shieldOver = (e: DragEvent) => {
+      if (!e.dataTransfer?.types?.includes("Files")) return;
+      e.preventDefault();
+      setShielding(true);
+    };
+    const shieldLeave = (e: DragEvent) => {
+      if (e.relatedTarget === null) setShielding(false);
+    };
+    const shieldDrop = (e: DragEvent) => {
+      e.preventDefault();
+      setShielding(false);
+    };
+    window.addEventListener("dragover", shieldOver);
+    window.addEventListener("dragleave", shieldLeave);
+    window.addEventListener("drop", shieldDrop);
+
     return () => {
       for (const el of slots) {
         el.removeEventListener("dragover", over);
         el.removeEventListener("dragleave", leave);
         el.removeEventListener("drop", drop);
+        el.removeEventListener("click", click);
       }
+      picker.removeEventListener("change", onPicked);
+      picker.remove();
+      window.removeEventListener("dragover", shieldOver);
+      window.removeEventListener("dragleave", shieldLeave);
+      window.removeEventListener("drop", shieldDrop);
     };
-  }, [on, slug, router]);
+  }, [on, slug, upload]);
 
   const save = useCallback(async () => {
     if (edits.current.size === 0) return;
@@ -309,8 +365,12 @@ export function Editor() {
       </button>
 
       {editable ? (
-        <button type="button" className={styles.btn} onClick={readOrder}>
-          Sections
+        <button
+          type="button"
+          className={`${styles.btn} ${styles.outlined}`}
+          onClick={readOrder}
+        >
+          ⇅ Sections
         </button>
       ) : null}
 
@@ -326,6 +386,12 @@ export function Editor() {
         Done
       </button>
       </div>
+
+      {shielding ? (
+        <div className={styles.dropShield}>
+          Drop the file on a numbered slot
+        </div>
+      ) : null}
 
       {panelOpen && order ? (
         <div className={styles.panel} role="dialog" aria-label="Page sections">

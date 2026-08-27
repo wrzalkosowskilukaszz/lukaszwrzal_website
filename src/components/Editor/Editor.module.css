@@ -103,6 +103,13 @@
 .primary { background: var(--lw-mint); }
 .primary:hover { background: rgb(74, 214, 179); }
 
+/* Was plain text among plain text, and got missed entirely. */
+.outlined {
+  background: transparent;
+  border: 1px solid rgba(7, 26, 49, 0.22);
+}
+.outlined:hover { background: rgba(7, 26, 49, 0.06); }
+
 /* Editable fields, only while edit mode is on. */
 :global(body[data-edit="on"]) [data-edit] {
   outline: 1px dashed rgba(7, 26, 49, 0.22);
@@ -121,14 +128,60 @@
   background: rgba(94, 231, 197, 0.12);
 }
 
-/* Drop targets for media slots. */
+/* Media slots. In edit mode they are click targets as well as drop targets,
+   and they say so — drag-only, with no label, read as "nothing happens". */
 :global(body[data-edit="on"]) [data-slot] {
-  outline: 1px dashed rgba(7, 26, 49, 0.28);
-  outline-offset: -1px;
-}
-:global(body[data-edit="on"]) [data-slot][data-drop="over"] {
-  outline: 2px solid var(--lw-mint);
+  outline: 2px dashed rgba(7, 26, 49, 0.3);
   outline-offset: -2px;
+  cursor: pointer;
+  position: relative;
+}
+:global(body[data-edit="on"]) [data-slot]::after {
+  content: "Slot " attr(data-slot) " · click or drop an image";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  padding: 9px 15px;
+  border-radius: 999px;
+  background: rgba(7, 26, 49, 0.86);
+  color: #fff;
+  font-family: var(--lw-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+}
+/* A slot that already holds an image only labels itself on hover. */
+:global(body[data-edit="on"]) [data-slot][data-filled="true"]::after { opacity: 0; }
+:global(body[data-edit="on"]) [data-slot][data-filled="true"]:hover::after { opacity: 1; }
+
+:global(body[data-edit="on"]) [data-slot][data-drop="over"] {
+  outline: 3px solid var(--lw-mint);
+  outline-offset: -3px;
+}
+
+/* Catches a file dropped anywhere that is not a slot, so the browser never
+   navigates away from the page. */
+.dropShield {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(7, 26, 49, 0.72);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: #fff;
+  font-family: var(--lw-font-mono);
+  font-size: var(--t-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 24px;
 }
 
 .slotHint {
@@ -201,11 +254,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 6px;
-  color: var(--lw-muted);
-  font-size: 13px;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid rgba(7, 26, 49, 0.16);
+  color: var(--lw-ink);
+  font-size: 15px;
   line-height: 1;
 }
 .iconBtn:hover { background: rgba(7, 26, 49, 0.08); color: var(--lw-ink); }
