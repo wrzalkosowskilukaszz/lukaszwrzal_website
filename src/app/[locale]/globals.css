@@ -111,3 +111,32 @@ button {
   --lw-font-display: var(--lw-font-display-face), var(--lw-font-body), sans-serif;
   --lw-font-mono: var(--lw-font-mono-face), ui-monospace, monospace;
 }
+
+/* ── View transitions ──────────────────────────────────────────────────
+   A clicked tile morphs into the case-study hero. The page beneath
+   cross-fades quickly so the morphing element carries the eye. */
+::view-transition-group(project-media) {
+  animation-duration: 520ms;
+  animation-timing-function: var(--lw-ease-out);
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 260ms;
+  animation-timing-function: var(--lw-ease-out);
+}
+::view-transition-old(project-media),
+::view-transition-new(project-media) {
+  /* Let the group's morph do the work rather than cross-fading the pixels. */
+  animation: none;
+  mix-blend-mode: normal;
+  height: 100%;
+  overflow: clip;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

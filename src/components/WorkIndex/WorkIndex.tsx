@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+
+import { TransitionLink } from "@/components/TransitionLink";
 
 import { CategoryTag } from "@/components/Category/Category";
 import { ArrowDiagonal } from "@/components/icons/Arrows";
@@ -24,6 +25,7 @@ export interface WorkIndexProps {
 export function WorkIndex({ projects, locale, images }: WorkIndexProps) {
   const listRef = useRef<HTMLDivElement | null>(null);
   const revealRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const mediaRefs = useRef<(HTMLDivElement | null)[]>([]);
   const rowRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const springs = useRef<Spring[]>([]);
   const hovered = useRef<number | null>(null);
@@ -93,9 +95,12 @@ export function WorkIndex({ projects, locale, images }: WorkIndexProps) {
   return (
     <div className={styles.list} ref={listRef}>
       {projects.map((p, i) => (
-        <Link
+        <TransitionLink
           key={p.slug}
           href={`/${locale}/work/${p.slug}`}
+          morphName="project-media"
+          getMorphEl={() => mediaRefs.current[i] ?? null}
+          prefetch={false}
           className={styles.row}
           ref={(el) => { rowRefs.current[i] = el; }}
           data-open={open === i || undefined}
@@ -123,7 +128,7 @@ export function WorkIndex({ projects, locale, images }: WorkIndexProps) {
 
           <div className={styles.reveal} ref={(el) => { revealRefs.current[i] = el; }}>
             <div>
-              <div className={styles.media}>
+              <div className={styles.media} ref={(el) => { mediaRefs.current[i] = el; }}>
                 {images[p.slug]?.["01"] ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={images[p.slug]["01"]} alt="" loading="lazy" decoding="async" />
@@ -139,7 +144,7 @@ export function WorkIndex({ projects, locale, images }: WorkIndexProps) {
               </div>
             </div>
           </div>
-        </Link>
+        </TransitionLink>
       ))}
     </div>
   );

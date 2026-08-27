@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef } from "react";
+
+import { TransitionLink } from "@/components/TransitionLink";
 
 import { CategoryTag } from "@/components/Category/Category";
 import { ArrowDiagonal } from "@/components/icons/Arrows";
@@ -42,6 +43,7 @@ export function ProjectTile({
   className,
 }: ProjectTileProps) {
   const descRef = useRef<HTMLDivElement | null>(null);
+  const mediaRef = useRef<HTMLDivElement | null>(null);
 
   /* Only the hover-reveal variant animates height; when the descriptor is
      always shown there is nothing to measure. */
@@ -56,8 +58,11 @@ export function ProjectTile({
   const stat = project.copy.stats?.[0];
 
   return (
-    <Link
+    <TransitionLink
       href={`/${locale}/work/${project.slug}`}
+      morphName="project-media"
+      getMorphEl={() => mediaRef.current}
+      prefetch
       className={`${styles.tile} ${className ?? ""}`}
       style={style}
       data-active={active || undefined}
@@ -68,7 +73,7 @@ export function ProjectTile({
       onFocus={onActivate}
       onBlur={onDeactivate}
     >
-      <div className={styles.media}>
+      <div className={styles.media} ref={mediaRef}>
         {image ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={image} alt="" loading="lazy" decoding="async" />
@@ -107,6 +112,6 @@ export function ProjectTile({
           </p>
         ) : null}
       </div>
-    </Link>
+    </TransitionLink>
   );
 }

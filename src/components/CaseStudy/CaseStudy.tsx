@@ -92,7 +92,9 @@ export function CaseStudy({ project, next, locale, images }: CaseStudyProps) {
         <p className={`${styles.lede} ${styles.rise}`} data-edit={ed("lede")}>{copy.lede}</p>
       </header>
 
-      <div className={styles.keyVisual}>
+      {/* Destination of the tile morph. The name is unique per page, and the
+          tile only claims it for the duration of the transition. */}
+      <div className={styles.keyVisual} style={{ viewTransitionName: "project-media" }}>
         {fig("01", { stage: true, height: "clamp(340px, 50vw, 700px)", parallax: 0.1 })}
       </div>
 

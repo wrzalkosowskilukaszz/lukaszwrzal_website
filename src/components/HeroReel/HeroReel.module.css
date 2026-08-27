@@ -10,6 +10,8 @@
 
 .frame {
   position: relative;
+  user-select: none;
+  -webkit-user-select: none;
   width: min(var(--lw-content-max), 100% - 40px);
   height: clamp(360px, 52vw, 720px);
   margin-inline: auto;
@@ -30,6 +32,7 @@
   inset: -4%;
   will-change: transform;
 }
+.media img { -webkit-user-drag: none; }
 .media video,
 .media img {
   width: 100%;
@@ -76,7 +79,16 @@
   border-radius: 2px;
 }
 
-.titleWrap { flex: 1 1 auto; min-width: 0; overflow: hidden; }
+/* The bar never moves; only the type inside it cycles. The wrap clips so a
+   title rolling out disappears behind the bar's own edge. */
+.titleWrap {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  /* Room for the roll without the bar changing height. */
+  line-height: 1.35;
+  height: 1.35em;
+}
 
 .title {
   display: block;
