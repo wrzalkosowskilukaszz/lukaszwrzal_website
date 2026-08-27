@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 import { getLocalisedProject, getProjects } from "@/lib/content";
 import { CATEGORY_LABELS } from "@/lib/i18n";
-import { headlineStat } from "@/lib/placeholder";
+import { headlineStat, isDraft } from "@/lib/placeholder";
 import { LOCALES, type Locale } from "@/lib/types";
 
 export const alt = "Project — Lukasz Wrzal";
@@ -11,7 +11,9 @@ export const contentType = "image/png";
 
 export function generateStaticParams() {
   return LOCALES.flatMap((locale) =>
-    getProjects().map((p) => ({ locale, slug: p.slug })),
+    getProjects()
+      .filter((p) => !isDraft(p.en))
+      .map((p) => ({ locale, slug: p.slug })),
   );
 }
 

@@ -24,3 +24,17 @@ export function realStats(stats: Stat[] | undefined): Stat[] {
 export function headlineStat(copy: ProjectCopy): Stat | undefined {
   return realStats(copy.stats)[0];
 }
+
+/**
+ * A project is a draft until its body copy is written. Title, description,
+ * category and year are real for all thirty, so a draft still belongs in
+ * the index — it is only the case-study page that would show prompts.
+ */
+export function isDraft(copy: ProjectCopy): boolean {
+  return (
+    isPlaceholder(copy.statement) ||
+    isPlaceholder(copy.brief?.[0]) ||
+    isPlaceholder(copy.process?.[0]?.body) ||
+    isPlaceholder(copy.outcome?.statement)
+  );
+}

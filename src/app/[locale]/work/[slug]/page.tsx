@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import { CaseStudy } from "@/components/CaseStudy/CaseStudy";
 import { getLocalisedProject, getProjects } from "@/lib/content";
-import { realStats } from "@/lib/placeholder";
+import { isDraft, realStats } from "@/lib/placeholder";
 import { imagesFor } from "@/lib/images";
 import { LOCALES, type Locale } from "@/lib/types";
 
@@ -50,6 +50,14 @@ export default async function ProjectPage({
 
   const project = getLocalisedProject(slug, l);
   if (!project) notFound();
+
+  /* A project whose body copy is still authoring prompts is a draft. It
+     keeps its row in the index — title, description, category and year are
+     all real — but its case-study page would be 29 screens of "Replace this
+     paragraph with…". Visible while writing, 404 once deployed. */
+  if (isDraft(project.copy) && process.env.NODE_ENV === "production") {
+    notFound();
+  }
 
   // Unwritten outcomes are authoring prompts, not content — drop them here
   // rather than filtering at render, so they never reach the browser.

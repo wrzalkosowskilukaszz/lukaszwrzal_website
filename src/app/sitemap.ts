@@ -1,12 +1,14 @@
 import type { MetadataRoute } from "next";
 
 import { getProjects } from "@/lib/content";
+import { isDraft } from "@/lib/placeholder";
 import { LOCALES } from "@/lib/types";
 
 const BASE = "https://takealuke.studio";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const projects = getProjects();
+  // Drafts 404 in production; do not point crawlers at them.
+  const projects = getProjects().filter((p) => !isDraft(p.en));
 
   const alternates = (suffix: string) => ({
     languages: Object.fromEntries(
