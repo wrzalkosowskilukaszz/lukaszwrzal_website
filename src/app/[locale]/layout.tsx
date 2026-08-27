@@ -14,12 +14,12 @@ import "./globals.css";
    layout shift from a late webfont. latin-ext carries the Polish diacritics.
 
    Bricolage Grotesque is the display voice: a variable grotesque drawn
-   deliberately imperfect, with a width axis we drive from scroll velocity.
-   Geist was replaced because it is the default of the moment — an excellent,
-   invisible choice that made the site read as anyone's. */
+   deliberately imperfect. Geist was replaced because it is the default of
+   the moment — an excellent, invisible choice that made the site read as
+   anyone's. Only the optical-size axis is loaded; the type does not move. */
 const display = Bricolage_Grotesque({
   subsets: ["latin", "latin-ext"],
-  axes: ["opsz", "wdth"],
+  axes: ["opsz"],
   variable: "--lw-font-display-face",
   display: "swap",
 });

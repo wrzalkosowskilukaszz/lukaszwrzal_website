@@ -9,7 +9,7 @@ import { ArrowDiagonal } from "@/components/icons/Arrows";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { subscribe } from "@/lib/raf";
 import { Spring } from "@/lib/spring";
-import type { FigureKey, Locale, LocalisedProject } from "@/lib/types";
+import type { Locale, ProjectCard } from "@/lib/types";
 
 import styles from "./WorkIndex.module.css";
 
@@ -17,12 +17,11 @@ import styles from "./WorkIndex.module.css";
 const TOUCH_MAX = 900;
 
 export interface WorkIndexProps {
-  projects: LocalisedProject[];
+  projects: ProjectCard[];
   locale: Locale;
-  images: Record<string, Partial<Record<FigureKey, string>>>;
 }
 
-export function WorkIndex({ projects, locale, images }: WorkIndexProps) {
+export function WorkIndex({ projects, locale }: WorkIndexProps) {
   const listRef = useRef<HTMLDivElement | null>(null);
   const revealRefs = useRef<(HTMLDivElement | null)[]>([]);
   const mediaRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -115,8 +114,8 @@ export function WorkIndex({ projects, locale, images }: WorkIndexProps) {
         >
           <div className={styles.line}>
             <span className={styles.n}>{String(i + 1).padStart(2, "0")}</span>
-            <span className={styles.name}>{p.copy.title}</span>
-            <span className={styles.desc}>{p.copy.desc}</span>
+            <span className={styles.name}>{p.title}</span>
+            <span className={styles.desc}>{p.desc}</span>
             <span className={styles.catCell}>
               <CategoryTag cat={p.cat} locale={locale} />
             </span>
@@ -129,15 +128,15 @@ export function WorkIndex({ projects, locale, images }: WorkIndexProps) {
           <div className={styles.reveal} ref={(el) => { revealRefs.current[i] = el; }}>
             <div>
               <div className={styles.media} ref={(el) => { mediaRefs.current[i] = el; }}>
-                {images[p.slug]?.["01"] ? (
+                {p.image ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={images[p.slug]["01"]} alt="" loading="lazy" decoding="async" />
+                  <img src={p.image} alt="" loading="lazy" decoding="async" />
                 ) : null}
                 <span className={styles.mediaMeta}>
-                  {p.copy.stats?.[0] ? (
+                  {p.stat ? (
                     <span className={styles.stat}>
-                      {p.copy.stats[0].value.toLocaleString(locale === "pl" ? "pl-PL" : "en-US")}
-                      {p.copy.stats[0].suffix ?? ""} · {p.copy.stats[0].label}
+                      {p.stat.value.toLocaleString(locale === "pl" ? "pl-PL" : "en-US")}
+                      {p.stat.suffix ?? ""} · {p.stat.label}
                     </span>
                   ) : null}
                 </span>

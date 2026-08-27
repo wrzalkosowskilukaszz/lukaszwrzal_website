@@ -3,8 +3,7 @@ import { notFound } from "next/navigation";
 
 import { Footer } from "@/components/Footer/Footer";
 import { WorkBrowser } from "@/components/WorkGrid/WorkBrowser";
-import { getLocalisedProjects } from "@/lib/content";
-import { allImages } from "@/lib/images";
+import { getCards } from "@/lib/content";
 import { t } from "@/lib/i18n";
 import { LOCALES, type Locale } from "@/lib/types";
 
@@ -36,7 +35,7 @@ export default async function WorkPage({
   if (!LOCALES.includes(locale as Locale)) notFound();
   const l = locale as Locale;
 
-  const projects = getLocalisedProjects(l);
+  const projects = getCards(l);
 
   return (
     <>
@@ -46,7 +45,7 @@ export default async function WorkPage({
         <p className={styles.lede}>{t(l, "workLede")}</p>
       </header>
 
-      <WorkBrowser projects={projects} locale={l} images={allImages()} />
+      <WorkBrowser projects={projects} locale={l} />
 
       <Footer locale={l} />
     </>

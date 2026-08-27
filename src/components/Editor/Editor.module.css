@@ -1,3 +1,69 @@
+/* Always-present way in, so edit mode is never a URL you have to remember. */
+.launcher {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 80;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 16px;
+  border: 1px solid rgba(7, 26, 49, 0.1);
+  border-radius: var(--lw-radius-pill);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(18px) saturate(1.6);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  box-shadow: var(--lw-shadow-float);
+  font-family: var(--lw-font-mono);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lw-ink);
+  transition: transform 220ms var(--lw-ease-playful);
+}
+.launcher:hover { transform: translateX(-50%) translateY(-2px); }
+.launcher .pip {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--lw-mint);
+}
+
+/* What is editable on THIS page — otherwise the bar looks broken on pages
+   that carry no editable content. */
+.scope {
+  font-family: var(--lw-font-mono);
+  font-size: var(--t-label);
+  letter-spacing: 0.06em;
+  color: var(--lw-muted);
+  padding-left: 4px;
+  border-left: 1px solid rgba(7, 26, 49, 0.14);
+  margin-left: 4px;
+  white-space: nowrap;
+}
+
+.hint {
+  position: fixed;
+  left: 50%;
+  bottom: 78px;
+  transform: translateX(-50%);
+  z-index: 79;
+  max-width: min(560px, calc(100vw - 32px));
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--lw-ink);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: var(--t-sm);
+  line-height: 1.5;
+  box-shadow: var(--lw-shadow-float);
+  text-align: center;
+}
+.hint b { color: var(--lw-mint); font-weight: 500; }
+
+@media (prefers-reduced-motion: reduce) {
+  .launcher:hover { transform: translateX(-50%); }
+}
+
 .bar {
   position: fixed;
   left: 50%;

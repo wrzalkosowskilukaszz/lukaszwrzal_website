@@ -72,6 +72,7 @@ export const CHROME = {
     drag: "Drag",
     closeEsc: "Close · esc",
     nextProject: "Next project",
+    allWork: "All work",
     previousImage: "Previous image",
     nextImage: "Next image",
 
@@ -148,6 +149,7 @@ export const CHROME = {
     drag: "Przeciągnij",
     closeEsc: "Zamknij · esc",
     nextProject: "Następny projekt",
+    allWork: "Wszystkie projekty",
     previousImage: "Poprzedni obraz",
     nextImage: "Następny obraz",
 

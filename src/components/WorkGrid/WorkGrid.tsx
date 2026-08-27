@@ -7,12 +7,12 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { subscribe } from "@/lib/raf";
 import { Spring } from "@/lib/spring";
 import { baseWidth, columnsFor, widthFactor } from "@/lib/workGridLayout";
-import type { Category, Locale, LocalisedProject } from "@/lib/types";
+import type { Category, Locale, ProjectCard } from "@/lib/types";
 
 import styles from "./WorkGrid.module.css";
 
 export interface WorkGridProps {
-  projects: LocalisedProject[];
+  projects: ProjectCard[];
   locale: Locale;
   /** Owned by WorkBrowser, so both views share one filter. */
   filter: Category | "all";

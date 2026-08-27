@@ -10,12 +10,12 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { t } from "@/lib/i18n";
 import { subscribe } from "@/lib/raf";
 import { Spring, clamp01 } from "@/lib/spring";
-import type { Locale, LocalisedProject } from "@/lib/types";
+import type { Locale, ProjectCard } from "@/lib/types";
 
 import styles from "./HeroReel.module.css";
 
 export interface HeroReelProps {
-  projects: LocalisedProject[];
+  projects: ProjectCard[];
   locale: Locale;
 }
 
@@ -195,7 +195,7 @@ export function HeroReel({ projects, locale }: HeroReelProps) {
 
   const current = projects[active];
   const titleRef = useTitleRoll(
-    current ? `${current.copy.title} — ${current.copy.desc}` : "",
+    current ? `${current.title} — ${current.desc}` : "",
   );
 
   return (
@@ -230,7 +230,7 @@ export function HeroReel({ projects, locale }: HeroReelProps) {
                   key={p.slug}
                   type="button"
                   className={styles.segment}
-                  aria-label={p.copy.title}
+                  aria-label={p.title}
                   aria-current={i === active ? "true" : undefined}
                   onClick={() => goTo(i)}
                 >

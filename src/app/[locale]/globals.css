@@ -26,17 +26,15 @@ h1, h2, h3, h4 {
   text-wrap: balance;
 }
 
-/* The display face is a variable grotesque. `wdth` is driven from scroll
-   velocity by useKineticType() — headings compress as the page moves fast
-   and relax when it settles. `--wdth` is the live value; 100 is at rest. */
+/* Display type sits at its natural width and does not move. */
 h1, h2 {
-  font-variation-settings: "wdth" var(--wdth, 100), "opsz" 48;
+  font-variation-settings: "opsz" 48;
   font-size: var(--t-xl);
   line-height: var(--lh-xl);
   letter-spacing: -0.035em;
 }
 h3 {
-  font-variation-settings: "wdth" var(--wdth, 100), "opsz" 24;
+  font-variation-settings: "opsz" 24;
   font-size: var(--t-md);
   line-height: var(--lh-md);
   letter-spacing: -0.02em;

@@ -37,7 +37,7 @@
 
 .name {
   font-family: var(--lw-font-display);
-  font-variation-settings: "wdth" var(--wdth, 100), "opsz" 24;
+  font-variation-settings: "opsz" 24;
   font-weight: 700;
   font-size: var(--t-md);
   line-height: 1.1;

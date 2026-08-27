@@ -4,7 +4,7 @@ import { useCallback, useMemo, useState } from "react";
 
 import { WorkIndex } from "@/components/WorkIndex/WorkIndex";
 import { CATEGORY_LABELS, t } from "@/lib/i18n";
-import { CATEGORIES, type Category, type FigureKey, type Locale, type LocalisedProject } from "@/lib/types";
+import { CATEGORIES, type Category, type Locale, type ProjectCard } from "@/lib/types";
 
 import { ViewToggle, type WorkView } from "./ViewToggle";
 import { WorkGrid } from "./WorkGrid";
@@ -12,9 +12,8 @@ import styles from "./WorkGrid.module.css";
 import toggleStyles from "./ViewToggle.module.css";
 
 export interface WorkBrowserProps {
-  projects: LocalisedProject[];
+  projects: ProjectCard[];
   locale: Locale;
-  images: Record<string, Partial<Record<FigureKey, string>>>;
 }
 
 /**
@@ -24,7 +23,7 @@ export interface WorkBrowserProps {
  * scanning to understand the shape of a practice — thirty rows read faster
  * than thirty pictures. Grid is one click away for browsing by eye.
  */
-export function WorkBrowser({ projects, locale, images }: WorkBrowserProps) {
+export function WorkBrowser({ projects, locale }: WorkBrowserProps) {
   const [filter, setFilter] = useState<Category | "all">("all");
   const [view, setView] = useState<WorkView>("index");
 
@@ -81,12 +80,7 @@ export function WorkBrowser({ projects, locale, images }: WorkBrowserProps) {
       </div>
 
       {view === "index" ? (
-        <WorkIndex
-          key={filter}
-          projects={shown}
-          locale={locale}
-          images={images}
-        />
+        <WorkIndex key={filter} projects={shown} locale={locale} />
       ) : (
         <WorkGrid projects={projects} locale={locale} filter={filter} />
       )}

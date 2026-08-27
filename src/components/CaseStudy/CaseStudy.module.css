@@ -1,7 +1,30 @@
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  width: min(1000px, 100% - 40px);
+  margin: clamp(6.5rem, 10vw, 8.5rem) auto 0;
+  font-family: var(--lw-font-mono);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: var(--lw-label-track);
+  text-transform: uppercase;
+  color: var(--lw-muted);
+  transition: color var(--lw-dur-quick) var(--lw-ease-out);
+}
+.backLink:hover { color: var(--lw-ink); }
+
+.backArrow {
+  display: inline-flex;
+  transform: rotate(180deg);
+  transition: transform 260ms var(--lw-ease-playful);
+}
+.backLink:hover .backArrow { transform: rotate(180deg) translateX(3px); }
+
 .hero {
   width: min(1000px, 100% - 40px);
   margin-inline: auto;
-  padding: clamp(7rem, 11vw, 9.875rem) 0 clamp(2rem, 4vw, 3rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(2rem, 4vw, 3rem);
   text-align: center;
 }
 .title {

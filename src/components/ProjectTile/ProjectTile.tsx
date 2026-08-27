@@ -6,19 +6,17 @@ import { TransitionLink } from "@/components/TransitionLink";
 
 import { CategoryTag } from "@/components/Category/Category";
 import { ArrowDiagonal } from "@/components/icons/Arrows";
-import type { Locale, LocalisedProject } from "@/lib/types";
+import type { Locale, ProjectCard } from "@/lib/types";
 
 import styles from "./ProjectTile.module.css";
 
 export interface ProjectTileProps {
-  project: LocalisedProject;
+  project: ProjectCard;
   locale: Locale;
   active: boolean;
   dimmed: boolean;
   onActivate: () => void;
   onDeactivate: () => void;
-  /** Key visual, when one exists. Absent renders the designed empty well. */
-  image?: string;
   /** Show the descriptor at rest rather than only on hover. */
   showDesc?: boolean;
   /** Show the headline outcome — the thing that earns the click. */
@@ -35,7 +33,6 @@ export function ProjectTile({
   dimmed,
   onActivate,
   onDeactivate,
-  image,
   showDesc = false,
   showStat = false,
   meta,
@@ -55,7 +52,7 @@ export function ProjectTile({
     el.style.height = active ? `${inner.scrollHeight}px` : "0px";
   }, [active, showDesc]);
 
-  const stat = project.copy.stats?.[0];
+  const { image, stat } = project;
 
   return (
     <TransitionLink
@@ -92,13 +89,13 @@ export function ProjectTile({
 
       <div className={styles.label}>
         <CategoryTag cat={project.cat} locale={locale} onMedia />
-        <span className={`${styles.name} tileName`}>{project.copy.title}</span>
+        <span className={`${styles.name} tileName`}>{project.title}</span>
 
         {showDesc ? (
-          <p className={styles.descStatic}>{project.copy.desc}</p>
+          <p className={styles.descStatic}>{project.desc}</p>
         ) : (
           <div className={styles.desc} ref={descRef}>
-            <p className={styles.descInner}>{project.copy.desc}</p>
+            <p className={styles.descInner}>{project.desc}</p>
           </div>
         )}
 

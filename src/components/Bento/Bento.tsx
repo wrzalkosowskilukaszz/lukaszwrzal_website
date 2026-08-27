@@ -7,7 +7,7 @@ import { Aurora } from "@/components/Aurora/Aurora";
 import { ProjectTile } from "@/components/ProjectTile/ProjectTile";
 import { ArrowRight } from "@/components/icons/Arrows";
 import { t } from "@/lib/i18n";
-import type { FigureKey, Locale, LocalisedProject } from "@/lib/types";
+import type { Locale, ProjectCard } from "@/lib/types";
 
 import styles from "./Bento.module.css";
 
@@ -21,12 +21,11 @@ import styles from "./Bento.module.css";
  * exists rather than manufacturing one on the fly.
  */
 export interface BentoProps {
-  projects: LocalisedProject[];
+  projects: ProjectCard[];
   locale: Locale;
-  images: Record<string, Partial<Record<FigureKey, string>>>;
 }
 
-export function Bento({ projects, locale, images }: BentoProps) {
+export function Bento({ projects, locale }: BentoProps) {
   const [active, setActive] = useState<string | null>(null);
   const featured = projects.slice(0, 6);
   const [lead, a, b, wide, narrow] = [
@@ -34,7 +33,7 @@ export function Bento({ projects, locale, images }: BentoProps) {
   ];
 
   const tile = (
-    p: LocalisedProject | undefined,
+    p: ProjectCard | undefined,
     className: string,
     showStat = false,
   ) =>
@@ -43,7 +42,6 @@ export function Bento({ projects, locale, images }: BentoProps) {
         <ProjectTile
           project={p}
           locale={locale}
-          image={images[p.slug]?.["01"]}
           active={active === p.slug}
           dimmed={active !== null && active !== p.slug}
           onActivate={() => setActive(p.slug)}

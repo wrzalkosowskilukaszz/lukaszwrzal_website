@@ -94,7 +94,7 @@
 .name {
   display: block;
   font-family: var(--lw-font-display);
-  font-variation-settings: "wdth" var(--wdth, 100), "opsz" 24;
+  font-variation-settings: "opsz" 24;
   font-size: var(--t-md);
   line-height: 1.3;
   letter-spacing: var(--lw-title-track);

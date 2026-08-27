@@ -6,10 +6,10 @@ import { Bento } from "@/components/Bento/Bento";
 import { Clients } from "@/components/Clients/Clients";
 import { Footer } from "@/components/Footer/Footer";
 import { Hero } from "@/components/Hero/Hero";
+import { Reveal } from "@/components/Reveal";
 import { HeroReel } from "@/components/HeroReel/HeroReel";
 import { PersonSchema } from "@/components/StructuredData";
-import { getBentoProjects, getLocalisedProjects } from "@/lib/content";
-import { allImages } from "@/lib/images";
+import { getCards } from "@/lib/content";
 import { t } from "@/lib/i18n";
 import { LOCALES, type Locale } from "@/lib/types";
 
@@ -39,8 +39,8 @@ export default async function HomePage({
   if (!LOCALES.includes(locale as Locale)) notFound();
   const l = locale as Locale;
 
-  const bento = getBentoProjects(l);
-  const reel = getLocalisedProjects(l).slice(0, 3);
+  const bento = getCards(l).slice(0, 6);
+  const reel = getCards(l).slice(0, 3);
 
   const points = [
     { title: t(l, "aboutPoint1Title"), body: t(l, "aboutPoint1Body") },
@@ -51,12 +51,23 @@ export default async function HomePage({
   return (
     <>
       <PersonSchema locale={l} />
+      {/* The hero and reel are present on load — no entry animation above
+          the fold. Everything below reveals as it is reached. */}
       <Hero locale={l} />
       <HeroReel projects={reel} locale={l} />
-      <Bento projects={bento} locale={l} images={allImages()} />
-      <About locale={l} points={points} />
-      <Clients locale={l} />
-      <Footer locale={l} variant="booking" />
+
+      <Reveal>
+        <Bento projects={bento} locale={l} />
+      </Reveal>
+      <Reveal>
+        <About locale={l} points={points} />
+      </Reveal>
+      <Reveal>
+        <Clients locale={l} />
+      </Reveal>
+      <Reveal>
+        <Footer locale={l} variant="booking" />
+      </Reveal>
     </>
   );
 }
