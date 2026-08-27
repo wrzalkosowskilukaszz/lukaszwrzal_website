@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
+import { SECTIONS, type SectionKind } from "@/lib/types";
+
 import styles from "./Editor.module.css";
 
 type Tone = "idle" | "dirty" | "saving" | "saved" | "error";
@@ -29,11 +31,67 @@ export function Editor() {
      the DOM — only case-study pages carry copy and image slots. */
   const editable = Boolean(slug);
 
+
   const [tone, setTone] = useState<Tone>("idle");
   const [message, setMessage] = useState("No changes");
   const edits = useRef<Map<string, string>>(new Map());
 
   const setStatus = (t: Tone, m: string) => { setTone(t); setMessage(m); };
+
+  const [panelOpen, setPanelOpen] = useState(false);
+  const [order, setOrder] = useState<SectionKind[] | null>(null);
+
+  /** Read the order actually on the page, so the panel always starts truthful. */
+  const readOrder = useCallback(() => {
+    const live = Array.from(document.querySelectorAll<HTMLElement>("[data-section]"))
+      .map((el) => el.dataset.section as SectionKind)
+      .filter((k) => SECTIONS.includes(k));
+    setOrder(live);
+    setPanelOpen(true);
+  }, []);
+
+  const move = (i: number, delta: number) => {
+    setOrder((prev) => {
+      if (!prev) return prev;
+      const next = [...prev];
+      const j = i + delta;
+      if (j < 0 || j >= next.length) return prev;
+      [next[i], next[j]] = [next[j], next[i]];
+      return next;
+    });
+  };
+
+  const toggle = (kind: SectionKind) => {
+    setOrder((prev) => {
+      if (!prev) return prev;
+      return prev.includes(kind)
+        ? prev.filter((k) => k !== kind)
+        : [...prev, kind];
+    });
+  };
+
+  const saveSections = useCallback(
+    async (next: SectionKind[] | null) => {
+      if (!slug) return;
+      setStatus("saving", "Saving layout…");
+      try {
+        const res = await fetch("/api/content", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sections: { slug, order: next } }),
+        });
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error ?? "Save failed");
+        if (json.sectionError) throw new Error(json.sectionError);
+        setStatus("saved", next ? `Layout saved · ${next.length} sections` : "Layout reset");
+        setPanelOpen(false);
+        router.refresh();
+      } catch (err) {
+        setStatus("error", err instanceof Error ? err.message : "Save failed");
+      }
+    },
+    [slug, router],
+  );
 
   /* Turn every [data-edit] node into a contentEditable field. */
   useEffect(() => {
@@ -251,7 +309,9 @@ export function Editor() {
       </button>
 
       {editable ? (
-        <span className={styles.scope}>12 image slots</span>
+        <button type="button" className={styles.btn} onClick={readOrder}>
+          Sections
+        </button>
       ) : null}
 
       <button
@@ -266,6 +326,58 @@ export function Editor() {
         Done
       </button>
       </div>
+
+      {panelOpen && order ? (
+        <div className={styles.panel} role="dialog" aria-label="Page sections">
+          <div className={styles.panelHead}>
+            <span>Sections</span>
+            <button type="button" className={styles.iconBtn} onClick={() => setPanelOpen(false)} aria-label="Close">
+              ✕
+            </button>
+          </div>
+          <p className={styles.panelHint}>
+            Turn blocks off, or reorder them. Not every project wants the same
+            case study.
+          </p>
+
+          {/* Included, in order */}
+          {order.map((kind, i) => (
+            <div className={styles.sectionRow} key={kind} data-on="true">
+              <button
+                type="button"
+                className={styles.toggle}
+                onClick={() => toggle(kind)}
+                aria-label={`Remove ${kind}`}
+              />
+              <span className={styles.sectionName}>{kind}</span>
+              <button type="button" className={styles.iconBtn} onClick={() => move(i, -1)} disabled={i === 0} aria-label="Move up">↑</button>
+              <button type="button" className={styles.iconBtn} onClick={() => move(i, 1)} disabled={i === order.length - 1} aria-label="Move down">↓</button>
+            </div>
+          ))}
+
+          {/* Available but currently off */}
+          {SECTIONS.filter((k) => !order.includes(k)).map((kind) => (
+            <div className={styles.sectionRow} key={kind} data-on="false">
+              <button
+                type="button"
+                className={styles.toggle}
+                onClick={() => toggle(kind)}
+                aria-label={`Add ${kind}`}
+              />
+              <span className={styles.sectionName}>{kind}</span>
+            </div>
+          ))}
+
+          <div className={styles.panelFoot}>
+            <button type="button" className={`${styles.btn} ${styles.primary}`} onClick={() => saveSections(order)}>
+              Save layout
+            </button>
+            <button type="button" className={styles.btn} onClick={() => saveSections(null)}>
+              Reset
+            </button>
+          </div>
+        </div>
+      ) : null}
     </>
   );
 }

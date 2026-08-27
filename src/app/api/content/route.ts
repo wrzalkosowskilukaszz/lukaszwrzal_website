@@ -3,7 +3,7 @@ import { promises as fs } from "node:fs";
 import { NextResponse } from "next/server";
 
 import { contentFile } from "@/lib/paths";
-import type { ProjectsFile } from "@/lib/types";
+import { SECTIONS, type ProjectsFile, type SectionKind } from "@/lib/types";
 
 /**
  * Writes copy edits back to projects.json.
@@ -51,11 +51,35 @@ function applyEdit(
   return true;
 }
 
+/** Replace a project's section order, or clear it back to the default. */
+function applySections(
+  data: ProjectsFile,
+  slug: string,
+  order: string[] | null,
+): string | null {
+  const project = data.projects.find((p) => p.slug === slug);
+  if (!project) return `Unknown project: ${slug}`;
+
+  if (order === null) {
+    delete project.sections;
+    return null;
+  }
+  const bad = order.filter((s) => !SECTIONS.includes(s as SectionKind));
+  if (bad.length) return `Unknown sections: ${bad.join(", ")}`;
+  if (new Set(order).size !== order.length) return "A section is listed twice.";
+
+  project.sections = order as SectionKind[];
+  return null;
+}
+
 export async function POST(request: Request) {
   const blocked = devOnly();
   if (blocked) return blocked;
 
-  let body: { edits?: Record<string, string> };
+  let body: {
+    edits?: Record<string, string>;
+    sections?: { slug: string; order: string[] | null };
+  };
   try {
     body = await request.json();
   } catch {
@@ -64,7 +88,7 @@ export async function POST(request: Request) {
 
   const edits = body.edits ?? {};
   const keys = Object.keys(edits);
-  if (keys.length === 0) {
+  if (keys.length === 0 && !body.sections) {
     return NextResponse.json({ saved: 0, rejected: [] });
   }
 
@@ -79,9 +103,15 @@ export async function POST(request: Request) {
     else rejected.push(key);
   }
 
+  let sectionError: string | null = null;
+  if (body.sections) {
+    sectionError = applySections(data, body.sections.slug, body.sections.order);
+    if (!sectionError) saved++;
+  }
+
   if (saved > 0) {
     await fs.writeFile(file, `${JSON.stringify(data, null, 2)}\n`, "utf8");
   }
 
-  return NextResponse.json({ saved, rejected });
+  return NextResponse.json({ saved, rejected, sectionError });
 }

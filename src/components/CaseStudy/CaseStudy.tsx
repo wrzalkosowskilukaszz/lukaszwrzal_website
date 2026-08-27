@@ -114,6 +114,7 @@ export function CaseStudy({ project, next, locale, images, sections }: CaseStudy
                  and the tile only claims it during the transition. */
               <div
                 key={kind}
+                data-section={kind}
                 className={styles.keyVisual}
                 style={{ viewTransitionName: "project-media" }}
               >
@@ -123,7 +124,7 @@ export function CaseStudy({ project, next, locale, images, sections }: CaseStudy
 
           case "meta":
             return (
-              <div key={kind} className={styles.meta}>
+              <div key={kind} data-section={kind} className={styles.meta}>
                 {meta.map((m) => (
                   <div key={m.label}>
                     <div className={styles.metaLabel}>{m.label}</div>
@@ -136,7 +137,7 @@ export function CaseStudy({ project, next, locale, images, sections }: CaseStudy
           case "brief":
             return (
               <Reveal key={kind}>
-                <section className={styles.section} id="brief">
+                <section data-section={kind} className={styles.section} id="brief">
                   <p className="lw-eyebrow">{t(locale, "sectionBrief")}</p>
                   <h2 className={styles.statement} data-edit={ed("statement")}>{copy.statement}</h2>
                   <div className={styles.columns}>
@@ -150,7 +151,7 @@ export function CaseStudy({ project, next, locale, images, sections }: CaseStudy
 
           case "figurePair":
             return (
-              <div key={kind} className={styles.pair}>
+              <div key={kind} data-section={kind} className={styles.pair}>
                 {fig("02", { height: "clamp(220px, 24vw, 340px)" })}
                 {fig("03", { height: "clamp(220px, 24vw, 340px)" })}
               </div>
@@ -158,19 +159,20 @@ export function CaseStudy({ project, next, locale, images, sections }: CaseStudy
 
           case "process":
             return (
+              <div key={kind} data-section={kind}>
               <Process
-                key={kind}
                 steps={copy.process ?? []}
                 locale={locale}
                 editPrefix={`${project.slug}.${locale}`}
                 figures={[images["04"], images["05"], images["06"], images["07"]]}
               />
+              </div>
             );
 
           case "system":
             return (
               <Reveal key={kind}>
-                <section className={styles.section} id="system">
+                <section data-section={kind} className={styles.section} id="system">
                   <p className="lw-eyebrow">{t(locale, "sectionSystem")}</p>
                   <h2 className={styles.statement} data-edit={ed("system.statement")}>{copy.system?.statement}</h2>
                   <p className={styles.body} data-edit={ed("system.body")}>{copy.system?.body}</p>
@@ -180,7 +182,7 @@ export function CaseStudy({ project, next, locale, images, sections }: CaseStudy
 
           case "plateStrip":
             return (
-              <div key={kind} style={{ marginTop: "clamp(2.5rem, 5vw, 4rem)" }}>
+              <div key={kind} data-section={kind} style={{ marginTop: "clamp(2.5rem, 5vw, 4rem)" }}>
                 <PlateStrip
                   locale={locale}
                   onOpen={openSlot}
@@ -196,7 +198,7 @@ export function CaseStudy({ project, next, locale, images, sections }: CaseStudy
           case "motion":
             /* Fig. 12 — settles to full scale on view. */
             return (
-              <div key={kind} className={styles.motionSlot} ref={motionRef} data-slot="12">
+              <div key={kind} data-section={kind} className={styles.motionSlot} ref={motionRef} data-slot="12">
                 {images["12"] ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -211,7 +213,7 @@ export function CaseStudy({ project, next, locale, images, sections }: CaseStudy
           case "outcome":
             return (
               <Reveal key={kind}>
-                <section className={styles.section} id="outcome">
+                <section data-section={kind} className={styles.section} id="outcome">
                   <p className="lw-eyebrow">{t(locale, "sectionOutcome")}</p>
                   <h2 className={styles.statement} data-edit={ed("outcome.statement")}>{copy.outcome?.statement}</h2>
                   <div className={styles.columns}>
