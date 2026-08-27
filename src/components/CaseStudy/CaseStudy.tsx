@@ -9,7 +9,7 @@ import { Reveal } from "@/components/Reveal";
 import { useReveal } from "@/hooks/useReveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { t } from "@/lib/i18n";
-import type { FigureKey, Locale, LocalisedProject } from "@/lib/types";
+import { DEFAULT_SECTIONS, type FigureKey, type Locale, type LocalisedProject, type SectionKind } from "@/lib/types";
 
 import styles from "./CaseStudy.module.css";
 import { Figure } from "./Figure";
@@ -29,9 +29,11 @@ export interface CaseStudyProps {
   locale: Locale;
   /** slot -> image url. Empty until real assets land. */
   images: Partial<Record<FigureKey, string>>;
+  /** Bespoke layout. Omit for the default order. */
+  sections?: SectionKind[];
 }
 
-export function CaseStudy({ project, next, locale, images }: CaseStudyProps) {
+export function CaseStudy({ project, next, locale, images, sections }: CaseStudyProps) {
   const { copy } = project;
   /** Field path the in-site editor writes back to projects.json. */
   const ed = (field: string) => `${project.slug}.${locale}.${field}`;
@@ -102,83 +104,130 @@ export function CaseStudy({ project, next, locale, images }: CaseStudyProps) {
         <p className={`${styles.lede} ${styles.rise}`} data-edit={ed("lede")}>{copy.lede}</p>
       </header>
 
-      {/* Destination of the tile morph. The name is unique per page, and the
-          tile only claims it for the duration of the transition. */}
-      <div className={styles.keyVisual} style={{ viewTransitionName: "project-media" }}>
-        {fig("01", { stage: true, height: "clamp(340px, 50vw, 700px)", parallax: 0.1 })}
-      </div>
+      {/* Sections render in the order the project asks for. A bespoke case
+          study is a different list here, not a forked template. */}
+      {(sections ?? DEFAULT_SECTIONS).map((kind) => {
+        switch (kind) {
+          case "keyVisual":
+            return (
+              /* Destination of the tile morph. The name is unique per page,
+                 and the tile only claims it during the transition. */
+              <div
+                key={kind}
+                className={styles.keyVisual}
+                style={{ viewTransitionName: "project-media" }}
+              >
+                {fig("01", { stage: true, height: "clamp(340px, 50vw, 700px)", parallax: 0.1 })}
+              </div>
+            );
 
-      <div className={styles.meta}>
-        {meta.map((m) => (
-          <div key={m.label}>
-            <div className={styles.metaLabel}>{m.label}</div>
-            <div className={styles.metaValue} data-edit={ed(m.field)}>{m.value}</div>
-          </div>
-        ))}
-      </div>
+          case "meta":
+            return (
+              <div key={kind} className={styles.meta}>
+                {meta.map((m) => (
+                  <div key={m.label}>
+                    <div className={styles.metaLabel}>{m.label}</div>
+                    <div className={styles.metaValue} data-edit={ed(m.field)}>{m.value}</div>
+                  </div>
+                ))}
+              </div>
+            );
 
-      <Reveal><section className={styles.section} id="brief">
-        <p className="lw-eyebrow">{t(locale, "sectionBrief")}</p>
-        <h2 className={styles.statement} data-edit={ed("statement")}>{copy.statement}</h2>
-        <div className={styles.columns}>
-          {copy.brief?.map((para, i) => (
-            <p key={i} data-edit={ed(`brief.${i}`)}>{para}</p>
-          ))}
-        </div>
-      </section></Reveal>
+          case "brief":
+            return (
+              <Reveal key={kind}>
+                <section className={styles.section} id="brief">
+                  <p className="lw-eyebrow">{t(locale, "sectionBrief")}</p>
+                  <h2 className={styles.statement} data-edit={ed("statement")}>{copy.statement}</h2>
+                  <div className={styles.columns}>
+                    {copy.brief?.map((para, i) => (
+                      <p key={i} data-edit={ed(`brief.${i}`)}>{para}</p>
+                    ))}
+                  </div>
+                </section>
+              </Reveal>
+            );
 
-      <div className={styles.pair}>
-        {fig("02", { height: "clamp(220px, 24vw, 340px)" })}
-        {fig("03", { height: "clamp(220px, 24vw, 340px)" })}
-      </div>
+          case "figurePair":
+            return (
+              <div key={kind} className={styles.pair}>
+                {fig("02", { height: "clamp(220px, 24vw, 340px)" })}
+                {fig("03", { height: "clamp(220px, 24vw, 340px)" })}
+              </div>
+            );
 
-      <Process
-        steps={copy.process ?? []}
-        locale={locale}
-        editPrefix={`${project.slug}.${locale}`}
-        figures={[images["04"], images["05"], images["06"], images["07"]]}
-      />
+          case "process":
+            return (
+              <Process
+                key={kind}
+                steps={copy.process ?? []}
+                locale={locale}
+                editPrefix={`${project.slug}.${locale}`}
+                figures={[images["04"], images["05"], images["06"], images["07"]]}
+              />
+            );
 
-      <Reveal><section className={styles.section} id="system">
-        <p className="lw-eyebrow">{t(locale, "sectionSystem")}</p>
-        <h2 className={styles.statement} data-edit={ed("system.statement")}>{copy.system?.statement}</h2>
-        <p className={styles.body} data-edit={ed("system.body")}>{copy.system?.body}</p>
-      </section></Reveal>
+          case "system":
+            return (
+              <Reveal key={kind}>
+                <section className={styles.section} id="system">
+                  <p className="lw-eyebrow">{t(locale, "sectionSystem")}</p>
+                  <h2 className={styles.statement} data-edit={ed("system.statement")}>{copy.system?.statement}</h2>
+                  <p className={styles.body} data-edit={ed("system.body")}>{copy.system?.body}</p>
+                </section>
+              </Reveal>
+            );
 
-      <div style={{ marginTop: "clamp(2.5rem, 5vw, 4rem)" }}>
-        <PlateStrip
-          locale={locale}
-          onOpen={openSlot}
-          slots={(["08", "09", "10", "11"] as FigureKey[]).map((s) => ({
-            slot: s,
-            src: images[s],
-            caption: copy.captionsShort?.[s],
-          }))}
-        />
-      </div>
+          case "plateStrip":
+            return (
+              <div key={kind} style={{ marginTop: "clamp(2.5rem, 5vw, 4rem)" }}>
+                <PlateStrip
+                  locale={locale}
+                  onOpen={openSlot}
+                  slots={(["08", "09", "10", "11"] as FigureKey[]).map((s) => ({
+                    slot: s,
+                    src: images[s],
+                    caption: copy.captionsShort?.[s],
+                  }))}
+                />
+              </div>
+            );
 
-      {/* Fig. 12 — motion slot, settles to full scale on view. */}
-      <div className={styles.motionSlot} ref={motionRef} data-slot="12">
-        {images["12"] ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={images["12"]}
-            alt={copy.captionsShort?.["12"] ?? ""}
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          />
-        ) : null}
-      </div>
+          case "motion":
+            /* Fig. 12 — settles to full scale on view. */
+            return (
+              <div key={kind} className={styles.motionSlot} ref={motionRef} data-slot="12">
+                {images["12"] ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={images["12"]}
+                    alt={copy.captionsShort?.["12"] ?? ""}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
+                ) : null}
+              </div>
+            );
 
-      <Reveal><section className={styles.section} id="outcome">
-        <p className="lw-eyebrow">{t(locale, "sectionOutcome")}</p>
-        <h2 className={styles.statement} data-edit={ed("outcome.statement")}>{copy.outcome?.statement}</h2>
-        <div className={styles.columns}>
-          {copy.outcome?.body?.map((para, i) => (
-            <p key={i} data-edit={ed(`outcome.body.${i}`)}>{para}</p>
-          ))}
-        </div>
-        {copy.stats.length ? <Stats stats={copy.stats} locale={locale} /> : null}
-      </section></Reveal>
+          case "outcome":
+            return (
+              <Reveal key={kind}>
+                <section className={styles.section} id="outcome">
+                  <p className="lw-eyebrow">{t(locale, "sectionOutcome")}</p>
+                  <h2 className={styles.statement} data-edit={ed("outcome.statement")}>{copy.outcome?.statement}</h2>
+                  <div className={styles.columns}>
+                    {copy.outcome?.body?.map((para, i) => (
+                      <p key={i} data-edit={ed(`outcome.body.${i}`)}>{para}</p>
+                    ))}
+                  </div>
+                  {copy.stats.length ? <Stats stats={copy.stats} locale={locale} /> : null}
+                </section>
+              </Reveal>
+            );
+
+          default:
+            return null;
+        }
+      })}
 
       <footer className={styles.next}>
         <Aurora />

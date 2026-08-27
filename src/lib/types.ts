@@ -11,6 +11,34 @@ export const CATEGORIES = [
 ] as const;
 export type Category = (typeof CATEGORIES)[number];
 
+/**
+ * The blocks a case study can be built from.
+ *
+ * Projects are not all the same shape — some need a bespoke case study. A
+ * project names the sections it wants, in the order it wants them, so a
+ * different layout is a content decision rather than a forked template.
+ * Anything not listed simply isn't rendered.
+ */
+export const SECTIONS = [
+  "keyVisual",   // Fig 01, full-bleed, 64px radius
+  "meta",        // Client / Role / Scope / Team
+  "brief",       // 01 — statement + two prose columns
+  "figurePair",  // Figs 02–03, side by side
+  "process",     // 02 — pinned frame, four wiping layers
+  "system",      // 03 — statement + body
+  "plateStrip",  // Figs 08–11, drag-scrolled with a progress rail
+  "motion",      // Fig 12, settles to full scale on view
+  "outcome",     // 04 — statement, columns, count-up stats
+] as const;
+
+export type SectionKind = (typeof SECTIONS)[number];
+
+/** The order used when a project doesn't specify its own. */
+export const DEFAULT_SECTIONS: SectionKind[] = [
+  "keyVisual", "meta", "brief", "figurePair",
+  "process", "system", "plateStrip", "motion", "outcome",
+];
+
 /** Figure slots on a case study, "01".."12". */
 export type FigureKey =
   | "01" | "02" | "03" | "04" | "05" | "06"
@@ -61,6 +89,8 @@ export interface Project {
   cat: Category;
   year: string;
   nextSlug: string;
+  /** Bespoke layout. Omit to use DEFAULT_SECTIONS. */
+  sections?: SectionKind[];
   en: ProjectCopy;
   pl: ProjectCopy;
 }

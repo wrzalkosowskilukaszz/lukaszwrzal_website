@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { CaseStudy } from "@/components/CaseStudy/CaseStudy";
-import { getLocalisedProject, getProjects } from "@/lib/content";
+import { getLocalisedProject, getProject, getProjects } from "@/lib/content";
 import { isDraft, realStats } from "@/lib/placeholder";
 import { imagesFor } from "@/lib/images";
 import { LOCALES, type Locale } from "@/lib/types";
@@ -75,6 +75,7 @@ export default async function ProjectPage({
       next={next}
       locale={l}
       images={imagesFor(slug)}
+      sections={getProject(slug)?.sections}
     />
   );
 }
