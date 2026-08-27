@@ -1,0 +1,126 @@
+/* Scroll-driven: a tall track with a sticky reel. Scroll distance maps to
+   slides. The wheel is NEVER intercepted. */
+
+.track { position: relative; }
+
+.sticky {
+  position: sticky;
+  top: clamp(84px, 10vh, 120px);
+}
+
+.frame {
+  position: relative;
+  width: min(var(--lw-content-max), 100% - 40px);
+  height: clamp(360px, 52vw, 720px);
+  margin-inline: auto;
+  border-radius: var(--lw-radius-stage);
+  overflow: hidden;
+  background: var(--lw-tile);
+  box-shadow: var(--lw-shadow-card);
+  cursor: grab;
+  touch-action: pan-y;
+}
+.frame:active { cursor: grabbing; }
+
+.plane { position: absolute; inset: 0; }
+
+/* Overscan, so parallax never exposes an edge. */
+.media {
+  position: absolute;
+  inset: -4%;
+  will-change: transform;
+}
+.media video,
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The bar itself never moves. Only the type inside it cycles — that stillness
+   is what makes it read as furniture rather than a carousel caption. */
+.bar {
+  position: absolute;
+  left: clamp(16px, 2.2vw, 40px);
+  right: clamp(16px, 2.2vw, 40px);
+  bottom: clamp(16px, 2.2vw, 40px);
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2vw, 26px);
+  padding: 12px 12px 12px clamp(20px, 2vw, 30px);
+  border-radius: var(--lw-radius-pill);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(22px) saturate(1.6);
+  -webkit-backdrop-filter: blur(22px) saturate(1.6);
+  box-shadow: 0 1px 2px rgba(16, 17, 26, 0.05), 0 16px 40px -20px rgba(16, 17, 26, 0.35);
+}
+
+.segments { display: flex; gap: 6px; flex: 0 0 auto; }
+
+.segment {
+  position: relative;
+  width: clamp(22px, 3vw, 44px);
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(7, 26, 49, 0.16);
+  overflow: hidden;
+  padding: 0;
+}
+.segmentFill {
+  position: absolute;
+  inset: 0;
+  width: 0;
+  background: var(--lw-ink);
+  border-radius: 2px;
+}
+
+.titleWrap { flex: 1 1 auto; min-width: 0; overflow: hidden; }
+
+.title {
+  display: block;
+  font-size: clamp(0.95rem, 1.35vw, 1.25rem);
+  font-weight: 500;
+  letter-spacing: var(--lw-title-track);
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  will-change: transform;
+}
+
+.cta {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px 11px 22px;
+  border-radius: var(--lw-radius-pill);
+  background: var(--lw-ink);
+  color: var(--lw-white);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.ctaDisc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--lw-radius-pill);
+  background: var(--lw-mint);
+  color: var(--lw-ink);
+  transition: transform 220ms var(--lw-ease-playful);
+}
+.cta:hover .ctaDisc { transform: translateX(3px); }
+
+@media (max-width: 700px) {
+  .bar { gap: 12px; padding: 10px 10px 10px 16px; }
+  .cta { padding: 9px 10px 9px 14px; font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta:hover .ctaDisc { transform: none; }
+}

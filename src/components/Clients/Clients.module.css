@@ -1,0 +1,59 @@
+.section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4rem);
+  width: min(var(--lw-stage-max), 100% - 48px);
+  margin: clamp(4rem, 8vw, 7.5rem) auto 0;
+}
+
+.copy { flex: 0 1 358px; min-width: 260px; }
+
+.title {
+  margin: 12px 0 14px;
+  font-size: clamp(2.2rem, 4.6vw, 4.4rem);
+  line-height: 1.12;
+}
+
+.intro {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--lw-muted);
+}
+
+.belts {
+  flex: 1 1 420px;
+  min-width: 0;
+  display: grid;
+  gap: clamp(18px, 2.4vw, 30px);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+}
+
+.belt { overflow: hidden; }
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: clamp(28px, 4vw, 58px);
+  width: max-content;
+  will-change: transform;
+}
+
+/* Held still until the measured width is real — a belt running on a bad
+   reading snaps back every couple of seconds. See context/MEMORY.md. */
+.track[data-ready="false"] { visibility: hidden; }
+
+.logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.5;
+  filter: grayscale(1);
+  transition: opacity 300ms var(--lw-ease-out), filter 300ms var(--lw-ease-out);
+}
+.logo:hover { opacity: 1; filter: grayscale(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .track { transform: none !important; }
+}

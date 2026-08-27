@@ -1,0 +1,35 @@
+.hero {
+  width: min(930px, 100% - 40px);
+  margin-inline: auto;
+  padding: clamp(7rem, 11vw, 9.875rem) 0 clamp(2.5rem, 5vw, 4rem);
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(2.5rem, 5.4vw, 4.5rem);
+  line-height: 1.1;
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+.lede {
+  font-size: clamp(1.05rem, 1.5vw, 1.5rem);
+  line-height: 1.4;
+  color: rgb(69, 69, 69);
+}
+
+/* The ONLY load animation on the site. Everything else reveals on scroll. */
+.rise {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: csRise 800ms var(--lw-ease-out) forwards;
+}
+.title.rise { animation-delay: 60ms; }
+.lede.rise { animation-delay: 140ms; }
+
+@keyframes csRise {
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise { opacity: 1; transform: none; animation: none; }
+}

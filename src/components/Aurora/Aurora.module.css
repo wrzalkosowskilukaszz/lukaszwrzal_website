@@ -1,0 +1,28 @@
+/* Five blurred blobs on independent sine orbits. Never a linear gradient —
+   that was tried twice and rejected. See DESIGN-SPEC "The aurora field". */
+
+.field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* The bento instance: same five blobs, lower two-thirds only, with a soft top
+   mask so the section starts as pure page background and colour arrives
+   mid-section. Its opacity also ramps with scroll (set from JS). */
+.masked {
+  top: 34%;
+  bottom: 0;
+  inset-inline: 0;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.28) 16%, #000 40%, #000 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.28) 16%, #000 40%, #000 100%);
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform;
+}

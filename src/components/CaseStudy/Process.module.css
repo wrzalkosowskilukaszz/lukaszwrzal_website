@@ -1,0 +1,113 @@
+/* The pinned wipe. Two traps, both learned the hard way:
+   1. NO overflow:hidden on the stage — it becomes the sticky scrollport and
+      the frame will not stick. The clipping and the 64px radius live on the
+      aurora layer, which already clips.
+   2. Below 1000px this pattern is ABANDONED, not stacked: each figure
+      relocates inline beneath its own step. */
+
+.stage {
+  position: relative;
+  width: min(var(--lw-stage-max), 100% - 48px);
+  margin: clamp(4rem, 8vw, 7.5rem) auto 0;
+  border-radius: var(--lw-radius-stage);
+  background: var(--lw-white);
+  /* deliberately no overflow:hidden */
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  width: min(var(--lw-content-max), 100% - 56px);
+  margin-inline: auto;
+  padding: clamp(3rem, 6vw, 5.5rem) 0;
+}
+
+.left { flex: 1 1 460px; min-width: 0; }
+
+.frameWrap { position: sticky; top: 104px; }
+
+.frame {
+  position: relative;
+  height: min(74vh, 660px);
+  border-radius: var(--lw-radius-tile);
+  overflow: hidden;
+  background: var(--lw-tile);
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  transition: clip-path 720ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.layer img { width: 100%; height: 100%; object-fit: cover; }
+
+.dots {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  display: flex;
+  gap: 6px;
+  z-index: 5;
+}
+.dot {
+  width: 20px;
+  height: 2px;
+  border-radius: 1px;
+  background: rgba(255, 255, 255, 0.4);
+  transition: background 320ms var(--lw-ease-out);
+}
+.dot[data-active="true"] { background: var(--lw-white); }
+
+.right { flex: 1 1 400px; min-width: 0; }
+
+.step {
+  padding: clamp(2rem, 8vh, 5rem) 0;
+  opacity: 0.28;
+  transition: opacity 480ms var(--lw-ease-out);
+}
+.step[data-active="true"] { opacity: 1; }
+
+.stepN {
+  font-family: var(--lw-font-mono);
+  font-size: 11px;
+  letter-spacing: var(--lw-label-track);
+  color: var(--lw-muted);
+}
+
+.stepTitle {
+  margin: 10px 0 12px;
+  font-size: clamp(1.2rem, 1.9vw, 1.6rem);
+  line-height: 1.28;
+}
+
+.stepBody {
+  max-width: 54ch;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--lw-muted);
+}
+
+/* Inline figure, used only below the breakpoint. */
+.inlineFig {
+  margin-top: 22px;
+  height: clamp(220px, 52vw, 400px);
+  border-radius: var(--lw-radius-tile);
+  overflow: hidden;
+  background: var(--lw-tile);
+}
+.inlineFig img { width: 100%; height: 100%; object-fit: cover; }
+
+@media (max-width: 999px) {
+  .left { display: none; }
+  .step { opacity: 1 !important; padding: clamp(1.5rem, 5vh, 2.5rem) 0; }
+}
+@media (min-width: 1000px) {
+  .inlineFig { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layer, .step, .dot { transition: none; }
+}

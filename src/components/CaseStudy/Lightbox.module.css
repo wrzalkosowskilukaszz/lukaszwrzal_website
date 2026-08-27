@@ -1,0 +1,86 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  background: rgba(7, 26, 49, 0.94);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: fadeIn 320ms var(--lw-ease-out);
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.stage {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  padding: clamp(64px, 8vw, 96px) clamp(16px, 4vw, 64px) 16px;
+}
+
+.image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: var(--lw-radius-tile);
+  animation: pop 420ms var(--lw-ease-playful);
+  transition: opacity 130ms linear;
+}
+@keyframes pop { from { transform: scale(0.985); } to { transform: none; } }
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 16px clamp(16px, 4vw, 64px) clamp(20px, 3vw, 32px);
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.caption {
+  max-width: 70ch;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.controls { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; }
+
+.counter {
+  font-family: var(--lw-font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  color: var(--lw-white);
+  transition: background 180ms var(--lw-ease-out);
+}
+.ghost:hover { background: rgba(255, 255, 255, 0.12); }
+.ghost:disabled { opacity: 0.35; cursor: default; }
+
+.close {
+  position: absolute;
+  top: clamp(16px, 2.4vw, 28px);
+  right: clamp(16px, 4vw, 64px);
+  padding: 9px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: var(--lw-radius-pill);
+  color: var(--lw-white);
+  font-size: 13px;
+  font-weight: 500;
+}
+.close:hover { background: rgba(255, 255, 255, 0.12); }
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay, .image { animation: none; }
+}

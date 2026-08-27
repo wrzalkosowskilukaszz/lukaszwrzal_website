@@ -1,0 +1,53 @@
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--lw-ink);
+  opacity: 0.35;
+  z-index: 70;
+  width: 0;
+}
+
+.spine {
+  position: fixed;
+  left: clamp(18px, 2.4vw, 44px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 55;
+  display: none;
+  flex-direction: column;
+  gap: 18px;
+}
+@media (min-width: 1240px) { .spine { display: flex; } }
+
+.entry {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* --lw-faint (rgb 163) is 2.44:1 on paper and fails even the 3:1 UI
+     threshold. The inactive spine entry is deliberately quiet, but it is
+     still text a reader needs — rgb(120) holds the hierarchy at 4.27:1. */
+  color: rgb(120, 120, 120);
+  transition: color 400ms var(--lw-ease-out);
+}
+.entry[data-active="true"] { color: var(--lw-ink); }
+
+.tick {
+  width: 12px;
+  height: 1px;
+  background: currentColor;
+  transition: width 400ms var(--lw-ease-playful);
+}
+.entry[data-active="true"] .tick { width: 30px; }
+
+.label {
+  font-family: var(--lw-font-mono);
+  font-size: 11px;
+  letter-spacing: var(--lw-label-track);
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tick, .entry { transition: none; }
+}

@@ -1,0 +1,93 @@
+/* A wrapping FLEX row per rank — deliberately NOT CSS Grid.
+
+   Grid column tracks are shared down the entire grid, so widening a track must
+   widen every card beneath it. That produced a real bug where hovering one
+   tile stretched a whole column. See context/MEMORY.md. */
+
+.grid {
+  --cols: 1;
+  --gap: 14px;
+  /* The 0.5px shave: without it, rounded pixel widths can total more than the
+     container and force a wrap mid-hover. */
+  --base: calc((100% - var(--gap) * (var(--cols) - 1)) / var(--cols) - 0.5px);
+  /* Same figure in container units. A percentage inside a `height` calc would
+     resolve against the parent's HEIGHT, not its width, and collapse to zero —
+     cqw is 1% of this container's inline size, which is what we mean. */
+  --base-cq: calc((100cqw - var(--gap) * (var(--cols) - 1)) / var(--cols) - 0.5px);
+
+  container-type: inline-size;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  width: min(2400px, 100% - 32px);
+  margin-inline: auto;
+  align-items: flex-start;
+}
+
+@media (min-width: 680px)  { .grid { --cols: 2; } }
+@media (min-width: 1100px) { .grid { --cols: 3; } }
+@media (min-width: 1500px) { .grid { --cols: 4; } }
+
+.card {
+  flex: 0 0 auto;
+  /* CSS owns the RESTING layout, so the grid is correct with no JS, with JS
+     still booting, or in a background tab where rAF never fires. The spring
+     only overrides width while a hover is in flight. */
+  width: var(--base);
+  /* Height is pinned from the resting width and never animates. aspect-ratio
+     would make the hover stretch vertical as well as horizontal — explicitly
+     rejected. */
+  height: clamp(200px, calc(var(--base-cq) * 0.72), 430px);
+  will-change: width;
+}
+
+/* Filtering collapses a card in place rather than reflowing the whole grid. */
+.card[data-hidden="true"] {
+  position: absolute;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0;
+  transform: scale(0.96);
+  pointer-events: none;
+  transition:
+    opacity 260ms var(--lw-ease-out),
+    transform 260ms var(--lw-ease-out);
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto clamp(2rem, 4vw, 3.25rem);
+  padding-inline: 16px;
+}
+
+.filter {
+  padding: 10px 18px;
+  border: 1px solid rgba(7, 26, 49, 0.1);
+  border-radius: var(--lw-radius-pill);
+  background: transparent;
+  color: var(--lw-muted);
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1;
+  transition:
+    background 220ms var(--lw-ease-out),
+    color 220ms var(--lw-ease-out),
+    border-color 220ms var(--lw-ease-out);
+}
+.filter:hover { color: var(--lw-ink); }
+.filter[aria-pressed="true"] {
+  background: var(--lw-ink);
+  border-color: var(--lw-ink);
+  color: var(--lw-white);
+}
+
+.count {
+  margin-left: 7px;
+  font-family: var(--lw-font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  opacity: 0.6;
+}

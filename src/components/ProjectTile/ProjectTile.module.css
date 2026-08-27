@@ -1,0 +1,110 @@
+/* Shared hover language. The layout moves, not the object — never scale() a
+   tile. See DESIGN-SPEC "The hover language".
+
+   Labels live INSIDE the media, never below it: in a grid of varying tile
+   heights, labels below produce N unrelated vertical positions and read as
+   chaos. Inside, every label sits at the same offset from its own tile's
+   bottom edge — N identical relationships. */
+
+.tile {
+  position: relative;
+  display: block;
+  min-width: 0;
+  border-radius: var(--lw-radius-tile);
+  overflow: hidden;
+  background: var(--lw-tile);
+  box-shadow: var(--lw-shadow-tile);
+}
+
+.media {
+  position: absolute;
+  inset: 0;
+  transition: filter var(--lw-dur-slow) var(--lw-ease-out);
+}
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Unattended tiles desaturate; the hovered one lifts slightly. */
+.tile[data-dimmed="true"] .media { filter: saturate(0.22) brightness(1.04); }
+.tile[data-active="true"] .media { filter: saturate(1.06); }
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(7, 26, 49, 0) 40%, rgba(7, 26, 49, 0.62) 100%);
+  opacity: 0.72;
+  transition: opacity 420ms ease;
+}
+.tile[data-active="true"] .scrim { opacity: 1; }
+
+.year {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  font-family: var(--lw-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.78);
+  opacity: 0;
+  transition: opacity 320ms ease;
+}
+.tile[data-active="true"] .year { opacity: 1; }
+
+.disc {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--lw-radius-pill);
+  background: var(--lw-mint);
+  color: var(--lw-ink);
+  opacity: 0;
+  transform: scale(0.78);
+  transition:
+    opacity 280ms ease,
+    transform 380ms var(--lw-ease-playful);
+}
+.tile[data-active="true"] .disc { opacity: 1; transform: scale(1); }
+
+.label {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 18px;
+}
+
+.name {
+  display: block;
+  font-size: 19px;
+  line-height: 1.3;
+  letter-spacing: var(--lw-title-track);
+  font-weight: 500;
+  color: var(--lw-white);
+}
+
+/* Animated height, not max-height — the measured value comes from JS so the
+   easing lands on the real content height. */
+.desc {
+  overflow: hidden;
+  height: 0;
+  transition: height 460ms var(--lw-ease-out);
+}
+.descInner {
+  margin: 7px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.74);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .media, .scrim, .year, .disc, .desc { transition: none; }
+  .tile[data-dimmed="true"] .media { filter: none; }
+}

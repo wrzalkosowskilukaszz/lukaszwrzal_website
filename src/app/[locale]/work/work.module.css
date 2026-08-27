@@ -1,0 +1,18 @@
+.header {
+  width: min(760px, 100% - 40px);
+  margin-inline: auto;
+  padding: clamp(7rem, 11vw, 9.875rem) 0 clamp(2rem, 4vw, 3rem);
+  text-align: center;
+}
+
+.title {
+  margin: 14px 0 18px;
+  font-size: clamp(2.5rem, 5.4vw, 4.5rem);
+  line-height: 1.1;
+}
+
+.lede {
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  line-height: 1.4;
+  color: rgb(69, 69, 69);
+}

@@ -1,0 +1,21 @@
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 32px 24px;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.value {
+  font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: var(--lw-display-track);
+  font-variant-numeric: tabular-nums;
+}
+
+.label {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--lw-muted);
+}

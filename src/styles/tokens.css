@@ -1,0 +1,63 @@
+/* ==========================================================================
+   Lukasz Wrzal — Brand System v2 ("Signal Navy")
+   Derived from the approved Portfolio v3 build. Load this file, then style
+   against the custom properties below. Values are exact — do not round.
+   ========================================================================== */
+
+:root {
+  /* ---- Ink & paper ----------------------------------------------------- */
+  --lw-ink:            rgb(7, 26, 49);      /* headings, primary surfaces   */
+  --lw-ink-2:          rgb(60, 62, 68);     /* nav rest state               */
+  --lw-muted:          rgb(95, 109, 119);   /* body copy on light           */
+  --lw-faint:          rgb(163, 163, 163);  /* mono labels, meta            */
+  --lw-paper:          rgb(252, 251, 248);  /* page ground                  */
+  --lw-white:          rgb(255, 255, 255);  /* cards, footer ground         */
+  --lw-tile:           rgb(205, 221, 242);  /* empty media wells            */
+
+  /* ---- Accent ---------------------------------------------------------- */
+  --lw-mint:           rgb(94, 231, 197);   /* the single interactive accent */
+
+  /* ---- Aurora field ----------------------------------------------------
+     Five blobs on independent orbits, never a linear gradient. Used behind
+     the work grid and the footer — the only two places colour appears at
+     scale. Alphas are tuned for a white/paper ground; do not raise them.  */
+  --lw-aura-sky:       rgba(205, 221, 242, 0.98);
+  --lw-aura-sky-soft:  rgba(205, 221, 242, 0.60);
+  --lw-aura-violet:    rgba(60, 44, 194, 0.20);
+  --lw-aura-butter:    rgba(255, 248, 207, 0.95);
+  --lw-aura-mint:      rgba(94, 231, 197, 0.50);
+
+  /* ---- Type ------------------------------------------------------------ */
+  --lw-font:           'Geist', system-ui, sans-serif;
+  --lw-font-mono:      'Geist Mono', ui-monospace, monospace;
+
+  --lw-display-track:  -2px;      /* h1/h2 letter-spacing at display sizes  */
+  --lw-title-track:    -0.3px;    /* tile names, card titles                */
+  --lw-label-track:    0.12em;    /* mono eyebrow labels, uppercase         */
+
+  /* ---- Radius ---------------------------------------------------------- */
+  --lw-radius-stage:   64px;      /* full-width section containers          */
+  --lw-radius-tile:    22px;      /* media tiles, cards                     */
+  --lw-radius-pill:    999px;     /* buttons, nav, chips                    */
+
+  /* ---- Shadow ---------------------------------------------------------- */
+  --lw-shadow-tile:    0 1px 2px rgba(16, 17, 26, 0.06), 0 1px 1px rgba(16, 17, 26, 0.04);
+  --lw-shadow-card:    0 2px 4px rgba(16, 17, 26, 0.04), 0 12px 32px -12px rgba(16, 17, 26, 0.14);
+  --lw-shadow-float:   0 1px 2px rgba(16, 17, 26, 0.05), 0 16px 40px -20px rgba(16, 17, 26, 0.35);
+
+  /* ---- Motion ----------------------------------------------------------
+     Two curves only. Springs in JS handle anything that must survive an
+     interruption (column widths, carousel planes, pinned sequences).      */
+  --lw-ease-out:       cubic-bezier(0.22, 1, 0.36, 1);
+  --lw-ease-playful:   cubic-bezier(0.34, 1.56, 0.64, 1);
+  --lw-dur-quick:      180ms;
+  --lw-dur-base:       320ms;
+  --lw-dur-slow:       480ms;
+
+  /* ---- Layout ---------------------------------------------------------- */
+  --lw-stage-max:      1872px;    /* outer rounded containers               */
+  --lw-content-max:    1420px;    /* work grid, hero media                  */
+  --lw-read-max:       1200px;    /* prose and footer                       */
+  --lw-gap-col:        29px;      /* bento column gap                       */
+  --lw-gap-row:        30px;      /* bento row gap                          */
+}
