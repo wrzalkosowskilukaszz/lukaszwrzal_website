@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { Footer } from "@/components/Footer/Footer";
-import { WorkGrid } from "@/components/WorkGrid/WorkGrid";
+import { WorkBrowser } from "@/components/WorkGrid/WorkBrowser";
 import { getLocalisedProjects } from "@/lib/content";
+import { allImages } from "@/lib/images";
 import { t } from "@/lib/i18n";
 import { LOCALES, type Locale } from "@/lib/types";
 
@@ -45,7 +46,7 @@ export default async function WorkPage({
         <p className={styles.lede}>{t(l, "workLede")}</p>
       </header>
 
-      <WorkGrid projects={projects} locale={l} />
+      <WorkBrowser projects={projects} locale={l} images={allImages()} />
 
       <Footer locale={l} />
     </>

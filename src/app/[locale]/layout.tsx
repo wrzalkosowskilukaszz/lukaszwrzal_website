@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Archivo, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
@@ -11,18 +11,29 @@ import { LOCALES, type Locale } from "@/lib/types";
 import "./globals.css";
 
 /* Self-hosted by next/font — no render-blocking request to Google, and no
-   layout shift from a late webfont. latin-ext carries the Polish diacritics. */
-const geist = Geist({
+   layout shift from a late webfont. latin-ext carries the Polish diacritics.
+
+   Bricolage Grotesque is the display voice: a variable grotesque drawn
+   deliberately imperfect, with a width axis we drive from scroll velocity.
+   Geist was replaced because it is the default of the moment — an excellent,
+   invisible choice that made the site read as anyone's. */
+const display = Bricolage_Grotesque({
   subsets: ["latin", "latin-ext"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--lw-font-geist",
+  axes: ["opsz", "wdth"],
+  variable: "--lw-font-display-face",
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
+const body = Archivo({
+  subsets: ["latin", "latin-ext"],
+  variable: "--lw-font-body",
+  display: "swap",
+});
+
+const mono = JetBrains_Mono({
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500"],
-  variable: "--lw-font-geist-mono",
+  variable: "--lw-font-mono-face",
   display: "swap",
 });
 
@@ -49,7 +60,10 @@ export default async function RootLayout({
   if (!LOCALES.includes(locale as Locale)) notFound();
 
   return (
-    <html lang={locale} className={`${geist.variable} ${geistMono.variable}`}>
+    <html
+      lang={locale}
+      className={`${display.variable} ${body.variable} ${mono.variable}`}
+    >
       <body>
         {/* The animation clock starts before any third-party embed mounts — a
             cal.com failure must never take down the springs or the gradients. */}

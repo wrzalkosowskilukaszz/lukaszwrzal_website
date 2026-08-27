@@ -42,7 +42,7 @@
 
 .caption {
   max-width: 70ch;
-  font-size: 14px;
+  font-size: var(--t-sm);
   line-height: 1.5;
 }
 
@@ -50,7 +50,7 @@
 
 .counter {
   font-family: var(--lw-font-mono);
-  font-size: 12px;
+  font-size: var(--t-label);
   letter-spacing: 0.08em;
 }
 
@@ -76,7 +76,7 @@
   border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: var(--lw-radius-pill);
   color: var(--lw-white);
-  font-size: 13px;
+  font-size: var(--t-sm);
   font-weight: 500;
 }
 .close:hover { background: rgba(255, 255, 255, 0.12); }

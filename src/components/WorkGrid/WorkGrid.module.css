@@ -69,7 +69,7 @@
   border-radius: var(--lw-radius-pill);
   background: transparent;
   color: var(--lw-muted);
-  font-size: 13.5px;
+  font-size: var(--t-sm);
   font-weight: 500;
   line-height: 1;
   transition:
@@ -87,7 +87,16 @@
 .count {
   margin-left: 7px;
   font-family: var(--lw-font-mono);
-  font-size: 10.5px;
+  font-size: var(--t-label);
   letter-spacing: 0.06em;
   opacity: 0.6;
 }
+
+.filterDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cat);
+  margin-right: 1px;
+}
+.filter { display: inline-flex; align-items: center; gap: 7px; }

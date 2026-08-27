@@ -1,4 +1,5 @@
 @import "../../styles/tokens.css";
+@import "../../styles/scale.css";
 
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -12,7 +13,7 @@ body {
   background: var(--lw-paper);
   color: var(--lw-ink);
   font-family: var(--lw-font);
-  font-size: 1rem;
+  font-size: var(--t-base);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -20,13 +21,30 @@ body {
 
 h1, h2, h3, h4 {
   margin: 0;
-  font-weight: 500;
+  font-family: var(--lw-font-display);
+  font-weight: 700;
   text-wrap: balance;
 }
-h1, h2 { letter-spacing: var(--lw-display-track); }
-h3     { letter-spacing: var(--lw-title-track); }
+
+/* The display face is a variable grotesque. `wdth` is driven from scroll
+   velocity by useKineticType() — headings compress as the page moves fast
+   and relax when it settles. `--wdth` is the live value; 100 is at rest. */
+h1, h2 {
+  font-variation-settings: "wdth" var(--wdth, 100), "opsz" 48;
+  font-size: var(--t-xl);
+  line-height: var(--lh-xl);
+  letter-spacing: -0.035em;
+}
+h3 {
+  font-variation-settings: "wdth" var(--wdth, 100), "opsz" 24;
+  font-size: var(--t-md);
+  line-height: var(--lh-md);
+  letter-spacing: -0.02em;
+}
 
 p { margin: 0; text-wrap: pretty; }
+
+body { font-size: var(--t-base); line-height: var(--lh-base); }
 
 a { color: inherit; text-decoration: none; }
 
@@ -50,8 +68,8 @@ button {
 .lw-eyebrow {
   margin: 0;
   font-family: var(--lw-font-mono);
-  font-size: 11px;
-  font-weight: 400;
+  font-size: var(--t-label);
+  font-weight: 500;
   letter-spacing: var(--lw-label-track);
   text-transform: uppercase;
   /* --lw-faint fails AA for body text; darkened per the handoff's a11y note. */
@@ -89,6 +107,7 @@ button {
 
 /* next/font supplies the families; keep the token names as the public API. */
 :root {
-  --lw-font: var(--lw-font-geist), system-ui, sans-serif;
-  --lw-font-mono: var(--lw-font-geist-mono), ui-monospace, monospace;
+  --lw-font: var(--lw-font-body), system-ui, sans-serif;
+  --lw-font-display: var(--lw-font-display-face), var(--lw-font-body), sans-serif;
+  --lw-font-mono: var(--lw-font-mono-face), ui-monospace, monospace;
 }

@@ -1,0 +1,111 @@
+/* The index. Same hover grammar as the bento — the layout moves, not the
+   object — rotated ninety degrees: a row CLAIMS HEIGHT on a spring and its
+   neighbours shed the difference.
+
+   Because the mechanic is "which row has your attention", not "where is the
+   mouse", it swaps input cleanly: pointer on desktop, scroll proximity on
+   touch. Mobile gets a designed behaviour, not a degraded one. */
+
+.list {
+  width: min(var(--lw-stage-max), 100% - 48px);
+  margin-inline: auto;
+  border-top: 1px solid rgba(7, 26, 49, 0.12);
+}
+
+.row {
+  position: relative;
+  display: block;
+  border-bottom: 1px solid rgba(7, 26, 49, 0.12);
+}
+
+.line {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1.6fr) minmax(0, 1.5fr) 150px 60px 28px;
+  gap: 20px;
+  align-items: center;
+  padding: 18px 8px;
+  transition: padding-inline 220ms var(--lw-ease-out);
+}
+.row[data-open="true"] .line { padding-inline: 16px; }
+
+.n {
+  font-family: var(--lw-font-mono);
+  font-size: var(--t-label);
+  font-variant-numeric: tabular-nums;
+  color: var(--lw-muted);
+}
+
+.name {
+  font-family: var(--lw-font-display);
+  font-variation-settings: "wdth" var(--wdth, 100), "opsz" 24;
+  font-weight: 700;
+  font-size: var(--t-md);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.desc {
+  font-size: var(--t-sm);
+  line-height: var(--lh-sm);
+  color: var(--lw-muted);
+}
+
+.year {
+  font-family: var(--lw-font-mono);
+  font-size: var(--t-label);
+  font-variant-numeric: tabular-nums;
+  color: var(--lw-muted);
+  text-align: right;
+}
+
+.arrow {
+  color: var(--lw-muted);
+  opacity: 0;
+  transition:
+    opacity 200ms var(--lw-ease-out),
+    transform 320ms var(--lw-ease-playful);
+}
+.row[data-open="true"] .arrow { opacity: 1; transform: translateX(4px); }
+
+/* The claimed panel. Height is spring-driven from JS; overflow hides the
+   media until the row opens. */
+.reveal {
+  height: 0;
+  overflow: hidden;
+}
+
+.media {
+  height: clamp(180px, 26vw, 340px);
+  margin: 0 8px 20px;
+  border-radius: var(--lw-radius-tile);
+  overflow: hidden;
+  background: var(--lw-tile);
+  position: relative;
+}
+.media img { width: 100%; height: 100%; object-fit: cover; }
+
+.mediaMeta {
+  position: absolute;
+  left: 18px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.stat {
+  font-family: var(--lw-font-mono);
+  font-size: var(--t-label);
+  letter-spacing: 0.06em;
+  color: var(--lw-mint);
+}
+
+/* Below the index's comfortable width, shed columns rather than shrink them. */
+@media (max-width: 900px) {
+  .line { grid-template-columns: 34px minmax(0, 1fr) 54px; gap: 14px; }
+  .desc, .catCell, .arrow { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .line, .arrow { transition: none; }
+}

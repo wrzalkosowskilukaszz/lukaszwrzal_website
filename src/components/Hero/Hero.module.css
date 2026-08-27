@@ -6,13 +6,13 @@
 }
 
 .title {
-  font-size: clamp(2.5rem, 5.4vw, 4.5rem);
+  font-size: var(--t-xl);
   line-height: 1.1;
   margin-bottom: clamp(1rem, 2vw, 1.5rem);
 }
 
 .lede {
-  font-size: clamp(1.05rem, 1.5vw, 1.5rem);
+  font-size: var(--t-md);
   line-height: 1.4;
   color: rgb(69, 69, 69);
 }

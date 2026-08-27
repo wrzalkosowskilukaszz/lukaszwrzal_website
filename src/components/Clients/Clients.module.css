@@ -11,12 +11,12 @@
 
 .title {
   margin: 12px 0 14px;
-  font-size: clamp(2.2rem, 4.6vw, 4.4rem);
+  font-size: var(--t-xl);
   line-height: 1.12;
 }
 
 .intro {
-  font-size: 18px;
+  font-size: var(--t-md);
   line-height: 1.6;
   color: var(--lw-muted);
 }

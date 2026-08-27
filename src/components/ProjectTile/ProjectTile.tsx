@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
+import { CategoryTag } from "@/components/Category/Category";
 import { ArrowDiagonal } from "@/components/icons/Arrows";
 import type { Locale, LocalisedProject } from "@/lib/types";
 
@@ -11,12 +12,16 @@ import styles from "./ProjectTile.module.css";
 export interface ProjectTileProps {
   project: LocalisedProject;
   locale: Locale;
-  /** Hover/focus is owned by the parent grid, which also drives the springs. */
   active: boolean;
   dimmed: boolean;
   onActivate: () => void;
   onDeactivate: () => void;
-  /** Top-left meta. The bento shows the index, the work index shows the year. */
+  /** Key visual, when one exists. Absent renders the designed empty well. */
+  image?: string;
+  /** Show the descriptor at rest rather than only on hover. */
+  showDesc?: boolean;
+  /** Show the headline outcome — the thing that earns the click. */
+  showStat?: boolean;
   meta?: string;
   style?: React.CSSProperties;
   className?: string;
@@ -29,20 +34,26 @@ export function ProjectTile({
   dimmed,
   onActivate,
   onDeactivate,
+  image,
+  showDesc = false,
+  showStat = false,
   meta,
   style,
   className,
 }: ProjectTileProps) {
   const descRef = useRef<HTMLDivElement | null>(null);
 
-  /* Measure the real content height rather than animating to a guess. */
+  /* Only the hover-reveal variant animates height; when the descriptor is
+     always shown there is nothing to measure. */
   useEffect(() => {
+    if (showDesc) return;
     const el = descRef.current;
-    if (!el) return;
-    const inner = el.firstElementChild as HTMLElement | null;
-    if (!inner) return;
+    const inner = el?.firstElementChild as HTMLElement | null;
+    if (!el || !inner) return;
     el.style.height = active ? `${inner.scrollHeight}px` : "0px";
-  }, [active]);
+  }, [active, showDesc]);
+
+  const stat = project.copy.stats?.[0];
 
   return (
     <Link
@@ -50,6 +61,7 @@ export function ProjectTile({
       className={`${styles.tile} ${className ?? ""}`}
       style={style}
       data-active={active || undefined}
+      data-empty={!image || undefined}
       data-dimmed={dimmed || undefined}
       onPointerEnter={onActivate}
       onPointerLeave={onDeactivate}
@@ -57,16 +69,16 @@ export function ProjectTile({
       onBlur={onDeactivate}
     >
       <div className={styles.media}>
-        {/* Empty media wells are a designed state (--lw-tile), not a gap.
-            Real images drop in here as content arrives. */}
+        {image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={image} alt="" loading="lazy" decoding="async" />
+        ) : null}
       </div>
 
       <div className={styles.scrim} />
 
       {meta ? (
-        <span className={styles.year} aria-hidden="true">
-          {meta}
-        </span>
+        <span className={styles.year} aria-hidden="true">{meta}</span>
       ) : null}
 
       <span className={styles.disc} aria-hidden="true">
@@ -74,10 +86,26 @@ export function ProjectTile({
       </span>
 
       <div className={styles.label}>
-        <span className={styles.name}>{project.copy.title}</span>
-        <div className={styles.desc} ref={descRef}>
-          <p className={styles.descInner}>{project.copy.desc}</p>
-        </div>
+        <CategoryTag cat={project.cat} locale={locale} onMedia />
+        <span className={`${styles.name} tileName`}>{project.copy.title}</span>
+
+        {showDesc ? (
+          <p className={styles.descStatic}>{project.copy.desc}</p>
+        ) : (
+          <div className={styles.desc} ref={descRef}>
+            <p className={styles.descInner}>{project.copy.desc}</p>
+          </div>
+        )}
+
+        {showStat && stat ? (
+          <p className={styles.stat}>
+            <b>
+              {stat.value.toLocaleString(locale === "pl" ? "pl-PL" : "en-US")}
+              {stat.suffix ?? ""}
+            </b>
+            <span>{stat.label}</span>
+          </p>
+        ) : null}
       </div>
     </Link>
   );

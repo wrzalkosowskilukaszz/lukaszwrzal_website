@@ -39,6 +39,14 @@
   opacity: 0.72;
   transition: opacity 420ms ease;
 }
+
+/* No image yet: nothing to protect, so the scrim can go deeper and the
+   label sits on a surface that actually holds white and mint. Reverts to
+   the lighter gradient the moment a photograph lands. */
+.tile[data-empty="true"] .scrim {
+  background: linear-gradient(180deg, rgba(7, 26, 49, 0.06) 0%, rgba(7, 26, 49, 0.34) 46%, rgba(7, 26, 49, 0.82) 100%);
+  opacity: 1;
+}
 .tile[data-active="true"] .scrim { opacity: 1; }
 
 .year {
@@ -46,7 +54,7 @@
   top: 18px;
   left: 20px;
   font-family: var(--lw-font-mono);
-  font-size: 11px;
+  font-size: var(--t-label);
   letter-spacing: 0.12em;
   color: rgba(255, 255, 255, 0.78);
   opacity: 0;
@@ -81,12 +89,16 @@
   bottom: 18px;
 }
 
+.label > span:first-child { margin-bottom: 6px; }
+
 .name {
   display: block;
-  font-size: 19px;
+  font-family: var(--lw-font-display);
+  font-variation-settings: "wdth" var(--wdth, 100), "opsz" 24;
+  font-size: var(--t-md);
   line-height: 1.3;
   letter-spacing: var(--lw-title-track);
-  font-weight: 500;
+  font-weight: 700;
   color: var(--lw-white);
 }
 
@@ -99,10 +111,33 @@
 }
 .descInner {
   margin: 7px 0 0;
-  font-size: 13px;
+  font-size: var(--t-sm);
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.74);
 }
+
+/* Always-visible descriptor, for the homepage's larger tiles. */
+.descStatic {
+  margin: 7px 0 0;
+  max-width: 46ch;
+  font-size: var(--t-sm);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* The headline outcome — what actually earns a click from someone hiring. */
+.stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 11px 0 0;
+  font-family: var(--lw-font-mono);
+  font-size: var(--t-sm);
+  letter-spacing: 0.02em;
+  color: var(--lw-mint);
+}
+.stat b { font-weight: 500; font-variant-numeric: tabular-nums; }
+.stat span { color: rgba(255, 255, 255, 0.72); font-size: var(--t-label); letter-spacing: 0.06em; }
 
 @media (prefers-reduced-motion: reduce) {
   .media, .scrim, .year, .disc, .desc { transition: none; }

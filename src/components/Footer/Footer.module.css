@@ -19,7 +19,7 @@
 .lockup { justify-content: center; margin-bottom: clamp(1.5rem, 3vw, 2.25rem); }
 
 .title {
-  font-size: clamp(2.2rem, 4.6vw, 4.4rem);
+  font-size: var(--t-xl);
   line-height: 1.12;
   margin-bottom: 1rem;
 }
@@ -27,7 +27,7 @@
 .lede {
   max-width: 62ch;
   margin: 0 auto clamp(2rem, 4vw, 3rem);
-  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  font-size: var(--t-md);
   line-height: 1.5;
   color: var(--lw-muted);
 }
@@ -55,7 +55,7 @@
 
 .emailLine {
   margin-top: clamp(1.25rem, 2.5vw, 1.75rem);
-  font-size: 15px;
+  font-size: var(--t-sm);
   color: var(--lw-muted);
 }
 .emailLine a { color: var(--lw-ink); text-decoration: underline; text-underline-offset: 3px; }
@@ -69,7 +69,7 @@
   margin-top: clamp(2.5rem, 5vw, 4rem);
   padding-top: 22px;
   border-top: 1px solid rgba(7, 26, 49, 0.08);
-  font-size: 13px;
+  font-size: var(--t-sm);
   color: var(--lw-muted);
   text-align: left;
 }
@@ -83,7 +83,7 @@
   border-radius: var(--lw-radius-pill);
   background: var(--lw-ink);
   color: var(--lw-white);
-  font-size: 14px;
+  font-size: var(--t-sm);
   font-weight: 600;
   transition: transform 220ms var(--lw-ease-playful);
 }

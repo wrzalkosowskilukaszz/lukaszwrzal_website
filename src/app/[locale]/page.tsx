@@ -9,6 +9,7 @@ import { Hero } from "@/components/Hero/Hero";
 import { HeroReel } from "@/components/HeroReel/HeroReel";
 import { PersonSchema } from "@/components/StructuredData";
 import { getBentoProjects, getLocalisedProjects } from "@/lib/content";
+import { allImages } from "@/lib/images";
 import { t } from "@/lib/i18n";
 import { LOCALES, type Locale } from "@/lib/types";
 
@@ -52,7 +53,7 @@ export default async function HomePage({
       <PersonSchema locale={l} />
       <Hero locale={l} />
       <HeroReel projects={reel} locale={l} />
-      <Bento projects={bento} locale={l} />
+      <Bento projects={bento} locale={l} images={allImages()} />
       <About locale={l} points={points} />
       <Clients locale={l} />
       <Footer locale={l} variant="booking" />

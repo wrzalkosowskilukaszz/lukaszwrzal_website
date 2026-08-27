@@ -51,6 +51,9 @@ export const CHROME = {
     workLede:
       "Brand systems, product interfaces, print and packaging. Everything I can show publicly.",
     filterAll: "All",
+    viewIndex: "Index",
+    viewGrid: "Grid",
+    viewGroup: "View as",
 
     // Case study
     chapterBrief: "Brief",
@@ -125,6 +128,9 @@ export const CHROME = {
     workLede:
       "Systemy marki, interfejsy produktów, druk i opakowania. Wszystko, co mogę pokazać publicznie.",
     filterAll: "Wszystkie",
+    viewIndex: "Lista",
+    viewGrid: "Siatka",
+    viewGroup: "Widok",
 
     chapterBrief: "Brief",
     chapterProcess: "Proces",
