@@ -1,4 +1,5 @@
 {
+  "$schema": "../project.schema.json",
   "slug": "solstice",
   "cat": "ai",
   "year": "2026",

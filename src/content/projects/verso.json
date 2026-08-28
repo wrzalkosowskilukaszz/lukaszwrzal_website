@@ -1,4 +1,5 @@
 {
+  "$schema": "../project.schema.json",
   "slug": "verso",
   "cat": "illustrations",
   "year": "2023",

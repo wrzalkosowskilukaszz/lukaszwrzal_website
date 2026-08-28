@@ -1,0 +1,46 @@
+{
+  "$schema": "../project.schema.json",
+  "slug": "my-project",
+  "cat": "identity",
+  "year": "2026",
+  "nextSlug": "northwind",
+  "title": "My Project",
+  "desc": { "en": "One line for the work list.", "pl": "Jedna linia na liście prac." },
+
+  "blocks": [
+    { "type": "hero",
+      "variant": "centred",
+      "eyebrow": { "en": "Identity · Six weeks · 2026", "pl": "Identyfikacja · Sześć tygodni · 2026" },
+      "title": "My Project",
+      "lede": { "en": "One or two sentences.", "pl": "Jedno lub dwa zdania." } },
+
+    { "type": "figure", "src": "01.jpg", "width": "stage", "parallax": 0.1 },
+
+    { "type": "meta",
+      "client": "Client name",
+      "role": { "en": "Identity, art direction", "pl": "Identyfikacja, kierunek artystyczny" },
+      "scope": { "en": "Mark, type, web", "pl": "Znak, typografia, web" },
+      "team": { "en": "Solo", "pl": "Solo" } },
+
+    { "type": "text",
+      "variant": "two-column",
+      "eyebrow": "01 / Brief",
+      "statement": { "en": "The one sentence that sums it up.", "pl": "Jedno zdanie podsumowania." },
+      "body": [
+        { "en": "First paragraph.", "pl": "Pierwszy akapit." },
+        { "en": "Second paragraph.", "pl": "Drugi akapit." }
+      ] },
+
+    { "type": "gallery",
+      "variant": "grid-2",
+      "items": [
+        { "src": "02.jpg", "caption": "Fig. 02" },
+        { "src": "03.jpg", "caption": "Fig. 03" }
+      ] },
+
+    { "type": "credits",
+      "roles": [
+        { "role": { "en": "Design", "pl": "Projekt" }, "name": "Lukasz Wrzal" }
+      ] }
+  ]
+}
