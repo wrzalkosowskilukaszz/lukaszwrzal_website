@@ -1,0 +1,66 @@
+import { readdirSync, readFileSync } from "node:fs";
+import path from "node:path";
+
+import { describe, expect, it } from "vitest";
+
+import { validateBlocks } from "@/blocks/validate";
+import { BLOCK_TYPES, type Block } from "@/blocks/types";
+
+const DIR = path.join(process.cwd(), "src", "content", "projects");
+const files = readdirSync(DIR).filter((f) => f.endsWith(".json"));
+const docs = files.map(
+  (f) => JSON.parse(readFileSync(path.join(DIR, f), "utf8")) as {
+    slug: string; blocks: Block[];
+  },
+);
+
+describe("project content", () => {
+  it("is one file per project", () => {
+    expect(files.length).toBe(20);
+    for (const d of docs) {
+      expect(files).toContain(`${d.slug}.json`);
+    }
+  });
+
+  it("every block validates", () => {
+    for (const d of docs) {
+      expect(validateBlocks(d.slug, d.blocks)).toEqual([]);
+    }
+  });
+
+  it("catches an unknown block type", () => {
+    const bad = [{ type: "galery", items: [] }] as unknown as Block[];
+    expect(validateBlocks("x", bad)[0]).toContain("unknown type");
+  });
+
+  it("catches a missing required field", () => {
+    const bad = [{ type: "quote" }] as unknown as Block[];
+    expect(validateBlocks("x", bad)[0]).toContain('"text" is required');
+  });
+});
+
+describe("projects are free to differ", () => {
+  it("blocks may repeat within a project", () => {
+    const repeated = docs.filter(
+      (d) => new Set(d.blocks.map((b) => b.type)).size < d.blocks.length,
+    );
+    expect(repeated.length).toBeGreaterThan(0);
+  });
+
+  it("no two projects are forced into the same shape", () => {
+    const shapes = new Set(docs.map((d) => d.blocks.map((b) => b.type).join(">")));
+    expect(shapes.size).toBeGreaterThan(1);
+  });
+
+  it("a block carries its own content, so counts are free", () => {
+    const galleries = docs
+      .flatMap((d) => d.blocks)
+      .filter((b): b is Extract<Block, { type: "gallery" }> => b.type === "gallery");
+    const sizes = new Set(galleries.map((g) => g.items.length));
+    expect(sizes.size).toBeGreaterThan(1);
+  });
+
+  it("every registered block type is renderable", () => {
+    expect(BLOCK_TYPES).toHaveLength(12);
+  });
+});

@@ -46,7 +46,7 @@ export const CHROME = {
     workedWith: "Worked with",
 
     // Work index
-    workEyebrow: "Thirty projects · 2022—2026",
+    workEyebrow: "Twenty projects · 2023—2026",
     workTitle: "All work",
     workLede:
       "Brand systems, product interfaces, print and packaging. Everything I can show publicly.",
@@ -124,7 +124,7 @@ export const CHROME = {
     clientsIntro: "Wybór zespołów, z którymi pracowałem przez ostatnią dekadę.",
     workedWith: "Pracowałem z",
 
-    workEyebrow: "Trzydzieści projektów · 2022—2026",
+    workEyebrow: "Dwadzieścia projektów · 2023—2026",
     workTitle: "Wszystkie projekty",
     workLede:
       "Systemy marki, interfejsy produktów, druk i opakowania. Wszystko, co mogę pokazać publicznie.",

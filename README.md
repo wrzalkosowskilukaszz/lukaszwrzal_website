@@ -20,49 +20,71 @@ Then open http://localhost:3000 — it redirects to `/en`.
 
 ## Editing content
 
-**Text** lives in `src/content/projects.json` — 30 projects, each with an
-`en` and a `pl` block. Edit it directly.
-
-**Images** are discovered from the filesystem. Drop a file into
-`public/work/<slug>/` named after its slot and it appears on the next build:
-
-```
-public/work/northwind/01.jpg    key visual, and the tile image everywhere else
-public/work/northwind/02.jpg    the 2-up pair
-public/work/northwind/04–07.jpg the four layers of the Process wipe
-public/work/northwind/08–11.jpg the plate strip
-public/work/northwind/12.mp4    the motion slot
-```
-
-Nothing to register. Full resolution is fine; nothing is re-encoded. Any
-slot without a file renders the designed empty well, which is a finished
-state rather than a gap. See `public/work/README.md`.
-
-**Layout per project.** Not every project wants the same case study. A
-project can name the sections it wants, in the order it wants them:
+**One file per project**, in `src/content/projects/`. A project is a list of
+blocks; each block carries its own content. Adding a project means adding a
+file — no application code changes.
 
 ```json
-"sections": ["keyVisual", "plateStrip", "meta", "brief", "motion", "outcome"]
+{
+  "slug": "thicket", "cat": "illustrations", "year": "2025",
+  "nextSlug": "pallas", "title": "Thicket",
+  "desc": { "en": "A children's range…", "pl": "Seria dla dzieci…" },
+  "blocks": [
+    { "type": "hero", "variant": "left", "title": "Thicket",
+      "lede": { "en": "Twenty-two plates…", "pl": "Dwadzieścia dwie plansze…" } },
+    { "type": "gallery", "variant": "masonry", "items": [ { "src": "badger.jpg" } ] },
+    { "type": "quote", "variant": "aurora", "text": { "en": "…", "pl": "…" } },
+    { "type": "credits", "roles": [ { "role": "Illustration", "name": "Lukasz Wrzal" } ] }
+  ]
+}
 ```
 
-Omit the field for the default order. Available blocks: `keyVisual`, `meta`,
-`brief`, `figurePair`, `process`, `system`, `plateStrip`, `motion`,
-`outcome`.
+A string that is the same in both languages can be written plainly; one that
+differs becomes `{ "en": …, "pl": … }`.
 
-> There was an in-browser editor here. It was removed: editing a
-> React-rendered page in place desynchronises the virtual DOM, and the page
-> blanks with "removeChild: the node to be removed is not a child of this
-> node". That is inherent to the approach, not a bug that was one fix away.
+### The blocks
+
+| Block | Variants |
+| --- | --- |
+| `hero` | `centred` · `left` |
+| `meta` | client / role / scope / team |
+| `text` | `single` · `two-column` |
+| `statement` | `left` · `centred` |
+| `figure` | width `content` · `stage` · `full-bleed` |
+| `gallery` | `grid-2` · `grid-3` · `masonry` · `strip` |
+| `textMedia` | `media-left` · `media-right` |
+| `quote` | `plain` · `aurora` |
+| `process` | `pinned` · `stacked` |
+| `stats` | any number of count-ups |
+| `video` | width `content` · `stage` · `full-bleed` |
+| `credits` | roles and names |
+
+Any block can appear any number of times, in any order. Every block takes an
+optional `"spacing": "tight" | "normal" | "loose"` — blocks own their own
+rhythm, so blank space is never placed by hand.
+
+### Images
+
+Drop files into `public/work/<slug>/` and reference them by filename:
+`"src": "badger.jpg"`. Full resolution is fine; nothing is re-encoded. A
+`src` whose file has not landed yet renders the designed empty well rather
+than a broken image, so a project is presentable before its photography is.
+
+### If something is wrong
+
+The build fails and names it:
+
+```
+Invalid project content:
+  thicket block 7 (galery): unknown type. Expected one of hero, meta, …
+  thicket block 8 (quote): "text" is required
+```
 
 ### What still needs writing
 
-29 of 30 projects carry prompt text in their body fields. **Northwind is
-fully written in both languages** and is the reference for tone and length.
-A project whose body copy is still prompts is treated as a draft: it keeps
-its row in the index, and its case-study page 404s in production until
-written.
-
-18 of 30 have no Polish tile description yet and fall back to English.
+19 of 20 projects carry prompt text. **Northwind is fully written in both
+languages.** A project whose prose is still prompts is treated as a draft: it
+keeps its row in the index, and its page 404s in production until written.
 
 ## Structure
 

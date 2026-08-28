@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import { Footer } from "@/components/Footer/Footer";
 import { WorkBrowser } from "@/components/WorkGrid/WorkBrowser";
-import { getCards } from "@/lib/content";
+import { getCards } from "@/lib/projects";
 import { t } from "@/lib/i18n";
 import { LOCALES, type Locale } from "@/lib/types";
 

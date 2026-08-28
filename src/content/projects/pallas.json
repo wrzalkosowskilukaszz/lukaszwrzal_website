@@ -1,0 +1,235 @@
+{
+  "slug": "pallas",
+  "cat": "web",
+  "year": "2025",
+  "nextSlug": "grainline",
+  "title": "Pallas",
+  "desc": "A museum site that lets the collection do the talking",
+  "blocks": [
+    {
+      "type": "hero",
+      "variant": "centred",
+      "eyebrow": "Website · Seven weeks · 2025",
+      "title": "Pallas",
+      "lede": "A museum site where the collection is the interface, not the hero image."
+    },
+    {
+      "type": "figure",
+      "src": "01.jpg",
+      "width": "stage",
+      "parallax": 0.1,
+      "caption": {
+        "en": "Fig. 01 — Key visual",
+        "pl": "Rys. 01 — Kluczowa wizualizacja"
+      }
+    },
+    {
+      "type": "meta",
+      "client": "Pallas Museum",
+      "role": "Art direction, web design",
+      "scope": "Narrative, browse, ticketing",
+      "team": "With two engineers"
+    },
+    {
+      "type": "text",
+      "variant": "two-column",
+      "eyebrow": "01 / Brief",
+      "statement": {
+        "en": "Replace this line with the one sentence that frames the problem.",
+        "pl": "Zastąp tę linię jednym zdaniem, które ujmuje problem."
+      },
+      "body": [
+        {
+          "en": "Replace this paragraph with the situation you were handed: what existed, what was failing, and who it was failing.",
+          "pl": "Zastąp ten akapit sytuacją, którą dostałeś: co istniało, co zawodziło i wobec kogo."
+        },
+        {
+          "en": "Replace this paragraph with the constraint that decided everything else — the deadline, the surface, the team size, the budget.",
+          "pl": "Zastąp ten akapit ograniczeniem, które zdecydowało o wszystkim innym — terminem, nośnikiem, wielkością zespołu, budżetem."
+        }
+      ]
+    },
+    {
+      "type": "gallery",
+      "variant": "grid-2",
+      "items": [
+        {
+          "src": "02.jpg",
+          "caption": {
+            "en": "Fig. 02 — Before",
+            "pl": "Rys. 02 — Przed"
+          }
+        },
+        {
+          "src": "03.jpg",
+          "caption": {
+            "en": "Fig. 03 — Audit",
+            "pl": "Rys. 03 — Audyt"
+          }
+        }
+      ]
+    },
+    {
+      "type": "process",
+      "variant": "pinned",
+      "eyebrow": "02 / Process",
+      "steps": [
+        {
+          "n": "01",
+          "title": {
+            "en": "First decision",
+            "pl": "Pierwsza decyzja"
+          },
+          "body": {
+            "en": "What you decided first, and why it ruled other options out.",
+            "pl": "Co zdecydowałeś najpierw i dlaczego wykluczyło to inne opcje."
+          },
+          "src": "04.jpg"
+        },
+        {
+          "n": "02",
+          "title": {
+            "en": "Second decision",
+            "pl": "Druga decyzja"
+          },
+          "body": {
+            "en": "The rule you set, and the thing it protected against.",
+            "pl": "Zasada, którą ustaliłeś, i to, przed czym chroniła."
+          },
+          "src": "05.jpg"
+        },
+        {
+          "n": "03",
+          "title": {
+            "en": "Third decision",
+            "pl": "Trzecia decyzja"
+          },
+          "body": {
+            "en": "Where you pushed back on the brief, and what happened.",
+            "pl": "Gdzie sprzeciwiłeś się briefowi i co z tego wyszło."
+          },
+          "src": "06.jpg"
+        },
+        {
+          "n": "04",
+          "title": {
+            "en": "Fourth decision",
+            "pl": "Czwarta decyzja"
+          },
+          "body": {
+            "en": "The detail nobody asked for that made the rest work.",
+            "pl": "Detal, o który nikt nie prosił, a bez którego reszta nie działa."
+          },
+          "src": "07.jpg"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "variant": "single",
+      "eyebrow": "03 / System",
+      "statement": {
+        "en": "What you handed over, in one line.",
+        "pl": "Co przekazałeś, w jednej linii."
+      },
+      "body": [
+        {
+          "en": "How the client runs it now without you: the document, the components, the rules, the exceptions.",
+          "pl": "Jak klient prowadzi to dziś bez ciebie: dokument, komponenty, zasady, odstępstwa."
+        }
+      ]
+    },
+    {
+      "type": "gallery",
+      "variant": "strip",
+      "items": [
+        {
+          "src": "08.jpg",
+          "caption": {
+            "en": "Fig. 08 — In situ",
+            "pl": "Rys. 08 — W kontekście"
+          }
+        },
+        {
+          "src": "09.jpg",
+          "caption": {
+            "en": "Fig. 09 — Screens",
+            "pl": "Rys. 09 — Ekrany"
+          }
+        },
+        {
+          "src": "10.jpg",
+          "caption": {
+            "en": "Fig. 10 — Print",
+            "pl": "Rys. 10 — Druk"
+          }
+        },
+        {
+          "src": "11.jpg",
+          "caption": {
+            "en": "Fig. 11 — Applied",
+            "pl": "Rys. 11 — Zastosowanie"
+          }
+        }
+      ]
+    },
+    {
+      "type": "video",
+      "src": "12.mp4",
+      "width": "stage"
+    },
+    {
+      "type": "text",
+      "variant": "two-column",
+      "eyebrow": "04 / Outcome",
+      "statement": {
+        "en": "The result, stated plainly.",
+        "pl": "Rezultat, powiedziany wprost."
+      },
+      "body": [
+        {
+          "en": "What changed for the client after launch.",
+          "pl": "Co zmieniło się dla klienta po launchu."
+        },
+        {
+          "en": "What the numbers did, and what people actually said.",
+          "pl": "Co zrobiły liczby i co ludzie naprawdę powiedzieli."
+        }
+      ]
+    },
+    {
+      "type": "stats",
+      "items": [
+        {
+          "value": 0,
+          "label": {
+            "en": "Replace with a real number",
+            "pl": "Zastąp prawdziwą liczbą"
+          }
+        },
+        {
+          "value": 0,
+          "suffix": "%",
+          "label": {
+            "en": "Replace with a real number",
+            "pl": "Zastąp prawdziwą liczbą"
+          }
+        },
+        {
+          "value": 0,
+          "label": {
+            "en": "Replace with a real number",
+            "pl": "Zastąp prawdziwą liczbą"
+          }
+        },
+        {
+          "value": 0,
+          "label": {
+            "en": "Replace with a real number",
+            "pl": "Zastąp prawdziwą liczbą"
+          }
+        }
+      ]
+    }
+  ]
+}

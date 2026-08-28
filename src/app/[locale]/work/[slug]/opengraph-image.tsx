@@ -1,8 +1,7 @@
 import { ImageResponse } from "next/og";
 
-import { getLocalisedProject, getProjects } from "@/lib/content";
+import { getProjectDoc, getProjectDocs, isDraftDoc, toCard } from "@/lib/projects";
 import { CATEGORY_LABELS } from "@/lib/i18n";
-import { headlineStat, isDraft } from "@/lib/placeholder";
 import { LOCALES, type Locale } from "@/lib/types";
 
 export const alt = "Project — Lukasz Wrzal";
@@ -11,9 +10,9 @@ export const contentType = "image/png";
 
 export function generateStaticParams() {
   return LOCALES.flatMap((locale) =>
-    getProjects()
-      .filter((p) => !isDraft(p.en))
-      .map((p) => ({ locale, slug: p.slug })),
+    getProjectDocs()
+      .filter((d) => !isDraftDoc(d))
+      .map((d) => ({ locale, slug: d.slug })),
   );
 }
 
@@ -34,9 +33,10 @@ export default async function Image({
 }) {
   const { locale, slug } = await params;
   const l = (LOCALES.includes(locale as Locale) ? locale : "en") as Locale;
-  const project = getLocalisedProject(slug, l);
+  const doc = getProjectDoc(slug);
+  const project = doc ? toCard(doc, l) : undefined;
   const hue = project ? HUES[project.cat] ?? "#3C2CC2" : "#3C2CC2";
-  const stat = project ? headlineStat(project.copy) : undefined;
+  const stat = project?.stat;
 
   return new ImageResponse(
     (
@@ -95,7 +95,7 @@ export default async function Image({
                 color: "#FFFFFF",
               }}
             >
-              {project?.copy.title ?? "Work"}
+              {project?.title ?? "Work"}
             </div>
             <div
               style={{
@@ -106,7 +106,7 @@ export default async function Image({
                 maxWidth: 860,
               }}
             >
-              {project?.copy.desc ?? ""}
+              {project?.desc ?? ""}
             </div>
             {stat ? (
               <div

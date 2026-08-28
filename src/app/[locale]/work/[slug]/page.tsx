@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { CaseStudy } from "@/components/CaseStudy/CaseStudy";
-import { getLocalisedProject, getProject, getProjects } from "@/lib/content";
-import { isDraft, realStats } from "@/lib/placeholder";
-import { imagesFor } from "@/lib/images";
+import { ProjectPage } from "@/components/CaseStudy/ProjectPage";
+import { getProjectDoc, getProjectDocs, isDraftDoc, toCard } from "@/lib/projects";
 import { LOCALES, type Locale } from "@/lib/types";
 
-/** One template, 30 projects x 2 locales, pre-rendered. Never 30 page files. */
+/** One route, N projects. Adding a project adds a content file, not a page. */
 export function generateStaticParams() {
   return LOCALES.flatMap((locale) =>
-    getProjects().map((p) => ({ locale, slug: p.slug })),
+    getProjectDocs()
+      .filter((d) => !isDraftDoc(d))
+      .map((d) => ({ locale, slug: d.slug })),
   );
 }
 
@@ -21,25 +21,22 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, slug } = await params;
   const l = (LOCALES.includes(locale as Locale) ? locale : "en") as Locale;
-  const project = getLocalisedProject(slug, l);
-  if (!project) return {};
+  const doc = getProjectDoc(slug);
+  if (!doc) return {};
+  const card = toCard(doc, l);
 
   return {
-    title: `${project.copy.title} — Lukasz Wrzal`,
-    description: project.copy.lede,
+    title: `${doc.title} — Lukasz Wrzal`,
+    description: card.desc,
     alternates: {
       canonical: `/${l}/work/${slug}`,
       languages: { en: `/en/work/${slug}`, pl: `/pl/work/${slug}` },
     },
-    openGraph: {
-      title: `${project.copy.title} — Lukasz Wrzal`,
-      description: project.copy.lede,
-      type: "article",
-    },
+    openGraph: { title: `${doc.title} — Lukasz Wrzal`, description: card.desc, type: "article" },
   };
 }
 
-export default async function ProjectPage({
+export default async function Page({
   params,
 }: {
   params: Promise<{ locale: string; slug: string }>;
@@ -48,34 +45,19 @@ export default async function ProjectPage({
   if (!LOCALES.includes(locale as Locale)) notFound();
   const l = locale as Locale;
 
-  const project = getLocalisedProject(slug, l);
-  if (!project) notFound();
+  const doc = getProjectDoc(slug);
+  if (!doc) notFound();
 
-  /* A project whose body copy is still authoring prompts is a draft. It
-     keeps its row in the index — title, description, category and year are
-     all real — but its case-study page would be 29 screens of "Replace this
-     paragraph with…". Visible while writing, 404 once deployed. */
-  if (isDraft(project.copy) && process.env.NODE_ENV === "production") {
-    notFound();
-  }
+  /* Unwritten projects keep their row in the index but 404 in production. */
+  if (isDraftDoc(doc) && process.env.NODE_ENV === "production") notFound();
 
-  // Unwritten outcomes are authoring prompts, not content — drop them here
-  // rather than filtering at render, so they never reach the browser.
-  const clean = {
-    ...project,
-    copy: { ...project.copy, stats: realStats(project.copy.stats) },
-  };
-
-  const nextProject = getLocalisedProject(project.nextSlug, l) ?? project;
-  const next = { slug: nextProject.slug, title: nextProject.copy.title };
+  const next = getProjectDoc(doc.nextSlug) ?? doc;
 
   return (
-    <CaseStudy
-      project={clean}
-      next={next}
+    <ProjectPage
+      doc={doc}
       locale={l}
-      images={imagesFor(slug)}
-      sections={getProject(slug)?.sections}
+      next={{ slug: next.slug, title: next.title }}
     />
   );
 }

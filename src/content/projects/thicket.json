@@ -1,0 +1,152 @@
+{
+  "slug": "thicket",
+  "cat": "illustrations",
+  "year": "2025",
+  "nextSlug": "pallas",
+  "title": "Thicket",
+  "desc": {
+    "en": "A children's range illustrated for two-colour print",
+    "pl": "Seria dla dzieci ilustrowana do druku dwukolorowego"
+  },
+  "blocks": [
+    {
+      "type": "hero",
+      "variant": "left",
+      "eyebrow": {
+        "en": "Illustration · Six weeks · 2025",
+        "pl": "Ilustracja · Sześć tygodni · 2025"
+      },
+      "title": "Thicket",
+      "lede": {
+        "en": "Twenty-two plates for a childrens range, drawn to survive two-colour print and a four-year-old.",
+        "pl": "Dwadzieścia dwie plansze do serii dla dzieci, narysowane z myślą o druku dwukolorowym i czterolatku."
+      }
+    },
+    {
+      "type": "gallery",
+      "variant": "masonry",
+      "spacing": "tight",
+      "items": [
+        {
+          "src": "badger.jpg",
+          "caption": "badger"
+        },
+        {
+          "src": "fox.jpg",
+          "caption": "fox"
+        },
+        {
+          "src": "owl.jpg",
+          "caption": "owl"
+        },
+        {
+          "src": "hare.jpg",
+          "caption": "hare"
+        },
+        {
+          "src": "heron.jpg",
+          "caption": "heron"
+        },
+        {
+          "src": "moth.jpg",
+          "caption": "moth"
+        },
+        {
+          "src": "beetle.jpg",
+          "caption": "beetle"
+        },
+        {
+          "src": "wren.jpg",
+          "caption": "wren"
+        },
+        {
+          "src": "stoat.jpg",
+          "caption": "stoat"
+        }
+      ]
+    },
+    {
+      "type": "quote",
+      "variant": "aurora",
+      "text": {
+        "en": "The children found the badger first. Every single time.",
+        "pl": "Dzieci zawsze najpierw znajdowały borsuka."
+      },
+      "attribution": {
+        "en": "Editor, Thicket Press",
+        "pl": "Redaktorka, Thicket Press"
+      }
+    },
+    {
+      "type": "textMedia",
+      "variant": "media-right",
+      "src": "sketches.jpg",
+      "statement": {
+        "en": "Two inks, and nowhere to hide.",
+        "pl": "Dwa tusze i nigdzie się nie schować."
+      },
+      "body": [
+        {
+          "en": "Two-colour print removes every shortcut. No gradients, no tonal rescue — the drawing either reads or it does not.",
+          "pl": "Druk dwukolorowy odbiera wszystkie skróty. Bez gradientów, bez ratunku w tonach."
+        }
+      ]
+    },
+    {
+      "type": "gallery",
+      "variant": "grid-3",
+      "items": [
+        {
+          "src": "plate-01.jpg"
+        },
+        {
+          "src": "plate-02.jpg"
+        },
+        {
+          "src": "plate-03.jpg"
+        },
+        {
+          "src": "plate-04.jpg"
+        },
+        {
+          "src": "plate-05.jpg"
+        },
+        {
+          "src": "plate-06.jpg"
+        }
+      ]
+    },
+    {
+      "type": "figure",
+      "src": "spread.jpg",
+      "width": "full-bleed",
+      "spacing": "loose"
+    },
+    {
+      "type": "credits",
+      "roles": [
+        {
+          "role": {
+            "en": "Illustration",
+            "pl": "Ilustracja"
+          },
+          "name": "Lukasz Wrzal"
+        },
+        {
+          "role": {
+            "en": "Publisher",
+            "pl": "Wydawca"
+          },
+          "name": "Thicket Press"
+        },
+        {
+          "role": {
+            "en": "Print",
+            "pl": "Druk"
+          },
+          "name": "Riso, two colours"
+        }
+      ]
+    }
+  ]
+}

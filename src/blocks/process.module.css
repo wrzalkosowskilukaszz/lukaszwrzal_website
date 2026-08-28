@@ -7,8 +7,6 @@
 
 .stage {
   position: relative;
-  width: min(var(--lw-stage-max), 100% - 48px);
-  margin: clamp(4rem, 8vw, 7.5rem) auto 0;
   border-radius: var(--lw-radius-stage);
   background: var(--lw-white);
   /* deliberately no overflow:hidden */
