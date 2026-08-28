@@ -15,11 +15,17 @@ const docs = files.map(
 );
 
 describe("project content", () => {
-  it("is one file per project", () => {
-    expect(files.length).toBe(20);
+  it("is one file per project, named after its slug", () => {
+    // No hard count — projects are added and removed through the Studio.
+    expect(files.length).toBeGreaterThan(0);
     for (const d of docs) {
       expect(files).toContain(`${d.slug}.json`);
     }
+  });
+
+  it("no two projects share a slug", () => {
+    const slugs = docs.map((d) => d.slug);
+    expect(new Set(slugs).size).toBe(slugs.length);
   });
 
   it("every block validates", () => {

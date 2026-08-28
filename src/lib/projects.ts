@@ -24,10 +24,35 @@ const DIR = path.join(process.cwd(), "src", "content", "projects");
  * Adding a project means adding a file here — no application code changes,
  * and the route, work index, sitemap and social card all follow.
  */
+/** Populated by the last load(). One broken file must never take every
+    other project down with it — see loadErrors() below. */
+let lastErrors: string[] = [];
+
+/**
+ * One bad file must not 500 the whole site. Each file is read and validated
+ * on its own; a broken one is skipped and reported, not thrown.
+ */
 function load(): ProjectDoc[] {
-  const docs = readdirSync(DIR)
-    .filter((f) => f.endsWith(".json"))
-    .map((f) => JSON.parse(readFileSync(path.join(DIR, f), "utf8")) as ProjectDoc);
+  const errors: string[] = [];
+  const docs: ProjectDoc[] = [];
+
+  for (const file of readdirSync(DIR).filter((f) => f.endsWith(".json"))) {
+    let doc: ProjectDoc;
+    try {
+      doc = JSON.parse(readFileSync(path.join(DIR, file), "utf8")) as ProjectDoc;
+    } catch (err) {
+      errors.push(`${file}: not valid JSON — ${err instanceof Error ? err.message : err}`);
+      continue;
+    }
+
+    const blockErrors = validateBlocks(doc.slug ?? file, doc.blocks ?? []);
+    if (blockErrors.length) {
+      errors.push(...blockErrors.map((e) => `${file}: ${e}`));
+      continue;
+    }
+
+    docs.push(doc);
+  }
 
   /* Mark media whose file has not landed yet, so the page shows the designed
      empty well instead of a broken image. */
@@ -44,13 +69,19 @@ function load(): ProjectDoc[] {
     }
   }
 
-  const errors = docs.flatMap((d) => validateBlocks(d.slug, d.blocks));
-  if (errors.length) {
-    throw new Error(`Invalid project content:\n  ${errors.join("\n  ")}`);
+  lastErrors = errors;
+  if (errors.length && process.env.NODE_ENV !== "production") {
+    console.error(`[projects] ${errors.length} project file(s) skipped:\n  ${errors.join("\n  ")}`);
   }
 
   // Stable order: newest first, then alphabetical.
   return docs.sort((a, b) => b.year.localeCompare(a.year) || a.slug.localeCompare(b.slug));
+}
+
+/** Files that failed to load on the last read, for the Studio tool to surface. */
+export function loadErrors(): string[] {
+  projects();
+  return lastErrors;
 }
 
 /**
