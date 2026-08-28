@@ -1,10 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
 
 import { ClockStarter } from "@/components/ClockStarter";
-import { Editor } from "@/components/Editor/Editor";
 import { Nav } from "@/components/Nav/Nav";
 import { LOCALES, type Locale } from "@/lib/types";
 
@@ -70,12 +68,6 @@ export default async function RootLayout({
         <ClockStarter />
         <Nav locale={locale as Locale} />
         <main id="main">{children}</main>
-        {/* Development-only content editor, reached with ?edit=1 */}
-        {process.env.NODE_ENV !== "production" ? (
-          <Suspense fallback={null}>
-            <Editor />
-          </Suspense>
-        ) : null}
       </body>
     </html>
   );

@@ -20,39 +20,49 @@ Then open http://localhost:3000 — it redirects to `/en`.
 
 ## Editing content
 
-**Everything is editable in the browser. You never need to touch JSON.**
+**Text** lives in `src/content/projects.json` — 30 projects, each with an
+`en` and a `pl` block. Edit it directly.
 
-Add `?edit=1` to any URL:
+**Images** are discovered from the filesystem. Drop a file into
+`public/work/<slug>/` named after its slot and it appears on the next build:
 
 ```
-http://localhost:3000/en/work/northwind?edit=1
+public/work/northwind/01.jpg    key visual, and the tile image everywhere else
+public/work/northwind/02.jpg    the 2-up pair
+public/work/northwind/04–07.jpg the four layers of the Process wipe
+public/work/northwind/08–11.jpg the plate strip
+public/work/northwind/12.mp4    the motion slot
 ```
 
-- **Text** — every editable field gets a dashed outline. Click, type, press
-  Enter to commit (Escape reverts). Edited fields turn mint. Hit **Save** or
-  ⌘S and it writes straight into `src/content/projects.json`.
-- **Images** — drag a file onto any media slot. It is saved into
-  `public/work/<slug>/` **at its original resolution** and recorded in
-  `src/content/images.json`. Accepts JPG, PNG, WebP, AVIF, GIF, MP4, WebM up
-  to 40MB.
+Nothing to register. Full resolution is fine; nothing is re-encoded. Any
+slot without a file renders the designed empty well, which is a finished
+state rather than a gap. See `public/work/README.md`.
 
-Switch to `/pl/...?edit=1` to write the Polish copy — the two languages are
-stored separately and never overwrite each other.
+**Layout per project.** Not every project wants the same case study. A
+project can name the sections it wants, in the order it wants them:
 
-The editor is **development only**. Its API routes refuse to run in production,
-so it can't be used to edit the live site. Workflow: edit locally, then commit
-the changed JSON and images.
+```json
+"sections": ["keyVisual", "plateStrip", "meta", "brief", "motion", "outcome"]
+```
+
+Omit the field for the default order. Available blocks: `keyVisual`, `meta`,
+`brief`, `figurePair`, `process`, `system`, `plateStrip`, `motion`,
+`outcome`.
+
+> There was an in-browser editor here. It was removed: editing a
+> React-rendered page in place desynchronises the virtual DOM, and the page
+> blanks with "removeChild: the node to be removed is not a child of this
+> node". That is inherent to the approach, not a bug that was one fix away.
 
 ### What still needs writing
 
-29 of 30 projects carry prompt text in their body fields ("Replace this
-paragraph with the situation you were handed…"). **Northwind is fully written
-in both languages** and is the reference for tone and length.
+29 of 30 projects carry prompt text in their body fields. **Northwind is
+fully written in both languages** and is the reference for tone and length.
+A project whose body copy is still prompts is treated as a draft: it keeps
+its row in the index, and its case-study page 404s in production until
+written.
 
-18 of 30 projects have no Polish tile description yet and fall back to English.
-
-Empty media wells are a *designed* state (`--lw-tile`), not a bug — the site is
-presentable before any image lands.
+18 of 30 have no Polish tile description yet and fall back to English.
 
 ## Structure
 

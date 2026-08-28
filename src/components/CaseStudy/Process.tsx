@@ -16,12 +16,9 @@ export interface ProcessProps {
   locale: Locale;
   /** Figure sources for slots 04..07, empty until content lands. */
   figures: (string | undefined)[];
-  /** Field-path prefix for the in-site editor, e.g. "northwind.en". */
-  editPrefix?: string;
 }
 
-export function Process({ steps, locale, figures, editPrefix }: ProcessProps) {
-  const ed = (field: string) => (editPrefix ? `${editPrefix}.${field}` : undefined);
+export function Process({ steps, locale, figures }: ProcessProps) {
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [active, setActive] = useState(0);
   const activeRef = useRef(0);
@@ -107,8 +104,8 @@ export function Process({ steps, locale, figures, editPrefix }: ProcessProps) {
               data-active={i === active}
             >
               <span className={styles.stepN}>{s.n}</span>
-              <h3 className={styles.stepTitle} data-edit={ed(`process.${i}.title`)}>{s.title}</h3>
-              <p className={styles.stepBody} data-edit={ed(`process.${i}.body`)}>{s.body}</p>
+              <h3 className={styles.stepTitle}>{s.title}</h3>
+              <p className={styles.stepBody}>{s.body}</p>
 
               {/* Below 1000px each figure relocates inline beneath its step. */}
               <div className={styles.inlineFig}>

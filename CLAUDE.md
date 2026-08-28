@@ -198,9 +198,18 @@ spring is ~15 lines in `src/lib/spring.ts` and stays interruptible.
 
 ## Content editing
 
-`?edit=1` on any page. Text writes to `projects.json`, dropped images save into
-`public/work/<slug>/` at original resolution. Development only — the API routes
-in `src/app/api/` refuse to run in production. See README.md.
+Text: edit `src/content/projects.json` directly.
+Images: drop files into `public/work/<slug>/` as `01.jpg` … `12.mp4`. They are
+discovered from the filesystem — no manifest, no upload step.
+
+**An in-browser editor was built here and then removed.** Editing a
+React-rendered page in place — contentEditable on live nodes, or writing
+innerText — desynchronises React's virtual DOM. The next reconciliation dies
+with "removeChild: the node to be removed is not a child of this node" and the
+page goes blank. Several fixes were attempted (constraining selection, forcing
+focus, swapping to a textarea); all of them treated symptoms. Do not rebuild
+in-place editing. If a content UI is wanted, use a real CMS with real form
+fields against the content file.
 
 **Never route content back through the design prototypes.** `image-slot.js`
 caps uploads at 1200px, re-encodes to WebP and keeps the result in browser

@@ -35,8 +35,6 @@ export interface CaseStudyProps {
 
 export function CaseStudy({ project, next, locale, images, sections }: CaseStudyProps) {
   const { copy } = project;
-  /** Field path the in-site editor writes back to projects.json. */
-  const ed = (field: string) => `${project.slug}.${locale}.${field}`;
   const [lightbox, setLightbox] = useState<number | null>(null);
   const reduced = useReducedMotion();
   const motionRef = useReveal<HTMLDivElement>(!reduced);
@@ -79,10 +77,10 @@ export function CaseStudy({ project, next, locale, images, sections }: CaseStudy
   ];
 
   const meta = [
-    { label: t(locale, "metaClient"), value: copy.client, field: "client" },
-    { label: t(locale, "metaRole"), value: copy.role, field: "role" },
-    { label: t(locale, "metaScope"), value: copy.scope, field: "scope" },
-    { label: t(locale, "metaTeam"), value: copy.team, field: "team" },
+    { label: t(locale, "metaClient"), value: copy.client },
+    { label: t(locale, "metaRole"), value: copy.role },
+    { label: t(locale, "metaScope"), value: copy.scope },
+    { label: t(locale, "metaTeam"), value: copy.team },
   ];
 
   return (
@@ -99,9 +97,9 @@ export function CaseStudy({ project, next, locale, images, sections }: CaseStudy
       </Link>
 
       <header className={styles.hero}>
-        <p className={`lw-eyebrow ${styles.rise}`} data-edit={ed("eyebrow")}>{copy.eyebrow}</p>
-        <h1 className={`${styles.title} ${styles.rise}`} data-edit={ed("title")}>{copy.title}</h1>
-        <p className={`${styles.lede} ${styles.rise}`} data-edit={ed("lede")}>{copy.lede}</p>
+        <p className={`lw-eyebrow ${styles.rise}`}>{copy.eyebrow}</p>
+        <h1 className={`${styles.title} ${styles.rise}`}>{copy.title}</h1>
+        <p className={`${styles.lede} ${styles.rise}`}>{copy.lede}</p>
       </header>
 
       {/* Sections render in the order the project asks for. A bespoke case
@@ -128,7 +126,7 @@ export function CaseStudy({ project, next, locale, images, sections }: CaseStudy
                 {meta.map((m) => (
                   <div key={m.label}>
                     <div className={styles.metaLabel}>{m.label}</div>
-                    <div className={styles.metaValue} data-edit={ed(m.field)}>{m.value}</div>
+                    <div className={styles.metaValue}>{m.value}</div>
                   </div>
                 ))}
               </div>
@@ -139,10 +137,10 @@ export function CaseStudy({ project, next, locale, images, sections }: CaseStudy
               <Reveal key={kind}>
                 <section data-section={kind} className={styles.section} id="brief">
                   <p className="lw-eyebrow">{t(locale, "sectionBrief")}</p>
-                  <h2 className={styles.statement} data-edit={ed("statement")}>{copy.statement}</h2>
+                  <h2 className={styles.statement}>{copy.statement}</h2>
                   <div className={styles.columns}>
                     {copy.brief?.map((para, i) => (
-                      <p key={i} data-edit={ed(`brief.${i}`)}>{para}</p>
+                      <p key={i}>{para}</p>
                     ))}
                   </div>
                 </section>
@@ -163,7 +161,6 @@ export function CaseStudy({ project, next, locale, images, sections }: CaseStudy
               <Process
                 steps={copy.process ?? []}
                 locale={locale}
-                editPrefix={`${project.slug}.${locale}`}
                 figures={[images["04"], images["05"], images["06"], images["07"]]}
               />
               </div>
@@ -174,8 +171,8 @@ export function CaseStudy({ project, next, locale, images, sections }: CaseStudy
               <Reveal key={kind}>
                 <section data-section={kind} className={styles.section} id="system">
                   <p className="lw-eyebrow">{t(locale, "sectionSystem")}</p>
-                  <h2 className={styles.statement} data-edit={ed("system.statement")}>{copy.system?.statement}</h2>
-                  <p className={styles.body} data-edit={ed("system.body")}>{copy.system?.body}</p>
+                  <h2 className={styles.statement}>{copy.system?.statement}</h2>
+                  <p className={styles.body}>{copy.system?.body}</p>
                 </section>
               </Reveal>
             );
@@ -215,10 +212,10 @@ export function CaseStudy({ project, next, locale, images, sections }: CaseStudy
               <Reveal key={kind}>
                 <section data-section={kind} className={styles.section} id="outcome">
                   <p className="lw-eyebrow">{t(locale, "sectionOutcome")}</p>
-                  <h2 className={styles.statement} data-edit={ed("outcome.statement")}>{copy.outcome?.statement}</h2>
+                  <h2 className={styles.statement}>{copy.outcome?.statement}</h2>
                   <div className={styles.columns}>
                     {copy.outcome?.body?.map((para, i) => (
-                      <p key={i} data-edit={ed(`outcome.body.${i}`)}>{para}</p>
+                      <p key={i}>{para}</p>
                     ))}
                   </div>
                   {copy.stats.length ? <Stats stats={copy.stats} locale={locale} /> : null}
