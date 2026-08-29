@@ -32,6 +32,9 @@ export function Editor({
   });
   const [slugTouched, setSlugTouched] = useState(!isNew);
   const [addOpen, setAddOpen] = useState(false);
+  const [confirming, setConfirming] = useState(false);
+  const [alsoDeleteImages, setAlsoDeleteImages] = useState(false);
+  const [imageCount, setImageCount] = useState(0);
   const [tone, setTone] = useState<Tone>("idle");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
@@ -80,13 +83,27 @@ export function Editor({
     }
   };
 
-  const remove = async () => {
+  /* Deleting is the one irreversible thing here, so it asks in place rather
+     than in a browser dialog — and shows how many pictures are at stake. */
+  const startRemove = async () => {
     if (!originalSlug) return;
-    if (!confirm(`Delete "${doc.title || originalSlug}"? This can't be undone.`)) return;
+    try {
+      const res = await fetch(`/api/studio/assets?slug=${encodeURIComponent(originalSlug)}`);
+      const json = await res.json();
+      setImageCount((json.files ?? []).length);
+    } catch {
+      setImageCount(0);
+    }
+    setAlsoDeleteImages(false);
+    setConfirming(true);
+  };
+
+  const confirmRemove = async () => {
+    if (!originalSlug) return;
     await fetch("/api/studio/delete", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ slug: originalSlug }),
+      body: JSON.stringify({ slug: originalSlug, deleteImages: alsoDeleteImages }),
     });
     router.push("/studio");
   };
@@ -183,6 +200,41 @@ export function Editor({
         <button type="button" className={s.addToggle} onClick={() => setAddOpen(true)}>+ Add a section</button>
       )}
 
+      {confirming ? (
+        <div className={s.confirmPanel}>
+          <b>Delete &ldquo;{doc.title || originalSlug}&rdquo;?</b>
+          <p>
+            The project page and its entry in the work list will be removed.
+            This can&apos;t be undone.
+          </p>
+          {imageCount > 0 ? (
+            <label className={s.confirmCheck}>
+              <input
+                type="checkbox"
+                checked={alsoDeleteImages}
+                onChange={(e) => setAlsoDeleteImages(e.target.checked)}
+              />
+              Also delete its {imageCount} picture{imageCount === 1 ? "" : "s"} from
+              {" "}<code>public/work/{originalSlug}/</code>
+            </label>
+          ) : null}
+          {imageCount > 0 && !alsoDeleteImages ? (
+            <p className={s.confirmNote}>
+              Pictures will be kept. If you later create a project with the same
+              URL name, they&apos;ll reappear on it.
+            </p>
+          ) : null}
+          <div className={s.confirmActions}>
+            <button type="button" className={`${s.saveBtn} ${s.confirmDelete}`} onClick={confirmRemove}>
+              Delete project
+            </button>
+            <button type="button" className={s.ghostBtn} onClick={() => setConfirming(false)}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      ) : null}
+
       {errors.length ? (
         <div className={s.errorBanner}>
           <b>Fix these before saving:</b>
@@ -197,7 +249,7 @@ export function Editor({
           Preview
         </a>
         {!isNew ? (
-          <button type="button" className={`${s.ghostBtn} ${s.dangerBtn}`} onClick={remove}>
+          <button type="button" className={`${s.ghostBtn} ${s.dangerBtn}`} onClick={startRemove}>
             Delete
           </button>
         ) : null}

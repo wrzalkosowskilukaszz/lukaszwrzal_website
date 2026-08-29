@@ -23,6 +23,17 @@ describe("project content", () => {
     }
   });
 
+  it("every project's picture folder matches its slug exactly", () => {
+    // Case matters once deployed — macOS is forgiving, Linux is not.
+    const workDir = path.join(process.cwd(), "public", "work");
+    const folders = readdirSync(workDir, { withFileTypes: true })
+      .filter((e) => e.isDirectory())
+      .map((e) => e.name);
+    for (const folder of folders) {
+      expect(folder).toBe(folder.toLowerCase());
+    }
+  });
+
   it("no two projects share a slug", () => {
     const slugs = docs.map((d) => d.slug);
     expect(new Set(slugs).size).toBe(slugs.length);
