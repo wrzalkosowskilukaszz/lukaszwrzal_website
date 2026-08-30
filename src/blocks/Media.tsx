@@ -90,7 +90,7 @@ export function Media({
         aria-label={zoomable ? tx(media.alt, ctx.locale) || caption : undefined}
       >
         {missing ? null : isVideo ? (
-          <video src={url} autoPlay muted loop playsInline />
+          <video src={url} autoPlay={!reduced} muted loop playsInline preload="metadata" />
         ) : parallax > 0 ? (
           <div className={s.inner} ref={innerRef}>
             {/* eslint-disable-next-line @next/next/no-img-element */}

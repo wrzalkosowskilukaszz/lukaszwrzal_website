@@ -142,8 +142,28 @@ export function isDraftDoc(doc: ProjectDoc): boolean {
   return !first || /^(replace|describe|add |write )/i.test(first.trim());
 }
 
+/* The tile image is the first still picture that actually exists on disk —
+   videos are skipped so a motion hero never puts a <video> into every
+   grid tile (keep an 01.jpg still even when the hero becomes 01.mp4). */
+function cardImage(doc: ProjectDoc): string | undefined {
+  for (const b of doc.blocks) {
+    const media: { src?: string; missing?: boolean }[] =
+      b.type === "figure" || b.type === "textMedia" ? [b]
+      : b.type === "gallery" ? b.items
+      : b.type === "story" || b.type === "deck" ? b.items
+      : [];
+    for (const m of media) {
+      if (m.src && m.missing === false && !/\.(mp4|webm)$/i.test(m.src)) {
+        return `/work/${doc.slug}/${m.src}`;
+      }
+    }
+  }
+  return undefined;
+}
+
 export function toCard(doc: ProjectDoc, locale: Locale): ProjectCard {
   const stat = headline(doc, locale);
+  const image = cardImage(doc);
   return {
     slug: doc.slug,
     cat: doc.cat,
@@ -151,6 +171,7 @@ export function toCard(doc: ProjectDoc, locale: Locale): ProjectCard {
     title: doc.title,
     desc: tx(doc.desc, locale),
     ...(stat ? { stat } : {}),
+    ...(image ? { image } : {}),
   };
 }
 
