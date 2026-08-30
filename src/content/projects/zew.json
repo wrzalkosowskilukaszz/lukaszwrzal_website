@@ -1,0 +1,114 @@
+{
+  "$schema": "../project.schema.json",
+  "slug": "zew",
+  "cat": "identity",
+  "order": 10,
+  "nextSlug": "cukier",
+  "title": "ZEW",
+  "desc": "A wordmark with a second meaning hidden inside it",
+  "blocks": [
+    {
+      "type": "hero",
+      "variant": "centred",
+      "eyebrow": "Branding · Hospitality",
+      "title": "ZEW",
+      "lede": "A wordmark with a second meaning hidden inside it."
+    },
+    {
+      "type": "figure",
+      "src": "01.jpg",
+      "width": "stage",
+      "parallax": 0.1
+    },
+    {
+      "type": "meta",
+      "items": [
+        {
+          "label": "Client",
+          "value": "ZEW — restaurant"
+        },
+        {
+          "label": "Role",
+          "value": "Naming, logotype, identity design, art direction"
+        },
+        {
+          "label": "Scope",
+          "value": "Naming, mark, identity system, print, in-venue applications"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "statement": "ZEW had two personalities to reconcile.",
+      "body": [
+        "One was raw and primal. The other was refined and contemporary.",
+        "The early directions leaned too far one way or the other, so the identity needed to hold both without falling into restaurant clichés."
+      ],
+      "variant": "two-column"
+    },
+    {
+      "type": "text",
+      "statement": "The idea",
+      "body": [
+        "Make the mark do more than one job.",
+        "At first glance, ZEW is simply a confident geometric wordmark. Look closer and the dot and horizontal stroke within the E form the silhouette of a cloche."
+      ],
+      "variant": "two-column"
+    },
+    {
+      "type": "gallery",
+      "variant": "grid-2",
+      "items": [
+        {
+          "src": "02.jpg"
+        },
+        {
+          "src": "03.jpg"
+        }
+      ]
+    },
+    {
+      "type": "quote",
+      "variant": "aurora",
+      "text": "The best logo trick is the one you discover yourself."
+    },
+    {
+      "type": "text",
+      "statement": "The work",
+      "body": [
+        "The hidden construction became part of a wider identity system across menus, signage, takeaway packaging and in-venue applications.",
+        "The visual language stays restrained so the mark, typography and material feel can carry the personality."
+      ],
+      "variant": "two-column"
+    },
+    {
+      "type": "gallery",
+      "variant": "grid-3",
+      "items": [
+        {
+          "src": "04.jpg"
+        },
+        {
+          "src": "05.jpg"
+        },
+        {
+          "src": "06.jpg"
+        }
+      ]
+    },
+    {
+      "type": "figure",
+      "src": "07.jpg",
+      "width": "full-bleed"
+    },
+    {
+      "type": "text",
+      "statement": "The result",
+      "body": [
+        "One identity works from menu scale to venue scale without needing a separate “small” and “large” solution.",
+        "Strong from a distance. Rewarding up close. That tension is the identity."
+      ],
+      "variant": "two-column"
+    }
+  ]
+}

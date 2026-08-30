@@ -6,7 +6,7 @@ export const CATEGORIES = [
   "product",
   "brand",
   "web",
-  "ai",
+  "campaign",
   "illustrations",
 ] as const;
 export type Category = (typeof CATEGORIES)[number];
@@ -26,7 +26,8 @@ export interface Stat {
 export interface ProjectCard {
   slug: string;
   cat: Category;
-  year: string;
+  /** Shown when known. The content rule is: never invent dates. */
+  year?: string;
   title: string;
   desc: string;
   /** Already filtered: absent when the outcome has not been written yet. */

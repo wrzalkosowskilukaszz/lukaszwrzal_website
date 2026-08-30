@@ -15,6 +15,7 @@ export type FieldKind =
   | "media"
   | "mediaList"
   | "localisedList"
+  | "kv"
   | "steps"
   | "stats"
   | "roles"
@@ -49,10 +50,8 @@ export const BLOCK_FIELDS: Record<BlockType, FieldDef[]> = {
     SPACING_FIELD,
   ],
   meta: [
-    { key: "client", label: "Client", kind: "localisedText" },
-    { key: "role", label: "Role", kind: "localisedText" },
-    { key: "scope", label: "Scope", kind: "localisedText" },
-    { key: "team", label: "Team", kind: "localisedText" },
+    { key: "items", label: "Facts", kind: "kv", required: true,
+      help: "Any label and value — Client, Role, Scope, Status, Location…" },
     SPACING_FIELD,
   ],
   text: [
@@ -156,5 +155,5 @@ export const BLOCK_LABELS: Record<BlockType, { label: string; help: string }> = 
 
 export const CATEGORY_OPTIONS: { value: Category; label: string }[] = CATEGORIES.map((c) => ({
   value: c,
-  label: c === "ai" ? "AI" : c[0].toUpperCase() + c.slice(1),
+  label: c[0].toUpperCase() + c.slice(1),
 }));

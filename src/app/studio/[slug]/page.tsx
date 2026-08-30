@@ -18,7 +18,7 @@ export default async function EditProject({
   const draft: DraftDoc = {
     slug: doc.slug,
     cat: doc.cat,
-    year: doc.year,
+    year: doc.year ?? "",
     nextSlug: doc.nextSlug,
     title: doc.title,
     desc: doc.desc,

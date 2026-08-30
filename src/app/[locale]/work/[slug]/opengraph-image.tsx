@@ -21,7 +21,7 @@ const HUES: Record<string, string> = {
   product: "#0F8B7E",
   brand: "#C2761B",
   web: "#2563EB",
-  ai: "#C026A3",
+  campaign: "#C026A3",
   illustrations: "#E4572E",
 };
 
@@ -81,7 +81,7 @@ export default async function Image({
               }}
             >
               {project ? CATEGORY_LABELS[l][project.cat] : "Work"}
-              {project ? ` · ${project.year}` : ""}
+              {project?.year ? ` · ${project.year}` : ""}
             </div>
           </div>
 

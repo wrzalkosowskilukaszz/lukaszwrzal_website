@@ -29,6 +29,7 @@ export function starterBlocks(): DraftBlock[] {
   return [
     { type: "hero", variant: "centred", title: "" },
     { type: "figure", src: "", width: "stage" },
+    { type: "meta", items: [{ label: "Role", value: "" }, { label: "Scope", value: "" }] },
     { type: "text", variant: "two-column", body: [""] },
     { type: "credits", roles: [{ role: "Design", name: "Lukasz Wrzal" }] },
   ];

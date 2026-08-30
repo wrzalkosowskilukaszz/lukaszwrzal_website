@@ -1,0 +1,112 @@
+{
+  "$schema": "../project.schema.json",
+  "slug": "teatr-nowe-formy",
+  "cat": "brand",
+  "order": 5,
+  "nextSlug": "resi4rent-website",
+  "title": "Teatr Nowe Formy",
+  "desc": "An identity designed to change with the theatre",
+  "blocks": [
+    {
+      "type": "hero",
+      "variant": "centred",
+      "eyebrow": "Brand · Art Direction · Culture",
+      "title": "Teatr Nowe Formy",
+      "lede": "An identity designed to change with the theatre — without losing its own character."
+    },
+    {
+      "type": "figure",
+      "src": "01.jpg",
+      "width": "stage",
+      "parallax": 0.1
+    },
+    {
+      "type": "meta",
+      "items": [
+        {
+          "label": "Client",
+          "value": "Teatr Nowe Formy"
+        },
+        {
+          "label": "Role",
+          "value": "Visual art direction, identity system"
+        },
+        {
+          "label": "Scope",
+          "value": "Identity, poster system, season identity, print programmes, social"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "statement": "The theatre was full of different worlds. The identity looked like sixteen of them.",
+      "body": [
+        "Strong productions were being designed as isolated jobs, so every premiere could look completely different — and the theatre itself was disappearing behind the programme.",
+        "The challenge wasn’t to make every show look the same. It was to give very different productions a recognisable home."
+      ],
+      "variant": "two-column"
+    },
+    {
+      "type": "text",
+      "statement": "The idea",
+      "body": [
+        "The identity should behave like the theatre.",
+        "Some productions are quiet. Some are absurd. Some are visceral. Some are almost surreal. The system therefore had to flex emotionally without losing its own accent."
+      ],
+      "variant": "two-column"
+    },
+    {
+      "type": "gallery",
+      "variant": "grid-2",
+      "items": [
+        {
+          "src": "02.jpg"
+        },
+        {
+          "src": "03.jpg"
+        }
+      ]
+    },
+    {
+      "type": "quote",
+      "variant": "aurora",
+      "text": "Consistency shouldn’t mean making every performance look like the same performance."
+    },
+    {
+      "type": "text",
+      "statement": "The work",
+      "body": [
+        "A flexible visual system across posters, programmes, social and season communication. Different productions can push the visual language in different directions while still belonging to the same theatre."
+      ],
+      "variant": "single"
+    },
+    {
+      "type": "gallery",
+      "variant": "grid-3",
+      "items": [
+        {
+          "src": "04.jpg"
+        },
+        {
+          "src": "05.jpg"
+        },
+        {
+          "src": "06.jpg"
+        }
+      ]
+    },
+    {
+      "type": "figure",
+      "src": "07.jpg",
+      "width": "full-bleed"
+    },
+    {
+      "type": "text",
+      "statement": "The result",
+      "body": [
+        "A brand language that finally works with the theatre’s unpredictability instead of fighting it — cohesive across a season without flattening the individuality of the work."
+      ],
+      "variant": "single"
+    }
+  ]
+}

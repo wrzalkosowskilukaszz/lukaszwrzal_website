@@ -1,0 +1,111 @@
+{
+  "$schema": "../project.schema.json",
+  "slug": "jacks-bar",
+  "cat": "illustrations",
+  "order": 16,
+  "nextSlug": "surveyvor",
+  "title": "Jack’s Bar",
+  "desc": "Posters that look less like advertising and more like Friday night",
+  "blocks": [
+    {
+      "type": "hero",
+      "variant": "centred",
+      "eyebrow": "Illustration · Campaign",
+      "title": "Jack’s Bar",
+      "lede": "A poster series that looks less like advertising and more like Friday night."
+    },
+    {
+      "type": "figure",
+      "src": "01.jpg",
+      "width": "stage",
+      "parallax": 0.1
+    },
+    {
+      "type": "meta",
+      "items": [
+        {
+          "label": "Client",
+          "value": "Jack’s Bar"
+        },
+        {
+          "label": "Role",
+          "value": "Illustration, art direction"
+        },
+        {
+          "label": "Scope",
+          "value": "Poster series"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "statement": "The brief was simple: make it feel like the place.",
+      "body": [
+        "Jack’s Bar didn’t need another poster with a cocktail sitting politely on a background. The visuals needed the same energy as the room — playful, loud and slightly chaotic."
+      ],
+      "variant": "single"
+    },
+    {
+      "type": "text",
+      "statement": "The idea",
+      "body": [
+        "Turn every poster into its own tiny world.",
+        "Cocktails become alpine peaks. Hourglasses drip with booze. Typography elbows its way into the scene. The imagery is exaggerated on purpose."
+      ],
+      "variant": "two-column"
+    },
+    {
+      "type": "gallery",
+      "variant": "grid-2",
+      "items": [
+        {
+          "src": "02.jpg"
+        },
+        {
+          "src": "03.jpg"
+        }
+      ]
+    },
+    {
+      "type": "quote",
+      "variant": "aurora",
+      "text": "Make the poster feel like the place before you’ve even walked in."
+    },
+    {
+      "type": "text",
+      "statement": "The work",
+      "body": [
+        "A series built from bold shapes, strong colour relationships and surreal Alpine transformations. Rather than putting an offer on a background, each poster becomes a small visual event."
+      ],
+      "variant": "single"
+    },
+    {
+      "type": "gallery",
+      "variant": "grid-3",
+      "items": [
+        {
+          "src": "04.jpg"
+        },
+        {
+          "src": "05.jpg"
+        },
+        {
+          "src": "06.jpg"
+        }
+      ]
+    },
+    {
+      "type": "figure",
+      "src": "07.jpg",
+      "width": "full-bleed"
+    },
+    {
+      "type": "text",
+      "statement": "The result",
+      "body": [
+        "The posters became part of the atmosphere rather than just another communication layer — something guests could notice, photograph and remember."
+      ],
+      "variant": "single"
+    }
+  ]
+}

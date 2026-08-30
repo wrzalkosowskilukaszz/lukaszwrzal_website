@@ -32,7 +32,7 @@
   --c-product:       #0F8B7E;
   --c-brand:         #C2761B;
   --c-web:           #2563EB;
-  --c-ai:            #C026A3;
+  --c-campaign:      #C026A3;
   --c-illustrations: #E4572E;
 
   /* Zero-alpha pairs, for the aurora's radial falloff. Never `transparent`
@@ -41,6 +41,6 @@
   --c-product-0:       rgba(15, 139, 126, 0);
   --c-brand-0:         rgba(194, 118, 27, 0);
   --c-web-0:           rgba(37, 99, 235, 0);
-  --c-ai-0:            rgba(192, 38, 163, 0);
+  --c-campaign-0:      rgba(192, 38, 163, 0);
   --c-illustrations-0: rgba(228, 87, 46, 0);
 }

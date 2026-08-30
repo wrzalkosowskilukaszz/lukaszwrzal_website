@@ -1,0 +1,122 @@
+{
+  "$schema": "../project.schema.json",
+  "slug": "auragen",
+  "cat": "brand",
+  "order": 3,
+  "nextSlug": "win-casino",
+  "title": "AuraGen",
+  "desc": "A biotech brand built to prove its own credibility",
+  "blocks": [
+    {
+      "type": "hero",
+      "variant": "centred",
+      "eyebrow": "Brand · Product · Web · Self-initiated",
+      "title": "AuraGen",
+      "lede": "A biotech company that doesn’t exist — built to test whether a brand can prove its own credibility."
+    },
+    {
+      "type": "figure",
+      "src": "01.jpg",
+      "width": "stage",
+      "parallax": 0.1
+    },
+    {
+      "type": "meta",
+      "items": [
+        {
+          "label": "Client",
+          "value": "Self-initiated / Spec"
+        },
+        {
+          "label": "Role",
+          "value": "Concept, brand, product design, front-end build, AI direction"
+        },
+        {
+          "label": "Scope",
+          "value": "Identity, design system, interactive website, working dashboard prototype"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "statement": "Most biotech websites ask you to believe them.",
+      "body": [
+        "They say they are rigorous. Data-driven. Scientific. Investor-ready.",
+        "Then they show you a polished screenshot and ask you to take their word for it.",
+        "AuraGen started as a test of the opposite approach."
+      ],
+      "variant": "two-column"
+    },
+    {
+      "type": "text",
+      "statement": "The idea",
+      "body": [
+        "AuraGen is fictional. I invented the company so I could build the kind of investor site I wanted to see.",
+        "Instead of showing a static picture of the product, the site contains a working piece of it: an interactive lab dashboard with simulated operational data."
+      ],
+      "variant": "two-column"
+    },
+    {
+      "type": "gallery",
+      "variant": "grid-2",
+      "items": [
+        {
+          "src": "02.jpg"
+        },
+        {
+          "src": "03.jpg"
+        }
+      ]
+    },
+    {
+      "type": "quote",
+      "variant": "aurora",
+      "text": "Prove trust with a working demo, not another claim."
+    },
+    {
+      "type": "text",
+      "statement": "Where AI came in",
+      "body": [
+        "The brand and design system were established first, by hand. AI entered later, at specific points where it could increase speed without making the creative decisions: scaling the system across the site and helping build the functioning experience.",
+        "That distinction matters to me. The experiment wasn’t “how much can AI do?” It was “how much can a designer direct when AI becomes part of the production pipeline?”"
+      ],
+      "variant": "two-column"
+    },
+    {
+      "type": "gallery",
+      "variant": "grid-3",
+      "items": [
+        {
+          "src": "04.jpg"
+        },
+        {
+          "src": "05.jpg"
+        },
+        {
+          "src": "06.jpg"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "statement": "The work",
+      "body": [
+        "Identity, logotype, visual language, interface foundations, an investor-facing website and a live internal dashboard demonstration — all built as one connected system."
+      ],
+      "variant": "single"
+    },
+    {
+      "type": "figure",
+      "src": "07.jpg",
+      "width": "full-bleed"
+    },
+    {
+      "type": "text",
+      "statement": "What it proves",
+      "body": [
+        "AuraGen sits somewhere between brand work, product design and creative technology. More than a fictional biotech company, it is a working test of how traditional design judgement and AI-assisted making can coexist without one quietly replacing the other."
+      ],
+      "variant": "single"
+    }
+  ]
+}

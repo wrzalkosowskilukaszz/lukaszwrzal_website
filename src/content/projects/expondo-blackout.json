@@ -1,0 +1,114 @@
+{
+  "$schema": "../project.schema.json",
+  "slug": "expondo-blackout",
+  "cat": "campaign",
+  "order": 8,
+  "nextSlug": "expondo-doer",
+  "title": "Expondo — Blackout Sale",
+  "desc": "Black Week became a solar eclipse",
+  "blocks": [
+    {
+      "type": "hero",
+      "variant": "centred",
+      "eyebrow": "Campaign · Performance",
+      "title": "Expondo — Blackout Sale",
+      "lede": "Black Week became a solar eclipse."
+    },
+    {
+      "type": "figure",
+      "src": "01.jpg",
+      "width": "stage",
+      "parallax": 0.1
+    },
+    {
+      "type": "meta",
+      "items": [
+        {
+          "label": "Client",
+          "value": "Expondo"
+        },
+        {
+          "label": "Role",
+          "value": "Creative direction, campaign concept, art direction, landing page"
+        },
+        {
+          "label": "Scope",
+          "value": "Campaign concept, motion, landing page, email, channel adaptations"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "statement": "Black Week had a noise problem.",
+      "body": [
+        "Black backgrounds. Red accents. Giant discounts. Increasingly desperate typography.",
+        "The category had spent so long trying to look urgent that urgency itself had become invisible."
+      ],
+      "variant": "two-column"
+    },
+    {
+      "type": "text",
+      "statement": "The idea",
+      "body": [
+        "Instead of making Expondo shout louder, I wanted to make people notice the moment something went quiet.",
+        "A solar eclipse gave the campaign a built-in narrative: the light disappears slowly, everything goes dark, then the sale is revealed."
+      ],
+      "variant": "two-column"
+    },
+    {
+      "type": "gallery",
+      "variant": "grid-2",
+      "items": [
+        {
+          "src": "02.jpg"
+        },
+        {
+          "src": "03.jpg"
+        }
+      ]
+    },
+    {
+      "type": "quote",
+      "variant": "aurora",
+      "text": "The drama was already in the idea. We didn’t need to invent it."
+    },
+    {
+      "type": "text",
+      "statement": "The work",
+      "body": [
+        "A full visual world built around darkness, atmospheric light and the feeling that light itself was becoming scarce.",
+        "Motion, landing pages and email followed the same three-stage structure, so the campaign felt like one event rather than a pile of channel adaptations."
+      ],
+      "variant": "two-column"
+    },
+    {
+      "type": "gallery",
+      "variant": "grid-3",
+      "items": [
+        {
+          "src": "04.jpg"
+        },
+        {
+          "src": "05.jpg"
+        },
+        {
+          "src": "06.jpg"
+        }
+      ]
+    },
+    {
+      "type": "figure",
+      "src": "07.jpg",
+      "width": "full-bleed"
+    },
+    {
+      "type": "text",
+      "statement": "The result",
+      "body": [
+        "The campaign became one of Expondo’s key creative drivers for Black Week and was associated with a noticeably improved sales period.",
+        "The portfolio version should ideally replace “noticeably improved” with the real number — revenue, conversion rate, traffic or another measurable result."
+      ],
+      "variant": "two-column"
+    }
+  ]
+}

@@ -2,8 +2,8 @@
   "$schema": "../project.schema.json",
   "slug": "my-project",
   "cat": "identity",
-  "year": "2026",
-  "nextSlug": "northwind",
+  "order": 17,
+  "nextSlug": "surveyvor",
   "title": "My Project",
   "desc": { "en": "One line for the work list.", "pl": "Jedna linia na liście prac." },
 
@@ -17,10 +17,11 @@
     { "type": "figure", "src": "01.jpg", "width": "stage", "parallax": 0.1 },
 
     { "type": "meta",
-      "client": "Client name",
-      "role": { "en": "Identity, art direction", "pl": "Identyfikacja, kierunek artystyczny" },
-      "scope": { "en": "Mark, type, web", "pl": "Znak, typografia, web" },
-      "team": { "en": "Solo", "pl": "Solo" } },
+      "items": [
+        { "label": "Client", "value": "Client name" },
+        { "label": "Role", "value": { "en": "Identity, art direction", "pl": "Identyfikacja, kierunek artystyczny" } },
+        { "label": "Scope", "value": { "en": "Mark, type, web", "pl": "Znak, typografia, web" } }
+      ] },
 
     { "type": "text",
       "variant": "two-column",

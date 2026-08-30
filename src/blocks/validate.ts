@@ -3,6 +3,7 @@ import { BLOCK_TYPES, type Block, type BlockType } from "./types";
 /** Fields a block cannot render without. */
 const REQUIRED: Partial<Record<BlockType, string[]>> = {
   hero: ["title"],
+  meta: ["items"],
   text: ["body"],
   statement: ["text"],
   figure: ["src"],

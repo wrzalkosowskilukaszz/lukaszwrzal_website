@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     errors.push("The project's URL name can only use lowercase letters, numbers and hyphens.");
   }
   if (!doc?.title?.trim()) errors.push("Give the project a title.");
-  if (!doc?.year || !/^\d{4}$/.test(doc.year)) errors.push("Year must be four digits, e.g. 2026.");
+  if (doc?.year && !/^\d{4}$/.test(doc.year)) errors.push("Year must be four digits, e.g. 2026 — or leave it empty.");
   if (!doc?.cat || !CATEGORIES.includes(doc.cat)) errors.push("Choose a category.");
   if (!doc?.nextSlug?.trim()) errors.push("Choose which project the “next project” link points to.");
   if (!doc?.blocks?.length) errors.push("Add at least one section to the page.");
@@ -68,7 +68,8 @@ export async function POST(request: Request) {
     $schema: "../project.schema.json",
     slug: doc.slug,
     cat: doc.cat,
-    year: doc.year,
+    ...(doc.year ? { year: doc.year } : {}),
+    ...(doc.order ? { order: doc.order } : {}),
     nextSlug: doc.nextSlug,
     title: doc.title,
     desc: doc.desc,

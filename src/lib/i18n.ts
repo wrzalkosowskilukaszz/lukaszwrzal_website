@@ -46,7 +46,7 @@ export const CHROME = {
     workedWith: "Worked with",
 
     // Work index
-    workEyebrow: "Twenty projects · 2023—2026",
+    workEyebrow: "Sixteen projects · Selected work",
     workTitle: "All work",
     workLede:
       "Brand systems, product interfaces, print and packaging. Everything I can show publicly.",
@@ -56,20 +56,6 @@ export const CHROME = {
     viewGroup: "View as",
 
     // Case study
-    chapterBrief: "Brief",
-    chapterProcess: "Process",
-    chapterSystem: "System",
-    chapterOutcome: "Outcome",
-    sectionBrief: "01 / Brief",
-    sectionProcess: "02 / Process",
-    sectionSystem: "03 / System",
-    sectionOutcome: "04 / Outcome",
-    metaClient: "Client",
-    metaRole: "Role",
-    metaScope: "Scope",
-    metaTeam: "Team",
-    expand: "Expand",
-    drag: "Drag",
     closeEsc: "Close · esc",
     nextProject: "Next project",
     allWork: "All work",
@@ -83,7 +69,6 @@ export const CHROME = {
     footerLedeShort:
       "Fifteen minutes is usually enough to know if we should work together.",
     footerEmailLine: "Pick a slot above, or reach me at hello@takealuke.studio",
-    preferEmail: "I'd rather send an email",
     calendarFailed: "The booking calendar didn't load here.",
     openCalendar: "Open my calendar",
     bookCall: "Book a call",
@@ -124,7 +109,7 @@ export const CHROME = {
     clientsIntro: "Wybór zespołów, z którymi pracowałem przez ostatnią dekadę.",
     workedWith: "Pracowałem z",
 
-    workEyebrow: "Dwadzieścia projektów · 2023—2026",
+    workEyebrow: "Szesnaście projektów · Wybrane prace",
     workTitle: "Wszystkie projekty",
     workLede:
       "Systemy marki, interfejsy produktów, druk i opakowania. Wszystko, co mogę pokazać publicznie.",
@@ -133,20 +118,6 @@ export const CHROME = {
     viewGrid: "Siatka",
     viewGroup: "Widok",
 
-    chapterBrief: "Brief",
-    chapterProcess: "Proces",
-    chapterSystem: "System",
-    chapterOutcome: "Efekt",
-    sectionBrief: "01 / Brief",
-    sectionProcess: "02 / Proces",
-    sectionSystem: "03 / System",
-    sectionOutcome: "04 / Efekt",
-    metaClient: "Klient",
-    metaRole: "Rola",
-    metaScope: "Zakres",
-    metaTeam: "Zespół",
-    expand: "Powiększ",
-    drag: "Przeciągnij",
     closeEsc: "Zamknij · esc",
     nextProject: "Następny projekt",
     allWork: "Wszystkie projekty",
@@ -159,7 +130,6 @@ export const CHROME = {
     footerLedeShort:
       "Piętnaście minut zwykle wystarczy, żeby wiedzieć, czy powinniśmy pracować razem.",
     footerEmailLine: "Wybierz termin powyżej lub napisz na hello@takealuke.studio",
-    preferEmail: "Wolę napisać maila",
     calendarFailed: "Kalendarz rezerwacji się nie wczytał.",
     openCalendar: "Otwórz mój kalendarz",
     bookCall: "Zarezerwuj rozmowę",
@@ -181,7 +151,7 @@ export const CATEGORY_LABELS: Record<Locale, Record<Category, string>> = {
     product: "Product",
     brand: "Brand",
     web: "Web",
-    ai: "AI",
+    campaign: "Campaign",
     illustrations: "Illustrations",
   },
   pl: {
@@ -189,7 +159,7 @@ export const CATEGORY_LABELS: Record<Locale, Record<Category, string>> = {
     product: "Produkt",
     brand: "Marka",
     web: "Web",
-    ai: "AI",
+    campaign: "Kampania",
     illustrations: "Ilustracje",
   },
 };

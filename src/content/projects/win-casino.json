@@ -1,0 +1,114 @@
+{
+  "$schema": "../project.schema.json",
+  "slug": "win-casino",
+  "cat": "brand",
+  "order": 4,
+  "nextSlug": "teatr-nowe-formy",
+  "title": "Win Casino",
+  "desc": "Four loyalty identities people actually want to become",
+  "blocks": [
+    {
+      "type": "hero",
+      "variant": "centred",
+      "eyebrow": "Brand · Loyalty · Art Direction",
+      "title": "Win Casino",
+      "lede": "Turning a loyalty programme into four identities people actually want to become."
+    },
+    {
+      "type": "figure",
+      "src": "01.jpg",
+      "width": "stage",
+      "parallax": 0.1
+    },
+    {
+      "type": "meta",
+      "items": [
+        {
+          "label": "Client",
+          "value": "Win Casino"
+        },
+        {
+          "label": "Role",
+          "value": "Creative direction, identity system, implementation oversight"
+        },
+        {
+          "label": "Scope",
+          "value": "Brandbook, motion rules, jackpot visuals, loyalty cards, packaging, digital assets"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "statement": "Casino branding has a noise problem.",
+      "body": [
+        "Gold. Neon. Black. More gold. More neon. Everything is trying to look exciting, and somehow everything ends up looking the same.",
+        "Win Casino wanted to move away from that visual shorthand and feel more contemporary without losing the energy of the category."
+      ],
+      "variant": "two-column"
+    },
+    {
+      "type": "text",
+      "statement": "The idea",
+      "body": [
+        "The real opportunity was in the loyalty programme.",
+        "People don’t only move through loyalty tiers by collecting points. They move through them by feeling that they are becoming something.",
+        "So I turned four levels into four identities: Explorer, Achiever, Magician and Legend."
+      ],
+      "variant": "two-column"
+    },
+    {
+      "type": "gallery",
+      "variant": "grid-2",
+      "items": [
+        {
+          "src": "02.jpg"
+        },
+        {
+          "src": "03.jpg"
+        }
+      ]
+    },
+    {
+      "type": "quote",
+      "variant": "aurora",
+      "text": "Not four tiers. Four identities to grow into."
+    },
+    {
+      "type": "text",
+      "statement": "The work",
+      "body": [
+        "I developed the system across the brandbook, visual language, motion rules, jackpot imagery, layouts, physical loyalty cards, packaging and digital assets.",
+        "The goal was not four separate looks. It was one world with enough range to make progression feel real."
+      ],
+      "variant": "two-column"
+    },
+    {
+      "type": "gallery",
+      "variant": "grid-3",
+      "items": [
+        {
+          "src": "04.jpg"
+        },
+        {
+          "src": "05.jpg"
+        },
+        {
+          "src": "06.jpg"
+        }
+      ]
+    },
+    {
+      "type": "figure",
+      "src": "07.jpg",
+      "width": "full-bleed"
+    },
+    {
+      "type": "text",
+      "statement": "The result",
+      "body": [
+        "Status became something players could recognise before they ever got to the terms and benefits. The system was also designed to be used without constant art-direction intervention: the team has been able to extend it into new tiers and occasions independently."
+      ],
+      "variant": "single"
+    }
+  ]
+}

@@ -9,7 +9,10 @@ import type { Category, Locale, ProjectCard, Stat } from "./types";
 export interface ProjectDoc {
   slug: string;
   cat: Category;
-  year: string;
+  /** Only when verified — the content rule is: never invent dates. */
+  year?: string;
+  /** Position in the work index. */
+  order?: number;
   nextSlug: string;
   title: string;
   desc: Localised;
@@ -74,8 +77,13 @@ function load(): ProjectDoc[] {
     console.error(`[projects] ${errors.length} project file(s) skipped:\n  ${errors.join("\n  ")}`);
   }
 
-  // Stable order: newest first, then alphabetical.
-  return docs.sort((a, b) => b.year.localeCompare(a.year) || a.slug.localeCompare(b.slug));
+  // Explicit curatorial order first; then year (newest), then name.
+  return docs.sort(
+    (a, b) =>
+      (a.order ?? 999) - (b.order ?? 999) ||
+      (b.year ?? "").localeCompare(a.year ?? "") ||
+      a.slug.localeCompare(b.slug),
+  );
 }
 
 /** Files that failed to load on the last read, for the Studio tool to surface. */
@@ -136,7 +144,7 @@ export function toCard(doc: ProjectDoc, locale: Locale): ProjectCard {
   return {
     slug: doc.slug,
     cat: doc.cat,
-    year: doc.year,
+    ...(doc.year ? { year: doc.year } : {}),
     title: doc.title,
     desc: tx(doc.desc, locale),
     ...(stat ? { stat } : {}),

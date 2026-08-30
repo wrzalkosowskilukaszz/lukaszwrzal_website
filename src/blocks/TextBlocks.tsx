@@ -18,16 +18,12 @@ export function Hero({ block, ctx }: { block: HeroBlock; ctx: BlockContext }) {
 }
 
 export function Meta({ block, ctx }: { block: MetaBlock; ctx: BlockContext }) {
-  const cells = [
-    ["Client", block.client], ["Role", block.role],
-    ["Scope", block.scope], ["Team", block.team],
-  ] as const;
   return (
     <div className={`${s.read} ${s.meta}`}>
-      {cells.filter(([, v]) => v).map(([label, value]) => (
-        <div key={label}>
-          <div className={s.metaLabel}>{label}</div>
-          <div className={s.metaValue}>{tx(value, ctx.locale)}</div>
+      {block.items.map((row, i) => (
+        <div key={i}>
+          <div className={s.metaLabel}>{tx(row.label, ctx.locale)}</div>
+          <div className={s.metaValue}>{tx(row.value, ctx.locale)}</div>
         </div>
       ))}
     </div>

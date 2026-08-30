@@ -1,5 +1,7 @@
 .backLink {
-  display: inline-flex;
+  /* display:flex, not inline-flex — auto margins resolve to 0 on inline
+     boxes, which pinned this link to the viewport edge at every width. */
+  display: flex;
   align-items: center;
   gap: 9px;
   width: min(1000px, 100% - 40px);

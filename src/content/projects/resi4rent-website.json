@@ -1,0 +1,121 @@
+{
+  "$schema": "../project.schema.json",
+  "slug": "resi4rent-website",
+  "cat": "web",
+  "order": 6,
+  "nextSlug": "resi4rent-art-direction",
+  "title": "Resi4Rent — Website Redesign",
+  "desc": "A rental website rebuilt around finding a place",
+  "blocks": [
+    {
+      "type": "hero",
+      "variant": "centred",
+      "eyebrow": "UX · UI · Website",
+      "title": "Resi4Rent — Website Redesign",
+      "lede": "Rebuilding a rental website around the one thing that actually matters: finding a place."
+    },
+    {
+      "type": "figure",
+      "src": "01.jpg",
+      "width": "stage",
+      "parallax": 0.1
+    },
+    {
+      "type": "meta",
+      "items": [
+        {
+          "label": "Client",
+          "value": "Resi4Rent"
+        },
+        {
+          "label": "Role",
+          "value": "UX research, information architecture, UX/UI, art direction, web design"
+        },
+        {
+          "label": "Development",
+          "value": "Adrian Tuszyński"
+        },
+        {
+          "label": "Scope",
+          "value": "Research, personas, IA, desktop, mobile, design system"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "statement": "The site wasn’t short on information. It was short on direction.",
+      "body": [
+        "Resi4Rent was already a major name in the Polish rental market, but the website made the process feel more complicated than it needed to be.",
+        "Research made the problem hard to ignore: 90% reported a poor mobile experience, 72% didn’t know how to move from browsing to contacting an agent, and 87% said the visuals didn’t give them enough confidence to act.",
+        "There was no meaningful analytics setup either, so the business couldn’t clearly see where people were dropping out."
+      ],
+      "variant": "two-column"
+    },
+    {
+      "type": "text",
+      "statement": "The thinking",
+      "body": [
+        "I started with surveys, interviews, analytics, heuristic review and competitor benchmarking. A five-whys analysis of contact abandonment took us past “the CTA is unclear” to the bigger problem: the site was organised around the company, not the user’s decision.",
+        "So the core journey became: City → Area → Apartment → Contact."
+      ],
+      "variant": "two-column"
+    },
+    {
+      "type": "gallery",
+      "variant": "grid-2",
+      "items": [
+        {
+          "src": "02.jpg"
+        },
+        {
+          "src": "03.jpg"
+        }
+      ]
+    },
+    {
+      "type": "quote",
+      "variant": "aurora",
+      "text": "The best advert for a rental subscription is a website where you can actually find one."
+    },
+    {
+      "type": "text",
+      "statement": "The work",
+      "body": [
+        "Search became the main interface. The neighbourhood map became part of the browsing experience instead of an afterthought. Mobile was redesigned as a real product experience, not simply a smaller desktop layout.",
+        "Filters, distance-to-amenities, the application flow and trust signals were all rebuilt around the same idea: make the next step obvious.",
+        "Everything was backed by a mobile-first design system built to scale as the service expanded."
+      ],
+      "variant": "two-column"
+    },
+    {
+      "type": "gallery",
+      "variant": "grid-3",
+      "items": [
+        {
+          "src": "04.jpg"
+        },
+        {
+          "src": "05.jpg"
+        },
+        {
+          "src": "06.jpg"
+        }
+      ]
+    },
+    {
+      "type": "figure",
+      "src": "07.jpg",
+      "width": "full-bleed"
+    },
+    {
+      "type": "text",
+      "statement": "The result",
+      "body": [
+        "The route from homepage to contacting an agent became a clear four-step journey instead of a collection of disconnected pages.",
+        "The research told us where the friction was. The redesign removed it.",
+        "The strongest missing proof is post-launch data: conversion, enquiry rate, mobile bounce or another measure showing what changed after release."
+      ],
+      "variant": "two-column"
+    }
+  ]
+}

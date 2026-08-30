@@ -42,10 +42,11 @@ export interface HeroBlock extends Base {
 
 export interface MetaBlock extends Base {
   type: "meta";
-  client?: Localised;
-  role?: Localised;
-  scope?: Localised;
-  team?: Localised;
+  /** Label/value rows — Client, Role, Scope, Status, Location, whatever the
+      project actually has. The old fixed Client/Role/Scope/Team shape forced
+      every project to have the same four facts (and hardcoded the labels in
+      English). */
+  items: { label: Localised; value: Localised }[];
 }
 
 export interface TextBlock extends Base {

@@ -1,0 +1,112 @@
+{
+  "$schema": "../project.schema.json",
+  "slug": "fit13",
+  "cat": "identity",
+  "order": 13,
+  "nextSlug": "leman-skills",
+  "title": "Fit13",
+  "desc": "A figure in motion, hidden inside the number 13",
+  "blocks": [
+    {
+      "type": "hero",
+      "variant": "centred",
+      "eyebrow": "Branding · Identity",
+      "title": "Fit13",
+      "lede": "A figure in motion, hidden inside the number 13."
+    },
+    {
+      "type": "figure",
+      "src": "01.jpg",
+      "width": "stage",
+      "parallax": 0.1
+    },
+    {
+      "type": "meta",
+      "items": [
+        {
+          "label": "Client",
+          "value": "Fit13 — private training studio"
+        },
+        {
+          "label": "Role",
+          "value": "Logotype, identity system, collateral, logo animation"
+        },
+        {
+          "label": "Scope",
+          "value": "Mark construction, identity, social, signage, animation"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "statement": "Fitness branding has a very small vocabulary.",
+      "body": [
+        "Neon. Shouting. “Push harder.” Everything tries to motivate so aggressively that it starts looking like background noise.",
+        "Fit13 needed strength without the performance of strength."
+      ],
+      "variant": "two-column"
+    },
+    {
+      "type": "text",
+      "statement": "The idea",
+      "body": [
+        "The number 13 became the starting point. While exploring its construction, I found enough space inside the numeral to hide a human figure in motion."
+      ],
+      "variant": "single"
+    },
+    {
+      "type": "gallery",
+      "variant": "grid-2",
+      "items": [
+        {
+          "src": "02.jpg"
+        },
+        {
+          "src": "03.jpg"
+        }
+      ]
+    },
+    {
+      "type": "quote",
+      "variant": "aurora",
+      "text": "Energy from construction, not from effects."
+    },
+    {
+      "type": "text",
+      "statement": "The work",
+      "body": [
+        "The system extends across social, apparel and signage, including a wall-scale application. The logo animation keeps the same construction rule in motion instead of inventing a second idea."
+      ],
+      "variant": "single"
+    },
+    {
+      "type": "gallery",
+      "variant": "grid-3",
+      "items": [
+        {
+          "src": "04.jpg"
+        },
+        {
+          "src": "05.jpg"
+        },
+        {
+          "src": "06.jpg"
+        }
+      ]
+    },
+    {
+      "type": "figure",
+      "src": "07.jpg",
+      "width": "full-bleed"
+    },
+    {
+      "type": "text",
+      "statement": "The result",
+      "body": [
+        "Fit13 gets energy without looking like another motivational gym brand.",
+        "And there is a broader design principle behind it: the strongest concept doesn’t always need to sit on top of the design. Sometimes it should be hiding inside it."
+      ],
+      "variant": "two-column"
+    }
+  ]
+}

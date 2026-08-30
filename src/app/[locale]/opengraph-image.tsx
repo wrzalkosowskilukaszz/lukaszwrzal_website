@@ -1,7 +1,8 @@
 import { ImageResponse } from "next/og";
 
 import { t } from "@/lib/i18n";
-import { LOCALES, type Locale } from "@/lib/types";
+import { getProjectDocs } from "@/lib/projects";
+import { CATEGORIES, LOCALES, type Locale } from "@/lib/types";
 
 export const alt = "Lukasz Wrzal — Creative Designer & AI Director";
 export const size = { width: 1200, height: 630 };
@@ -11,15 +12,14 @@ export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
 }
 
-/** The six disciplines, in the order they appear on the work index. */
-const SPECTRUM = [
-  { hue: "#3C2CC2", n: 7 },  // Identity
-  { hue: "#0F8B7E", n: 5 },  // Product
-  { hue: "#C2761B", n: 4 },  // Brand
-  { hue: "#2563EB", n: 4 },  // Web
-  { hue: "#C026A3", n: 4 },  // AI
-  { hue: "#E4572E", n: 6 },  // Illustrations
-];
+const HUES: Record<string, string> = {
+  identity: "#3C2CC2",
+  product: "#0F8B7E",
+  brand: "#C2761B",
+  web: "#2563EB",
+  campaign: "#C026A3",
+  illustrations: "#E4572E",
+};
 
 /**
  * Every link shared during a job hunt renders as this card — the most-seen
@@ -39,6 +39,14 @@ export default async function Image({
   const { locale } = await params;
   const l = (LOCALES.includes(locale as Locale) ? locale : "en") as Locale;
 
+  /* The spine is the real portfolio: one band per discipline, sized by how
+     many projects it holds. Computed, so it can never go stale again. */
+  const docs = getProjectDocs();
+  const spectrum = CATEGORIES.map((cat) => ({
+    hue: HUES[cat],
+    n: docs.filter((d) => d.cat === cat).length,
+  })).filter((b) => b.n > 0);
+
   return new ImageResponse(
     (
       <div
@@ -51,8 +59,8 @@ export default async function Image({
       >
         {/* Discipline spine: each band's height is that category's share. */}
         <div style={{ display: "flex", flexDirection: "column", width: 22 }}>
-          {SPECTRUM.map((s) => (
-            <div key={s.hue} style={{ display: "flex", flexGrow: s.n, background: s.hue }} />
+          {spectrum.map((b) => (
+            <div key={b.hue} style={{ display: "flex", flexGrow: b.n, background: b.hue }} />
           ))}
         </div>
 
@@ -123,7 +131,7 @@ export default async function Image({
               color: "rgba(255,255,255,0.55)",
             }}
           >
-            THIRTY PROJECTS · WARSAW · AVAILABLE FOR NEW WORK
+            {`${docs.length} PROJECTS · WARSAW · AVAILABLE FOR NEW WORK`}
           </div>
         </div>
       </div>
