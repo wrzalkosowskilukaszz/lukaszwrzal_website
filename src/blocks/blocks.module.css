@@ -389,10 +389,12 @@
   position: absolute;
   inset: 0;
   padding-block: clamp(3rem, 8vh, 6rem);
-  opacity: 0;
-  will-change: transform, opacity;
+  /* Opaque paper, because the incoming slide covers the outgoing one —
+     the wipe would otherwise show both texts through each other. */
+  background: var(--lw-paper);
+  will-change: clip-path;
 }
-.deckPinned .deckSlide:first-child { opacity: 1; }
+.deckPinned .deckSlide:not(:first-child) { clip-path: inset(0 0 100% 0); }
 .deckPinned .deckCounter {
   display: block;
   position: absolute;

@@ -47,9 +47,8 @@ export function Deck({ block, ctx }: { block: DeckBlock; ctx: BlockContext }) {
       /* Stacked mode: clear any leftover per-slide styling. */
       for (const el of slideRefs.current) {
         if (!el) continue;
-        el.style.opacity = "";
+        el.style.clipPath = "";
         el.style.visibility = "";
-        el.style.transform = "";
       }
       return;
     }
@@ -67,16 +66,27 @@ export function Deck({ block, ctx }: { block: DeckBlock; ctx: BlockContext }) {
       const travel = rect.height - vh;
       const pos = clamp01(-rect.top / Math.max(travel, 1)) * (n - 1);
 
+      /* Slides never move and never fade — the incoming slide is revealed
+         by a clip edge wiping downward over the (static, opaque) one
+         beneath. The wipe occupies only the middle quarter of the gap
+         between slots, so each slide dwells planted for most of its
+         scroll; there is no ghost overlap, only a crisp travelling edge. */
+      const WINDOW = 0.24;
       for (let i = 0; i < n; i++) {
         const el = slideRefs.current[i];
         if (!el) continue;
-        const d = pos - i;
-        /* Full at its slot, gone one slot away; outgoing drifts up,
-           incoming rises in. */
-        const o = clamp01(1 - Math.abs(d) * 1.45);
-        el.style.opacity = String(o);
-        el.style.visibility = o < 0.02 ? "hidden" : "visible";
-        el.style.transform = `translate3d(0, ${d * -34}px, 0)`;
+        if (i === 0) {
+          el.style.clipPath = "none";
+        } else {
+          const t = clamp01((pos - (i - 0.5 - WINDOW / 2)) / WINDOW);
+          el.style.clipPath =
+            t <= 0 ? "inset(0 0 100% 0)" : t >= 1 ? "none" : `inset(0 0 ${(1 - t) * 100}% 0)`;
+          el.style.visibility = t <= 0 ? "hidden" : "visible";
+        }
+        /* Fully covered by the next slide? Drop it from painting. */
+        const covered = i < n - 1 && pos >= i + 0.5 + WINDOW / 2;
+        if (covered) el.style.visibility = "hidden";
+        else if (i === 0) el.style.visibility = "visible";
       }
 
       const active = Math.round(pos);
