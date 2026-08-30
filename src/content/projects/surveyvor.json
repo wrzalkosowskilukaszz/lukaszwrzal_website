@@ -47,7 +47,7 @@
         "And AI makes that easier to hide. Ask an AI to improve an incomplete brief and it will happily fill the gaps. The result sounds better. More complete. More professional.",
         "The gaps are still there. They’re just harder to see."
       ],
-      "variant": "single"
+      "eyebrow": "The challenge"
     },
     {
       "type": "text",
@@ -56,7 +56,7 @@
         "The obvious idea was an AI that helps you write better briefs. I started there too. Then I realised there was very little product in it. General-purpose AI can already turn messy notes into polished copy in seconds.",
         "The more interesting question was: what if AI didn’t try to complete the brief? What if it tried to find what the brief hadn’t settled?"
       ],
-      "variant": "two-column"
+      "eyebrow": "The idea"
     },
     {
       "type": "gallery",
@@ -83,7 +83,7 @@
         "Each brief type therefore has its own knowledge model — campaign, packaging, identity, website and so on. The model looks for relationships inside the brief, not just generic vagueness.",
         "So instead of “your brief could be more specific”, you can get something like: “Your sustainability claim conflicts with your chosen substrate.”"
       ],
-      "variant": "single"
+      "eyebrow": "How it works"
     },
     {
       "type": "gallery",
@@ -121,11 +121,11 @@
           "description": "something is being treated as fact without being confirmed."
         }
       ],
-      "statement": "Four ways a brief can be wrong."
+      "statement": "Four ways a brief can be wrong.",
+      "eyebrow": "What it finds"
     },
     {
       "type": "text",
-      "variant": "single",
       "body": [
         "Those are different problems. They need different conversations."
       ]
@@ -137,7 +137,7 @@
         "A tool that only finds problems becomes annoying very quickly. So Surveyvor has to tell you at least one thing the brief already gets right. Every finding can be dismissed immediately. And once you’ve dismissed something, it stays dismissed.",
         "Small details, but they change the relationship with the tool. It becomes something you can work with rather than something that keeps nagging."
       ],
-      "variant": "two-column"
+      "eyebrow": "Product decisions"
     },
     {
       "type": "list",
@@ -160,7 +160,8 @@
           "description": "invented precision is still invented precision."
         }
       ],
-      "statement": "What I deliberately didn’t build."
+      "statement": "What I deliberately didn’t build.",
+      "eyebrow": "The scope"
     },
     {
       "type": "text",
@@ -169,7 +170,7 @@
         "Accessibility was measured across 74 contrast pairs with zero failures, alongside full keyboard paths, focus trapping in dialogs, 44px touch targets and reduced-motion support.",
         "The interface runs on a token-based design system. The privacy policy and terms were written around what the product actually does. And 56 tests cover storage migrations, template switching and the guard preventing brief content from reaching analytics."
       ],
-      "variant": "two-column"
+      "eyebrow": "The craft"
     },
     {
       "type": "figure",
@@ -178,12 +179,11 @@
     },
     {
       "type": "text",
-      "statement": "The result",
+      "statement": "Surveyvor is live at surveyvor.app in closed beta. I designed the brand, product, system and interface, then built the thing myself.",
       "body": [
-        "Surveyvor is live at surveyvor.app in closed beta. I designed the brand, product, system and interface, then built the thing myself.",
         "The next test isn’t another feature. It’s ten real designers using it. I want to see what they dismiss, what they resolve, and whether Surveyvor actually helps people think more clearly — or just becomes very good at finding things to complain about."
       ],
-      "variant": "two-column"
+      "eyebrow": "The result"
     }
   ]
 }

@@ -24,8 +24,7 @@
       ] },
 
     { "type": "text",
-      "variant": "two-column",
-      "eyebrow": "01 / Brief",
+      "eyebrow": "The challenge",
       "statement": { "en": "The one sentence that sums it up.", "pl": "Jedno zdanie podsumowania." },
       "body": [
         { "en": "First paragraph.", "pl": "Pierwszy akapit." },

@@ -41,7 +41,9 @@ export function Text({ block, ctx }: { block: TextBlock; ctx: BlockContext }) {
 
   return (
     <section className={s.read}>
-      {block.eyebrow ? <p className={s.eyebrow}>{tx(block.eyebrow, ctx.locale)}</p> : null}
+      {block.eyebrow ? (
+        <p className={`${s.eyebrow} ${s.secEyebrow}`}>{tx(block.eyebrow, ctx.locale)}</p>
+      ) : null}
       {block.statement ? <h2 className={s.statement}>{tx(block.statement, ctx.locale)}</h2> : null}
       <div className={`${s.prose} ${pair ? s.pair : ""}`}>
         {paras.map((p, i) => <p key={i}>{p}</p>)}
@@ -60,11 +62,13 @@ export function List({ block, ctx }: { block: ListBlock; ctx: BlockContext }) {
 
   return (
     <section className={s.read}>
-      {block.eyebrow ? <p className={s.eyebrow}>{tx(block.eyebrow, ctx.locale)}</p> : null}
+      {block.eyebrow ? (
+        <p className={`${s.eyebrow} ${s.secEyebrow}`}>{tx(block.eyebrow, ctx.locale)}</p>
+      ) : null}
       {block.statement ? <h2 className={s.statement}>{tx(block.statement, ctx.locale)}</h2> : null}
 
       {cards ? (
-        <div className={s.listCards}>
+        <div className={`${s.listCards} ${numbered ? "" : s.listStat}`}>
           {block.items.map((item, i) => (
             <div className={s.listCard} key={i}>
               {numbered ? (

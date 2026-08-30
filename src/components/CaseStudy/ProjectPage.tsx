@@ -79,7 +79,9 @@ export function ProjectPage({
         {t(locale, "allWork")}
       </Link>
 
-      <BlockList blocks={doc.blocks} ctx={ctx} />
+      <article className={styles.chapters}>
+        <BlockList blocks={doc.blocks} ctx={ctx} />
+      </article>
 
       <footer className={styles.next}>
         <Aurora />

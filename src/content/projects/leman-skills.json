@@ -44,16 +44,15 @@
         "Blog content. Programmes. PCM. Leadership. Podcast. Products. Strong material, grown over time until every section started competing with the next.",
         "Visitors had to work too hard to answer three simple questions: who is this, is it relevant to me, and where do I start?"
       ],
-      "variant": "two-column"
+      "eyebrow": "The challenge"
     },
     {
       "type": "text",
-      "statement": "The idea",
       "body": [
         "The website needed to behave like Aleksandra’s work: clear, structured and focused on what actually matters.",
         "The experience was rebuilt around three questions: Who is she? Who does she help? What should I do next?"
       ],
-      "variant": "two-column"
+      "eyebrow": "The idea"
     },
     {
       "type": "gallery",
@@ -74,11 +73,10 @@
     },
     {
       "type": "text",
-      "statement": "The work",
       "body": [
         "Navigation was reorganised by intent. Pages received clearer hierarchy and one primary action. Long text blocks became shorter, more breathable sections supported by scannable benefits, social proof and reusable patterns."
       ],
-      "variant": "single"
+      "eyebrow": "The work"
     },
     {
       "type": "gallery",
@@ -102,12 +100,11 @@
     },
     {
       "type": "text",
-      "statement": "The result",
       "body": [
         "The site became easier to understand without losing the depth of the content.",
         "The change was less about adding things and more about giving the existing things a job."
       ],
-      "variant": "two-column"
+      "eyebrow": "The result"
     }
   ]
 }

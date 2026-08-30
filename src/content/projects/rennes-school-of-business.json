@@ -44,17 +44,16 @@
         "Different audiences shared the same navigation. Pages followed inconsistent structures. Basic information often sat several clicks away.",
         "Nothing was catastrophically wrong. The problem was cumulative: every inconsistency asked users to spend more time figuring out where they were."
       ],
-      "variant": "two-column"
+      "eyebrow": "The challenge"
     },
     {
       "type": "text",
-      "statement": "The thinking",
       "body": [
         "I started with heuristic review, user-flow analysis, analytics, interviews and competitor benchmarking.",
         "The pattern was clear: the school had organised the site around itself. Users arrived with completely different reasons for being there.",
         "So the architecture shifted from “How is the institution structured?” to “What are you here to do?”"
       ],
-      "variant": "single"
+      "eyebrow": "The thinking"
     },
     {
       "type": "gallery",
@@ -75,12 +74,11 @@
     },
     {
       "type": "text",
-      "statement": "The work",
       "body": [
         "Dedicated entry paths for different audiences, a calmer content hierarchy, progressive disclosure, a documented component system and responsive patterns across the redesigned sections.",
         "Low-fidelity wireframes and usability testing helped resolve practical issues before they became visual problems."
       ],
-      "variant": "two-column"
+      "eyebrow": "The work"
     },
     {
       "type": "gallery",
@@ -104,12 +102,10 @@
     },
     {
       "type": "text",
-      "statement": "The result",
       "body": [
-        "Navigation became intent-led rather than organisation-led, and the component system was documented well enough for the team to extend new programme pages without starting from scratch.",
-        "The case study would be stronger with one post-launch metric showing what changed after the new structure shipped."
+        "Navigation became intent-led rather than organisation-led, and the component system was documented well enough for the team to extend new programme pages without starting from scratch."
       ],
-      "variant": "two-column"
+      "eyebrow": "The result"
     }
   ]
 }

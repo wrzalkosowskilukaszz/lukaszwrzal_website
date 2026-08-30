@@ -44,16 +44,15 @@
         "Black backgrounds. Red accents. Giant discounts. Increasingly desperate typography.",
         "The category had spent so long trying to look urgent that urgency itself had become invisible."
       ],
-      "variant": "two-column"
+      "eyebrow": "The challenge"
     },
     {
       "type": "text",
-      "statement": "The idea",
       "body": [
         "Instead of making Expondo shout louder, I wanted to make people notice the moment something went quiet.",
         "A solar eclipse gave the campaign a built-in narrative: the light disappears slowly, everything goes dark, then the sale is revealed."
       ],
-      "variant": "two-column"
+      "eyebrow": "The idea"
     },
     {
       "type": "gallery",
@@ -74,12 +73,11 @@
     },
     {
       "type": "text",
-      "statement": "The work",
       "body": [
         "A full visual world built around darkness, atmospheric light and the feeling that light itself was becoming scarce.",
         "Motion, landing pages and email followed the same three-stage structure, so the campaign felt like one event rather than a pile of channel adaptations."
       ],
-      "variant": "two-column"
+      "eyebrow": "The work"
     },
     {
       "type": "gallery",
@@ -103,12 +101,10 @@
     },
     {
       "type": "text",
-      "statement": "The result",
       "body": [
-        "The campaign became one of Expondo’s key creative drivers for Black Week and was associated with a noticeably improved sales period.",
-        "The portfolio version should ideally replace “noticeably improved” with the real number — revenue, conversion rate, traffic or another measurable result."
+        "The campaign became one of Expondo’s key creative drivers for Black Week and was associated with a noticeably improved sales period."
       ],
-      "variant": "two-column"
+      "eyebrow": "The result"
     }
   ]
 }

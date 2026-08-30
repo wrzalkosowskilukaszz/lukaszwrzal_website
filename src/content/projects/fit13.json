@@ -44,15 +44,14 @@
         "Neon. Shouting. “Push harder.” Everything tries to motivate so aggressively that it starts looking like background noise.",
         "Fit13 needed strength without the performance of strength."
       ],
-      "variant": "two-column"
+      "eyebrow": "The challenge"
     },
     {
       "type": "text",
-      "statement": "The idea",
       "body": [
         "The number 13 became the starting point. While exploring its construction, I found enough space inside the numeral to hide a human figure in motion."
       ],
-      "variant": "single"
+      "eyebrow": "The idea"
     },
     {
       "type": "gallery",
@@ -73,11 +72,10 @@
     },
     {
       "type": "text",
-      "statement": "The work",
       "body": [
         "The system extends across social, apparel and signage, including a wall-scale application. The logo animation keeps the same construction rule in motion instead of inventing a second idea."
       ],
-      "variant": "single"
+      "eyebrow": "The work"
     },
     {
       "type": "gallery",
@@ -101,12 +99,11 @@
     },
     {
       "type": "text",
-      "statement": "The result",
+      "statement": "Fit13 gets energy without looking like another motivational gym brand.",
       "body": [
-        "Fit13 gets energy without looking like another motivational gym brand.",
         "And there is a broader design principle behind it: the strongest concept doesn’t always need to sit on top of the design. Sometimes it should be hiding inside it."
       ],
-      "variant": "two-column"
+      "eyebrow": "The result"
     }
   ]
 }

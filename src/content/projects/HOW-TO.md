@@ -79,7 +79,8 @@ These are all the blocks you can use:
 | --- | --- | --- |
 | `hero` | Title, eyebrow, opening line | `centred`, `left` |
 | `meta` | Client / Role / Scope / Team | — |
-| `text` | Paragraphs, with an optional big statement | `single`, `two-column` |
+| `text` | Paragraphs, with an optional big statement | `single`, `two-column` (side by side — only works with exactly two paragraphs) |
+| `list` | Term + description pairs (instead of bullet points) | `cards` (numbered set), `rows` (term left, text right) |
 | `statement` | One large sentence on its own | `left`, `centred` |
 | `figure` | One picture | width: `content`, `stage`, `full-bleed` |
 | `gallery` | Several pictures | `grid-2`, `grid-3`, `masonry`, `strip` |
@@ -91,6 +92,10 @@ These are all the blocks you can use:
 | `credits` | Roles and names | — |
 
 Any block can be used as many times as you like, in any order.
+
+Give a `text` or `list` block an `"eyebrow"` (like `"The idea"`) and it becomes a
+numbered chapter — the `01`, `02`, `03` appear by themselves, so never type the
+numbers yourself. Blocks without an eyebrow stay unnumbered.
 
 Need more air around something? Add `"spacing": "loose"` to that block.
 Less air? `"spacing": "tight"`.

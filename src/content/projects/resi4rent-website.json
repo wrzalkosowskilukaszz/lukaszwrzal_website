@@ -45,20 +45,45 @@
       "type": "text",
       "statement": "The site wasn’t short on information. It was short on direction.",
       "body": [
-        "Resi4Rent was already a major name in the Polish rental market, but the website made the process feel more complicated than it needed to be.",
-        "Research made the problem hard to ignore: 90% reported a poor mobile experience, 72% didn’t know how to move from browsing to contacting an agent, and 87% said the visuals didn’t give them enough confidence to act.",
-        "There was no meaningful analytics setup either, so the business couldn’t clearly see where people were dropping out."
+        "Resi4Rent was already a major name in the Polish rental market, but the website made the process feel more complicated than it needed to be."
       ],
-      "variant": "single"
+      "eyebrow": "The challenge"
+    },
+    {
+      "type": "list",
+      "variant": "cards",
+      "numbered": false,
+      "statement": "Research made the problem hard to ignore.",
+      "items": [
+        {
+          "term": "90%",
+          "description": "reported a poor mobile experience."
+        },
+        {
+          "term": "72%",
+          "description": "didn’t know how to move from browsing to contacting an agent."
+        },
+        {
+          "term": "87%",
+          "description": "said the visuals didn’t give them enough confidence to act."
+        }
+      ],
+      "spacing": "tight"
     },
     {
       "type": "text",
-      "statement": "The thinking",
+      "body": [
+        "There was no meaningful analytics setup either, so the business couldn’t clearly see where people were dropping out."
+      ],
+      "spacing": "tight"
+    },
+    {
+      "type": "text",
       "body": [
         "I started with surveys, interviews, analytics, heuristic review and competitor benchmarking. A five-whys analysis of contact abandonment took us past “the CTA is unclear” to the bigger problem: the site was organised around the company, not the user’s decision.",
         "So the core journey became: City → Area → Apartment → Contact."
       ],
-      "variant": "two-column"
+      "eyebrow": "The thinking"
     },
     {
       "type": "gallery",
@@ -79,13 +104,12 @@
     },
     {
       "type": "text",
-      "statement": "The work",
       "body": [
         "Search became the main interface. The neighbourhood map became part of the browsing experience instead of an afterthought. Mobile was redesigned as a real product experience, not simply a smaller desktop layout.",
         "Filters, distance-to-amenities, the application flow and trust signals were all rebuilt around the same idea: make the next step obvious.",
         "Everything was backed by a mobile-first design system built to scale as the service expanded."
       ],
-      "variant": "single"
+      "eyebrow": "The work"
     },
     {
       "type": "gallery",
@@ -109,13 +133,11 @@
     },
     {
       "type": "text",
-      "statement": "The result",
       "body": [
         "The route from homepage to contacting an agent became a clear four-step journey instead of a collection of disconnected pages.",
-        "The research told us where the friction was. The redesign removed it.",
-        "The strongest missing proof is post-launch data: conversion, enquiry rate, mobile bounce or another measure showing what changed after release."
+        "The research told us where the friction was. The redesign removed it."
       ],
-      "variant": "single"
+      "eyebrow": "The result"
     }
   ]
 }

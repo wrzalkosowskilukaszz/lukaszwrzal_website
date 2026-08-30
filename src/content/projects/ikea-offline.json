@@ -48,16 +48,16 @@
         "Digital-fatigue advertising was already full of detox language and guilt: spend less time on your screen, switch off, be more present. That felt slightly wrong for a brand whose job is to make everyday life better — not to tell people they’re living badly.",
         "So I turned the problem around. What if IKEA didn’t have to fight the phone at all? What if it simply reminded people what home can feel like when nobody is performing for a screen?"
       ],
-      "variant": "single"
+      "eyebrow": "The challenge"
     },
     {
       "type": "text",
-      "statement": "The idea",
+      "statement": "The campaign never mentions technology.",
       "body": [
-        "The campaign never mentions technology. Not in the headline, not in the visual, not as a comparison.",
+        "Not in the headline, not in the visual, not as a comparison.",
         "Instead, it lives in the small moments that make you forget to check anything: dinner stretching longer than planned, collapsing into a sofa after a long day, talking without needing a reason, closing your eyes for a minute."
       ],
-      "variant": "two-column"
+      "eyebrow": "The idea"
     },
     {
       "type": "gallery",
@@ -78,12 +78,11 @@
     },
     {
       "type": "text",
-      "statement": "The work",
       "body": [
         "I developed the concept as a complete campaign platform: communication strategy, key visual, copy system, adaptation rules and channel extensions.",
         "The idea started with pencil and paper, then moved into visual development with Google Stitch and Krea before being assembled in Figma."
       ],
-      "variant": "two-column"
+      "eyebrow": "The work"
     },
     {
       "type": "gallery",
@@ -107,12 +106,11 @@
     },
     {
       "type": "text",
-      "statement": "What it proves",
       "body": [
         "This was made as a spec project, so the test wasn’t client approval or campaign data. It was whether one observation could survive as a real campaign system.",
         "That’s the part I care about most: finding a simple human truth, giving it one strong creative rule, and letting the work stay quiet enough for the idea to breathe."
       ],
-      "variant": "two-column"
+      "eyebrow": "What it proves"
     }
   ]
 }

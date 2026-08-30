@@ -43,16 +43,15 @@
       "body": [
         "Jack’s Bar didn’t need another poster with a cocktail sitting politely on a background. The visuals needed the same energy as the room — playful, loud and slightly chaotic."
       ],
-      "variant": "single"
+      "eyebrow": "The challenge"
     },
     {
       "type": "text",
-      "statement": "The idea",
+      "statement": "Turn every poster into its own tiny world.",
       "body": [
-        "Turn every poster into its own tiny world.",
         "Cocktails become alpine peaks. Hourglasses drip with booze. Typography elbows its way into the scene. The imagery is exaggerated on purpose."
       ],
-      "variant": "two-column"
+      "eyebrow": "The idea"
     },
     {
       "type": "gallery",
@@ -73,11 +72,10 @@
     },
     {
       "type": "text",
-      "statement": "The work",
       "body": [
         "A series built from bold shapes, strong colour relationships and surreal Alpine transformations. Rather than putting an offer on a background, each poster becomes a small visual event."
       ],
-      "variant": "single"
+      "eyebrow": "The work"
     },
     {
       "type": "gallery",
@@ -101,11 +99,10 @@
     },
     {
       "type": "text",
-      "statement": "The result",
       "body": [
         "The posters became part of the atmosphere rather than just another communication layer — something guests could notice, photograph and remember."
       ],
-      "variant": "single"
+      "eyebrow": "The result"
     }
   ]
 }

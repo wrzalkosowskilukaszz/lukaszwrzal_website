@@ -44,16 +44,15 @@
         "Small packaging. Interior scale. Digital applications.",
         "A mark that works beautifully on a label can fall apart when enlarged. A mark designed for a wall can lose its character when reduced to a few centimetres. Production adds another problem: each application may be made by a different process, by different people."
       ],
-      "variant": "two-column"
+      "eyebrow": "The challenge"
     },
     {
       "type": "text",
-      "statement": "The idea",
+      "statement": "Build the mark around one construction rule, then make the rule the system.",
       "body": [
-        "Build the mark around one construction rule, then make the rule the system.",
         "Instead of drawing exceptions for every format, each application becomes a variation of the same underlying logic."
       ],
-      "variant": "two-column"
+      "eyebrow": "The idea"
     },
     {
       "type": "gallery",
@@ -74,11 +73,10 @@
     },
     {
       "type": "text",
-      "statement": "The work",
       "body": [
         "A documented logotype construction, identity system, packaging and interior applications built from the same foundation."
       ],
-      "variant": "single"
+      "eyebrow": "The work"
     },
     {
       "type": "gallery",
@@ -102,12 +100,11 @@
     },
     {
       "type": "text",
-      "statement": "The result",
       "body": [
         "The mark holds its form from small packaging to architectural scale without needing a separate redraw for every condition.",
         "The wider point is production reality: the identity is designed to keep working even when the original designer isn’t there to check every output."
       ],
-      "variant": "two-column"
+      "eyebrow": "The result"
     }
   ]
 }

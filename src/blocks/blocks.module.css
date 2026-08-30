@@ -18,6 +18,25 @@
   color: var(--lw-muted);
 }
 
+/* Text and list sections that carry an eyebrow join one running sequence —
+   a hairline, an index and a label — so a case study reads as numbered
+   chapters instead of a stack of identical headings. The counter is reset
+   on the page's block container (CaseStudy.module.css). */
+.secEyebrow {
+  counter-increment: lwsec;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin: 0 0 clamp(1.5rem, 2.6vw, 2.1rem);
+  padding-top: 20px;
+  border-top: 1px solid rgba(7, 26, 49, 0.14);
+}
+.secEyebrow::before {
+  content: counter(lwsec, decimal-leading-zero);
+  font-variant-numeric: tabular-nums;
+  color: var(--lw-ink);
+}
+
 .statement {
   max-width: 24ch;
   margin: 0 0 clamp(2rem, 4vw, 3rem);
@@ -259,6 +278,14 @@
   line-height: 1.55;
   color: var(--lw-muted);
   max-width: 40ch;
+}
+
+/* Un-numbered cards are value-led — a stat, a figure — so the term does the
+   display work the index number would otherwise do. */
+.listStat .listTerm {
+  font-size: var(--t-lg);
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Rows: a hairline per item, term held in a fixed left column so the

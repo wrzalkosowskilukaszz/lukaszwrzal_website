@@ -44,16 +44,15 @@
         "Strong productions were being designed as isolated jobs, so every premiere could look completely different — and the theatre itself was disappearing behind the programme.",
         "The challenge wasn’t to make every show look the same. It was to give very different productions a recognisable home."
       ],
-      "variant": "two-column"
+      "eyebrow": "The challenge"
     },
     {
       "type": "text",
-      "statement": "The idea",
+      "statement": "The identity should behave like the theatre.",
       "body": [
-        "The identity should behave like the theatre.",
         "Some productions are quiet. Some are absurd. Some are visceral. Some are almost surreal. The system therefore had to flex emotionally without losing its own accent."
       ],
-      "variant": "two-column"
+      "eyebrow": "The idea"
     },
     {
       "type": "gallery",
@@ -74,11 +73,10 @@
     },
     {
       "type": "text",
-      "statement": "The work",
       "body": [
         "A flexible visual system across posters, programmes, social and season communication. Different productions can push the visual language in different directions while still belonging to the same theatre."
       ],
-      "variant": "single"
+      "eyebrow": "The work"
     },
     {
       "type": "gallery",
@@ -102,11 +100,10 @@
     },
     {
       "type": "text",
-      "statement": "The result",
       "body": [
         "A brand language that finally works with the theatre’s unpredictability instead of fighting it — cohesive across a season without flattening the individuality of the work."
       ],
-      "variant": "single"
+      "eyebrow": "The result"
     }
   ]
 }

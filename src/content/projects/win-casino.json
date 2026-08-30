@@ -44,17 +44,16 @@
         "Gold. Neon. Black. More gold. More neon. Everything is trying to look exciting, and somehow everything ends up looking the same.",
         "Win Casino wanted to move away from that visual shorthand and feel more contemporary without losing the energy of the category."
       ],
-      "variant": "two-column"
+      "eyebrow": "The challenge"
     },
     {
       "type": "text",
-      "statement": "The idea",
+      "statement": "The real opportunity was in the loyalty programme.",
       "body": [
-        "The real opportunity was in the loyalty programme.",
         "People don’t only move through loyalty tiers by collecting points. They move through them by feeling that they are becoming something.",
         "So I turned four levels into four identities: Explorer, Achiever, Magician and Legend."
       ],
-      "variant": "single"
+      "eyebrow": "The idea"
     },
     {
       "type": "gallery",
@@ -75,12 +74,11 @@
     },
     {
       "type": "text",
-      "statement": "The work",
       "body": [
         "I developed the system across the brandbook, visual language, motion rules, jackpot imagery, layouts, physical loyalty cards, packaging and digital assets.",
         "The goal was not four separate looks. It was one world with enough range to make progression feel real."
       ],
-      "variant": "two-column"
+      "eyebrow": "The work"
     },
     {
       "type": "gallery",
@@ -104,11 +102,10 @@
     },
     {
       "type": "text",
-      "statement": "The result",
       "body": [
         "Status became something players could recognise before they ever got to the terms and benefits. The system was also designed to be used without constant art-direction intervention: the team has been able to extend it into new tiers and occasions independently."
       ],
-      "variant": "single"
+      "eyebrow": "The result"
     }
   ]
 }

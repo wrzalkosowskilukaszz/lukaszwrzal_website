@@ -44,16 +44,15 @@
         "One was raw and primal. The other was refined and contemporary.",
         "The early directions leaned too far one way or the other, so the identity needed to hold both without falling into restaurant clichés."
       ],
-      "variant": "two-column"
+      "eyebrow": "The challenge"
     },
     {
       "type": "text",
-      "statement": "The idea",
+      "statement": "Make the mark do more than one job.",
       "body": [
-        "Make the mark do more than one job.",
         "At first glance, ZEW is simply a confident geometric wordmark. Look closer and the dot and horizontal stroke within the E form the silhouette of a cloche."
       ],
-      "variant": "two-column"
+      "eyebrow": "The idea"
     },
     {
       "type": "gallery",
@@ -74,12 +73,11 @@
     },
     {
       "type": "text",
-      "statement": "The work",
       "body": [
         "The hidden construction became part of a wider identity system across menus, signage, takeaway packaging and in-venue applications.",
         "The visual language stays restrained so the mark, typography and material feel can carry the personality."
       ],
-      "variant": "two-column"
+      "eyebrow": "The work"
     },
     {
       "type": "gallery",
@@ -103,12 +101,11 @@
     },
     {
       "type": "text",
-      "statement": "The result",
       "body": [
         "One identity works from menu scale to venue scale without needing a separate “small” and “large” solution.",
         "Strong from a distance. Rewarding up close. That tension is the identity."
       ],
-      "variant": "two-column"
+      "eyebrow": "The result"
     }
   ]
 }

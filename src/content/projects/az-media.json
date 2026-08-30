@@ -43,16 +43,15 @@
       "body": [
         "AZ Media’s previous identity worked, but it didn’t say much. That felt like a missed opportunity for a company whose job is giving other people’s stories a distinctive voice."
       ],
-      "variant": "single"
+      "eyebrow": "The challenge"
     },
     {
       "type": "text",
-      "statement": "The idea",
+      "statement": "Turn the A into an arrow.",
       "body": [
-        "Turn the A into an arrow.",
         "The shape pushes upward while still reading immediately as part of the wordmark. A simple metaphor for visibility, momentum and moving a story forward — without bolting a separate symbol onto the side."
       ],
-      "variant": "two-column"
+      "eyebrow": "The idea"
     },
     {
       "type": "gallery",
@@ -73,11 +72,10 @@
     },
     {
       "type": "text",
-      "statement": "The work",
       "body": [
         "A focused wordmark construction designed to hold its confidence at presentation scale and stay solid at the smallest practical application."
       ],
-      "variant": "single"
+      "eyebrow": "The work"
     },
     {
       "type": "gallery",
@@ -101,11 +99,10 @@
     },
     {
       "type": "text",
-      "statement": "The result",
       "body": [
         "A sharper identity with a point of view, without falling into the corporate shorthand so many agencies default to."
       ],
-      "variant": "single"
+      "eyebrow": "The result"
     }
   ]
 }
