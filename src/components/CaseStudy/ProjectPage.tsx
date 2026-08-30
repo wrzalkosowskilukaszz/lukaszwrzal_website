@@ -46,9 +46,13 @@ export function ProjectPage({
     return out;
   }, [doc, locale]);
 
+  /* The first figure is the element a clicked work tile morphs into. */
+  const morphIndex = doc.blocks.findIndex((b) => b.type === "figure");
+
   const ctx = {
     slug: doc.slug,
     locale,
+    morphIndex: morphIndex === -1 ? undefined : morphIndex,
     onOpenMedia: gallery.length
       ? (src: string) => {
           const i = gallery.findIndex((g) => g.slot === src);

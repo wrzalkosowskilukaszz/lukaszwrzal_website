@@ -44,4 +44,8 @@ export interface BlockContext {
   locale: Locale;
   /** Opens the lightbox for a media src, when the project has real images. */
   onOpenMedia?: (src: string) => void;
+  /** Index of the block whose media carries the `project-media`
+      view-transition name — the element a clicked tile morphs into.
+      Exactly one per page, or the transition silently degrades. */
+  morphIndex?: number;
 }

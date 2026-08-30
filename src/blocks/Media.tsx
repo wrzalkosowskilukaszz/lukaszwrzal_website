@@ -21,6 +21,7 @@ export function Media({
   height,
   ratio,
   parallax = 0,
+  morph = false,
 }: {
   media: MediaData;
   ctx: BlockContext;
@@ -29,6 +30,9 @@ export function Media({
   /** e.g. "16 / 9". Lets a gallery keep native proportions. */
   ratio?: string;
   parallax?: number;
+  /** Names this frame `project-media`, the shared element a clicked work
+      tile morphs into. At most one Media per page may set it. */
+  morph?: boolean;
 }) {
   const frameRef = useRef<HTMLDivElement | null>(null);
   const innerRef = useRef<HTMLDivElement | null>(null);
@@ -64,7 +68,11 @@ export function Media({
       <div
         ref={frameRef}
         className={`${s.frame} ${radiusClass} ${zoomable ? s.zoomable : ""}`}
-        style={{ height, aspectRatio: height ? undefined : ratio }}
+        style={{
+          height,
+          aspectRatio: height ? undefined : ratio,
+          viewTransitionName: morph ? "project-media" : undefined,
+        }}
         onClick={zoomable ? () => ctx.onOpenMedia?.(media.src) : undefined}
         role={zoomable ? "button" : undefined}
         tabIndex={zoomable ? 0 : undefined}

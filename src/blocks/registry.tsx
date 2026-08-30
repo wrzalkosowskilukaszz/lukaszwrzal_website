@@ -36,7 +36,7 @@ export function renderBlock(block: Block, ctx: BlockContext, key: React.Key) {
     }
     return null;
   }
-  return <Component key={key} block={block} ctx={ctx} />;
+  return <Component key={key} block={block} ctx={ctx} index={typeof key === "number" ? key : undefined} />;
 }
 
 export { REGISTRY };

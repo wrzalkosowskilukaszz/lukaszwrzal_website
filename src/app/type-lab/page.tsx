@@ -51,6 +51,26 @@ const DIRECTIONS = [
     mono: "'Martian Mono'",
   },
   {
+    id: "switzer",
+    name: "D — Swiss minimal (Fontshare)",
+    fonts: "Switzer · Switzer · Fragment Mono",
+    note: "The cleanest free neo-grotesque outside Google Fonts — Swiss tradition, colder and more anonymous than Schibsted. The go-to for designers who find Inter too prevalent, which is also its risk: the minimal tier is crowded.",
+    display: "Switzer",
+    displayVar: "\"opsz\" 1",
+    body: "Switzer",
+    mono: "'Fragment Mono'",
+  },
+  {
+    id: "general",
+    name: "E — Grounded Swiss (Fontshare)",
+    fonts: "General Sans · General Sans · Fragment Mono",
+    note: "Swiss precision with more warmth in the bowls than Switzer. One family for display and body — maximum quiet, minimum voices.",
+    display: "'General Sans'",
+    displayVar: "\"opsz\" 1",
+    body: "'General Sans'",
+    mono: "'Fragment Mono'",
+  },
+  {
     id: "grotesk",
     name: "C — Sharpened grotesque",
     fonts: "Schibsted Grotesk · Hanken Grotesk · Fragment Mono",
@@ -116,12 +136,16 @@ export default function TypeLab() {
         <title>Type lab</title>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="stylesheet" href={GF} />
+        <link
+          rel="stylesheet"
+          href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,700,900&f[]=general-sans@400,500,600,700&display=swap"
+        />
         <style dangerouslySetInnerHTML={{ __html: CSS }} />
       </head>
       <body>
         <main className="lab">
           <p className="labHead" style={{ fontFamily: "'JetBrains Mono'" }}>
-            Type lab · four voices · same copy · judge with your eyes
+            Type lab · six voices · same copy · judge with your eyes
           </p>
           {DIRECTIONS.map((d) => (
             <section className="panel" key={d.id}>
