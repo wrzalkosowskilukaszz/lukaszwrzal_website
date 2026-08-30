@@ -103,11 +103,15 @@ export function Belt({ logos, direction, speed = 14 }: BeltProps) {
 
       // Hovering eases the belt to 15% — slowed, never stopped.
       const factor = hovered.current ? 0.15 : 1;
-      x += direction * speed * factor * dt;
 
-      // Wrap by exactly one set so the seam is invisible.
-      x = ((x % setWidth) + setWidth) % setWidth;
-      track.style.transform = `translate3d(${direction === 1 ? x - setWidth : -x}px, 0, 0)`;
+      /* Travel always accumulates forward and wraps into [0, setWidth); the
+         DIRECTION is expressed in how that distance maps to an offset. Applying
+         the sign to `x` instead made the wrapped value run backwards through
+         the range, so a left-running belt rendered as a right-running one — and
+         both belts moved the same way. */
+      x = (x + speed * factor * dt) % setWidth;
+      const offset = direction === 1 ? x - setWidth : -x;
+      track.style.transform = `translate3d(${offset}px, 0, 0)`;
     });
 
     return stop;

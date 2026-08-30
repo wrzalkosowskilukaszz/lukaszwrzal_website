@@ -4,7 +4,9 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { validateBlocks } from "@/blocks/validate";
+import { REGISTRY } from "@/blocks/registry";
 import { BLOCK_TYPES, type Block } from "@/blocks/types";
+import { BLOCK_FIELDS, BLOCK_LABELS } from "@/studio/schema";
 
 const DIR = path.join(process.cwd(), "src", "content", "projects");
 const files = readdirSync(DIR).filter((f) => f.endsWith(".json"));
@@ -77,7 +79,13 @@ describe("projects are free to differ", () => {
     expect(sizes.size).toBeGreaterThan(1);
   });
 
-  it("every registered block type is renderable", () => {
-    expect(BLOCK_TYPES).toHaveLength(12);
+  it("every block type has a renderer and a Studio form", () => {
+    // The real invariant, rather than a count that goes stale each time a
+    // block is added.
+    for (const type of BLOCK_TYPES) {
+      expect(REGISTRY[type], `no renderer for "${type}"`).toBeTypeOf("function");
+      expect(BLOCK_FIELDS[type], `no Studio fields for "${type}"`).toBeDefined();
+      expect(BLOCK_LABELS[type], `no Studio label for "${type}"`).toBeDefined();
+    }
   });
 });

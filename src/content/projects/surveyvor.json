@@ -47,7 +47,7 @@
         "And AI makes that easier to hide. Ask an AI to improve an incomplete brief and it will happily fill the gaps. The result sounds better. More complete. More professional.",
         "The gaps are still there. They’re just harder to see."
       ],
-      "variant": "two-column"
+      "variant": "single"
     },
     {
       "type": "text",
@@ -83,7 +83,7 @@
         "Each brief type therefore has its own knowledge model — campaign, packaging, identity, website and so on. The model looks for relationships inside the brief, not just generic vagueness.",
         "So instead of “your brief could be more specific”, you can get something like: “Your sustainability claim conflicts with your chosen substrate.”"
       ],
-      "variant": "two-column"
+      "variant": "single"
     },
     {
       "type": "gallery",
@@ -101,16 +101,34 @@
       ]
     },
     {
-      "type": "text",
-      "statement": "Four ways a brief can be wrong.",
-      "body": [
-        "• Established — something the brief has already settled.",
-        "• Tension — two parts of the brief contradict each other.",
-        "• Unknown — something important was never decided.",
-        "• Assumption — something is being treated as fact without being confirmed.",
-        "Those are different problems. They need different conversations."
+      "type": "list",
+      "variant": "cards",
+      "items": [
+        {
+          "term": "Established",
+          "description": "something the brief has already settled."
+        },
+        {
+          "term": "Tension",
+          "description": "two parts of the brief contradict each other."
+        },
+        {
+          "term": "Unknown",
+          "description": "something important was never decided."
+        },
+        {
+          "term": "Assumption",
+          "description": "something is being treated as fact without being confirmed."
+        }
       ],
-      "variant": "single"
+      "statement": "Four ways a brief can be wrong."
+    },
+    {
+      "type": "text",
+      "variant": "single",
+      "body": [
+        "Those are different problems. They need different conversations."
+      ]
     },
     {
       "type": "text",
@@ -122,15 +140,27 @@
       "variant": "two-column"
     },
     {
-      "type": "text",
-      "statement": "What I deliberately didn’t build.",
-      "body": [
-        "• Real-time autocomplete — useful for writing faster, but directly against the product’s purpose.",
-        "• User accounts — briefs stay in the browser, trading sync and recovery for a much stronger privacy story.",
-        "• A native app wrapper — no meaningful product problem to solve.",
-        "• A “brief health” score — invented precision is still invented precision."
+      "type": "list",
+      "variant": "rows",
+      "items": [
+        {
+          "term": "Real-time autocomplete",
+          "description": "useful for writing faster, but directly against the product’s purpose."
+        },
+        {
+          "term": "User accounts",
+          "description": "briefs stay in the browser, trading sync and recovery for a much stronger privacy story."
+        },
+        {
+          "term": "A native app wrapper",
+          "description": "no meaningful product problem to solve."
+        },
+        {
+          "term": "A “brief health” score",
+          "description": "invented precision is still invented precision."
+        }
       ],
-      "variant": "single"
+      "statement": "What I deliberately didn’t build."
     },
     {
       "type": "text",

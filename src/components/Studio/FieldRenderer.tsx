@@ -13,6 +13,7 @@ interface StepItem { n?: string; title?: Localised; body?: Localised; src?: stri
 interface StatItem { value?: number; suffix?: string; label?: Localised }
 interface RoleItem { role?: Localised; name?: string }
 interface KvItem { label?: Localised; value?: Localised }
+interface TermItem { term?: Localised; description?: Localised }
 
 /** One field, dispatched by kind. The schema table decides what a block
     needs; this component is the only place that knows how to draw it. */
@@ -203,6 +204,31 @@ export function FieldRenderer({
               <div style={{ flex: 1 }}>
                 <span className={s.langLabel}>Value</span>
                 <LocalisedField value={item.value} onChange={(value) => update({ ...item, value })} />
+              </div>
+            </div>
+          )}
+        />
+      );
+    }
+
+    case "terms": {
+      const items = (value as TermItem[] | undefined) ?? [];
+      return (
+        <RepeatableList
+          items={items}
+          onChange={onChange}
+          newItem={() => ({ term: "", description: "" })}
+          addLabel="Add an item"
+          makeRow={(item, update) => (
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              <div>
+                <span className={s.langLabel}>Term</span>
+                <LocalisedField value={item.term} onChange={(term) => update({ ...item, term })} />
+              </div>
+              <div>
+                <span className={s.langLabel}>What it means</span>
+                <LocalisedField value={item.description} multiline
+                  onChange={(description) => update({ ...item, description })} />
               </div>
             </div>
           )}

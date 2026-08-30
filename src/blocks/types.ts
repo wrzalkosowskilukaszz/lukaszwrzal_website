@@ -87,6 +87,22 @@ export interface TextMediaBlock extends Base, Media {
   body: Localised[];
 }
 
+/**
+ * A term-and-description list. Both bullet runs in the source copy are
+ * "Term — what it means" pairs, which is a definition list, not a bullet
+ * list — and a definition list can carry real typographic hierarchy.
+ */
+export interface ListBlock extends Base {
+  type: "list";
+  /** `cards` numbers a fixed taxonomy; `rows` suits varied-length reasoning. */
+  variant?: "cards" | "rows";
+  eyebrow?: Localised;
+  statement?: Localised;
+  /** Set false to drop the counters on `cards`. */
+  numbered?: boolean;
+  items: { term: Localised; description?: Localised }[];
+}
+
 export interface QuoteBlock extends Base {
   type: "quote";
   variant?: "plain" | "aurora";
@@ -130,6 +146,7 @@ export type Block =
   | FigureBlock
   | GalleryBlock
   | TextMediaBlock
+  | ListBlock
   | QuoteBlock
   | ProcessBlock
   | StatsBlock
@@ -140,5 +157,5 @@ export type BlockType = Block["type"];
 
 export const BLOCK_TYPES: BlockType[] = [
   "hero", "meta", "text", "statement", "figure", "gallery",
-  "textMedia", "quote", "process", "stats", "video", "credits",
+  "textMedia", "list", "quote", "process", "stats", "video", "credits",
 ];

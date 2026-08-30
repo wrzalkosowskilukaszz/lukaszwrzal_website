@@ -3,7 +3,7 @@ import { Aurora } from "@/components/Aurora/Aurora";
 import s from "./blocks.module.css";
 import { tx, txAll, type BlockContext } from "./shared";
 import type {
-  CreditsBlock, HeroBlock, MetaBlock, QuoteBlock, StatementBlock, TextBlock,
+  CreditsBlock, HeroBlock, ListBlock, MetaBlock, QuoteBlock, StatementBlock, TextBlock,
 } from "./types";
 
 export function Hero({ block, ctx }: { block: HeroBlock; ctx: BlockContext }) {
@@ -31,15 +31,64 @@ export function Meta({ block, ctx }: { block: MetaBlock; ctx: BlockContext }) {
 }
 
 export function Text({ block, ctx }: { block: TextBlock; ctx: BlockContext }) {
-  const twoCol = (block.variant ?? "two-column") === "two-column";
   const paras = txAll(block.body, ctx.locale);
+
+  /* Side-by-side only makes sense for exactly two paragraphs. Asking for it
+     with three or five produced the ragged grid this replaced, so the layout
+     falls back to the single measure rather than honouring an impossible
+     request. */
+  const pair = block.variant === "two-column" && paras.length === 2;
+
   return (
     <section className={s.read}>
       {block.eyebrow ? <p className={s.eyebrow}>{tx(block.eyebrow, ctx.locale)}</p> : null}
       {block.statement ? <h2 className={s.statement}>{tx(block.statement, ctx.locale)}</h2> : null}
-      <div className={`${s.prose} ${twoCol ? s.columns : ""}`} style={twoCol ? undefined : { maxWidth: "64ch" }}>
+      <div className={`${s.prose} ${pair ? s.pair : ""}`}>
         {paras.map((p, i) => <p key={i}>{p}</p>)}
       </div>
+    </section>
+  );
+}
+
+/**
+ * A definition list. `cards` for a fixed taxonomy that should read as a set;
+ * `rows` when the descriptions vary in length and want a shared left edge.
+ */
+export function List({ block, ctx }: { block: ListBlock; ctx: BlockContext }) {
+  const cards = (block.variant ?? "cards") === "cards";
+  const numbered = block.numbered ?? cards;
+
+  return (
+    <section className={s.read}>
+      {block.eyebrow ? <p className={s.eyebrow}>{tx(block.eyebrow, ctx.locale)}</p> : null}
+      {block.statement ? <h2 className={s.statement}>{tx(block.statement, ctx.locale)}</h2> : null}
+
+      {cards ? (
+        <div className={s.listCards}>
+          {block.items.map((item, i) => (
+            <div className={s.listCard} key={i}>
+              {numbered ? (
+                <span className={s.listCount}>{String(i + 1).padStart(2, "0")}</span>
+              ) : null}
+              <h3 className={s.listTerm}>{tx(item.term, ctx.locale)}</h3>
+              {item.description ? (
+                <p className={s.listDesc}>{tx(item.description, ctx.locale)}</p>
+              ) : null}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className={s.listRows}>
+          {block.items.map((item, i) => (
+            <div className={s.listRow} key={i}>
+              <h3 className={s.listTerm}>{tx(item.term, ctx.locale)}</h3>
+              {item.description ? (
+                <p className={s.listDesc}>{tx(item.description, ctx.locale)}</p>
+              ) : null}
+            </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

@@ -9,6 +9,7 @@ const REQUIRED: Partial<Record<BlockType, string[]>> = {
   figure: ["src"],
   gallery: ["items"],
   textMedia: ["src", "body"],
+  list: ["items"],
   quote: ["text"],
   process: ["steps"],
   stats: ["items"],

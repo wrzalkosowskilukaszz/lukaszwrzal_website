@@ -16,6 +16,7 @@ export type FieldKind =
   | "mediaList"
   | "localisedList"
   | "kv"
+  | "terms"
   | "steps"
   | "stats"
   | "roles"
@@ -99,6 +100,16 @@ export const BLOCK_FIELDS: Record<BlockType, FieldDef[]> = {
     { key: "body", label: "Paragraphs", kind: "localisedList", required: true },
     SPACING_FIELD,
   ],
+  list: [
+    { key: "eyebrow", label: "Small label above", kind: "localisedText" },
+    { key: "statement", label: "Heading", kind: "localisedText" },
+    { key: "items", label: "Items", kind: "terms", required: true,
+      help: "Each one is a short term and what it means." },
+    { key: "variant", label: "Layout", kind: "select", options: [
+      { value: "cards", label: "Numbered cards" }, { value: "rows", label: "Rows with dividers" },
+    ] },
+    SPACING_FIELD,
+  ],
   quote: [
     { key: "text", label: "Quote", kind: "localisedTextarea", required: true },
     { key: "attribution", label: "Who said it", kind: "localisedText" },
@@ -146,6 +157,7 @@ export const BLOCK_LABELS: Record<BlockType, { label: string; help: string }> = 
   figure: { label: "Picture", help: "A single image." },
   gallery: { label: "Gallery", help: "Several pictures together." },
   textMedia: { label: "Text beside a picture", help: "Words next to an image." },
+  list: { label: "Definition list", help: "Short terms with what each one means." },
   quote: { label: "Quote", help: "A pull-quote." },
   process: { label: "Process steps", help: "Numbered steps with a picture that follows along." },
   stats: { label: "Numbers", help: "Big numbers that count up." },

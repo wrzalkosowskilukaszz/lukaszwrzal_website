@@ -45,7 +45,7 @@
         "Then they show you a polished screenshot and ask you to take their word for it.",
         "AuraGen started as a test of the opposite approach."
       ],
-      "variant": "two-column"
+      "variant": "single"
     },
     {
       "type": "text",

@@ -86,6 +86,16 @@
             "body": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/text" } },
             "spacing": { "$ref": "#/$defs/spacing" } } },
 
+        { "type": "object", "required": ["type", "items"], "additionalProperties": false,
+          "properties": { "type": { "const": "list" },
+            "variant": { "enum": ["cards", "rows"] },
+            "eyebrow": { "$ref": "#/$defs/text" }, "statement": { "$ref": "#/$defs/text" },
+            "numbered": { "type": "boolean" },
+            "items": { "type": "array", "minItems": 1, "items": {
+              "type": "object", "required": ["term"], "additionalProperties": false,
+              "properties": { "term": { "$ref": "#/$defs/text" }, "description": { "$ref": "#/$defs/text" } } } },
+            "spacing": { "$ref": "#/$defs/spacing" } } },
+
         { "type": "object", "required": ["type", "text"], "additionalProperties": false,
           "properties": { "type": { "const": "quote" }, "variant": { "enum": ["plain", "aurora"] },
             "text": { "$ref": "#/$defs/text" }, "attribution": { "$ref": "#/$defs/text" },

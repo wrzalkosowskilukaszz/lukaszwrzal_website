@@ -1,7 +1,7 @@
 import { Gallery, Figure, TextMedia, Video } from "./MediaBlocks";
 import { Process } from "./ProcessBlock";
 import { Stats } from "./StatsBlock";
-import { Credits, Hero, Meta, Quote, Statement, Text } from "./TextBlocks";
+import { Credits, Hero, List, Meta, Quote, Statement, Text } from "./TextBlocks";
 import type { BlockContext } from "./shared";
 import type { Block, BlockType } from "./types";
 
@@ -20,6 +20,7 @@ const REGISTRY: Record<BlockType, (props: any) => React.ReactNode> = {
   figure: Figure,
   gallery: Gallery,
   textMedia: TextMedia,
+  list: List,
   quote: Quote,
   process: Process,
   stats: Stats,

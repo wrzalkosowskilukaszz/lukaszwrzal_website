@@ -49,7 +49,7 @@
         "Research made the problem hard to ignore: 90% reported a poor mobile experience, 72% didn’t know how to move from browsing to contacting an agent, and 87% said the visuals didn’t give them enough confidence to act.",
         "There was no meaningful analytics setup either, so the business couldn’t clearly see where people were dropping out."
       ],
-      "variant": "two-column"
+      "variant": "single"
     },
     {
       "type": "text",
@@ -85,7 +85,7 @@
         "Filters, distance-to-amenities, the application flow and trust signals were all rebuilt around the same idea: make the next step obvious.",
         "Everything was backed by a mobile-first design system built to scale as the service expanded."
       ],
-      "variant": "two-column"
+      "variant": "single"
     },
     {
       "type": "gallery",
@@ -115,7 +115,7 @@
         "The research told us where the friction was. The redesign removed it.",
         "The strongest missing proof is post-launch data: conversion, enquiry rate, mobile bounce or another measure showing what changed after release."
       ],
-      "variant": "two-column"
+      "variant": "single"
     }
   ]
 }
