@@ -40,17 +40,13 @@ export function Text({ block, ctx }: { block: TextBlock; ctx: BlockContext }) {
   const pair = block.variant === "two-column" && paras.length === 2;
 
   return (
-    <section className={`${s.read} ${s.chapter} ${block.eyebrow ? s.chapterRuled : ""}`}>
-      <div className={s.chapterRail}>
-        {block.eyebrow ? (
-          <p className={`${s.eyebrow} ${s.secEyebrow}`}>{tx(block.eyebrow, ctx.locale)}</p>
-        ) : null}
-      </div>
-      <div className={s.chapterBody}>
-        {block.statement ? <h2 className={s.statement}>{tx(block.statement, ctx.locale)}</h2> : null}
-        <div className={`${s.prose} ${pair ? s.pair : ""}`}>
-          {paras.map((p, i) => <p key={i}>{p}</p>)}
-        </div>
+    <section className={`${s.chapter} ${block.eyebrow ? s.chapterRuled : ""}`}>
+      {block.eyebrow ? (
+        <p className={`${s.eyebrow} ${s.secEyebrow}`}>{tx(block.eyebrow, ctx.locale)}</p>
+      ) : null}
+      {block.statement ? <h2 className={s.statement}>{tx(block.statement, ctx.locale)}</h2> : null}
+      <div className={`${s.prose} ${pair ? s.pair : ""}`}>
+        {paras.map((p, i) => <p key={i}>{p}</p>)}
       </div>
     </section>
   );
@@ -65,13 +61,10 @@ export function List({ block, ctx }: { block: ListBlock; ctx: BlockContext }) {
   const numbered = block.numbered ?? cards;
 
   return (
-    <section className={`${s.read} ${s.chapter} ${block.eyebrow ? s.chapterRuled : ""}`}>
-      <div className={s.chapterRail}>
-        {block.eyebrow ? (
-          <p className={`${s.eyebrow} ${s.secEyebrow}`}>{tx(block.eyebrow, ctx.locale)}</p>
-        ) : null}
-      </div>
-      <div className={s.chapterBody}>
+    <section className={`${s.chapter} ${block.eyebrow ? s.chapterRuled : ""}`}>
+      {block.eyebrow ? (
+        <p className={`${s.eyebrow} ${s.secEyebrow}`}>{tx(block.eyebrow, ctx.locale)}</p>
+      ) : null}
       {block.statement ? <h2 className={s.statement}>{tx(block.statement, ctx.locale)}</h2> : null}
 
       {cards ? (
@@ -108,7 +101,6 @@ export function List({ block, ctx }: { block: ListBlock; ctx: BlockContext }) {
           ))}
         </div>
       )}
-      </div>
     </section>
   );
 }

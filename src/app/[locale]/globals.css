@@ -28,13 +28,11 @@ h1, h2, h3, h4 {
 
 /* Display type sits at its natural width and does not move. */
 h1, h2 {
-  font-variation-settings: "opsz" 48;
   font-size: var(--t-xl);
   line-height: var(--lh-xl);
   letter-spacing: -0.035em;
 }
 h3 {
-  font-variation-settings: "opsz" 24;
   font-size: var(--t-md);
   line-height: var(--lh-md);
   letter-spacing: -0.02em;

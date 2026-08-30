@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
+import { Fragment_Mono, Hanken_Grotesk, Schibsted_Grotesk } from "next/font/google";
 import { notFound } from "next/navigation";
 
 import { ClockStarter } from "@/components/ClockStarter";
@@ -11,26 +11,28 @@ import "./globals.css";
 /* Self-hosted by next/font — no render-blocking request to Google, and no
    layout shift from a late webfont. latin-ext carries the Polish diacritics.
 
-   Bricolage Grotesque is the display voice: a variable grotesque drawn
-   deliberately imperfect. Geist was replaced because it is the default of
-   the moment — an excellent, invisible choice that made the site read as
-   anyone's. Only the optical-size axis is loaded; the type does not move. */
-const display = Bricolage_Grotesque({
+   Direction C from the type lab. Schibsted Grotesk is the display voice —
+   an editorial grotesque with real personality in its heavy weights that
+   almost no portfolio uses (Bricolage before it had become everyone's
+   safe-quirky pick; Geist before that was the default of the moment).
+   Hanken Grotesk warms the body; Fragment Mono replaces the developer-tool
+   flavour of JetBrains in the labels. */
+const display = Schibsted_Grotesk({
   subsets: ["latin", "latin-ext"],
-  axes: ["opsz"],
   variable: "--lw-font-display-face",
   display: "swap",
 });
 
-const body = Archivo({
+const body = Hanken_Grotesk({
   subsets: ["latin", "latin-ext"],
   variable: "--lw-font-body",
   display: "swap",
 });
 
-const mono = JetBrains_Mono({
+/* Fragment Mono ships one weight — the labels never needed more. */
+const mono = Fragment_Mono({
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500"],
+  weight: "400",
   variable: "--lw-font-mono-face",
   display: "swap",
 });

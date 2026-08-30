@@ -118,6 +118,14 @@ export interface ProcessBlock extends Base {
   steps: { n?: string; title: Localised; body: Localised; src?: string }[];
 }
 
+export interface DeckBlock extends Base {
+  type: "deck";
+  /** Slides. On a wide screen the section pins while scroll plays them
+      through; on mobile, reduced motion or without JS they simply stack.
+      The scrollbar is never hijacked — scroll distance maps to progress. */
+  items: { title: Localised; body?: Localised; src?: string }[];
+}
+
 export interface StatsBlock extends Base {
   type: "stats";
   eyebrow?: Localised;
@@ -149,6 +157,7 @@ export type Block =
   | ListBlock
   | QuoteBlock
   | ProcessBlock
+  | DeckBlock
   | StatsBlock
   | VideoBlock
   | CreditsBlock;
@@ -157,5 +166,5 @@ export type BlockType = Block["type"];
 
 export const BLOCK_TYPES: BlockType[] = [
   "hero", "meta", "text", "statement", "figure", "gallery",
-  "textMedia", "list", "quote", "process", "stats", "video", "credits",
+  "textMedia", "list", "quote", "process", "deck", "stats", "video", "credits",
 ];

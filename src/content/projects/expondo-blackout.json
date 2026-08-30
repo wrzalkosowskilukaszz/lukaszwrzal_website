@@ -55,14 +55,22 @@
       "eyebrow": "The idea"
     },
     {
-      "type": "gallery",
-      "variant": "grid-2",
+      "type": "deck",
       "items": [
         {
+          "title": "The light disappears slowly",
+          "body": "The category shouts; the campaign begins by dimming. Everyday scenes lose their light one notch at a time.",
           "src": "02.jpg"
         },
         {
+          "title": "Everything goes dark",
+          "body": "Full eclipse. Darkness, atmospheric light, and the feeling that light itself is becoming scarce.",
           "src": "03.jpg"
+        },
+        {
+          "title": "The sale is revealed",
+          "body": "The light returns as the offer. One event across motion, landing pages and email — not a pile of channel adaptations.",
+          "src": "04.jpg"
         }
       ]
     },
@@ -81,11 +89,8 @@
     },
     {
       "type": "gallery",
-      "variant": "grid-3",
+      "variant": "grid-2",
       "items": [
-        {
-          "src": "04.jpg"
-        },
         {
           "src": "05.jpg"
         },

@@ -1,14 +1,25 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { clamp01 } from "@/lib/spring";
 import { subscribe } from "@/lib/raf";
 
 import styles from "./Aurora.module.css";
+import { createAurora, type AuroraGL } from "./shader";
 
-/** Exact geometry from DESIGN-SPEC "The aurora field". */
+/**
+ * The aurora field — a GPU noise flow in the brand colours that drifts on
+ * its own clock, leans with the section's travel through the viewport and
+ * quickens with scroll velocity. Used in exactly two roles: behind the
+ * work grid and behind footers. That scarcity is what keeps it a signature.
+ *
+ * Where WebGL is unavailable, the original five-blob field takes over
+ * (static under reduced motion, orbiting otherwise).
+ */
+
+/** Exact geometry from DESIGN-SPEC "The aurora field" — the fallback. */
 const BLOBS = [
   { css: { left: "-12%", top: "-10%", width: "62%", height: "62%" }, colour: "--lw-aura-sky", fade: "rgba(205,221,242,0)", blur: 30 },
   { css: { right: "-10%", top: "-12%", width: "56%", height: "58%" }, colour: "--lw-aura-violet", fade: "rgba(60,44,194,0)", blur: 40 },
@@ -24,22 +35,46 @@ export interface AuroraProps {
 
 export function Aurora({ masked = false }: AuroraProps) {
   const fieldRef = useRef<HTMLDivElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const blobRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const reduced = useReducedMotion();
+  /* null = shader not running (SSR, init failure) — blobs render then.
+     The canvas is always mounted (unless reduced), so a failed init can
+     never leave the field empty: the blobs are simply behind it.
+     StrictMode note: cleanup must null the state and must NOT kill the
+     GL context — the dev double-mount re-inits the same canvas. */
+  const [gl, setGl] = useState<AuroraGL | null>(null);
 
+  useEffect(() => {
+    if (reduced) return; // reduced motion always gets the static blobs
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const instance = createAurora(canvas);
+    if (!instance) return;
+    /* Paint frame zero immediately so the field is never blank while the
+       shared loop spins up (or in environments where it never ticks). */
+    instance.draw(0, 0, 0, 0, 0);
+    setGl(instance);
+    return () => {
+      setGl(null);
+      instance.dispose();
+    };
+  }, [reduced]);
+
+  /* One subscription drives whichever field is active. */
   useEffect(() => {
     const field = fieldRef.current;
     if (!field) return;
 
-    // Reduced motion: paint the field at rest, no orbits, no pointer drift.
     if (reduced) {
       for (const el of blobRefs.current) if (el) el.style.transform = "none";
       field.style.opacity = "1";
       return;
     }
 
-    // Pointer, normalised -1..1 and eased toward the target at 0.045 per frame.
     let ptrX = 0, ptrY = 0, tgtX = 0, tgtY = 0;
+    let lastScrollY = window.scrollY;
+    let vel = 0; // smoothed |scroll velocity|, 0..1
 
     const onMove = (e: PointerEvent) => {
       tgtX = (e.clientX / window.innerWidth) * 2 - 1;
@@ -50,17 +85,22 @@ export function Aurora({ masked = false }: AuroraProps) {
     window.addEventListener("pointermove", onMove, { passive: true });
     window.addEventListener("pointerleave", onLeave, { passive: true });
 
-    const stop = subscribe((_dt, elapsed) => {
+    const stop = subscribe((dt, elapsed) => {
       const rect = field.getBoundingClientRect();
       const vh = window.innerHeight;
 
-      // Skip entirely when well outside the viewport.
+      // Scroll velocity keeps integrating even while offscreen, so the
+      // field doesn't jolt when it re-enters mid-fling.
+      const dy = window.scrollY - lastScrollY;
+      lastScrollY = window.scrollY;
+      const instant = clamp01(Math.abs(dy / Math.max(dt, 0.001)) / 2600);
+      vel += (instant - vel) * (instant > vel ? 0.16 : 0.03); // fast in, slow out
+
       if (rect.bottom < -300 || rect.top > vh + 300) return;
 
       ptrX += (tgtX - ptrX) * 0.045;
       ptrY += (tgtY - ptrY) * 0.045;
 
-      // The field's progress through the viewport, so it reacts to scroll.
       const travel = ((rect.top + rect.height / 2) / vh - 0.5) * -2;
 
       if (masked) {
@@ -68,10 +108,15 @@ export function Aurora({ masked = false }: AuroraProps) {
         field.style.opacity = String(clamp01((p - 0.08) / 0.34));
       }
 
+      if (gl) {
+        gl.draw(elapsed, travel, vel, ptrX, ptrY);
+        return;
+      }
+
+      /* Blob fallback — the original orbits. */
       for (let i = 0; i < BLOBS.length; i++) {
         const el = blobRefs.current[i];
         if (!el) continue;
-
         const ax = 26 + i * 9;
         const ay = 20 + i * 7;
         const sx = 0.055 + i * 0.017;
@@ -79,15 +124,13 @@ export function Aurora({ masked = false }: AuroraProps) {
         const px = i * 1.7;
         const py = i * 2.3;
         const pull = 0.5 + i * 0.22;
-
         const x = Math.sin(elapsed * sx * 6.28 + px) * ax + ptrX * 26 * pull;
         const y =
           Math.cos(elapsed * sy * 6.28 + py) * ay +
           ptrY * 20 * pull +
           travel * 34 * pull;
-        const s = 1 + Math.sin(elapsed * sx * 4.4 + py) * 0.06;
-
-        el.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${s})`;
+        const sc = 1 + Math.sin(elapsed * sx * 4.4 + py) * 0.06;
+        el.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${sc})`;
       }
     });
 
@@ -96,7 +139,9 @@ export function Aurora({ masked = false }: AuroraProps) {
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerleave", onLeave);
     };
-  }, [masked, reduced]);
+  }, [masked, reduced, gl]);
+
+  const shaderActive = gl !== null && !reduced;
 
   return (
     <div
@@ -105,20 +150,23 @@ export function Aurora({ masked = false }: AuroraProps) {
       aria-hidden="true"
       style={masked ? { opacity: 0 } : undefined}
     >
-      {BLOBS.map((b, i) => (
-        <span
-          key={i}
-          ref={(el) => { blobRefs.current[i] = el; }}
-          className={styles.blob}
-          style={{
-            ...b.css,
-            filter: `blur(${b.blur}px)`,
-            // Fade to the SAME colour at zero alpha, never `transparent` —
-            // that is rgba(0,0,0,0) and greys the falloff.
-            background: `radial-gradient(circle at 50% 50%, var(${b.colour}) 0%, ${b.fade} 68%)`,
-          }}
-        />
-      ))}
+      {!reduced ? <canvas ref={canvasRef} className={styles.canvas} /> : null}
+      {shaderActive
+        ? null
+        : BLOBS.map((b, i) => (
+            <span
+              key={i}
+              ref={(el) => { blobRefs.current[i] = el; }}
+              className={styles.blob}
+              style={{
+                ...b.css,
+                filter: `blur(${b.blur}px)`,
+                // Fade to the SAME colour at zero alpha, never `transparent` —
+                // that is rgba(0,0,0,0) and greys the falloff.
+                background: `radial-gradient(circle at 50% 50%, var(${b.colour}) 0%, ${b.fade} 68%)`,
+              }}
+            />
+          ))}
     </div>
   );
 }

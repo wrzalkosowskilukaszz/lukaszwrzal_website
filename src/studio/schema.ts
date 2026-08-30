@@ -110,6 +110,11 @@ export const BLOCK_FIELDS: Record<BlockType, FieldDef[]> = {
     ] },
     SPACING_FIELD,
   ],
+  deck: [
+    { key: "items", label: "Slides", kind: "steps", required: true,
+      help: "On a big screen the section stays put while scrolling plays the slides one by one; on a phone they simply stack." },
+    SPACING_FIELD,
+  ],
   quote: [
     { key: "text", label: "Quote", kind: "localisedTextarea", required: true },
     { key: "attribution", label: "Who said it", kind: "localisedText" },
@@ -158,6 +163,7 @@ export const BLOCK_LABELS: Record<BlockType, { label: string; help: string }> = 
   gallery: { label: "Gallery", help: "Several pictures together." },
   textMedia: { label: "Text beside a picture", help: "Words next to an image." },
   list: { label: "Definition list", help: "Short terms with what each one means." },
+  deck: { label: "Slide deck", help: "Scroll plays the slides one by one, like a story." },
   quote: { label: "Quote", help: "A pull-quote." },
   process: { label: "Process steps", help: "Numbered steps with a picture that follows along." },
   stats: { label: "Numbers", help: "Big numbers that count up." },

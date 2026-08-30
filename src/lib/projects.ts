@@ -69,6 +69,7 @@ function load(): ProjectDoc[] {
       if (b.type === "figure" || b.type === "textMedia") mark(b);
       if (b.type === "gallery") b.items.forEach(mark);
       if (b.type === "process") b.steps.forEach(mark);
+      if (b.type === "deck") b.items.forEach(mark);
     }
   }
 
