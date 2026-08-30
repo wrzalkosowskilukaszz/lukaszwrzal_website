@@ -18,23 +18,48 @@
   color: var(--lw-muted);
 }
 
-/* Text and list sections that carry an eyebrow join one running sequence —
-   a hairline, an index and a label — so a case study reads as numbered
-   chapters instead of a stack of identical headings. The counter is reset
-   on the page's block container (CaseStudy.module.css). */
+/* ── Chapters ──────────────────────────────────────────────────────────
+   Text and list sections compose the full read width as two zones: the
+   chapter label in a left rail, the reading column beside it. The measure
+   stays at 66ch — the width is used by the composition, not by stretching
+   the text. Sections with an eyebrow are ruled and join one running
+   number sequence (counter reset in CaseStudy.module.css); unlabelled
+   sections keep the same axes so every left edge on the page agrees. */
+.chapter {
+  display: grid;
+  grid-template-columns: minmax(190px, 260px) minmax(0, 1fr);
+  gap: clamp(2.5rem, 7vw, 6.5rem);
+  align-items: start;
+}
+.chapterRuled {
+  padding-top: 22px;
+  border-top: 1px solid rgba(7, 26, 49, 0.14);
+}
+/* The label keeps the reader oriented through a long section. */
+.chapterRail .secEyebrow { position: sticky; top: 96px; }
+
 .secEyebrow {
   counter-increment: lwsec;
   display: flex;
   align-items: baseline;
   gap: 14px;
-  margin: 0 0 clamp(1.5rem, 2.6vw, 2.1rem);
-  padding-top: 20px;
-  border-top: 1px solid rgba(7, 26, 49, 0.14);
+  margin: 0;
 }
 .secEyebrow::before {
   content: counter(lwsec, decimal-leading-zero);
   font-variant-numeric: tabular-nums;
   color: var(--lw-ink);
+}
+
+/* Display type runs a little wider than the prose underneath — the
+   statement's right edge reaching past the paragraph edge is what keeps
+   the reading column feeling set, not stranded. */
+.chapterBody .statement { max-width: 28ch; }
+
+@media (max-width: 900px) {
+  .chapter { grid-template-columns: 1fr; gap: 1.4rem; }
+  .chapterRail .secEyebrow { position: static; }
+  .chapterRuled { padding-top: 18px; }
 }
 
 .statement {
@@ -242,13 +267,16 @@
 
 .listCards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(var(--list-cols, 2), minmax(0, 1fr));
   gap: 1px;
   background: rgba(7, 26, 49, 0.12);
   border: 1px solid rgba(7, 26, 49, 0.12);
   border-radius: var(--lw-radius-tile);
   overflow: hidden;
 }
+/* An orphaned last card stretches to the row end, so the hairline grid can
+   never expose an empty painted cell. */
+.listCard:last-child { grid-column-end: -1; }
 .listCard {
   background: var(--lw-paper);
   padding: clamp(20px, 2.4vw, 30px);

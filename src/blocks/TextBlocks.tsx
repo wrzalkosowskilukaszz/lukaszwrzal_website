@@ -40,13 +40,17 @@ export function Text({ block, ctx }: { block: TextBlock; ctx: BlockContext }) {
   const pair = block.variant === "two-column" && paras.length === 2;
 
   return (
-    <section className={s.read}>
-      {block.eyebrow ? (
-        <p className={`${s.eyebrow} ${s.secEyebrow}`}>{tx(block.eyebrow, ctx.locale)}</p>
-      ) : null}
-      {block.statement ? <h2 className={s.statement}>{tx(block.statement, ctx.locale)}</h2> : null}
-      <div className={`${s.prose} ${pair ? s.pair : ""}`}>
-        {paras.map((p, i) => <p key={i}>{p}</p>)}
+    <section className={`${s.read} ${s.chapter} ${block.eyebrow ? s.chapterRuled : ""}`}>
+      <div className={s.chapterRail}>
+        {block.eyebrow ? (
+          <p className={`${s.eyebrow} ${s.secEyebrow}`}>{tx(block.eyebrow, ctx.locale)}</p>
+        ) : null}
+      </div>
+      <div className={s.chapterBody}>
+        {block.statement ? <h2 className={s.statement}>{tx(block.statement, ctx.locale)}</h2> : null}
+        <div className={`${s.prose} ${pair ? s.pair : ""}`}>
+          {paras.map((p, i) => <p key={i}>{p}</p>)}
+        </div>
       </div>
     </section>
   );
@@ -61,14 +65,25 @@ export function List({ block, ctx }: { block: ListBlock; ctx: BlockContext }) {
   const numbered = block.numbered ?? cards;
 
   return (
-    <section className={s.read}>
-      {block.eyebrow ? (
-        <p className={`${s.eyebrow} ${s.secEyebrow}`}>{tx(block.eyebrow, ctx.locale)}</p>
-      ) : null}
+    <section className={`${s.read} ${s.chapter} ${block.eyebrow ? s.chapterRuled : ""}`}>
+      <div className={s.chapterRail}>
+        {block.eyebrow ? (
+          <p className={`${s.eyebrow} ${s.secEyebrow}`}>{tx(block.eyebrow, ctx.locale)}</p>
+        ) : null}
+      </div>
+      <div className={s.chapterBody}>
       {block.statement ? <h2 className={s.statement}>{tx(block.statement, ctx.locale)}</h2> : null}
 
       {cards ? (
-        <div className={`${s.listCards} ${numbered ? "" : s.listStat}`}>
+        /* Column count follows the item count so the hairline grid always
+           fills its rows — four reads as 2×2, three sits in one row. The
+           last-child span in the CSS catches any count that still orphans. */
+        <div
+          className={`${s.listCards} ${numbered ? "" : s.listStat}`}
+          style={{ ["--list-cols" as string]:
+            block.items.length <= 3 ? block.items.length
+            : block.items.length % 3 === 0 ? 3 : 2 }}
+        >
           {block.items.map((item, i) => (
             <div className={s.listCard} key={i}>
               {numbered ? (
@@ -93,6 +108,7 @@ export function List({ block, ctx }: { block: ListBlock; ctx: BlockContext }) {
           ))}
         </div>
       )}
+      </div>
     </section>
   );
 }

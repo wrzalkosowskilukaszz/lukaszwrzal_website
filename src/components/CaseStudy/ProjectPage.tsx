@@ -14,10 +14,9 @@ import type { Locale } from "@/lib/types";
 
 import styles from "./CaseStudy.module.css";
 import { Lightbox, type LightboxItem } from "./Lightbox";
-import { Spine } from "./Spine";
 
 /**
- * Page furniture around the blocks: the back link, the chapter spine, the
+ * Page furniture around the blocks: the back link, the
  * lightbox and the next-project footer. Everything between is composed from
  * the project's own block list.
  */
@@ -58,20 +57,8 @@ export function ProjectPage({
       : undefined,
   };
 
-  /* The spine tracks whichever blocks carry an eyebrow — so it reflects the
-     project's own structure rather than four hardcoded chapters. */
-  const chapters = doc.blocks
-    .map((b, i) => {
-      const label =
-        "eyebrow" in b && b.eyebrow ? tx(b.eyebrow, locale) : "";
-      return label ? { id: `block-${i}`, label } : null;
-    })
-    .filter((c): c is { id: string; label: string } => c !== null);
-
   return (
     <>
-      {chapters.length > 1 ? <Spine chapters={chapters} /> : null}
-
       <Link href={`/${locale}/work`} className={styles.backLink}>
         <span className={styles.backArrow} aria-hidden="true">
           <ArrowRight />
