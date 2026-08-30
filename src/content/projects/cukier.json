@@ -38,21 +38,26 @@
       ]
     },
     {
-      "type": "text",
-      "statement": "The logo had three very different jobs.",
-      "body": [
-        "Small packaging. Interior scale. Digital applications.",
-        "A mark that works beautifully on a label can fall apart when enlarged. A mark designed for a wall can lose its character when reduced to a few centimetres. Production adds another problem: each application may be made by a different process, by different people."
-      ],
-      "eyebrow": "The challenge"
-    },
-    {
-      "type": "text",
-      "statement": "Build the mark around one construction rule, then make the rule the system.",
-      "body": [
-        "Instead of drawing exceptions for every format, each application becomes a variation of the same underlying logic."
-      ],
-      "eyebrow": "The idea"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The challenge",
+          "statement": "The logo had three very different jobs.",
+          "body": [
+            "Small packaging. Interior scale. Digital applications.",
+            "A mark that works beautifully on a label can fall apart when enlarged. A mark designed for a wall can lose its character when reduced to a few centimetres. Production adds another problem: each application may be made by a different process, by different people."
+          ],
+          "src": "10.jpg"
+        },
+        {
+          "eyebrow": "The idea",
+          "statement": "Build the mark around one construction rule, then make the rule the system.",
+          "body": [
+            "Instead of drawing exceptions for every format, each application becomes a variation of the same underlying logic."
+          ],
+          "src": "11.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -72,11 +77,16 @@
       "text": "One construction rule instead of ten versions of a logo."
     },
     {
-      "type": "text",
-      "body": [
-        "A documented logotype construction, identity system, packaging and interior applications built from the same foundation."
-      ],
-      "eyebrow": "The work"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The work",
+          "body": [
+            "A documented logotype construction, identity system, packaging and interior applications built from the same foundation."
+          ],
+          "src": "12.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -99,12 +109,17 @@
       "width": "full-bleed"
     },
     {
-      "type": "text",
-      "body": [
-        "The mark holds its form from small packaging to architectural scale without needing a separate redraw for every condition.",
-        "The wider point is production reality: the identity is designed to keep working even when the original designer isn’t there to check every output."
-      ],
-      "eyebrow": "The result"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The result",
+          "body": [
+            "The mark holds its form from small packaging to architectural scale without needing a separate redraw for every condition.",
+            "The wider point is production reality: the identity is designed to keep working even when the original designer isn’t there to check every output."
+          ],
+          "src": "13.jpg"
+        }
+      ]
     }
   ]
 }

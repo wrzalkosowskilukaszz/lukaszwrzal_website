@@ -353,10 +353,11 @@
 
 .deckSlide {
   display: grid;
-  grid-template-columns: minmax(280px, 5fr) minmax(0, 7fr);
+  grid-template-columns: minmax(280px, 6fr) minmax(0, 6fr);
   gap: clamp(2rem, 5vw, 4.5rem);
   align-items: center;
 }
+.deckMedia { max-width: 560px; }
 
 .deckIndex { margin-bottom: 16px; }
 .deckTitle {
@@ -407,3 +408,45 @@
 @media (max-width: 900px) {
   .deckSlide { grid-template-columns: 1fr; gap: 1.4rem; }
 }
+
+/* ── Story: the case-study spine ───────────────────────────────────────
+   Chapters flow as one text column; beside them a sticky frame wipes to
+   each chapter's picture as its text arrives. The text column is never
+   pinned — only the picture holds still. Stacked (inline pictures) is
+   the base layout; the split is layered on at >=900px. */
+.story { width: min(var(--lw-read-max), 100% - 48px); margin-inline: auto; }
+
+.storyChapter { padding-top: 24px; border-top: 1px solid rgba(7, 26, 49, 0.14); }
+.storyChapter + .storyChapter { margin-top: clamp(4rem, 8vw, 6.5rem); }
+.storyChapter .prose { max-width: 60ch; }
+.storyChapter .statement { max-width: 20ch; }
+
+.storyInlineMedia { margin-top: clamp(1.6rem, 3vw, 2.4rem); }
+.storyMedia { display: none; }
+
+.storyPinned {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(300px, 6fr);
+  gap: clamp(2.5rem, 6vw, 5.5rem);
+  align-items: start;
+}
+/* Enough travel per chapter for the frame to dwell. */
+.storyPinned .storyChapter { min-height: 58vh; }
+.storyPinned .storyInlineMedia { display: none; }
+.storyPinned .storyMedia {
+  display: block;
+  position: sticky;
+  top: clamp(72px, 10vh, 120px);
+}
+.storyFrame {
+  position: relative;
+  height: min(66vh, 620px);
+  border-radius: var(--lw-radius-stage);
+  overflow: hidden;
+  background: var(--lw-tile);
+  box-shadow: var(--lw-shadow-tile);
+}
+.storyLayer { position: absolute; inset: 0; will-change: clip-path; }
+.storyLayer:not(:first-child) { clip-path: inset(0 0 100% 0); }
+/* Media inside fills the frame */
+.storyLayer figure, .storyLayer figure > div { height: 100%; }

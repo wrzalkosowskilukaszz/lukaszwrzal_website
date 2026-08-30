@@ -508,6 +508,56 @@
         },
         {
           "type": "object",
+          "description": "Chapters flow as text on the left while a pinned picture on the right changes per chapter; on phones pictures sit inline.",
+          "properties": {
+            "type": {
+              "const": "story"
+            },
+            "items": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "eyebrow": {
+                    "$ref": "#/$defs/localised"
+                  },
+                  "statement": {
+                    "$ref": "#/$defs/localised"
+                  },
+                  "body": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/$defs/localised"
+                    }
+                  },
+                  "src": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "eyebrow",
+                  "body"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "spacing": {
+              "enum": [
+                "tight",
+                "normal",
+                "loose"
+              ]
+            }
+          },
+          "required": [
+            "type",
+            "items"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
           "description": "A pinned slide sequence: on wide screens the section holds the viewport while scroll plays the slides; on phones they stack.",
           "properties": {
             "type": {

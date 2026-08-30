@@ -118,6 +118,20 @@ export interface ProcessBlock extends Base {
   steps: { n?: string; title: Localised; body: Localised; src?: string }[];
 }
 
+export interface StoryBlock extends Base {
+  type: "story";
+  /** Chapters flow as normal text on the left while a pinned image on the
+      right wipes to each chapter's picture as it arrives. Text scroll is
+      NEVER hijacked; on phones each picture simply sits inline after its
+      chapter. Eyebrows join the page-wide chapter numbering. */
+  items: {
+    eyebrow: Localised;
+    statement?: Localised;
+    body: Localised[];
+    src?: string;
+  }[];
+}
+
 export interface DeckBlock extends Base {
   type: "deck";
   /** Slides. On a wide screen the section pins while scroll plays them
@@ -158,6 +172,7 @@ export type Block =
   | QuoteBlock
   | ProcessBlock
   | DeckBlock
+  | StoryBlock
   | StatsBlock
   | VideoBlock
   | CreditsBlock;
@@ -166,5 +181,5 @@ export type BlockType = Block["type"];
 
 export const BLOCK_TYPES: BlockType[] = [
   "hero", "meta", "text", "statement", "figure", "gallery",
-  "textMedia", "list", "quote", "process", "deck", "stats", "video", "credits",
+  "textMedia", "list", "quote", "process", "story", "deck", "stats", "video", "credits",
 ];

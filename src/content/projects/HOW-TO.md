@@ -87,6 +87,7 @@ These are all the blocks you can use:
 | `textMedia` | Words beside a picture | `media-left`, `media-right` |
 | `quote` | A quote | `plain`, `aurora` |
 | `process` | Numbered steps with sticky images | `pinned`, `stacked` |
+| `story` | Chapters with a picture that stays beside the text and changes per chapter | — |
 | `deck` | Slides that play one by one as you scroll (the page stays put) | — |
 | `stats` | Big numbers that count up | — |
 | `video` | A looping video | width: `content`, `stage`, `full-bleed` |

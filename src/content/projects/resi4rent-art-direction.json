@@ -42,22 +42,27 @@
       ]
     },
     {
-      "type": "text",
-      "statement": "Real-estate marketing has a wallpaper problem.",
-      "body": [
-        "Smiling stock photography. Predictable layouts. The same promise repeated with a different logo.",
-        "Resi4Rent already had a strong brand. What it needed was a way to make the marketing feel more human without losing consistency."
-      ],
-      "eyebrow": "The challenge"
-    },
-    {
-      "type": "text",
-      "statement": "Build the system before building the assets.",
-      "body": [
-        "The first launch had to work on citylights, A-frames and digital screens — three formats with completely different reading conditions. I built fixed rules for composition and typography, then let the content change inside them.",
-        "Once that structure was in place, the brief became bigger than “units available”. The work could start talking about what choosing a home actually feels like: comfort, routine, daily rituals, the emotional logic of a place."
-      ],
-      "eyebrow": "The idea"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The challenge",
+          "statement": "Real-estate marketing has a wallpaper problem.",
+          "body": [
+            "Smiling stock photography. Predictable layouts. The same promise repeated with a different logo.",
+            "Resi4Rent already had a strong brand. What it needed was a way to make the marketing feel more human without losing consistency."
+          ],
+          "src": "10.jpg"
+        },
+        {
+          "eyebrow": "The idea",
+          "statement": "Build the system before building the assets.",
+          "body": [
+            "The first launch had to work on citylights, A-frames and digital screens — three formats with completely different reading conditions. I built fixed rules for composition and typography, then let the content change inside them.",
+            "Once that structure was in place, the brief became bigger than “units available”. The work could start talking about what choosing a home actually feels like: comfort, routine, daily rituals, the emotional logic of a place."
+          ],
+          "src": "11.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -77,12 +82,17 @@
       "text": "One system. The same character on the street and on a phone."
     },
     {
-      "type": "text",
-      "body": [
-        "The launch campaign, adaptation rules and more than 50 pieces of output across posters, animations, billboards, events and internal communication.",
-        "Some executions are bold and illustrative. Others are quieter and lifestyle-led. They vary without drifting."
-      ],
-      "eyebrow": "The work"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The work",
+          "body": [
+            "The launch campaign, adaptation rules and more than 50 pieces of output across posters, animations, billboards, events and internal communication.",
+            "Some executions are bold and illustrative. Others are quieter and lifestyle-led. They vary without drifting."
+          ],
+          "src": "12.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -105,12 +115,17 @@
       "width": "full-bleed"
     },
     {
-      "type": "text",
-      "body": [
-        "The framework became useful beyond the original campaign. The internal team was able to extend the system into new formats independently.",
-        "That is the real test of a creative system: whether it keeps working when the original designer isn’t in the room."
-      ],
-      "eyebrow": "The result"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The result",
+          "body": [
+            "The framework became useful beyond the original campaign. The internal team was able to extend the system into new formats independently.",
+            "That is the real test of a creative system: whether it keeps working when the original designer isn’t in the room."
+          ],
+          "src": "13.jpg"
+        }
+      ]
     }
   ]
 }

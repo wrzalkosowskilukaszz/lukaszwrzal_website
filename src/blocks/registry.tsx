@@ -1,5 +1,6 @@
 import { Gallery, Figure, TextMedia, Video } from "./MediaBlocks";
 import { Deck } from "./DeckBlock";
+import { Story } from "./StoryBlock";
 import { Process } from "./ProcessBlock";
 import { Stats } from "./StatsBlock";
 import { Credits, Hero, List, Meta, Quote, Statement, Text } from "./TextBlocks";
@@ -24,6 +25,7 @@ const REGISTRY: Record<BlockType, (props: any) => React.ReactNode> = {
   list: List,
   quote: Quote,
   process: Process,
+  story: Story,
   deck: Deck,
   stats: Stats,
   video: Video,

@@ -38,25 +38,30 @@
       ]
     },
     {
-      "type": "text",
-      "statement": "A brief can be beautifully written and still say nothing.",
-      "body": [
-        "We’ve all seen it. A project gets three months in, everyone is looking at the same brief, and everyone thinks they agree.",
-        "Then someone says: “Wait — when we said premium, what exactly did we mean?”",
-        "The problem isn’t always bad writing. A brief can look finished while the important decisions inside it are still unresolved.",
-        "And AI makes that easier to hide. Ask an AI to improve an incomplete brief and it will happily fill the gaps. The result sounds better. More complete. More professional.",
-        "The gaps are still there. They’re just harder to see."
-      ],
-      "eyebrow": "The challenge"
-    },
-    {
-      "type": "text",
-      "statement": "So I built the opposite.",
-      "body": [
-        "The obvious idea was an AI that helps you write better briefs. I started there too. Then I realised there was very little product in it. General-purpose AI can already turn messy notes into polished copy in seconds.",
-        "The more interesting question was: what if AI didn’t try to complete the brief? What if it tried to find what the brief hadn’t settled?"
-      ],
-      "eyebrow": "The idea"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The challenge",
+          "statement": "A brief can be beautifully written and still say nothing.",
+          "body": [
+            "We’ve all seen it. A project gets three months in, everyone is looking at the same brief, and everyone thinks they agree.",
+            "Then someone says: “Wait — when we said premium, what exactly did we mean?”",
+            "The problem isn’t always bad writing. A brief can look finished while the important decisions inside it are still unresolved.",
+            "And AI makes that easier to hide. Ask an AI to improve an incomplete brief and it will happily fill the gaps. The result sounds better. More complete. More professional.",
+            "The gaps are still there. They’re just harder to see."
+          ],
+          "src": "10.jpg"
+        },
+        {
+          "eyebrow": "The idea",
+          "statement": "So I built the opposite.",
+          "body": [
+            "The obvious idea was an AI that helps you write better briefs. I started there too. Then I realised there was very little product in it. General-purpose AI can already turn messy notes into polished copy in seconds.",
+            "The more interesting question was: what if AI didn’t try to complete the brief? What if it tried to find what the brief hadn’t settled?"
+          ],
+          "src": "11.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -76,14 +81,19 @@
       "text": "Claude can write your brief. Surveyvor interrogates it."
     },
     {
-      "type": "text",
-      "statement": "It had to know what a good brief actually contains.",
-      "body": [
-        "“Something feels vague” isn’t very useful. A useful tool needs to know what should be clear, and what should agree with what.",
-        "Each brief type therefore has its own knowledge model — campaign, packaging, identity, website and so on. The model looks for relationships inside the brief, not just generic vagueness.",
-        "So instead of “your brief could be more specific”, you can get something like: “Your sustainability claim conflicts with your chosen substrate.”"
-      ],
-      "eyebrow": "How it works"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "How it works",
+          "statement": "It had to know what a good brief actually contains.",
+          "body": [
+            "“Something feels vague” isn’t very useful. A useful tool needs to know what should be clear, and what should agree with what.",
+            "Each brief type therefore has its own knowledge model — campaign, packaging, identity, website and so on. The model looks for relationships inside the brief, not just generic vagueness.",
+            "So instead of “your brief could be more specific”, you can get something like: “Your sustainability claim conflicts with your chosen substrate.”"
+          ],
+          "src": "12.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -131,13 +141,18 @@
       ]
     },
     {
-      "type": "text",
-      "statement": "I had to teach it when to shut up.",
-      "body": [
-        "A tool that only finds problems becomes annoying very quickly. So Surveyvor has to tell you at least one thing the brief already gets right. Every finding can be dismissed immediately. And once you’ve dismissed something, it stays dismissed.",
-        "Small details, but they change the relationship with the tool. It becomes something you can work with rather than something that keeps nagging."
-      ],
-      "eyebrow": "Product decisions"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "Product decisions",
+          "statement": "I had to teach it when to shut up.",
+          "body": [
+            "A tool that only finds problems becomes annoying very quickly. So Surveyvor has to tell you at least one thing the brief already gets right. Every finding can be dismissed immediately. And once you’ve dismissed something, it stays dismissed.",
+            "Small details, but they change the relationship with the tool. It becomes something you can work with rather than something that keeps nagging."
+          ],
+          "src": "13.jpg"
+        }
+      ]
     },
     {
       "type": "list",
@@ -164,13 +179,18 @@
       "eyebrow": "The scope"
     },
     {
-      "type": "text",
-      "statement": "Then I built the boring stuff too.",
-      "body": [
-        "Accessibility was measured across 74 contrast pairs with zero failures, alongside full keyboard paths, focus trapping in dialogs, 44px touch targets and reduced-motion support.",
-        "The interface runs on a token-based design system. The privacy policy and terms were written around what the product actually does. And 56 tests cover storage migrations, template switching and the guard preventing brief content from reaching analytics."
-      ],
-      "eyebrow": "The craft"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The craft",
+          "statement": "Then I built the boring stuff too.",
+          "body": [
+            "Accessibility was measured across 74 contrast pairs with zero failures, alongside full keyboard paths, focus trapping in dialogs, 44px touch targets and reduced-motion support.",
+            "The interface runs on a token-based design system. The privacy policy and terms were written around what the product actually does. And 56 tests cover storage migrations, template switching and the guard preventing brief content from reaching analytics."
+          ],
+          "src": "14.jpg"
+        }
+      ]
     },
     {
       "type": "figure",
@@ -178,12 +198,17 @@
       "width": "full-bleed"
     },
     {
-      "type": "text",
-      "statement": "Surveyvor is live at surveyvor.app in closed beta. I designed the brand, product, system and interface, then built the thing myself.",
-      "body": [
-        "The next test isn’t another feature. It’s ten real designers using it. I want to see what they dismiss, what they resolve, and whether Surveyvor actually helps people think more clearly — or just becomes very good at finding things to complain about."
-      ],
-      "eyebrow": "The result"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The result",
+          "statement": "Surveyvor is live at surveyvor.app in closed beta. I designed the brand, product, system and interface, then built the thing myself.",
+          "body": [
+            "The next test isn’t another feature. It’s ten real designers using it. I want to see what they dismiss, what they resolve, and whether Surveyvor actually helps people think more clearly — or just becomes very good at finding things to complain about."
+          ],
+          "src": "15.jpg"
+        }
+      ]
     }
   ]
 }

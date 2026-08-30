@@ -38,23 +38,28 @@
       ]
     },
     {
-      "type": "text",
-      "statement": "Most biotech websites ask you to believe them.",
-      "body": [
-        "They say they are rigorous. Data-driven. Scientific. Investor-ready.",
-        "Then they show you a polished screenshot and ask you to take their word for it.",
-        "AuraGen started as a test of the opposite approach."
-      ],
-      "eyebrow": "The challenge"
-    },
-    {
-      "type": "text",
-      "statement": "AuraGen is fictional.",
-      "body": [
-        "I invented the company so I could build the kind of investor site I wanted to see.",
-        "Instead of showing a static picture of the product, the site contains a working piece of it: an interactive lab dashboard with simulated operational data."
-      ],
-      "eyebrow": "The idea"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The challenge",
+          "statement": "Most biotech websites ask you to believe them.",
+          "body": [
+            "They say they are rigorous. Data-driven. Scientific. Investor-ready.",
+            "Then they show you a polished screenshot and ask you to take their word for it.",
+            "AuraGen started as a test of the opposite approach."
+          ],
+          "src": "10.jpg"
+        },
+        {
+          "eyebrow": "The idea",
+          "statement": "AuraGen is fictional.",
+          "body": [
+            "I invented the company so I could build the kind of investor site I wanted to see.",
+            "Instead of showing a static picture of the product, the site contains a working piece of it: an interactive lab dashboard with simulated operational data."
+          ],
+          "src": "11.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -74,12 +79,17 @@
       "text": "Prove trust with a working demo, not another claim."
     },
     {
-      "type": "text",
-      "body": [
-        "The brand and design system were established first, by hand. AI entered later, at specific points where it could increase speed without making the creative decisions: scaling the system across the site and helping build the functioning experience.",
-        "That distinction matters to me. The experiment wasn’t “how much can AI do?” It was “how much can a designer direct when AI becomes part of the production pipeline?”"
-      ],
-      "eyebrow": "Where AI came in"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "Where AI came in",
+          "body": [
+            "The brand and design system were established first, by hand. AI entered later, at specific points where it could increase speed without making the creative decisions: scaling the system across the site and helping build the functioning experience.",
+            "That distinction matters to me. The experiment wasn’t “how much can AI do?” It was “how much can a designer direct when AI becomes part of the production pipeline?”"
+          ],
+          "src": "12.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -97,11 +107,16 @@
       ]
     },
     {
-      "type": "text",
-      "body": [
-        "Identity, logotype, visual language, interface foundations, an investor-facing website and a live internal dashboard demonstration — all built as one connected system."
-      ],
-      "eyebrow": "The work"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The work",
+          "body": [
+            "Identity, logotype, visual language, interface foundations, an investor-facing website and a live internal dashboard demonstration — all built as one connected system."
+          ],
+          "src": "13.jpg"
+        }
+      ]
     },
     {
       "type": "figure",
@@ -109,11 +124,16 @@
       "width": "full-bleed"
     },
     {
-      "type": "text",
-      "body": [
-        "AuraGen sits somewhere between brand work, product design and creative technology. More than a fictional biotech company, it is a working test of how traditional design judgement and AI-assisted making can coexist without one quietly replacing the other."
-      ],
-      "eyebrow": "What it proves"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "What it proves",
+          "body": [
+            "AuraGen sits somewhere between brand work, product design and creative technology. More than a fictional biotech company, it is a working test of how traditional design judgement and AI-assisted making can coexist without one quietly replacing the other."
+          ],
+          "src": "14.jpg"
+        }
+      ]
     }
   ]
 }

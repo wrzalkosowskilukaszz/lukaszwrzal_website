@@ -38,20 +38,25 @@
       ]
     },
     {
-      "type": "text",
-      "statement": "The brief was simple: make it feel like the place.",
-      "body": [
-        "Jack’s Bar didn’t need another poster with a cocktail sitting politely on a background. The visuals needed the same energy as the room — playful, loud and slightly chaotic."
-      ],
-      "eyebrow": "The challenge"
-    },
-    {
-      "type": "text",
-      "statement": "Turn every poster into its own tiny world.",
-      "body": [
-        "Cocktails become alpine peaks. Hourglasses drip with booze. Typography elbows its way into the scene. The imagery is exaggerated on purpose."
-      ],
-      "eyebrow": "The idea"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The challenge",
+          "statement": "The brief was simple: make it feel like the place.",
+          "body": [
+            "Jack’s Bar didn’t need another poster with a cocktail sitting politely on a background. The visuals needed the same energy as the room — playful, loud and slightly chaotic."
+          ],
+          "src": "10.jpg"
+        },
+        {
+          "eyebrow": "The idea",
+          "statement": "Turn every poster into its own tiny world.",
+          "body": [
+            "Cocktails become alpine peaks. Hourglasses drip with booze. Typography elbows its way into the scene. The imagery is exaggerated on purpose."
+          ],
+          "src": "11.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -71,11 +76,16 @@
       "text": "Make the poster feel like the place before you’ve even walked in."
     },
     {
-      "type": "text",
-      "body": [
-        "A series built from bold shapes, strong colour relationships and surreal Alpine transformations. Rather than putting an offer on a background, each poster becomes a small visual event."
-      ],
-      "eyebrow": "The work"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The work",
+          "body": [
+            "A series built from bold shapes, strong colour relationships and surreal Alpine transformations. Rather than putting an offer on a background, each poster becomes a small visual event."
+          ],
+          "src": "12.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -98,11 +108,16 @@
       "width": "full-bleed"
     },
     {
-      "type": "text",
-      "body": [
-        "The posters became part of the atmosphere rather than just another communication layer — something guests could notice, photograph and remember."
-      ],
-      "eyebrow": "The result"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The result",
+          "body": [
+            "The posters became part of the atmosphere rather than just another communication layer — something guests could notice, photograph and remember."
+          ],
+          "src": "13.jpg"
+        }
+      ]
     }
   ]
 }

@@ -10,6 +10,24 @@ import s from "./Studio.module.css";
 
 interface MediaItem { src: string; caption?: Localised }
 interface StepItem { n?: string; title?: Localised; body?: Localised; src?: string }
+interface ChapterItem { eyebrow?: Localised; statement?: Localised; body?: Localised[]; src?: string }
+
+/* A chapter's paragraphs edit as one textarea, blank line = new paragraph.
+   Localised bodies join and split per language. */
+const joinParas = (body?: Localised[]): Localised => {
+  if (!body?.length) return "";
+  if (body.every((p) => typeof p === "string")) return (body as string[]).join("\n\n");
+  const en = body.map((p) => (typeof p === "string" ? p : p.en ?? "")).join("\n\n");
+  const pl = body.map((p) => (typeof p === "string" ? p : p.pl ?? "")).join("\n\n");
+  return { en, pl };
+};
+const splitParas = (v: Localised): Localised[] => {
+  const split = (t: string) => t.split(/\n\s*\n/).map((x) => x.trim()).filter(Boolean);
+  if (typeof v === "string") return split(v);
+  const en = split(v.en ?? "");
+  const pl = split(v.pl ?? "");
+  return en.map((e, i) => (pl[i] ? { en: e, pl: pl[i] } : e));
+};
 interface StatItem { value?: number; suffix?: string; label?: Localised }
 interface RoleItem { role?: Localised; name?: string }
 interface KvItem { label?: Localised; value?: Localised }
@@ -147,6 +165,42 @@ export function FieldRenderer({
               </div>
               <div>
                 <span className={s.langLabel}>Picture (optional)</span>
+                <MediaField slug={slug} value={item.src} onChange={(src) => update({ ...item, src })} />
+              </div>
+            </div>
+          )}
+        />
+      );
+    }
+
+    case "chapters": {
+      const items = (value as ChapterItem[] | undefined) ?? [];
+      return (
+        <RepeatableList
+          items={items}
+          onChange={onChange}
+          newItem={() => ({ eyebrow: "", body: [""] })}
+          addLabel="Add a chapter"
+          makeRow={(item, update) => (
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              <div>
+                <span className={s.langLabel}>Small label (e.g. The challenge)</span>
+                <LocalisedField value={item.eyebrow} onChange={(eyebrow) => update({ ...item, eyebrow })} />
+              </div>
+              <div>
+                <span className={s.langLabel}>Big line (optional)</span>
+                <LocalisedField value={item.statement} onChange={(statement) => update({ ...item, statement })} />
+              </div>
+              <div>
+                <span className={s.langLabel}>Copy — blank line between paragraphs</span>
+                <LocalisedField
+                  value={joinParas(item.body)}
+                  multiline
+                  onChange={(v) => update({ ...item, body: splitParas(v) })}
+                />
+              </div>
+              <div>
+                <span className={s.langLabel}>Picture</span>
                 <MediaField slug={slug} value={item.src} onChange={(src) => update({ ...item, src })} />
               </div>
             </div>

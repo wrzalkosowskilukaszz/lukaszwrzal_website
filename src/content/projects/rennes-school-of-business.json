@@ -38,22 +38,27 @@
       ]
     },
     {
-      "type": "text",
-      "statement": "The website wasn’t broken. It was exhausting.",
-      "body": [
-        "Different audiences shared the same navigation. Pages followed inconsistent structures. Basic information often sat several clicks away.",
-        "Nothing was catastrophically wrong. The problem was cumulative: every inconsistency asked users to spend more time figuring out where they were."
-      ],
-      "eyebrow": "The challenge"
-    },
-    {
-      "type": "text",
-      "body": [
-        "I started with heuristic review, user-flow analysis, analytics, interviews and competitor benchmarking.",
-        "The pattern was clear: the school had organised the site around itself. Users arrived with completely different reasons for being there.",
-        "So the architecture shifted from “How is the institution structured?” to “What are you here to do?”"
-      ],
-      "eyebrow": "The thinking"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The challenge",
+          "statement": "The website wasn’t broken. It was exhausting.",
+          "body": [
+            "Different audiences shared the same navigation. Pages followed inconsistent structures. Basic information often sat several clicks away.",
+            "Nothing was catastrophically wrong. The problem was cumulative: every inconsistency asked users to spend more time figuring out where they were."
+          ],
+          "src": "10.jpg"
+        },
+        {
+          "eyebrow": "The thinking",
+          "body": [
+            "I started with heuristic review, user-flow analysis, analytics, interviews and competitor benchmarking.",
+            "The pattern was clear: the school had organised the site around itself. Users arrived with completely different reasons for being there.",
+            "So the architecture shifted from “How is the institution structured?” to “What are you here to do?”"
+          ],
+          "src": "11.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -73,12 +78,17 @@
       "text": "A website should answer a question, not reproduce an org chart."
     },
     {
-      "type": "text",
-      "body": [
-        "Dedicated entry paths for different audiences, a calmer content hierarchy, progressive disclosure, a documented component system and responsive patterns across the redesigned sections.",
-        "Low-fidelity wireframes and usability testing helped resolve practical issues before they became visual problems."
-      ],
-      "eyebrow": "The work"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The work",
+          "body": [
+            "Dedicated entry paths for different audiences, a calmer content hierarchy, progressive disclosure, a documented component system and responsive patterns across the redesigned sections.",
+            "Low-fidelity wireframes and usability testing helped resolve practical issues before they became visual problems."
+          ],
+          "src": "12.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -101,11 +111,16 @@
       "width": "full-bleed"
     },
     {
-      "type": "text",
-      "body": [
-        "Navigation became intent-led rather than organisation-led, and the component system was documented well enough for the team to extend new programme pages without starting from scratch."
-      ],
-      "eyebrow": "The result"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The result",
+          "body": [
+            "Navigation became intent-led rather than organisation-led, and the component system was documented well enough for the team to extend new programme pages without starting from scratch."
+          ],
+          "src": "13.jpg"
+        }
+      ]
     }
   ]
 }

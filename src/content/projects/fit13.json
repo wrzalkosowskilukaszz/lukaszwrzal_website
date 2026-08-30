@@ -38,20 +38,25 @@
       ]
     },
     {
-      "type": "text",
-      "statement": "Fitness branding has a very small vocabulary.",
-      "body": [
-        "Neon. Shouting. “Push harder.” Everything tries to motivate so aggressively that it starts looking like background noise.",
-        "Fit13 needed strength without the performance of strength."
-      ],
-      "eyebrow": "The challenge"
-    },
-    {
-      "type": "text",
-      "body": [
-        "The number 13 became the starting point. While exploring its construction, I found enough space inside the numeral to hide a human figure in motion."
-      ],
-      "eyebrow": "The idea"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The challenge",
+          "statement": "Fitness branding has a very small vocabulary.",
+          "body": [
+            "Neon. Shouting. “Push harder.” Everything tries to motivate so aggressively that it starts looking like background noise.",
+            "Fit13 needed strength without the performance of strength."
+          ],
+          "src": "10.jpg"
+        },
+        {
+          "eyebrow": "The idea",
+          "body": [
+            "The number 13 became the starting point. While exploring its construction, I found enough space inside the numeral to hide a human figure in motion."
+          ],
+          "src": "11.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -71,11 +76,16 @@
       "text": "Energy from construction, not from effects."
     },
     {
-      "type": "text",
-      "body": [
-        "The system extends across social, apparel and signage, including a wall-scale application. The logo animation keeps the same construction rule in motion instead of inventing a second idea."
-      ],
-      "eyebrow": "The work"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The work",
+          "body": [
+            "The system extends across social, apparel and signage, including a wall-scale application. The logo animation keeps the same construction rule in motion instead of inventing a second idea."
+          ],
+          "src": "12.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -98,12 +108,17 @@
       "width": "full-bleed"
     },
     {
-      "type": "text",
-      "statement": "Fit13 gets energy without looking like another motivational gym brand.",
-      "body": [
-        "And there is a broader design principle behind it: the strongest concept doesn’t always need to sit on top of the design. Sometimes it should be hiding inside it."
-      ],
-      "eyebrow": "The result"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The result",
+          "statement": "Fit13 gets energy without looking like another motivational gym brand.",
+          "body": [
+            "And there is a broader design principle behind it: the strongest concept doesn’t always need to sit on top of the design. Sometimes it should be hiding inside it."
+          ],
+          "src": "13.jpg"
+        }
+      ]
     }
   ]
 }

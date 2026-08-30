@@ -38,20 +38,25 @@
       ]
     },
     {
-      "type": "text",
-      "statement": "A PR agency should probably be good at getting noticed.",
-      "body": [
-        "AZ Media’s previous identity worked, but it didn’t say much. That felt like a missed opportunity for a company whose job is giving other people’s stories a distinctive voice."
-      ],
-      "eyebrow": "The challenge"
-    },
-    {
-      "type": "text",
-      "statement": "Turn the A into an arrow.",
-      "body": [
-        "The shape pushes upward while still reading immediately as part of the wordmark. A simple metaphor for visibility, momentum and moving a story forward — without bolting a separate symbol onto the side."
-      ],
-      "eyebrow": "The idea"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The challenge",
+          "statement": "A PR agency should probably be good at getting noticed.",
+          "body": [
+            "AZ Media’s previous identity worked, but it didn’t say much. That felt like a missed opportunity for a company whose job is giving other people’s stories a distinctive voice."
+          ],
+          "src": "10.jpg"
+        },
+        {
+          "eyebrow": "The idea",
+          "statement": "Turn the A into an arrow.",
+          "body": [
+            "The shape pushes upward while still reading immediately as part of the wordmark. A simple metaphor for visibility, momentum and moving a story forward — without bolting a separate symbol onto the side."
+          ],
+          "src": "11.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -71,11 +76,16 @@
       "text": "The identity doesn’t describe the service. It behaves like it."
     },
     {
-      "type": "text",
-      "body": [
-        "A focused wordmark construction designed to hold its confidence at presentation scale and stay solid at the smallest practical application."
-      ],
-      "eyebrow": "The work"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The work",
+          "body": [
+            "A focused wordmark construction designed to hold its confidence at presentation scale and stay solid at the smallest practical application."
+          ],
+          "src": "12.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -98,11 +108,16 @@
       "width": "full-bleed"
     },
     {
-      "type": "text",
-      "body": [
-        "A sharper identity with a point of view, without falling into the corporate shorthand so many agencies default to."
-      ],
-      "eyebrow": "The result"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The result",
+          "body": [
+            "A sharper identity with a point of view, without falling into the corporate shorthand so many agencies default to."
+          ],
+          "src": "13.jpg"
+        }
+      ]
     }
   ]
 }

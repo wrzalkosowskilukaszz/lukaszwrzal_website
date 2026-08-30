@@ -70,6 +70,7 @@ function load(): ProjectDoc[] {
       if (b.type === "gallery") b.items.forEach(mark);
       if (b.type === "process") b.steps.forEach(mark);
       if (b.type === "deck") b.items.forEach(mark);
+      if (b.type === "story") b.items.forEach(mark);
     }
   }
 
@@ -133,9 +134,10 @@ function headline(doc: ProjectDoc, locale: Locale): Stat | undefined {
 
 /** A project is a draft until its prose is written. */
 export function isDraftDoc(doc: ProjectDoc): boolean {
-  const prose = doc.blocks
-    .filter((b) => b.type === "text")
-    .flatMap((b) => (b.type === "text" ? b.body : []));
+  /* Prose lives in text blocks and in story chapters. */
+  const prose = doc.blocks.flatMap((b) =>
+    b.type === "text" ? b.body : b.type === "story" ? b.items.flatMap((i) => i.body) : [],
+  );
   const first = tx(prose[0], "en");
   return !first || /^(replace|describe|add |write )/i.test(first.trim());
 }

@@ -38,21 +38,26 @@
       ]
     },
     {
-      "type": "text",
-      "statement": "The site had plenty to say. It just didn’t know what to say first.",
-      "body": [
-        "Blog content. Programmes. PCM. Leadership. Podcast. Products. Strong material, grown over time until every section started competing with the next.",
-        "Visitors had to work too hard to answer three simple questions: who is this, is it relevant to me, and where do I start?"
-      ],
-      "eyebrow": "The challenge"
-    },
-    {
-      "type": "text",
-      "body": [
-        "The website needed to behave like Aleksandra’s work: clear, structured and focused on what actually matters.",
-        "The experience was rebuilt around three questions: Who is she? Who does she help? What should I do next?"
-      ],
-      "eyebrow": "The idea"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The challenge",
+          "statement": "The site had plenty to say. It just didn’t know what to say first.",
+          "body": [
+            "Blog content. Programmes. PCM. Leadership. Podcast. Products. Strong material, grown over time until every section started competing with the next.",
+            "Visitors had to work too hard to answer three simple questions: who is this, is it relevant to me, and where do I start?"
+          ],
+          "src": "10.jpg"
+        },
+        {
+          "eyebrow": "The idea",
+          "body": [
+            "The website needed to behave like Aleksandra’s work: clear, structured and focused on what actually matters.",
+            "The experience was rebuilt around three questions: Who is she? Who does she help? What should I do next?"
+          ],
+          "src": "11.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -72,11 +77,16 @@
       "text": "The website should feel as clear as the work it represents."
     },
     {
-      "type": "text",
-      "body": [
-        "Navigation was reorganised by intent. Pages received clearer hierarchy and one primary action. Long text blocks became shorter, more breathable sections supported by scannable benefits, social proof and reusable patterns."
-      ],
-      "eyebrow": "The work"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The work",
+          "body": [
+            "Navigation was reorganised by intent. Pages received clearer hierarchy and one primary action. Long text blocks became shorter, more breathable sections supported by scannable benefits, social proof and reusable patterns."
+          ],
+          "src": "12.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -99,12 +109,17 @@
       "width": "full-bleed"
     },
     {
-      "type": "text",
-      "body": [
-        "The site became easier to understand without losing the depth of the content.",
-        "The change was less about adding things and more about giving the existing things a job."
-      ],
-      "eyebrow": "The result"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The result",
+          "body": [
+            "The site became easier to understand without losing the depth of the content.",
+            "The change was less about adding things and more about giving the existing things a job."
+          ],
+          "src": "13.jpg"
+        }
+      ]
     }
   ]
 }

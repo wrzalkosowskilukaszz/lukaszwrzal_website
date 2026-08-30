@@ -38,21 +38,26 @@
       ]
     },
     {
-      "type": "text",
-      "statement": "The theatre was full of different worlds. The identity looked like sixteen of them.",
-      "body": [
-        "Strong productions were being designed as isolated jobs, so every premiere could look completely different — and the theatre itself was disappearing behind the programme.",
-        "The challenge wasn’t to make every show look the same. It was to give very different productions a recognisable home."
-      ],
-      "eyebrow": "The challenge"
-    },
-    {
-      "type": "text",
-      "statement": "The identity should behave like the theatre.",
-      "body": [
-        "Some productions are quiet. Some are absurd. Some are visceral. Some are almost surreal. The system therefore had to flex emotionally without losing its own accent."
-      ],
-      "eyebrow": "The idea"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The challenge",
+          "statement": "The theatre was full of different worlds. The identity looked like sixteen of them.",
+          "body": [
+            "Strong productions were being designed as isolated jobs, so every premiere could look completely different — and the theatre itself was disappearing behind the programme.",
+            "The challenge wasn’t to make every show look the same. It was to give very different productions a recognisable home."
+          ],
+          "src": "10.jpg"
+        },
+        {
+          "eyebrow": "The idea",
+          "statement": "The identity should behave like the theatre.",
+          "body": [
+            "Some productions are quiet. Some are absurd. Some are visceral. Some are almost surreal. The system therefore had to flex emotionally without losing its own accent."
+          ],
+          "src": "11.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -72,11 +77,16 @@
       "text": "Consistency shouldn’t mean making every performance look like the same performance."
     },
     {
-      "type": "text",
-      "body": [
-        "A flexible visual system across posters, programmes, social and season communication. Different productions can push the visual language in different directions while still belonging to the same theatre."
-      ],
-      "eyebrow": "The work"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The work",
+          "body": [
+            "A flexible visual system across posters, programmes, social and season communication. Different productions can push the visual language in different directions while still belonging to the same theatre."
+          ],
+          "src": "12.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -99,11 +109,16 @@
       "width": "full-bleed"
     },
     {
-      "type": "text",
-      "body": [
-        "A brand language that finally works with the theatre’s unpredictability instead of fighting it — cohesive across a season without flattening the individuality of the work."
-      ],
-      "eyebrow": "The result"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The result",
+          "body": [
+            "A brand language that finally works with the theatre’s unpredictability instead of fighting it — cohesive across a season without flattening the individuality of the work."
+          ],
+          "src": "13.jpg"
+        }
+      ]
     }
   ]
 }

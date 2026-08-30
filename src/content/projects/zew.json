@@ -38,21 +38,26 @@
       ]
     },
     {
-      "type": "text",
-      "statement": "ZEW had two personalities to reconcile.",
-      "body": [
-        "One was raw and primal. The other was refined and contemporary.",
-        "The early directions leaned too far one way or the other, so the identity needed to hold both without falling into restaurant clichés."
-      ],
-      "eyebrow": "The challenge"
-    },
-    {
-      "type": "text",
-      "statement": "Make the mark do more than one job.",
-      "body": [
-        "At first glance, ZEW is simply a confident geometric wordmark. Look closer and the dot and horizontal stroke within the E form the silhouette of a cloche."
-      ],
-      "eyebrow": "The idea"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The challenge",
+          "statement": "ZEW had two personalities to reconcile.",
+          "body": [
+            "One was raw and primal. The other was refined and contemporary.",
+            "The early directions leaned too far one way or the other, so the identity needed to hold both without falling into restaurant clichés."
+          ],
+          "src": "10.jpg"
+        },
+        {
+          "eyebrow": "The idea",
+          "statement": "Make the mark do more than one job.",
+          "body": [
+            "At first glance, ZEW is simply a confident geometric wordmark. Look closer and the dot and horizontal stroke within the E form the silhouette of a cloche."
+          ],
+          "src": "11.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -72,12 +77,17 @@
       "text": "The best logo trick is the one you discover yourself."
     },
     {
-      "type": "text",
-      "body": [
-        "The hidden construction became part of a wider identity system across menus, signage, takeaway packaging and in-venue applications.",
-        "The visual language stays restrained so the mark, typography and material feel can carry the personality."
-      ],
-      "eyebrow": "The work"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The work",
+          "body": [
+            "The hidden construction became part of a wider identity system across menus, signage, takeaway packaging and in-venue applications.",
+            "The visual language stays restrained so the mark, typography and material feel can carry the personality."
+          ],
+          "src": "12.jpg"
+        }
+      ]
     },
     {
       "type": "gallery",
@@ -100,12 +110,17 @@
       "width": "full-bleed"
     },
     {
-      "type": "text",
-      "body": [
-        "One identity works from menu scale to venue scale without needing a separate “small” and “large” solution.",
-        "Strong from a distance. Rewarding up close. That tension is the identity."
-      ],
-      "eyebrow": "The result"
+      "type": "story",
+      "items": [
+        {
+          "eyebrow": "The result",
+          "body": [
+            "One identity works from menu scale to venue scale without needing a separate “small” and “large” solution.",
+            "Strong from a distance. Rewarding up close. That tension is the identity."
+          ],
+          "src": "13.jpg"
+        }
+      ]
     }
   ]
 }

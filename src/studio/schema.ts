@@ -18,6 +18,7 @@ export type FieldKind =
   | "kv"
   | "terms"
   | "steps"
+  | "chapters"
   | "stats"
   | "roles"
   | "spacing";
@@ -110,6 +111,11 @@ export const BLOCK_FIELDS: Record<BlockType, FieldDef[]> = {
     ] },
     SPACING_FIELD,
   ],
+  story: [
+    { key: "items", label: "Chapters", kind: "chapters", required: true,
+      help: "Each chapter: small label, big line, copy, and its picture. On a big screen the picture sits beside the text and changes as you read; on a phone it sits under its chapter." },
+    SPACING_FIELD,
+  ],
   deck: [
     { key: "items", label: "Slides", kind: "steps", required: true,
       help: "On a big screen the section stays put while scrolling plays the slides one by one; on a phone they simply stack." },
@@ -163,6 +169,7 @@ export const BLOCK_LABELS: Record<BlockType, { label: string; help: string }> = 
   gallery: { label: "Gallery", help: "Several pictures together." },
   textMedia: { label: "Text beside a picture", help: "Words next to an image." },
   list: { label: "Definition list", help: "Short terms with what each one means." },
+  story: { label: "Chapters + picture", help: "Text flows on the left, the picture on the right changes per chapter." },
   deck: { label: "Slide deck", help: "Scroll plays the slides one by one, like a story." },
   quote: { label: "Quote", help: "A pull-quote." },
   process: { label: "Process steps", help: "Numbered steps with a picture that follows along." },
