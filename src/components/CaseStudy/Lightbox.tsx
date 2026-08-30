@@ -100,6 +100,7 @@ export function Lightbox({ items, index, locale, onClose, onNavigate }: Lightbox
         <img
           key={current.slot}
           className={styles.image}
+          style={{ viewTransitionName: "zoom-media" }}
           src={current.src}
           alt={current.alt ?? current.caption ?? ""}
         />

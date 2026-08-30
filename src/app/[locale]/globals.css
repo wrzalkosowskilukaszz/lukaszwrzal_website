@@ -129,6 +129,20 @@ button {
   overflow: clip;
 }
 
+/* A clicked image morphs between its frame and the lightbox viewer. */
+::view-transition-group(zoom-media) {
+  animation-duration: 420ms;
+  animation-timing-function: var(--lw-ease-out);
+  z-index: 95; /* ride above the overlay's own fade */
+}
+::view-transition-old(zoom-media),
+::view-transition-new(zoom-media) {
+  animation: none;
+  mix-blend-mode: normal;
+  height: 100%;
+  overflow: clip;
+}
+
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*),
   ::view-transition-old(*),

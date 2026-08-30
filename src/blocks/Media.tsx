@@ -67,6 +67,7 @@ export function Media({
     <figure style={{ margin: 0 }}>
       <div
         ref={frameRef}
+        data-media-slot={zoomable ? media.src : undefined}
         className={`${s.frame} ${radiusClass} ${zoomable ? s.zoomable : ""}`}
         style={{
           height,
