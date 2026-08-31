@@ -265,6 +265,7 @@
             },
             "width": {
               "enum": [
+                "read",
                 "content",
                 "stage",
                 "full-bleed"

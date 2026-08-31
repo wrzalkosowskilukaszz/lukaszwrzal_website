@@ -17,7 +17,7 @@
     {
       "type": "figure",
       "src": "01.jpg",
-      "width": "stage",
+      "width": "read",
       "parallax": 0.1,
       "link": {
         "href": "https://surveyvor.app",

@@ -77,6 +77,7 @@ export const BLOCK_FIELDS: Record<BlockType, FieldDef[]> = {
   figure: [
     { key: "src", label: "Picture", kind: "media", required: true },
     { key: "width", label: "Size", kind: "select", options: [
+      { value: "read", label: "Text width — heroes" },
       { value: "content", label: "Normal" }, { value: "stage", label: "Large, rounded corners" },
       { value: "full-bleed", label: "Edge to edge" },
     ] },

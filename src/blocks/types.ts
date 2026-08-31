@@ -66,8 +66,8 @@ export interface StatementBlock extends Base {
 
 export interface FigureBlock extends Base, Media {
   type: "figure";
-  /** How wide the frame sits. */
-  width?: "content" | "stage" | "full-bleed";
+  /** How wide the frame sits. `read` matches the 1200px text grid. */
+  width?: "read" | "content" | "stage" | "full-bleed";
   /** 0–0.3. Overscan parallax as it passes the viewport. */
   parallax?: number;
   /** `ink` paints the frame navy — animations and cut-outs read better on

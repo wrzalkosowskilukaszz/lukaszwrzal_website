@@ -10,7 +10,7 @@ import { mediaUrl, tx, txAll, type BlockContext } from "./shared";
 import type { FigureBlock, GalleryBlock, TextMediaBlock, VideoBlock } from "./types";
 
 const widthClass = (w?: string) =>
-  w === "stage" ? s.stage : w === "full-bleed" ? s.fullBleed : s.content;
+  w === "read" ? s.read : w === "stage" ? s.stage : w === "full-bleed" ? s.fullBleed : s.content;
 
 export function Figure({ block, ctx, index }: { block: FigureBlock; ctx: BlockContext; index?: number }) {
   const width = block.width ?? "content";
@@ -24,7 +24,7 @@ export function Figure({ block, ctx, index }: { block: FigureBlock; ctx: BlockCo
         link={block.link}
         radius={width === "full-bleed" ? "flat" : width === "stage" ? "stage" : "tile"}
         height={width === "stage" ? "clamp(340px, 50vw, 700px)" : undefined}
-        ratio={width === "stage" ? undefined : "16 / 10"}
+        ratio={width === "stage" ? undefined : width === "read" ? "2 / 1" : "16 / 10"}
         parallax={block.parallax ?? 0}
       />
     </div>

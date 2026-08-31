@@ -211,7 +211,9 @@
 .quoteInner {
   position: relative;
   z-index: 1;
-  max-width: min(720px, 90%);
+  /* Wide enough for a full-length quote to sit on TWO lines at display
+     size — 720px forced three, which reads as a paragraph, not a quote. */
+  max-width: min(940px, 92%);
   margin-inline: auto;
   text-align: center;
 }
@@ -471,8 +473,8 @@
    role mint is reserved for. */
 .liveLink {
   position: absolute;
-  right: 16px;
-  bottom: 16px;
+  right: 24px;
+  bottom: 24px;
   z-index: 3;
   display: inline-flex;
   align-items: center;
