@@ -115,6 +115,12 @@ Tests cover the block registry invariants and lowercase-filename rule
 
 ## Never
 
+- **Set text in columns.** Not two-column prose, not statement-beside-
+  paragraphs, not any side-by-side text arrangement — tried three times
+  (auto-fit prose grid, the label rail, the split chapter), rejected
+  three times. Copy stacks on the single measure; a short section's
+  empty right side is air, not a defect. The ONLY side-by-side is text
+  beside an IMAGE (story block).
 - Rebuild in-place content editing (contentEditable on React DOM died
   with removeChild errors; the Studio exists instead).
 - Route content through the old Claude-Design prototypes — image-slot.js
