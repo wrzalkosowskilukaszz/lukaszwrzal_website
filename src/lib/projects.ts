@@ -153,7 +153,7 @@ function cardImage(doc: ProjectDoc): string | undefined {
       : b.type === "story" || b.type === "deck" ? b.items
       : [];
     for (const m of media) {
-      if (m.src && m.missing === false && !/\.(mp4|webm)$/i.test(m.src)) {
+      if (m.src && m.missing === false && !/\.(mp4|webm|json)$/i.test(m.src)) {
         return `/work/${doc.slug}/${m.src}`;
       }
     }

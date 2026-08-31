@@ -38,7 +38,7 @@ export function ProjectPage({
   const gallery = useMemo<LightboxItem[]>(() => {
     const out: LightboxItem[] = [];
     const push = (src: string, caption?: string) => {
-      if (/\.(mp4|webm)$/i.test(src)) return;
+      if (/\.(mp4|webm|json)$/i.test(src)) return;
       out.push({ slot: src, src: mediaUrl(doc.slug, src), caption });
     };
     for (const b of doc.blocks as Block[]) {

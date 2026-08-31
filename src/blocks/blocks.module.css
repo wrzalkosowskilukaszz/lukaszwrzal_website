@@ -450,3 +450,7 @@
 .storyLayer:not(:first-child) { clip-path: inset(0 0 100% 0); }
 /* Media inside fills the frame */
 .storyLayer figure, .storyLayer figure > div { height: 100%; }
+
+/* Lottie mounts fill their frame; the SVG scales like a covered image. */
+.lottie { position: absolute; inset: 0; }
+.lottie svg { width: 100%; height: 100%; display: block; }

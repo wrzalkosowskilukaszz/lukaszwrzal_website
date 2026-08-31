@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import type { AnimationItem } from "lottie-web";
 
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { subscribe } from "@/lib/raf";
@@ -52,13 +53,40 @@ export function Media({
     });
   }, [parallax, reduced]);
 
+  /* Lottie files mount a vector player; the library loads only when a page
+     actually contains one. Reduced motion holds frame zero. */
+  const lottieRef = useRef<HTMLDivElement | null>(null);
+  const isLottieSrc = /\.json$/i.test(media.src);
+  useEffect(() => {
+    if (!isLottieSrc || media.missing === true) return;
+    const el = lottieRef.current;
+    if (!el) return;
+    let anim: AnimationItem | null = null;
+    let dead = false;
+    void import("lottie-web/build/player/lottie_light").then((mod) => {
+      if (dead || !lottieRef.current) return;
+      anim = mod.default.loadAnimation({
+        container: lottieRef.current,
+        renderer: "svg",
+        loop: true,
+        autoplay: !reduced,
+        path: mediaUrl(ctx.slug, media.src),
+      });
+    });
+    return () => {
+      dead = true;
+      anim?.destroy();
+    };
+  }, [isLottieSrc, media.missing, media.src, ctx.slug, reduced]);
+
   /* `missing` is set by the loader for files that do not exist yet. An empty
      well is a designed state; a broken-image icon is not. */
   const missing = media.missing === true;
   const url = mediaUrl(ctx.slug, media.src);
   const isVideo = /\.(mp4|webm)$/i.test(media.src);
+  const isLottie = /\.json$/i.test(media.src);
   const caption = tx(media.caption, ctx.locale);
-  const zoomable = Boolean(ctx.onOpenMedia) && !isVideo && !missing;
+  const zoomable = Boolean(ctx.onOpenMedia) && !isVideo && !isLottie && !missing;
 
   const radiusClass =
     radius === "stage" ? s.frameStage : radius === "flat" ? s.frameFlat : s.frameTile;
@@ -89,7 +117,9 @@ export function Media({
         }
         aria-label={zoomable ? tx(media.alt, ctx.locale) || caption : undefined}
       >
-        {missing ? null : isVideo ? (
+        {missing ? null : isLottie ? (
+          <div className={s.lottie} ref={lottieRef} aria-label={tx(media.alt, ctx.locale) || undefined} />
+        ) : isVideo ? (
           <video src={url} autoPlay={!reduced} muted loop playsInline preload="metadata" />
         ) : parallax > 0 ? (
           <div className={s.inner} ref={innerRef}>
