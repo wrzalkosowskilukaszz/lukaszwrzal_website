@@ -430,18 +430,24 @@
   gap: clamp(2.5rem, 6vw, 5.5rem);
   align-items: start;
 }
-/* Enough travel per chapter for the frame to dwell. */
-.storyPinned .storyChapter { min-height: 58vh; }
+/* Enough travel per chapter for the frame to dwell — sized against the
+   4:3 frame, not the viewport, so a short chapter never leaves a canyon
+   of empty column beside a tall picture. */
+.storyPinned .storyChapter { min-height: clamp(320px, 40vh, 460px); }
 .storyPinned .storyInlineMedia { display: none; }
 .storyPinned .storyMedia {
   display: block;
   position: sticky;
   top: clamp(72px, 10vh, 120px);
 }
+/* The frame takes the ASSET's shape — the site's image spec is 4:3
+   (2400x1800) — instead of a viewport-tall portrait that cover-cropped
+   the sides off every landscape graphic. Tile radius: the stage radius
+   read as a blob at this size. */
 .storyFrame {
   position: relative;
-  height: min(66vh, 620px);
-  border-radius: var(--lw-radius-stage);
+  aspect-ratio: 4 / 3;
+  border-radius: var(--lw-radius-tile);
   overflow: hidden;
   background: var(--lw-tile);
   box-shadow: var(--lw-shadow-tile);

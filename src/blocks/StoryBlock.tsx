@@ -135,7 +135,7 @@ export function Story({ block, ctx }: { block: StoryBlock; ctx: BlockContext }) 
                   ref={(el) => { mediaRefs.current[i] = el; }}
                   className={s.storyLayer}
                 >
-                  <Media media={item as { src: string; missing?: boolean }} ctx={ctx} radius="stage" height="100%" />
+                  <Media media={item as { src: string; missing?: boolean }} ctx={ctx} radius="flat" height="100%" />
                 </div>
               ) : null,
             )}
