@@ -73,6 +73,9 @@ export interface FigureBlock extends Base, Media {
   /** `ink` paints the frame navy — animations and cut-outs read better on
       dark than on the tile well. */
   tone?: "ink";
+  /** A live destination pinned to the frame — the mint pill in the corner.
+      For the hero figure of a shipped project. */
+  link?: { href: string; label?: Localised };
 }
 
 export interface GalleryBlock extends Base {

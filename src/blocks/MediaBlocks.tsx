@@ -21,6 +21,7 @@ export function Figure({ block, ctx, index }: { block: FigureBlock; ctx: BlockCo
         ctx={ctx}
         morph={index !== undefined && index === ctx.morphIndex}
         tone={block.tone}
+        link={block.link}
         radius={width === "full-bleed" ? "flat" : width === "stage" ? "stage" : "tile"}
         height={width === "stage" ? "clamp(340px, 50vw, 700px)" : undefined}
         ratio={width === "stage" ? undefined : "16 / 10"}

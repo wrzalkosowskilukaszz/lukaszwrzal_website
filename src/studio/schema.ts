@@ -19,6 +19,7 @@ export type FieldKind =
   | "terms"
   | "steps"
   | "chapters"
+  | "link"
   | "stats"
   | "roles"
   | "spacing";
@@ -85,6 +86,8 @@ export const BLOCK_FIELDS: Record<BlockType, FieldDef[]> = {
     { key: "tone", label: "Frame colour", kind: "select", options: [
       { value: "", label: "Paper (default)" }, { value: "ink", label: "Navy — for animations and cut-outs" },
     ] },
+    { key: "link", label: "Live site (optional)", kind: "link",
+      help: "Shows a mint button in the picture's corner." },
   ],
   gallery: [
     { key: "variant", label: "Layout", kind: "select", options: [

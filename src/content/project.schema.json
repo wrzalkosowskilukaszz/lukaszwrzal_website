@@ -294,6 +294,21 @@
               "enum": [
                 "ink"
               ]
+            },
+            "link": {
+              "type": "object",
+              "properties": {
+                "href": {
+                  "type": "string"
+                },
+                "label": {
+                  "$ref": "#/$defs/localised"
+                }
+              },
+              "required": [
+                "href"
+              ],
+              "additionalProperties": false
             }
           }
         },

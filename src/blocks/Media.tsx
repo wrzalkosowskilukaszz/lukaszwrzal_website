@@ -6,6 +6,8 @@ import type { AnimationItem } from "lottie-web";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { subscribe } from "@/lib/raf";
 
+import { ArrowDiagonal } from "@/components/icons/Arrows";
+
 import s from "./blocks.module.css";
 import { mediaUrl, tx, type BlockContext } from "./shared";
 import type { Media as MediaData } from "./types";
@@ -24,6 +26,7 @@ export function Media({
   parallax = 0,
   morph = false,
   tone,
+  link,
 }: {
   media: MediaData;
   ctx: BlockContext;
@@ -37,6 +40,8 @@ export function Media({
   morph?: boolean;
   /** `ink` paints the frame navy behind the media. */
   tone?: "ink";
+  /** Live destination pinned to the frame's corner as a mint pill. */
+  link?: { href: string; label?: import("./types").Localised };
 }) {
   const frameRef = useRef<HTMLDivElement | null>(null);
   const innerRef = useRef<HTMLDivElement | null>(null);
@@ -134,6 +139,20 @@ export function Media({
           // eslint-disable-next-line @next/next/no-img-element
           <img src={url} alt={tx(media.alt, ctx.locale)} loading="lazy" decoding="async" />
         )}
+        {link?.href ? (
+          <a
+            className={s.liveLink}
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {tx(link.label, ctx.locale) || "View live site"}
+            <span className={s.liveLinkDisc} aria-hidden="true">
+              <ArrowDiagonal size={13} />
+            </span>
+          </a>
+        ) : null}
       </div>
       {caption ? <figcaption className={s.caption}>{caption}</figcaption> : null}
     </figure>

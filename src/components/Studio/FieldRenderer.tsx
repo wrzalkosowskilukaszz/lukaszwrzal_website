@@ -173,6 +173,31 @@ export function FieldRenderer({
       );
     }
 
+    case "link": {
+      const v = (value as { href?: string; label?: Localised } | undefined) ?? {};
+      return (
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          <div>
+            <span className={s.langLabel}>Web address (https://…)</span>
+            <input
+              className={s.input}
+              type="url"
+              value={v.href ?? ""}
+              placeholder="https://example.com"
+              onChange={(e) => {
+                const href = e.target.value;
+                onChange(href ? { ...v, href } : undefined);
+              }}
+            />
+          </div>
+          <div>
+            <span className={s.langLabel}>Button text (default: View live site)</span>
+            <LocalisedField value={v.label} onChange={(label) => onChange({ ...v, label })} />
+          </div>
+        </div>
+      );
+    }
+
     case "chapters": {
       const items = (value as ChapterItem[] | undefined) ?? [];
       return (
