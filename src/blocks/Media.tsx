@@ -23,6 +23,7 @@ export function Media({
   ratio,
   parallax = 0,
   morph = false,
+  tone,
 }: {
   media: MediaData;
   ctx: BlockContext;
@@ -34,6 +35,8 @@ export function Media({
   /** Names this frame `project-media`, the shared element a clicked work
       tile morphs into. At most one Media per page may set it. */
   morph?: boolean;
+  /** `ink` paints the frame navy behind the media. */
+  tone?: "ink";
 }) {
   const frameRef = useRef<HTMLDivElement | null>(null);
   const innerRef = useRef<HTMLDivElement | null>(null);
@@ -101,6 +104,7 @@ export function Media({
           height,
           aspectRatio: height ? undefined : ratio,
           viewTransitionName: morph ? "project-media" : undefined,
+          background: tone === "ink" ? "var(--lw-ink)" : undefined,
         }}
         onClick={zoomable ? () => ctx.onOpenMedia?.(media.src) : undefined}
         role={zoomable ? "button" : undefined}

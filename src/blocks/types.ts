@@ -70,6 +70,9 @@ export interface FigureBlock extends Base, Media {
   width?: "content" | "stage" | "full-bleed";
   /** 0–0.3. Overscan parallax as it passes the viewport. */
   parallax?: number;
+  /** `ink` paints the frame navy — animations and cut-outs read better on
+      dark than on the tile well. */
+  tone?: "ink";
 }
 
 export interface GalleryBlock extends Base {

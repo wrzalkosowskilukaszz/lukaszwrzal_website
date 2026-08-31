@@ -289,6 +289,11 @@
             },
             "spacing": {
               "$ref": "#/$defs/spacing"
+            },
+            "tone": {
+              "enum": [
+                "ink"
+              ]
             }
           }
         },

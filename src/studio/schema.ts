@@ -82,6 +82,9 @@ export const BLOCK_FIELDS: Record<BlockType, FieldDef[]> = {
     { key: "caption", label: "Caption (shown under the picture)", kind: "localisedText" },
     { key: "parallax", label: "Drift as you scroll (0 to 0.3)", kind: "number" },
     SPACING_FIELD,
+    { key: "tone", label: "Frame colour", kind: "select", options: [
+      { value: "", label: "Paper (default)" }, { value: "ink", label: "Navy — for animations and cut-outs" },
+    ] },
   ],
   gallery: [
     { key: "variant", label: "Layout", kind: "select", options: [

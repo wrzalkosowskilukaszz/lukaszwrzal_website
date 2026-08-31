@@ -64,7 +64,8 @@
     {
       "type": "figure",
       "src": "08.json",
-      "width": "content"
+      "width": "content",
+      "tone": "ink"
     },
     {
       "type": "quote",
