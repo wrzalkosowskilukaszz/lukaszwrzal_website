@@ -200,7 +200,8 @@
             "variant": {
               "enum": [
                 "single",
-                "two-column"
+                "two-column",
+                "centred"
               ]
             },
             "eyebrow": {

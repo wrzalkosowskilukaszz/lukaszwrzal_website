@@ -62,6 +62,7 @@ export const BLOCK_FIELDS: Record<BlockType, FieldDef[]> = {
     { key: "statement", label: "Big statement (optional)", kind: "localisedText" },
     { key: "body", label: "Paragraphs", kind: "localisedList", required: true },
     { key: "variant", label: "Layout", kind: "select", options: [
+      { value: "centred", label: "Centred — closing sections" },
       { value: "two-column", label: "Two columns" }, { value: "single", label: "One column" },
     ] },
     SPACING_FIELD,

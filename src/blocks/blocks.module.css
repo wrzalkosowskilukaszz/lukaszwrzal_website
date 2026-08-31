@@ -517,3 +517,13 @@
   color: var(--lw-ink);
   text-wrap: balance;
 }
+
+/* Centred text section — the CLOSING register. A short final chapter set
+   hard left leaves a dead right half; centring makes the air symmetric
+   and intentional, joining the hero/quote/statement family. Text still
+   stacks on the single measure — never columns. */
+.chapterCentred { text-align: center; }
+.chapterCentred .secEyebrow { justify-content: center; }
+.chapterCentred .statement { max-width: 22ch; margin-inline: auto; }
+.chapterCentred .prose { max-width: 60ch; margin-inline: auto; text-align: left; }
+.chapterCentred .prose > p:first-child { text-align: center; }
