@@ -127,6 +127,9 @@ export interface StoryBlock extends Base {
       right wipes to each chapter's picture as it arrives. Text scroll is
       NEVER hijacked; on phones each picture simply sits inline after its
       chapter. Eyebrows join the page-wide chapter numbering. */
+  /** Which side the pinned picture sits on (default right). Alternating
+      consecutive stories keeps a long page from reading as one template. */
+  side?: "left" | "right";
   items: {
     eyebrow: Localised;
     statement?: Localised;

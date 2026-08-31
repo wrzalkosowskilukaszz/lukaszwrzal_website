@@ -553,6 +553,12 @@
                 "normal",
                 "loose"
               ]
+            },
+            "side": {
+              "enum": [
+                "left",
+                "right"
+              ]
             }
           },
           "required": [

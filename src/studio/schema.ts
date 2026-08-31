@@ -115,6 +115,9 @@ export const BLOCK_FIELDS: Record<BlockType, FieldDef[]> = {
     SPACING_FIELD,
   ],
   story: [
+    { key: "side", label: "Picture side", kind: "select", options: [
+      { value: "", label: "Right (default)" }, { value: "left", label: "Left" },
+    ] },
     { key: "items", label: "Chapters", kind: "chapters", required: true,
       help: "Each chapter: small label, big line, copy, and its picture. On a big screen the picture sits beside the text and changes as you read; on a phone it sits under its chapter." },
     SPACING_FIELD,

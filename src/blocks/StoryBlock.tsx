@@ -57,16 +57,17 @@ export function Story({ block, ctx }: { block: StoryBlock; ctx: BlockContext }) 
     const root = rootRef.current;
     if (!root) return;
 
-    /* The wipe hands over as a chapter's text crosses the sticky frame's
-       zone — a band around the upper third of the viewport, where the
-       reader's eye actually is when they start a chapter. */
+    /* The wipe BEGINS only when the incoming chapter's heading crosses
+       the reading line (~38% down the viewport) and completes over a short
+       band above it — never before. A pre-roll band was tried first and
+       swapped images while the reader was still mid-chapter. */
     return subscribe(() => {
       const rect = root.getBoundingClientRect();
       const vh = window.innerHeight;
       if (rect.bottom < -100 || rect.top > vh + 100) return;
 
-      const anchor = vh * 0.42;
-      const band = Math.min(220, vh * 0.24);
+      const anchor = vh * 0.38;
+      const band = Math.min(180, vh * 0.2);
 
       for (let i = 0; i < n; i++) {
         const media = mediaRefs.current[i];
@@ -78,7 +79,7 @@ export function Story({ block, ctx }: { block: StoryBlock; ctx: BlockContext }) 
         }
         const ch = chapterRefs.current[i];
         if (!ch) continue;
-        const t = clamp01((anchor - ch.getBoundingClientRect().top + band) / band);
+        const t = clamp01((anchor - ch.getBoundingClientRect().top) / band);
         media.style.clipPath =
           t <= 0 ? "inset(0 0 100% 0)" : t >= 1 ? "none" : `inset(0 0 ${(1 - t) * 100}% 0)`;
         media.style.visibility = t <= 0 ? "hidden" : "visible";
@@ -89,7 +90,7 @@ export function Story({ block, ctx }: { block: StoryBlock; ctx: BlockContext }) 
         const next = chapterRefs.current[i + 1];
         const media = mediaRefs.current[i];
         if (!next || !media) continue;
-        const tNext = clamp01((anchor - next.getBoundingClientRect().top + band) / band);
+        const tNext = clamp01((anchor - next.getBoundingClientRect().top) / band);
         if (tNext >= 1) media.style.visibility = "hidden";
       }
     });
@@ -98,7 +99,9 @@ export function Story({ block, ctx }: { block: StoryBlock; ctx: BlockContext }) 
   return (
     <section
       ref={rootRef}
-      className={`${s.story} ${pinned && withMedia ? s.storyPinned : ""}`}
+      className={`${s.story} ${pinned && withMedia ? s.storyPinned : ""} ${
+        block.side === "left" ? s.storyFlip : ""
+      }`}
     >
       <div className={s.storyText}>
         {block.items.map((item, i) => (

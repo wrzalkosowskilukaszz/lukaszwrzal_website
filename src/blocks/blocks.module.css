@@ -430,6 +430,11 @@
   gap: clamp(2.5rem, 6vw, 5.5rem);
   align-items: start;
 }
+/* Flipped: picture left, text right — alternate consecutive stories so a
+   page of chapters doesn't read as one repeated template. */
+.storyFlip.storyPinned { grid-template-columns: minmax(300px, 6fr) minmax(0, 7fr); }
+.storyFlip.storyPinned .storyMedia { order: -1; }
+
 /* Enough travel per chapter for the frame to dwell — sized against the
    4:3 frame, not the viewport, so a short chapter never leaves a canyon
    of empty column beside a tall picture. */
