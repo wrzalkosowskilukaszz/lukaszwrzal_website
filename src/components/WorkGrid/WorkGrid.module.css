@@ -30,28 +30,24 @@
 
 .card {
   flex: 0 0 auto;
-  /* CSS owns the RESTING layout, so the grid is correct with no JS, with JS
-     still booting, or in a background tab where rAF never fires. The spring
-     only overrides width while a hover is in flight. */
   width: var(--base);
-  /* Height is pinned from the resting width and never animates. aspect-ratio
-     would make the hover stretch vertical as well as horizontal — explicitly
-     rejected. */
+  /* Height pinned from the resting width; nothing about a tile animates
+     its box — the hover story lives INSIDE the tile. */
   height: clamp(200px, calc(var(--base-cq) * 0.72), 430px);
-  will-change: width;
+  /* The shared entrance: rise in visible order. Also replays on filter
+     change (the grid remounts), so filtering reads as the list
+     reorganising rather than being swapped. */
+  animation: cardIn 480ms var(--lw-ease-out) both;
+  animation-delay: min(calc(var(--i, 0) * 32ms), 420ms);
 }
 
-/* Filtering collapses a card in place rather than reflowing the whole grid. */
-.card[data-hidden="true"] {
-  position: absolute;
-  width: 0 !important;
-  height: 0 !important;
-  opacity: 0;
-  transform: scale(0.96);
-  pointer-events: none;
-  transition:
-    opacity 260ms var(--lw-ease-out),
-    transform 260ms var(--lw-ease-out);
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card { animation: none; }
 }
 
 .filters {

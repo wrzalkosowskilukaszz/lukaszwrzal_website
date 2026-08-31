@@ -121,6 +121,7 @@ export function WorkIndex({ projects, locale }: WorkIndexProps) {
           getMorphEl={() => floodRefs.current[i] ?? null}
           prefetch={false}
           className={styles.row}
+          style={{ ["--i" as string]: i }}
           ref={(el) => { rowRefs.current[i] = el; }}
           data-open={open === i || undefined}
           onPointerEnter={() => {

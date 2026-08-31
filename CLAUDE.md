@@ -79,8 +79,14 @@ KIND = one component + one registry line + Studio fields
   to progress, the scrollbar never lies. Luke asked for fullpage
   snap-scrolling once; accepted this instead when the reason was clear.
 - **The layout moves, not the object.** Never `scale()` a tile on hover.
-  Hovered cards claim width via spring-interpolated sizes; neighbours
-  shed it. Labels live inside media.
+  Labels live inside media. The hover story lives INSIDE a tile: scrim
+  deepens, year/arrow surface, description unfolds, neighbours
+  desaturate. Width-claim springs were tried on the /work grid and
+  REJECTED (restless; mid-stretch rewrap clipped two-line copy) — tiles
+  there are static. The /work index row FLOODS instead: it claims a
+  little height while its image wipes in as the row's own background.
+  One shared entrance everywhere: rise + fade staggered ~32ms by
+  visible order, replayed on filter change (the grid/index remount).
 - Scroll-driven entrances: `animation-timeline: view()` on blocks after
   the first two (blocks.module.css) — scrubbed by scroll, not observer
   one-shots. He rejected kinetic/stretchy text ("looks cheap") and simple
@@ -104,6 +110,8 @@ the taste call — say so explicitly.
 
 Full check: `tsc --noEmit` · `eslint .` · `npm test` · `next build` ·
 fetch every `/en/work/<slug>` for 200. Node v26.7.0 via nvm.
+Tests cover the block registry invariants and lowercase-filename rule
+(the old work-grid width-spring tests left with that mechanic).
 
 ## Never
 
