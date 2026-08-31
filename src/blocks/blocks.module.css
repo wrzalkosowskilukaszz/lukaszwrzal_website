@@ -518,12 +518,10 @@
   text-wrap: balance;
 }
 
-/* Centred text section — the CLOSING register. A short final chapter set
-   hard left leaves a dead right half; centring makes the air symmetric
-   and intentional, joining the hero/quote/statement family. Text still
-   stacks on the single measure — never columns. */
-.chapterCentred { text-align: center; }
-.chapterCentred .secEyebrow { justify-content: center; }
-.chapterCentred .statement { max-width: 22ch; margin-inline: auto; }
-.chapterCentred .prose { max-width: 60ch; margin-inline: auto; text-align: left; }
-.chapterCentred .prose > p:first-child { text-align: center; }
+/* Wide text section — the CLOSING register. Everything stays LEFT on the
+   main margins (one alignment, no columns, no centring — both were tried
+   and rejected); statement and prose simply run the full grid width, so
+   a short final chapter owns its band edge to edge. */
+.chapterWide .statement { max-width: none; }
+.chapterWide .prose { max-width: none; }
+.chapterWide .prose p { text-wrap: pretty; }

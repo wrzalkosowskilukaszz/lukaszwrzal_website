@@ -43,13 +43,13 @@ export function Text({ block, ctx }: { block: TextBlock; ctx: BlockContext }) {
      single measure — text NEVER sets in columns, house rule), and a bare
      KICKER line spanning the width. */
   const kicker = !block.statement && !block.eyebrow;
-  const centred = block.variant === "centred";
+  const wide = block.variant === "wide";
 
   return (
     <section
       className={`${s.chapter} ${block.eyebrow ? s.chapterRuled : ""} ${
         kicker ? s.kicker : ""
-      } ${centred ? s.chapterCentred : ""}`}
+      } ${wide ? s.chapterWide : ""}`}
     >
       {block.eyebrow ? (
         <p className={`${s.eyebrow} ${s.secEyebrow}`}>{tx(block.eyebrow, ctx.locale)}</p>

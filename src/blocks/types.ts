@@ -53,7 +53,7 @@ export interface MetaBlock extends Base {
 
 export interface TextBlock extends Base {
   type: "text";
-  variant?: "single" | "two-column" | "centred";
+  variant?: "single" | "two-column" | "wide";
   eyebrow?: Localised;
   statement?: Localised;
   body: Localised[];
