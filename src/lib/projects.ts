@@ -62,8 +62,9 @@ function load(): ProjectDoc[] {
   for (const doc of docs) {
     const has = (src: string) =>
       existsSync(path.join(process.cwd(), "public", "work", doc.slug, src));
-    const mark = (m: { src?: string; missing?: boolean }) => {
+    const mark = (m: { src?: string; missing?: boolean; poster?: string }) => {
       if (m.src) m.missing = !has(m.src);
+      if (m.poster && !has(m.poster)) delete m.poster;
     };
     for (const b of doc.blocks) {
       if (b.type === "figure" || b.type === "textMedia") mark(b);
@@ -147,23 +148,34 @@ export function isDraftDoc(doc: ProjectDoc): boolean {
    grid tile (keep an 01.jpg still even when the hero becomes 01.mp4). */
 function cardImage(doc: ProjectDoc): string | undefined {
   for (const b of doc.blocks) {
-    const media: { src?: string; missing?: boolean }[] =
+    const media: { src?: string; missing?: boolean; poster?: string }[] =
       b.type === "figure" || b.type === "textMedia" ? [b]
       : b.type === "gallery" ? b.items
       : b.type === "story" || b.type === "deck" ? b.items
       : [];
     for (const m of media) {
-      if (m.src && m.missing === false && !/\.(mp4|webm|json)$/i.test(m.src)) {
-        return `/work/${doc.slug}/${m.src}`;
-      }
+      if (!m.src || m.missing !== false) continue;
+      if (!/\.(mp4|webm|json)$/i.test(m.src)) return `/work/${doc.slug}/${m.src}`;
+      /* A video hero's poster is its still — the tile image. */
+      if (m.poster) return `/work/${doc.slug}/${m.poster}`;
     }
   }
   return undefined;
 }
 
+/* Drop a `tile.mp4` into the project folder and its grid tile comes alive
+   on hover — fetched only then (preload=none), the card image standing in
+   as poster until. */
+function cardVideo(doc: ProjectDoc): string | undefined {
+  return existsSync(path.join(process.cwd(), "public", "work", doc.slug, "tile.mp4"))
+    ? `/work/${doc.slug}/tile.mp4`
+    : undefined;
+}
+
 export function toCard(doc: ProjectDoc, locale: Locale): ProjectCard {
   const stat = headline(doc, locale);
   const image = cardImage(doc);
+  const video = cardVideo(doc);
   return {
     slug: doc.slug,
     cat: doc.cat,
@@ -172,6 +184,7 @@ export function toCard(doc: ProjectDoc, locale: Locale): ProjectCard {
     desc: tx(doc.desc, locale),
     ...(stat ? { stat } : {}),
     ...(image ? { image } : {}),
+    ...(video ? { video } : {}),
   };
 }
 

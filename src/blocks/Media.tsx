@@ -129,7 +129,15 @@ export function Media({
         {missing ? null : isLottie ? (
           <div className={s.lottie} ref={lottieRef} aria-label={tx(media.alt, ctx.locale) || undefined} />
         ) : isVideo ? (
-          <video src={url} autoPlay={!reduced} muted loop playsInline preload="metadata" />
+          <video
+            src={url}
+            poster={media.poster ? mediaUrl(ctx.slug, media.poster) : undefined}
+            autoPlay={!reduced}
+            muted
+            loop
+            playsInline
+            preload="metadata"
+          />
         ) : parallax > 0 ? (
           <div className={s.inner} ref={innerRef}>
             {/* eslint-disable-next-line @next/next/no-img-element */}

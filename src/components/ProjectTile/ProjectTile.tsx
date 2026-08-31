@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from "react";
 
+import { useReducedMotion } from "@/hooks/useReducedMotion";
+
 import { TransitionLink } from "@/components/TransitionLink";
 
 import { CategoryTag } from "@/components/Category/Category";
@@ -41,6 +43,17 @@ export function ProjectTile({
 }: ProjectTileProps) {
   const descRef = useRef<HTMLDivElement | null>(null);
   const mediaRef = useRef<HTMLDivElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const reduced = useReducedMotion();
+
+  /* The hover video plays only while the tile has attention, and fetches
+     only on first play (preload=none) — a still tile costs zero bytes. */
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (active && !reduced) void v.play().catch(() => {});
+    else v.pause();
+  }, [active, reduced]);
 
   /* Only the hover-reveal variant animates height; when the descriptor is
      always shown there is nothing to measure. */
@@ -52,7 +65,7 @@ export function ProjectTile({
     el.style.height = active ? `${inner.scrollHeight}px` : "0px";
   }, [active, showDesc]);
 
-  const { image, stat } = project;
+  const { image, stat, video } = project;
 
   return (
     <TransitionLink
@@ -71,7 +84,17 @@ export function ProjectTile({
       onBlur={onDeactivate}
     >
       <div className={styles.media} ref={mediaRef}>
-        {image ? (
+        {video ? (
+          <video
+            ref={videoRef}
+            src={video}
+            poster={image}
+            muted
+            loop
+            playsInline
+            preload="none"
+          />
+        ) : image ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={image} alt="" loading="lazy" decoding="async" />
         ) : null}

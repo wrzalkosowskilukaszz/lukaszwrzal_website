@@ -16,13 +16,14 @@
     },
     {
       "type": "figure",
-      "src": "01.jpg",
+      "src": "01.mp4",
       "width": "read",
       "parallax": 0.1,
       "link": {
         "href": "https://auragen-ten.vercel.app/",
         "label": "View the live site"
-      }
+      },
+      "poster": "01.jpg"
     },
     {
       "type": "meta",

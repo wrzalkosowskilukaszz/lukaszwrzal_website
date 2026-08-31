@@ -33,5 +33,7 @@ export interface ProjectCard {
   /** Already filtered: absent when the outcome has not been written yet. */
   stat?: Stat;
   image?: string;
+  /** Hover video for the tile (tile.mp4 in the project folder). */
+  video?: string;
 }
 

@@ -24,6 +24,8 @@ export interface Media {
   /** Long caption, lightbox only. Falls back to `caption`. */
   lightboxCaption?: Localised;
   alt?: Localised;
+  /** For video media: the still shown before playback (e.g. "01.jpg"). */
+  poster?: string;
   /** Set by the loader when the file is not in public/work/<slug>/ yet. */
   missing?: boolean;
 }
