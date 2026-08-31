@@ -38,8 +38,8 @@ export function Media({
   /** Names this frame `project-media`, the shared element a clicked work
       tile morphs into. At most one Media per page may set it. */
   morph?: boolean;
-  /** `ink` paints the frame navy behind the media. */
-  tone?: "ink";
+  /** Dark frame behind the media: navy or pure black. */
+  tone?: "ink" | "black";
   /** Live destination pinned to the frame's corner as a mint pill. */
   link?: { href: string; label?: import("./types").Localised };
 }) {
@@ -109,7 +109,7 @@ export function Media({
           height,
           aspectRatio: height ? undefined : ratio,
           viewTransitionName: morph ? "project-media" : undefined,
-          background: tone === "ink" ? "var(--lw-ink)" : undefined,
+          background: tone === "ink" ? "var(--lw-ink)" : tone === "black" ? "#000" : undefined,
         }}
         onClick={zoomable ? () => ctx.onOpenMedia?.(media.src) : undefined}
         role={zoomable ? "button" : undefined}

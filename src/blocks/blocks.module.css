@@ -254,30 +254,30 @@
    brief contradict each other." Setting the term apart from its description
    is what makes the set readable at a glance instead of a wall of dashes. */
 
+/* Open editorial columns — a top rule and air, not a boxed table (the
+   hairline-cell grid was tried and read as a spreadsheet). */
 .listCards {
   display: grid;
   grid-template-columns: repeat(var(--list-cols, 2), minmax(0, 1fr));
-  gap: 1px;
-  background: rgba(7, 26, 49, 0.12);
-  border: 1px solid rgba(7, 26, 49, 0.12);
-  border-radius: var(--lw-radius-tile);
-  overflow: hidden;
+  gap: clamp(2rem, 4vw, 3rem) clamp(1.8rem, 3vw, 2.5rem);
 }
-/* An orphaned last card stretches to the row end, so the hairline grid can
-   never expose an empty painted cell. */
-.listCard:last-child { grid-column-end: -1; }
 .listCard {
-  background: var(--lw-paper);
-  padding: clamp(20px, 2.4vw, 30px);
+  border-top: 1px solid rgba(7, 26, 49, 0.22);
+  padding-top: 18px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 .listCount {
+  align-self: flex-start;
+  padding: 5px 10px;
+  border: 1px solid rgba(7, 26, 49, 0.22);
+  border-radius: var(--lw-radius-pill);
   font-family: var(--lw-font-mono);
   font-size: var(--t-label);
   letter-spacing: 0.1em;
-  color: var(--lw-muted);
+  line-height: 1;
+  color: var(--lw-ink);
   font-variant-numeric: tabular-nums;
 }
 .listTerm {
@@ -506,28 +506,14 @@
   .liveLink, .liveLink:hover, .liveLink:hover .liveLinkDisc { transform: none; }
 }
 
-/* ── Text registers on the read grid ───────────────────────────────────
-   Split chapter: statement left, prose right — the story blocks' 7:6
-   proportions, so a standalone chapter fills the same width instead of
-   stacking everything left and abandoning the right half. */
-@media (min-width: 900px) {
-  .chapterSplit {
-    display: grid;
-    grid-template-columns: minmax(0, 7fr) minmax(0, 6fr);
-    gap: 0 clamp(2.5rem, 6vw, 5.5rem);
-    align-items: start;
-  }
-  .chapterSplit .secEyebrow { grid-column: 1 / -1; }
-  .chapterSplit .statement { grid-column: 1; margin-bottom: 0; }
-  .chapterSplit .prose { grid-column: 2; max-width: 56ch; }
-}
-
 /* Kicker: a bare connective line (no label, no statement) runs the full
-   width at sub-display size — an interstitial thought, not a paragraph. */
+   width at body size with ink weight — an interstitial thought, not a
+   paragraph and not a heading. */
 .kicker .prose { max-width: none; }
 .kicker .prose p {
-  font-size: var(--t-md);
-  line-height: 1.45;
+  font-size: var(--t-base);
+  font-weight: 500;
+  line-height: 1.5;
   color: var(--lw-ink);
   text-wrap: balance;
 }

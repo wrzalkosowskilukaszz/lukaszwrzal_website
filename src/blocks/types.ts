@@ -70,9 +70,9 @@ export interface FigureBlock extends Base, Media {
   width?: "read" | "content" | "stage" | "full-bleed";
   /** 0–0.3. Overscan parallax as it passes the viewport. */
   parallax?: number;
-  /** `ink` paints the frame navy — animations and cut-outs read better on
-      dark than on the tile well. */
-  tone?: "ink";
+  /** Paints the frame dark behind the media — animations and cut-outs
+      read better on `ink` (navy) or `black` than on the tile well. */
+  tone?: "ink" | "black";
   /** A live destination pinned to the frame — the mint pill in the corner.
       For the hero figure of a shipped project. */
   link?: { href: string; label?: Localised };

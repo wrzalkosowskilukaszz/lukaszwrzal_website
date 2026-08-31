@@ -52,7 +52,7 @@
             "A lot of investor-facing communication responds by doing the same thing: make the company look credible. Use the right language. Show the right imagery. Say “data-driven,” “rigorous,” “science-led.”",
             "But a polished presentation is still a presentation. For AuraGen, I wanted to explore a different approach: what if the digital experience could demonstrate the company’s way of working instead of simply describing it?"
           ],
-          "src": "10.jpg"
+          "src": "11.jpg"
         }
       ]
     },
@@ -89,7 +89,7 @@
             "The website follows the same principle. Information is structured rather than overloaded. The interface creates hierarchy instead of visual noise. The dashboard becomes a central piece of evidence rather than a decorative screenshot.",
             "The result is an investor experience that doesn’t just say we know what we’re doing. It gives the visitor something to inspect."
           ],
-          "src": "11.jpg"
+          "src": "10.jpg"
         }
       ]
     },
@@ -97,7 +97,7 @@
       "type": "figure",
       "src": "08.json",
       "width": "read",
-      "tone": "ink"
+      "tone": "black"
     },
     {
       "type": "story",
@@ -129,27 +129,10 @@
           "statement": "One system instead of a collection of screens.",
           "body": [
             "The project was designed as a connected system from the beginning. The identity informs the website. The website informs the product interface. The product interface makes the proposition tangible. The same visual logic carries across all three.",
-            "That connection was important because the project isn’t really a branding exercise followed by a website. It’s one idea expressed at different levels: brand → interface → product."
+            "That connection was important because the project isn’t really a branding exercise followed by a website. It’s one idea expressed at different levels: brand → interface → product.",
+            "The identity establishes credibility, the website creates the narrative and the dashboard demonstrates the proposition."
           ],
           "src": "14.jpg"
-        }
-      ]
-    },
-    {
-      "type": "list",
-      "variant": "rows",
-      "items": [
-        {
-          "term": "The identity",
-          "description": "establishes credibility."
-        },
-        {
-          "term": "The website",
-          "description": "creates the narrative."
-        },
-        {
-          "term": "The dashboard",
-          "description": "demonstrates the proposition."
         }
       ]
     },

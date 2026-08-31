@@ -85,7 +85,8 @@ export const BLOCK_FIELDS: Record<BlockType, FieldDef[]> = {
     { key: "parallax", label: "Drift as you scroll (0 to 0.3)", kind: "number" },
     SPACING_FIELD,
     { key: "tone", label: "Frame colour", kind: "select", options: [
-      { value: "", label: "Paper (default)" }, { value: "ink", label: "Navy — for animations and cut-outs" },
+      { value: "", label: "Paper (default)" }, { value: "ink", label: "Navy" },
+      { value: "black", label: "Black — for animations and cut-outs" },
     ] },
     { key: "link", label: "Live site (optional)", kind: "link",
       help: "Shows a mint button in the picture's corner." },
