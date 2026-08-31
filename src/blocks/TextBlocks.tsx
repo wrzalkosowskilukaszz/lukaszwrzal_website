@@ -74,8 +74,9 @@ export function List({ block, ctx }: { block: ListBlock; ctx: BlockContext }) {
         <div
           className={`${s.listCards} ${numbered ? "" : s.listStat}`}
           style={{ ["--list-cols" as string]:
-            block.items.length <= 3 ? block.items.length
-            : block.items.length % 3 === 0 ? 3 : 2 }}
+            block.items.length <= 4 ? block.items.length
+            : block.items.length % 4 === 0 ? 4
+            : block.items.length % 3 === 0 ? 3 : 4 }}
         >
           {block.items.map((item, i) => (
             <div className={s.listCard} key={i}>

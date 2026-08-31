@@ -19,14 +19,13 @@
 }
 
 /* ── Chapters ──────────────────────────────────────────────────────────
-   Text and list sections sit on ONE centred reading column, narrower than
-   the media blocks around it — wide pictures, a settled column of words,
-   the classic case-study rhythm. Everything in a chapter shares this one
-   left edge: label, statement, prose. (A left label rail was tried and
-   rejected — it split the eye.) Sections with an eyebrow are ruled and
-   join one running number sequence; the counter is reset per case study
-   in CaseStudy.module.css. */
-.chapter { width: min(720px, 100% - 48px); margin-inline: auto; }
+   Standalone text and list sections sit on the SAME 1200px reading grid
+   as the story blocks, left-aligned — one left edge down the whole page.
+   (A 720px centred column was the pre-story layout; once stories put
+   chapters on the full grid, the centred interludes floated off it.)
+   Sections with an eyebrow are ruled and join one running number
+   sequence; the counter is reset per case study in CaseStudy.module.css. */
+.chapter { width: min(var(--lw-read-max), 100% - 48px); margin-inline: auto; }
 .chapterRuled {
   padding-top: 24px;
   border-top: 1px solid rgba(7, 26, 49, 0.14);
