@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "auragen-static",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "5331", "--directory", "/Users/lukewrzal/Desktop/Claude/Code/AuraGen/site"],
+      "port": 5331
+    }
+  ]
+}

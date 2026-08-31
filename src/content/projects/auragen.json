@@ -18,7 +18,11 @@
       "type": "figure",
       "src": "01.jpg",
       "width": "stage",
-      "parallax": 0.1
+      "parallax": 0.1,
+      "link": {
+        "href": "https://auragen-ten.vercel.app/",
+        "label": "View the live site"
+      }
     },
     {
       "type": "meta",
