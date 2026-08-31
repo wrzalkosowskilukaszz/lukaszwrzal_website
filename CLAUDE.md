@@ -57,12 +57,32 @@ KIND = one component + one registry line + Studio fields
   for Polish. Sentence case everywhere; ALL CAPS only in mono eyebrows.
   Rejected: Geist (the default of the moment), Bricolage (everyone's
   safe-quirky pick), JetBrains Mono (reads developer-tool).
-- **Case-study chapters:** text/list sections sit on ONE centred 720px
-  column — wide media, settled words. A section with an `eyebrow` gets a
-  hairline and an auto-numbered pill (CSS counter `lwsec`, reset per page)
-  — never type numbers into content. A left label rail was tried and
-  REJECTED: it split the eye. Prose measure is 66ch; first paragraph is
-  the inked lede; `two-column` renders only with exactly two paragraphs.
+- **ONE grid on case pages: 1200px, one left edge.** Everything — hero
+  figure (width `read`, 2:1, 22px corners), story blocks, lists, codas —
+  aligns to it. A section with an `eyebrow` gets a hairline and an
+  auto-numbered pill (CSS counter `lwsec`) — never type numbers into
+  content. Prose measure 66ch, first paragraph inked lede. Text
+  registers: labelled flow (stacked), `wide` (closing sections: left,
+  full grid width), kicker (bare connective line, full width, body size).
+  A 720px centred column, a left label rail, split statement/prose and a
+  centred close were ALL tried and rejected.
+- **Story block is the case-study spine:** chapters flow as text while a
+  pinned 4:3 frame beside them wipes per chapter (starts when the
+  incoming heading crosses 38% of the viewport — no pre-roll); `side:
+  "left"` flips it; alternate consecutive stories. Deck = pinned slide
+  wipes, Expondo Blackout only. List cards are OPEN editorial columns
+  (top rule + pill number), never boxed cells.
+- **Media conventions:** images 2400x1800 JPEG q80 (recompress uploads:
+  Pillow quality 80 progressive). Hero video = 01.mp4 + poster 01.jpg;
+  tile.mp4 in a project folder auto-animates its grid tile on hover
+  (preload=none); the homepage reel plays card.heroVideo on the active
+  plane only. Encode: ffmpeg -vf scale=1280:-2 -crf 23 -preset slow -an
+  (tiles: 960/-2, crf 26). Lottie plays via lottie-web light (dynamic
+  import); compress embedded rasters inside the JSON. Figures take
+  tone (ink/black) and link {href,label} — the mint live-site pill.
+- **/work:** grid tiles are STATIC (hover story lives inside the tile);
+  the index row FLOODS with its image; both views share one staggered
+  rise entrance that replays on filter change.
 - **The aurora** is a WebGL noise-flow shader (`src/components/Aurora/`)
   in the five brand colours — drifts on its own clock, leans with section
   travel, quickens with scroll velocity. Ramp is tuned to ~25% paper /
@@ -133,6 +153,14 @@ Tests cover the block registry invariants and lowercase-filename rule
 - Docx notes-to-self published as site copy (it happened; three were
   removed — watch for "the portfolio version should…" phrasing).
 
+## External pieces
+
+- AuraGen live site: https://auragen-ten.vercel.app/ — source at
+  ~/Desktop/Claude/Code/AuraGen/site (NOT a git repo; deployed by manual
+  upload — after edits Luke re-uploads). Its mobile matrix fix is local.
+- Surveyvor live at surveyvor.app. Launch configs: portfolio-site (this
+  app), auragen-site (static). /type-lab and /studio are dev-only.
+
 ## Open items
 
 - **Images are the ceiling:** every gallery is a placeholder well. Real
@@ -141,8 +169,8 @@ Tests cover the block registry invariants and lowercase-filename rule
   string | {en, pl}` is ready).
 - Three projects want one real metric each: Expondo Blackout, Rennes,
   Resi4Rent Website.
-- Deck block ships on Expondo Blackout as the trial; Luke judges before
-  it spreads. Slide bodies there are light editorial glue written from
-  the copy's own eclipse sentence — Luke may want to rewrite.
+- AuraGen is the finished reference page (real copy, images, video,
+  Lottie). The other 15 await Luke's new copy — rebuild each around its
+  own structure the way AuraGen was, not the migration template.
 - Gallery rhythm is uniform across projects (migration artifact); vary
   per project (masonry/strip/full-bleed) once real images land.
