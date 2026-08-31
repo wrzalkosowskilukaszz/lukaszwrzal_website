@@ -35,5 +35,7 @@ export interface ProjectCard {
   image?: string;
   /** Hover video for the tile (tile.mp4 in the project folder). */
   video?: string;
+  /** The hero figure's video at full size, for the homepage reel. */
+  heroVideo?: string;
 }
 

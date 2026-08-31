@@ -31,6 +31,7 @@ export function HeroReel({ projects, locale }: HeroReelProps) {
   const ptr = useRef({ x: new Spring(0, 60, 14), y: new Spring(0, 60, 14) });
   const activeRef = useRef(0);
   const [active, setActive] = useState(0);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const reduced = useReducedMotion();
 
   /* Every input — scroll, drag, keys, segment clicks — resolves to a scroll
@@ -193,6 +194,16 @@ export function HeroReel({ projects, locale }: HeroReelProps) {
     };
   }, [count, reduced, goTo]);
 
+  /* Only the visible plane spends decode time; the rest hold their
+     poster. Reduced motion keeps every plane on its still. */
+  useEffect(() => {
+    videoRefs.current.forEach((v, i) => {
+      if (!v) return;
+      if (i === active && !reduced) void v.play().catch(() => {});
+      else v.pause();
+    });
+  }, [active, reduced]);
+
   const current = projects[active];
   const titleRef = useTitleRoll(
     current ? `${current.title} — ${current.desc}` : "",
@@ -216,9 +227,20 @@ export function HeroReel({ projects, locale }: HeroReelProps) {
               aria-hidden={i !== active}
             >
               <div className={styles.media} ref={(el) => { mediaRefs.current[i] = el; }}>
-                {/* Hero reel motion files pending — 1600x900, 4–8s seamless
-                    loop, MP4/WebM. Until they land this is the designed
-                    empty well. */}
+                {p.heroVideo ?? p.video ? (
+                  <video
+                    ref={(el) => { videoRefs.current[i] = el; }}
+                    src={p.heroVideo ?? p.video}
+                    poster={p.image}
+                    muted
+                    loop
+                    playsInline
+                    preload={i === 0 ? "metadata" : "none"}
+                  />
+                ) : p.image ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={p.image} alt="" loading={i === 0 ? "eager" : "lazy"} decoding="async" />
+                ) : null}
               </div>
             </div>
           ))}

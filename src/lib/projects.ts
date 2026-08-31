@@ -163,6 +163,17 @@ function cardImage(doc: ProjectDoc): string | undefined {
   return undefined;
 }
 
+/* The hero figure's own video (e.g. 01.mp4) — the big rendition, for the
+   homepage reel's stage-size planes. */
+function cardHeroVideo(doc: ProjectDoc): string | undefined {
+  for (const b of doc.blocks) {
+    if (b.type === "figure" && b.missing === false && /\.(mp4|webm)$/i.test(b.src)) {
+      return `/work/${doc.slug}/${b.src}`;
+    }
+  }
+  return undefined;
+}
+
 /* Drop a `tile.mp4` into the project folder and its grid tile comes alive
    on hover — fetched only then (preload=none), the card image standing in
    as poster until. */
@@ -176,6 +187,7 @@ export function toCard(doc: ProjectDoc, locale: Locale): ProjectCard {
   const stat = headline(doc, locale);
   const image = cardImage(doc);
   const video = cardVideo(doc);
+  const heroVideo = cardHeroVideo(doc);
   return {
     slug: doc.slug,
     cat: doc.cat,
@@ -185,6 +197,7 @@ export function toCard(doc: ProjectDoc, locale: Locale): ProjectCard {
     ...(stat ? { stat } : {}),
     ...(image ? { image } : {}),
     ...(video ? { video } : {}),
+    ...(heroVideo ? { heroVideo } : {}),
   };
 }
 
