@@ -59,10 +59,13 @@ void main() {
   vec2 uv = gl_FragCoord.xy / u_res;
   vec2 p = uv * vec2(u_res.x / u_res.y, 1.0) * 1.55;
 
-  /* Scroll velocity feeds the clock and the warp — the field flows faster
-     and folds harder while the page is moving, then settles. */
-  float t = u_time * 0.045 + u_vel * u_time * 0.10;
-  float warp = 2.2 + u_vel * 1.4;
+  /* u_time arrives as a phase already integrated on the CPU — scroll
+     velocity accelerates its RATE there and does nothing else. A velocity
+     term on the warp was measured to churn the whole field's structure
+     (~35x the resting frame-to-frame change even when eased); speeding the
+     clock alone tops out at ~2x resting, which reads as stirred water. */
+  float t = u_time * 0.045;
+  float warp = 2.2;
 
   vec2 q = vec2(
     fbm(p + vec2(0.0, t)),

@@ -75,6 +75,7 @@ export function Aurora({ masked = false }: AuroraProps) {
     let ptrX = 0, ptrY = 0, tgtX = 0, tgtY = 0;
     let lastScrollY = window.scrollY;
     let vel = 0; // smoothed |scroll velocity|, 0..1
+    let phase = 0; // the field clock: scroll speeds its rate, never jumps it
 
     const onMove = (e: PointerEvent) => {
       tgtX = (e.clientX / window.innerWidth) * 2 - 1;
@@ -95,6 +96,7 @@ export function Aurora({ masked = false }: AuroraProps) {
       lastScrollY = window.scrollY;
       const instant = clamp01(Math.abs(dy / Math.max(dt, 0.001)) / 2600);
       vel += (instant - vel) * (instant > vel ? 0.16 : 0.03); // fast in, slow out
+      phase += dt * (1 + vel * 1.2);
 
       if (rect.bottom < -300 || rect.top > vh + 300) return;
 
@@ -109,7 +111,7 @@ export function Aurora({ masked = false }: AuroraProps) {
       }
 
       if (gl) {
-        gl.draw(elapsed, travel, vel, ptrX, ptrY);
+        gl.draw(phase, travel, vel, ptrX, ptrY);
         return;
       }
 
