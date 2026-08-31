@@ -505,3 +505,29 @@
 @media (prefers-reduced-motion: reduce) {
   .liveLink, .liveLink:hover, .liveLink:hover .liveLinkDisc { transform: none; }
 }
+
+/* ── Text registers on the read grid ───────────────────────────────────
+   Split chapter: statement left, prose right — the story blocks' 7:6
+   proportions, so a standalone chapter fills the same width instead of
+   stacking everything left and abandoning the right half. */
+@media (min-width: 900px) {
+  .chapterSplit {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 6fr);
+    gap: 0 clamp(2.5rem, 6vw, 5.5rem);
+    align-items: start;
+  }
+  .chapterSplit .secEyebrow { grid-column: 1 / -1; }
+  .chapterSplit .statement { grid-column: 1; margin-bottom: 0; }
+  .chapterSplit .prose { grid-column: 2; max-width: 56ch; }
+}
+
+/* Kicker: a bare connective line (no label, no statement) runs the full
+   width at sub-display size — an interstitial thought, not a paragraph. */
+.kicker .prose { max-width: none; }
+.kicker .prose p {
+  font-size: var(--t-md);
+  line-height: 1.45;
+  color: var(--lw-ink);
+  text-wrap: balance;
+}

@@ -39,8 +39,19 @@ export function Text({ block, ctx }: { block: TextBlock; ctx: BlockContext }) {
      request. */
   const pair = block.variant === "two-column" && paras.length === 2;
 
+  /* Three registers on the same grid: a SPLIT chapter (statement left,
+     prose right — the story blocks' proportions, so nothing leaves a dead
+     right side), a labelled flow, and a bare KICKER line spanning the
+     width. */
+  const split = Boolean(block.statement) && !pair;
+  const kicker = !block.statement && !block.eyebrow;
+
   return (
-    <section className={`${s.chapter} ${block.eyebrow ? s.chapterRuled : ""}`}>
+    <section
+      className={`${s.chapter} ${block.eyebrow ? s.chapterRuled : ""} ${
+        split ? s.chapterSplit : ""
+      } ${kicker ? s.kicker : ""}`}
+    >
       {block.eyebrow ? (
         <p className={`${s.eyebrow} ${s.secEyebrow}`}>{tx(block.eyebrow, ctx.locale)}</p>
       ) : null}
