@@ -74,9 +74,20 @@
   overflow: hidden;
 }
 
+/* A bounded-height strip inherently balloons in ratio as the row grows
+   (full row width up to 1808px against a 340px cap was measuring 5.3:1 —
+   the crop the user flagged). A bounded-ratio strip at full width instead
+   balloons in HEIGHT as the row grows (900px+ tall at the same width),
+   losing the "quick reveal" feel. Capping the plate's own width keeps
+   both bounded: a contained cinematic still, centered, matching the
+   ~1.9:1 max crop the case-study hero already asks of the same source
+   image — one shooting ratio serves both slots. */
 .media {
-  height: clamp(180px, 26vw, 340px);
-  margin: 0 8px 20px;
+  width: calc(100% - 16px);
+  max-width: 640px;
+  aspect-ratio: 1.9 / 1;
+  height: auto;
+  margin: 0 auto 20px;
   border-radius: var(--lw-radius-tile);
   overflow: hidden;
   background: var(--lw-tile);
