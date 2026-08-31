@@ -67,33 +67,7 @@
 }
 .row[data-open="true"] .arrow { opacity: 1; transform: translateX(4px); }
 
-/* The claimed panel. Height is spring-driven from JS; overflow hides the
-   media until the row opens. */
-.reveal {
-  height: 0;
-  overflow: hidden;
-}
 
-/* A bounded-height strip inherently balloons in ratio as the row grows
-   (full row width up to 1808px against a 340px cap was measuring 5.3:1 —
-   the crop the user flagged). A bounded-ratio strip at full width instead
-   balloons in HEIGHT as the row grows (900px+ tall at the same width),
-   losing the "quick reveal" feel. Capping the plate's own width keeps
-   both bounded: a contained cinematic still, centered, matching the
-   ~1.9:1 max crop the case-study hero already asks of the same source
-   image — one shooting ratio serves both slots. */
-.media {
-  width: calc(100% - 16px);
-  max-width: 640px;
-  aspect-ratio: 1.9 / 1;
-  height: auto;
-  margin: 0 auto 20px;
-  border-radius: var(--lw-radius-tile);
-  overflow: hidden;
-  background: var(--lw-tile);
-  position: relative;
-}
-.media img { width: 100%; height: 100%; object-fit: cover; }
 
 .mediaMeta {
   position: absolute;
@@ -121,47 +95,52 @@
   .line, .arrow { transition: none; }
 }
 
-/* ── The cursor companion ──────────────────────────────────────────────
-   Fixed to the viewport, carried on springs from JS. Layers stack; the
-   active one wipes in directionally (down the list = from the top). */
-.ghost {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: clamp(230px, 19vw, 320px);
-  aspect-ratio: 3 / 2;
-  border-radius: var(--lw-radius-tile);
-  overflow: hidden;
-  background: var(--lw-tile);
-  box-shadow: 0 24px 64px rgba(7, 26, 49, 0.28);
-  pointer-events: none;
-  z-index: 50;
-  opacity: 0;
-  will-change: transform, opacity;
-}
-.ghostLayer {
+/* ── The flood ─────────────────────────────────────────────────────────
+   The hovered row's image fills the row's own rectangle behind the text —
+   wiped in from the left by JS (clip-path from the row spring). Same
+   scrim-and-paper-label grammar as the grid tiles. */
+.flood {
   position: absolute;
   inset: 0;
-  /* Opaque, so a project without an image shows the designed well —
-     never a stale neighbour bleeding through mid-wipe. */
-  background: var(--lw-tile);
-  will-change: clip-path;
+  overflow: hidden;
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  pointer-events: none;
 }
-.ghostLayer img {
+.flood img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
-.ghostMeta {
+.floodScrim {
   position: absolute;
-  left: 14px;
+  inset: 0;
+  /* Text sits left-of-centre; the scrim is heaviest there and eases off. */
+  background: linear-gradient(90deg,
+    rgba(7, 26, 49, 0.78) 0%,
+    rgba(7, 26, 49, 0.55) 45%,
+    rgba(7, 26, 49, 0.30) 100%);
+}
+.floodStat {
+  position: absolute;
+  right: 56px;
   bottom: 12px;
-  z-index: 3;
   font-family: var(--lw-font-mono);
   font-size: var(--t-label);
   letter-spacing: var(--lw-label-track);
   text-transform: uppercase;
-  color: rgb(252, 251, 248);
-  text-shadow: 0 1px 8px rgba(7, 26, 49, 0.5);
+  color: rgba(252, 251, 248, 0.85);
 }
+
+/* Text flips to paper while its image is behind it. */
+.line { position: relative; z-index: 1; }
+.row[data-open="true"] .n,
+.row[data-open="true"] .desc,
+.row[data-open="true"] .year { color: rgba(252, 251, 248, 0.78); }
+.row[data-open="true"] .name { color: rgb(252, 251, 248); }
+.row[data-open="true"] .arrow { color: rgb(252, 251, 248); }
+.n, .name, .desc, .year, .arrow { transition: color 240ms var(--lw-ease-out); }
+
+/* The tag flips to its on-media colour, like on the grid tiles. */
+.row[data-open="true"] .catCell { --tag-ink: rgba(255, 255, 255, 0.9); }

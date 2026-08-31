@@ -8,7 +8,7 @@ import { CategoryTag } from "@/components/Category/Category";
 import { ArrowDiagonal } from "@/components/icons/Arrows";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { subscribe } from "@/lib/raf";
-import { Spring, clamp } from "@/lib/spring";
+import { Spring } from "@/lib/spring";
 import type { Locale, ProjectCard } from "@/lib/types";
 
 import styles from "./WorkIndex.module.css";
@@ -22,77 +22,26 @@ export interface WorkIndexProps {
 }
 
 /**
- * The index. Rows stay slim; on a real pointer the hovered project's image
- * floats WITH the cursor — carried on springs, tilting with its own
- * momentum, wiping to the next image as the pointer crosses rows. On touch
- * (and under reduced motion) the image reveals inline instead: the same
- * information, the pointing device the reader actually has.
+ * The index. The hovered row FLOODS: it claims a little height on a spring
+ * while its image wipes in as the row's own full-bleed background, text
+ * flipping to paper over the same scrim the grid tiles use. One hover
+ * grammar for both /work views — labels live inside the media.
+ *
+ * Nothing is ever covered: the image occupies the rectangle that already
+ * belongs to that project. On touch the same flood is driven by scroll
+ * proximity — one presentation on every input. (A cursor-following ghost
+ * was tried and rejected: it sat on top of the very row being read.)
  */
 export function WorkIndex({ projects, locale }: WorkIndexProps) {
   const listRef = useRef<HTMLDivElement | null>(null);
-  const revealRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const mediaRefs = useRef<(HTMLDivElement | null)[]>([]);
   const rowRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const lineRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const floodRefs = useRef<(HTMLDivElement | null)[]>([]);
   const springs = useRef<Spring[]>([]);
   const hovered = useRef<number | null>(null);
   const openRef = useRef<number | null>(null);
   const [open, setOpen] = useState<number | null>(null);
   const reduced = useReducedMotion();
-
-  /* ── The floating ghost ──────────────────────────────────────────── */
-  const ghostRef = useRef<HTMLDivElement | null>(null);
-  const layerRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const metaRef = useRef<HTMLSpanElement | null>(null);
-  const gx = useRef(new Spring(0, 170, 26));
-  const gy = useRef(new Spring(0, 170, 26));
-  const gs = useRef(new Spring(0, 150, 20)); // presence: scale + opacity
-  const ptr = useRef({ x: 0, y: 0, has: false });
-  const activeGhost = useRef<number | null>(null);
-  const settleTimer = useRef<number | null>(null);
-
-  /* Swap the visible layer with a directional wipe: moving down the list
-     wipes the incoming image in from the top, moving up from the bottom. */
-  const showLayer = (next: number | null) => {
-    const prev = activeGhost.current;
-    if (next === prev) return;
-    activeGhost.current = next;
-
-    if (metaRef.current) {
-      const p = next !== null ? projects[next] : null;
-      metaRef.current.textContent = p?.stat
-        ? `${p.stat.value.toLocaleString(locale === "pl" ? "pl-PL" : "en-US")}${p.stat.suffix ?? ""} · ${p.stat.label}`
-        : "";
-    }
-    if (next === null) return;
-
-    const goingDown = prev === null || next > prev;
-    const from = goingDown ? "inset(0 0 100% 0)" : "inset(100% 0 0 0)";
-
-    for (let i = 0; i < projects.length; i++) {
-      const el = layerRefs.current[i];
-      if (!el) continue;
-      if (i === next) {
-        el.style.zIndex = "2";
-        el.style.visibility = "visible";
-        /* Start clipped without transition, reflow, then wipe open. */
-        el.style.transition = "none";
-        el.style.clipPath = prev === null ? "none" : from;
-        void el.offsetWidth;
-        el.style.transition = "clip-path 380ms var(--lw-ease-out)";
-        el.style.clipPath = "none";
-      } else {
-        el.style.zIndex = "1";
-      }
-    }
-    /* Once the wipe lands, drop everything beneath from painting. */
-    if (settleTimer.current) window.clearTimeout(settleTimer.current);
-    settleTimer.current = window.setTimeout(() => {
-      for (let i = 0; i < projects.length; i++) {
-        const el = layerRefs.current[i];
-        if (el && i !== activeGhost.current) el.style.visibility = "hidden";
-      }
-    }, 420);
-  };
 
   useEffect(() => {
     const list = listRef.current;
@@ -102,18 +51,8 @@ export function WorkIndex({ projects, locale }: WorkIndexProps) {
       springs.current = projects.map(() => new Spring(0, 150, 24));
     }
 
-    const finePointer = window.matchMedia("(pointer: fine)");
-
-    const onMove = (e: PointerEvent) => {
-      ptr.current.x = e.clientX;
-      ptr.current.y = e.clientY;
-      ptr.current.has = true;
-    };
-    list.addEventListener("pointermove", onMove, { passive: true });
-
     const stop = subscribe((dt) => {
       const touch = window.innerWidth <= TOUCH_MAX;
-      const ghostMode = !touch && !reduced && finePointer.matches;
 
       /* Which row has the reader's attention?
          Pointer on desktop; on touch, whichever row straddles the focal
@@ -140,93 +79,37 @@ export function WorkIndex({ projects, locale }: WorkIndexProps) {
         setOpen(target);
       }
 
-      /* Inline reveal — the touch/reduced-motion presentation. In ghost
-         mode every reveal stays shut and the ghost carries the image. */
       for (let i = 0; i < projects.length; i++) {
         const s = springs.current[i];
-        const el = revealRefs.current[i];
-        if (!s || !el) continue;
+        const line = lineRefs.current[i];
+        const flood = floodRefs.current[i];
+        if (!s || !line || !flood) continue;
 
-        s.target = !ghostMode && i === target ? 1 : 0;
+        s.target = i === target ? 1 : 0;
         if (reduced) s.set(s.target);
         else s.step(dt);
 
-        const inner = el.firstElementChild as HTMLElement | null;
-        if (!inner) continue;
-
+        const v = s.v;
         if (s.atRest && s.target === 0) {
-          if (el.style.height !== "0px") el.style.height = "0px";
-        } else {
-          el.style.height = `${inner.offsetHeight * s.v}px`;
+          /* Resting layout goes back to CSS. */
+          if (line.style.paddingBlock) {
+            line.style.paddingBlock = "";
+            flood.style.clipPath = "";
+            flood.style.opacity = "";
+          }
+          continue;
         }
+
+        /* The row claims height; its image wipes in from the left —
+           reading direction — and fades the last stretch. */
+        line.style.paddingBlock = `${18 + v * 26}px`;
+        flood.style.clipPath = `inset(0 ${(1 - v) * 100}% 0 0)`;
+        flood.style.opacity = String(Math.min(1, v * 1.6));
       }
-
-      /* The ghost itself. */
-      const ghost = ghostRef.current;
-      if (!ghost) return;
-
-      const wantGhost = ghostMode && target !== null && ptr.current.has;
-      if (wantGhost && target !== activeGhost.current) showLayer(target);
-      if (!wantGhost && activeGhost.current !== null && gs.current.v < 0.02) {
-        showLayer(null);
-      }
-
-      /* Placement: above-right of the cursor, so the hovered row — and the
-         unread rows below it — stay fully visible. Only rows the reader has
-         already passed sit underneath. Flips below the cursor near the top
-         edge and to its left near the right edge; the springs smooth every
-         flip into a glide. */
-      const vw = window.innerWidth;
-      const w0 = ghost.offsetWidth;
-      const h0 = ghost.offsetHeight;
-      let ax = ptr.current.x + 28;
-      if (ax + w0 > vw - 16) ax = ptr.current.x - w0 - 28;
-      let ay = ptr.current.y - h0 - 24;
-      if (ay < 12) ay = ptr.current.y + 28;
-
-      /* First appearance snaps into place so the ghost never flies in
-         from a stale corner; afterwards the springs carry it. */
-      if (wantGhost && gs.current.v < 0.02 && gs.current.target === 0) {
-        gx.current.set(ax);
-        gy.current.set(ay);
-      }
-
-      gx.current.target = ax;
-      gy.current.target = ay;
-      gs.current.target = wantGhost ? 1 : 0;
-      gx.current.step(dt);
-      gy.current.step(dt);
-      gs.current.step(dt);
-
-      const p = gs.current.v;
-      if (p < 0.01 && gs.current.target === 0) {
-        if (ghost.style.opacity !== "0") ghost.style.opacity = "0";
-        return;
-      }
-
-      /* Momentum tilt: the image leans into its own horizontal travel. */
-      const tilt = clamp(gx.current.vel * 0.008, -6, 6);
-      ghost.style.opacity = String(Math.min(1, p));
-      ghost.style.transform =
-        `translate3d(${gx.current.v}px, ${gy.current.v}px, 0) ` +
-        `rotate(${tilt}deg) scale(${0.86 + p * 0.14})`;
     });
 
-    return () => {
-      stop();
-      list.removeEventListener("pointermove", onMove);
-      if (settleTimer.current) window.clearTimeout(settleTimer.current);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return stop;
   }, [projects, reduced]);
-
-  /* In ghost mode the morph into the case study starts from the ghost —
-     the image the reader is actually looking at. */
-  const morphSource = (i: number) => {
-    const ghostVisible =
-      activeGhost.current === i && gs.current.v > 0.5 && ghostRef.current;
-    return ghostVisible ? layerRefs.current[i] : mediaRefs.current[i];
-  };
 
   return (
     <div className={styles.list} ref={listRef}>
@@ -235,7 +118,7 @@ export function WorkIndex({ projects, locale }: WorkIndexProps) {
           key={p.slug}
           href={`/${locale}/work/${p.slug}`}
           morphName="project-media"
-          getMorphEl={() => morphSource(i)}
+          getMorphEl={() => floodRefs.current[i] ?? null}
           prefetch={false}
           className={styles.row}
           ref={(el) => { rowRefs.current[i] = el; }}
@@ -249,7 +132,22 @@ export function WorkIndex({ projects, locale }: WorkIndexProps) {
           onFocus={() => { hovered.current = i; }}
           onBlur={() => { hovered.current = null; }}
         >
-          <div className={styles.line}>
+          {/* The row's own image, behind its text. */}
+          <div className={styles.flood} ref={(el) => { floodRefs.current[i] = el; }} aria-hidden="true">
+            {p.image ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={p.image} alt="" loading="lazy" decoding="async" />
+            ) : null}
+            <span className={styles.floodScrim} />
+            {p.stat ? (
+              <span className={styles.floodStat}>
+                {p.stat.value.toLocaleString(locale === "pl" ? "pl-PL" : "en-US")}
+                {p.stat.suffix ?? ""} · {p.stat.label}
+              </span>
+            ) : null}
+          </div>
+
+          <div className={styles.line} ref={(el) => { lineRefs.current[i] = el; }}>
             <span className={styles.n}>{String(i + 1).padStart(2, "0")}</span>
             <span className={styles.name}>{p.title}</span>
             <span className={styles.desc}>{p.desc}</span>
@@ -261,45 +159,8 @@ export function WorkIndex({ projects, locale }: WorkIndexProps) {
               <ArrowDiagonal size={14} />
             </span>
           </div>
-
-          <div className={styles.reveal} ref={(el) => { revealRefs.current[i] = el; }}>
-            <div>
-              <div className={styles.media} ref={(el) => { mediaRefs.current[i] = el; }}>
-                {p.image ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={p.image} alt="" loading="lazy" decoding="async" />
-                ) : null}
-                <span className={styles.mediaMeta}>
-                  {p.stat ? (
-                    <span className={styles.stat}>
-                      {p.stat.value.toLocaleString(locale === "pl" ? "pl-PL" : "en-US")}
-                      {p.stat.suffix ?? ""} · {p.stat.label}
-                    </span>
-                  ) : null}
-                </span>
-              </div>
-            </div>
-          </div>
         </TransitionLink>
       ))}
-
-      {/* The cursor companion. Decorative — every image also exists in its
-          row's inline reveal, which is the accessible presentation. */}
-      <div ref={ghostRef} className={styles.ghost} aria-hidden="true">
-        {projects.map((p, i) => (
-          <div
-            key={p.slug}
-            ref={(el) => { layerRefs.current[i] = el; }}
-            className={styles.ghostLayer}
-          >
-            {p.image ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={p.image} alt="" loading="lazy" decoding="async" />
-            ) : null}
-          </div>
-        ))}
-        <span ref={metaRef} className={styles.ghostMeta} />
-      </div>
     </div>
   );
 }

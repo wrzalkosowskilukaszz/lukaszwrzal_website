@@ -7,8 +7,9 @@
   font-weight: 500;
   letter-spacing: var(--lw-label-track);
   text-transform: uppercase;
-  color: var(--lw-muted);
+  color: var(--tag-ink, var(--lw-muted));
   white-space: nowrap;
+  transition: color 240ms var(--lw-ease-out);
 }
 
 /* On a dark tile the label sits over the scrim. */
