@@ -110,7 +110,12 @@
   transition: height 460ms var(--lw-ease-out);
 }
 .descInner {
-  margin: 7px 0 0;
+  /* Padding, NOT margin: the reveal sizes the container to this element's
+     scrollHeight, which includes padding but excludes margins — a margin
+     here left the box exactly that many pixels too short, clipping the
+     last line's descenders. */
+  margin: 0;
+  padding-top: 7px;
   font-size: var(--t-sm);
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.74);
