@@ -128,7 +128,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  width: clamp(280px, 24vw, 380px);
+  width: clamp(230px, 19vw, 320px);
   aspect-ratio: 3 / 2;
   border-radius: var(--lw-radius-tile);
   overflow: hidden;

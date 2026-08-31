@@ -171,15 +171,28 @@ export function WorkIndex({ projects, locale }: WorkIndexProps) {
         showLayer(null);
       }
 
-      /* First appearance snaps to the cursor so the ghost never flies in
+      /* Placement: above-right of the cursor, so the hovered row — and the
+         unread rows below it — stay fully visible. Only rows the reader has
+         already passed sit underneath. Flips below the cursor near the top
+         edge and to its left near the right edge; the springs smooth every
+         flip into a glide. */
+      const vw = window.innerWidth;
+      const w0 = ghost.offsetWidth;
+      const h0 = ghost.offsetHeight;
+      let ax = ptr.current.x + 28;
+      if (ax + w0 > vw - 16) ax = ptr.current.x - w0 - 28;
+      let ay = ptr.current.y - h0 - 24;
+      if (ay < 12) ay = ptr.current.y + 28;
+
+      /* First appearance snaps into place so the ghost never flies in
          from a stale corner; afterwards the springs carry it. */
       if (wantGhost && gs.current.v < 0.02 && gs.current.target === 0) {
-        gx.current.set(ptr.current.x);
-        gy.current.set(ptr.current.y);
+        gx.current.set(ax);
+        gy.current.set(ay);
       }
 
-      gx.current.target = ptr.current.x;
-      gy.current.target = ptr.current.y;
+      gx.current.target = ax;
+      gy.current.target = ay;
       gs.current.target = wantGhost ? 1 : 0;
       gx.current.step(dt);
       gy.current.step(dt);
@@ -191,13 +204,11 @@ export function WorkIndex({ projects, locale }: WorkIndexProps) {
         return;
       }
 
-      const w = ghost.offsetWidth;
-      const h = ghost.offsetHeight;
       /* Momentum tilt: the image leans into its own horizontal travel. */
       const tilt = clamp(gx.current.vel * 0.008, -6, 6);
       ghost.style.opacity = String(Math.min(1, p));
       ghost.style.transform =
-        `translate3d(${gx.current.v - w / 2}px, ${gy.current.v - h / 2}px, 0) ` +
+        `translate3d(${gx.current.v}px, ${gy.current.v}px, 0) ` +
         `rotate(${tilt}deg) scale(${0.86 + p * 0.14})`;
     });
 
