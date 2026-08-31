@@ -44,6 +44,9 @@
    is what makes it read as furniture rather than a carousel caption. */
 .bar {
   position: absolute;
+  /* Above the planes: their z-index runs to 4 from JS, and a plane with a
+     VIDEO paints opaquely — the transparent wells only hid this. */
+  z-index: 6;
   left: clamp(16px, 2.2vw, 40px);
   right: clamp(16px, 2.2vw, 40px);
   bottom: clamp(16px, 2.2vw, 40px);

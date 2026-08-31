@@ -235,7 +235,7 @@ export function HeroReel({ projects, locale }: HeroReelProps) {
                     muted
                     loop
                     playsInline
-                    preload={i === 0 ? "metadata" : "none"}
+                    preload="auto"
                   />
                 ) : p.image ? (
                   // eslint-disable-next-line @next/next/no-img-element
