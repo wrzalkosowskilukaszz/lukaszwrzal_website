@@ -89,9 +89,11 @@ export function ProjectPage({
       const transition = document.startViewTransition(() => {
         flushSync(update);
       });
-      void transition.finished.finally(() => {
+      // Rejects when a newer transition aborts this one — routine, not an error.
+      const untag = () => {
         if (el) el.style.viewTransitionName = "";
-      });
+      };
+      transition.finished.then(untag, untag);
     },
     [reduced],
   );

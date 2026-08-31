@@ -90,9 +90,12 @@ export function TransitionLink({
       );
 
       // The name must not outlive the transition, or the next one collides.
-      void transition.finished.finally(() => {
+      // `finished` REJECTS when a newer transition aborts this one — routine
+      // traffic (fast double-clicks), not an error worth surfacing.
+      const untag = () => {
         if (el) el.style.viewTransitionName = "";
-      });
+      };
+      transition.finished.then(untag, untag);
     },
     [href, morphName, getMorphEl, onClick, reduced, router],
   );
