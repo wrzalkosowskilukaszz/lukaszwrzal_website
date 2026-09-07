@@ -16,9 +16,10 @@
     },
     {
       "type": "figure",
-      "src": "01.jpg",
+      "src": "01.json",
+      "poster": "01.jpg",
+      "fit": "cover",
       "width": "read",
-      "parallax": 0.1,
       "link": {
         "href": "https://surveyvor.app",
         "label": "Open surveyvor.app"
@@ -55,7 +56,13 @@
             "The gaps are still there. They’re just harder to see."
           ],
           "src": "10.jpg"
-        },
+        }
+      ]
+    },
+    {
+      "type": "story",
+      "side": "left",
+      "items": [
         {
           "eyebrow": "The idea",
           "statement": "So I built the opposite.",
@@ -64,18 +71,6 @@
             "The more interesting question was: what if AI didn’t try to complete the brief? What if it tried to find what the brief hadn’t settled?"
           ],
           "src": "11.jpg"
-        }
-      ]
-    },
-    {
-      "type": "gallery",
-      "variant": "grid-2",
-      "items": [
-        {
-          "src": "02.jpg"
-        },
-        {
-          "src": "03.jpg"
         }
       ]
     },
@@ -100,19 +95,10 @@
       ]
     },
     {
-      "type": "gallery",
-      "variant": "grid-3",
-      "items": [
-        {
-          "src": "04.jpg"
-        },
-        {
-          "src": "05.jpg"
-        },
-        {
-          "src": "06.jpg"
-        }
-      ]
+      "type": "figure",
+      "src": "08.json",
+      "width": "read",
+      "tone": "black"
     },
     {
       "type": "list",
@@ -140,12 +126,14 @@
     },
     {
       "type": "text",
+      "spacing": "tight",
       "body": [
         "Those are different problems. They need different conversations."
       ]
     },
     {
       "type": "story",
+      "side": "left",
       "items": [
         {
           "eyebrow": "Product decisions",
@@ -154,65 +142,28 @@
             "A tool that only finds problems becomes annoying very quickly. So Surveyvor has to tell you at least one thing the brief already gets right. Every finding can be dismissed immediately. And once you’ve dismissed something, it stays dismissed.",
             "Small details, but they change the relationship with the tool. It becomes something you can work with rather than something that keeps nagging."
           ],
-          "src": "13.jpg"
+          "src": "13.mp4"
         }
       ]
     },
     {
-      "type": "list",
-      "variant": "rows",
-      "items": [
-        {
-          "term": "Real-time autocomplete",
-          "description": "useful for writing faster, but directly against the product’s purpose."
-        },
-        {
-          "term": "User accounts",
-          "description": "briefs stay in the browser, trading sync and recovery for a much stronger privacy story."
-        },
-        {
-          "term": "A native app wrapper",
-          "description": "no meaningful product problem to solve."
-        },
-        {
-          "term": "A “brief health” score",
-          "description": "invented precision is still invented precision."
-        }
+      "type": "text",
+      "eyebrow": "The craft",
+      "statement": "Then I built the boring stuff too.",
+      "body": [
+        "Accessibility was measured across 74 contrast pairs with zero failures, alongside full keyboard paths, focus trapping in dialogs, 44px touch targets and reduced-motion support.",
+        "The interface runs on a token-based design system. The privacy policy and terms were written around what the product actually does. And 56 tests cover storage migrations, template switching and the guard preventing brief content from reaching analytics."
       ],
-      "statement": "What I deliberately didn’t build.",
-      "eyebrow": "The scope"
+      "variant": "wide"
     },
     {
-      "type": "story",
-      "items": [
-        {
-          "eyebrow": "The craft",
-          "statement": "Then I built the boring stuff too.",
-          "body": [
-            "Accessibility was measured across 74 contrast pairs with zero failures, alongside full keyboard paths, focus trapping in dialogs, 44px touch targets and reduced-motion support.",
-            "The interface runs on a token-based design system. The privacy policy and terms were written around what the product actually does. And 56 tests cover storage migrations, template switching and the guard preventing brief content from reaching analytics."
-          ],
-          "src": "14.jpg"
-        }
-      ]
-    },
-    {
-      "type": "figure",
-      "src": "07.jpg",
-      "width": "full-bleed"
-    },
-    {
-      "type": "story",
-      "items": [
-        {
-          "eyebrow": "The result",
-          "statement": "Surveyvor is live at surveyvor.app in closed beta. I designed the brand, product, system and interface, then built the thing myself.",
-          "body": [
-            "The next test isn’t another feature. It’s ten real designers using it. I want to see what they dismiss, what they resolve, and whether Surveyvor actually helps people think more clearly — or just becomes very good at finding things to complain about."
-          ],
-          "src": "15.jpg"
-        }
-      ]
+      "type": "text",
+      "eyebrow": "The result",
+      "statement": "Surveyvor is live at surveyvor.app in closed beta. I designed the brand, product, system and interface, then built the thing myself.",
+      "body": [
+        "The next test isn’t another feature. It’s ten real designers using it. I want to see what they dismiss, what they resolve, and whether Surveyvor actually helps people think more clearly — or just becomes very good at finding things to complain about."
+      ],
+      "variant": "wide"
     }
   ]
 }

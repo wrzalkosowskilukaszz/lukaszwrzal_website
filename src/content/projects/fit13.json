@@ -46,27 +46,19 @@
           "body": [
             "Neon. Shouting. “Push harder.” Everything tries to motivate so aggressively that it starts looking like background noise.",
             "Fit13 needed strength without the performance of strength."
-          ],
-          "src": "10.jpg"
-        },
-        {
-          "eyebrow": "The idea",
-          "body": [
-            "The number 13 became the starting point. While exploring its construction, I found enough space inside the numeral to hide a human figure in motion."
-          ],
-          "src": "11.jpg"
+          ]
         }
       ]
     },
     {
-      "type": "gallery",
-      "variant": "grid-2",
+      "type": "story",
+      "side": "left",
       "items": [
         {
-          "src": "02.jpg"
-        },
-        {
-          "src": "03.jpg"
+          "eyebrow": "The idea",
+          "body": [
+            "The number 13 became the starting point. While exploring its construction, I found enough space inside the numeral to hide a human figure in motion."
+          ]
         }
       ]
     },
@@ -82,43 +74,18 @@
           "eyebrow": "The work",
           "body": [
             "The system extends across social, apparel and signage, including a wall-scale application. The logo animation keeps the same construction rule in motion instead of inventing a second idea."
-          ],
-          "src": "12.jpg"
+          ]
         }
       ]
     },
     {
-      "type": "gallery",
-      "variant": "grid-3",
-      "items": [
-        {
-          "src": "04.jpg"
-        },
-        {
-          "src": "05.jpg"
-        },
-        {
-          "src": "06.jpg"
-        }
-      ]
-    },
-    {
-      "type": "figure",
-      "src": "07.jpg",
-      "width": "full-bleed"
-    },
-    {
-      "type": "story",
-      "items": [
-        {
-          "eyebrow": "The result",
-          "statement": "Fit13 gets energy without looking like another motivational gym brand.",
-          "body": [
-            "And there is a broader design principle behind it: the strongest concept doesn’t always need to sit on top of the design. Sometimes it should be hiding inside it."
-          ],
-          "src": "13.jpg"
-        }
-      ]
+      "type": "text",
+      "eyebrow": "The result",
+      "statement": "Fit13 gets energy without looking like another motivational gym brand.",
+      "body": [
+        "And there is a broader design principle behind it: the strongest concept doesn’t always need to sit on top of the design. Sometimes it should be hiding inside it."
+      ],
+      "variant": "wide"
     }
   ]
 }

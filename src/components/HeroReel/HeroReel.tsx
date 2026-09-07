@@ -1,5 +1,6 @@
 "use client";
 
+import type { AnimationItem } from "lottie-web";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -28,10 +29,11 @@ export function HeroReel({ projects, locale }: HeroReelProps) {
   const fillRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   const planeSprings = useRef<Spring[]>([]);
-  const ptr = useRef({ x: new Spring(0, 60, 14), y: new Spring(0, 60, 14) });
   const activeRef = useRef(0);
   const [active, setActive] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const lottieBoxRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const lottieAnims = useRef<(AnimationItem | null)[]>([]);
   const reduced = useReducedMotion();
 
   /* Every input — scroll, drag, keys, segment clicks — resolves to a scroll
@@ -62,18 +64,6 @@ export function HeroReel({ projects, locale }: HeroReelProps) {
         (_, i) => new Spring(i === 0 ? 0 : 1, 120, 22),
       );
     }
-
-    let tx = 0, ty = 0;
-
-    const onMove = (e: PointerEvent) => {
-      const r = frame.getBoundingClientRect();
-      tx = ((e.clientX - r.left) / r.width) * 2 - 1;
-      ty = ((e.clientY - r.top) / r.height) * 2 - 1;
-    };
-    const onLeave = () => { tx = 0; ty = 0; };
-
-    frame.addEventListener("pointermove", onMove, { passive: true });
-    frame.addEventListener("pointerleave", onLeave, { passive: true });
 
     /* Drag with a velocity throw. Threshold 60px, or a flick over 0.6 px/ms.
        touch-action: pan-y on the frame means a vertical swipe still scrolls
@@ -146,11 +136,6 @@ export function HeroReel({ projects, locale }: HeroReelProps) {
         setActive(next);
       }
 
-      ptr.current.x.target = reduced ? 0 : tx;
-      ptr.current.y.target = reduced ? 0 : ty;
-      const px = reduced ? 0 : ptr.current.x.step(dt);
-      const py = reduced ? 0 : ptr.current.y.step(dt);
-
       for (let i = 0; i < count; i++) {
         const s = planeSprings.current[i];
         s.target = i === activeRef.current ? 0 : 1;
@@ -167,10 +152,8 @@ export function HeroReel({ projects, locale }: HeroReelProps) {
         plane.style.opacity = String(1 - v * 0.25);
         plane.style.zIndex = String(i === activeRef.current ? 4 : 3 - Math.abs(i - activeRef.current));
 
-        const drift = (1 - v) * 0.5;
         media.style.transform =
-          `translate3d(${px * 14 * drift}px, ${py * 10 * drift - v * 26}px, 0) ` +
-          `scale(${1.02 + (1 - v) * 0.03})`;
+          `translate3d(0, ${-v * 26}px, 0) scale(${1.02 + (1 - v) * 0.03})`;
       }
 
       /* Progress segments show the live position within the track. */
@@ -184,8 +167,6 @@ export function HeroReel({ projects, locale }: HeroReelProps) {
 
     return () => {
       stop();
-      frame.removeEventListener("pointermove", onMove);
-      frame.removeEventListener("pointerleave", onLeave);
       frame.removeEventListener("pointerdown", onDown);
       frame.removeEventListener("pointermove", onDrag);
       window.removeEventListener("pointerup", onUp);
@@ -194,6 +175,35 @@ export function HeroReel({ projects, locale }: HeroReelProps) {
     };
   }, [count, reduced, goTo]);
 
+  /* A Lottie hero (e.g. Surveyvor's 01.json) plays as itself on its plane —
+     the same animation the case page shows, cover-cropped like a video. */
+  useEffect(() => {
+    let dead = false;
+    const anims = lottieAnims.current;
+    void import("lottie-web/build/player/lottie_light").then((mod) => {
+      if (dead) return;
+      projects.forEach((p, i) => {
+        const el = lottieBoxRefs.current[i];
+        if (!p.heroLottie || !el || anims[i]) return;
+        anims[i] = mod.default.loadAnimation({
+          container: el,
+          renderer: "svg",
+          loop: true,
+          /* The play/pause effect below fires on plane CHANGES — it has
+             already run by the time this async load lands, so the active
+             plane must start itself or it sits on frame 0 forever. */
+          autoplay: i === activeRef.current && !reduced,
+          path: p.heroLottie,
+          rendererSettings: { preserveAspectRatio: "xMidYMid slice" },
+        });
+      });
+    });
+    return () => {
+      dead = true;
+      anims.forEach((a, i) => { a?.destroy(); anims[i] = null; });
+    };
+  }, [projects, reduced]);
+
   /* Only the visible plane spends decode time; the rest hold their
      poster. Reduced motion keeps every plane on its still. */
   useEffect(() => {
@@ -201,6 +211,11 @@ export function HeroReel({ projects, locale }: HeroReelProps) {
       if (!v) return;
       if (i === active && !reduced) void v.play().catch(() => {});
       else v.pause();
+    });
+    lottieAnims.current.forEach((a, i) => {
+      if (!a) return;
+      if (i === active && !reduced) a.play();
+      else a.pause();
     });
   }, [active, reduced]);
 
@@ -227,7 +242,12 @@ export function HeroReel({ projects, locale }: HeroReelProps) {
               aria-hidden={i !== active}
             >
               <div className={styles.media} ref={(el) => { mediaRefs.current[i] = el; }}>
-                {p.heroVideo ?? p.video ? (
+                {p.heroLottie ? (
+                  <div
+                    className={styles.lottieBox}
+                    ref={(el) => { lottieBoxRefs.current[i] = el; }}
+                  />
+                ) : p.heroVideo ?? p.video ? (
                   <video
                     ref={(el) => { videoRefs.current[i] = el; }}
                     src={p.heroVideo ?? p.video}
@@ -235,7 +255,9 @@ export function HeroReel({ projects, locale }: HeroReelProps) {
                     muted
                     loop
                     playsInline
-                    preload="auto"
+                    /* Only the plane on stage earns a full download; parked
+                       planes fetch a sliver and catch up when they activate. */
+                    preload={i === active ? "auto" : "metadata"}
                   />
                 ) : p.image ? (
                   // eslint-disable-next-line @next/next/no-img-element

@@ -79,6 +79,10 @@ export function Media({
         loop: true,
         autoplay: !reduced,
         path: mediaUrl(ctx.slug, media.src),
+        rendererSettings: {
+          preserveAspectRatio:
+            media.fit === "cover" ? "xMidYMid slice" : "xMidYMid meet",
+        },
       });
     });
     return () => {

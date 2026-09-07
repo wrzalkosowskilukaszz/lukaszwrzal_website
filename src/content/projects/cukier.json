@@ -46,28 +46,20 @@
           "body": [
             "Small packaging. Interior scale. Digital applications.",
             "A mark that works beautifully on a label can fall apart when enlarged. A mark designed for a wall can lose its character when reduced to a few centimetres. Production adds another problem: each application may be made by a different process, by different people."
-          ],
-          "src": "10.jpg"
-        },
+          ]
+        }
+      ]
+    },
+    {
+      "type": "story",
+      "side": "left",
+      "items": [
         {
           "eyebrow": "The idea",
           "statement": "Build the mark around one construction rule, then make the rule the system.",
           "body": [
             "Instead of drawing exceptions for every format, each application becomes a variation of the same underlying logic."
-          ],
-          "src": "11.jpg"
-        }
-      ]
-    },
-    {
-      "type": "gallery",
-      "variant": "grid-2",
-      "items": [
-        {
-          "src": "02.jpg"
-        },
-        {
-          "src": "03.jpg"
+          ]
         }
       ]
     },
@@ -83,43 +75,18 @@
           "eyebrow": "The work",
           "body": [
             "A documented logotype construction, identity system, packaging and interior applications built from the same foundation."
-          ],
-          "src": "12.jpg"
+          ]
         }
       ]
     },
     {
-      "type": "gallery",
-      "variant": "grid-3",
-      "items": [
-        {
-          "src": "04.jpg"
-        },
-        {
-          "src": "05.jpg"
-        },
-        {
-          "src": "06.jpg"
-        }
-      ]
-    },
-    {
-      "type": "figure",
-      "src": "07.jpg",
-      "width": "full-bleed"
-    },
-    {
-      "type": "story",
-      "items": [
-        {
-          "eyebrow": "The result",
-          "body": [
-            "The mark holds its form from small packaging to architectural scale without needing a separate redraw for every condition.",
-            "The wider point is production reality: the identity is designed to keep working even when the original designer isn’t there to check every output."
-          ],
-          "src": "13.jpg"
-        }
-      ]
+      "type": "text",
+      "eyebrow": "The result",
+      "statement": "The mark holds its form from small packaging to architectural scale without needing a separate redraw for every condition.",
+      "body": [
+        "The wider point is production reality: the identity is designed to keep working even when the original designer isn’t there to check every output."
+      ],
+      "variant": "wide"
     }
   ]
 }

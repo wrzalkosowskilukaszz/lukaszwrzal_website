@@ -5,8 +5,9 @@
   text-align: center;
 }
 
+/* The greeting is a full sentence — always the long-title step. */
 .title {
-  font-size: var(--t-xl);
+  font-size: var(--t-xl-long);
   line-height: 1.1;
   margin-bottom: clamp(1rem, 2vw, 1.5rem);
 }

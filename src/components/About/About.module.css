@@ -42,8 +42,8 @@
 
 .title {
   margin: 12px 0 18px;
-  font-size: var(--t-xl);
-  line-height: 1.12;
+  font-size: var(--t-lg);
+  line-height: var(--lh-lg);
 }
 
 .intro {

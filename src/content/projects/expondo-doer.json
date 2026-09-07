@@ -46,28 +46,20 @@
           "body": [
             "Ambition. Collaboration. Accountability. The usual corporate vocabulary.",
             "The problem wasn’t that they were wrong. They were just too generic to become part of everyday conversation."
-          ],
-          "src": "10.jpg"
-        },
+          ]
+        }
+      ]
+    },
+    {
+      "type": "story",
+      "side": "left",
+      "items": [
         {
           "eyebrow": "The idea",
           "statement": "Instead of describing a value, I gave people an attitude: DO.",
           "body": [
             "Then I turned it into a character. The existing Expondo “DO” mark became the starting point for a mascot that could move, react and communicate rather than simply sit on a poster."
-          ],
-          "src": "11.jpg"
-        }
-      ]
-    },
-    {
-      "type": "gallery",
-      "variant": "grid-2",
-      "items": [
-        {
-          "src": "02.jpg"
-        },
-        {
-          "src": "03.jpg"
+          ]
         }
       ]
     },
@@ -84,43 +76,18 @@
           "body": [
             "The DOer was taken from rough pencil sketches through to final animation, then extended into workplace posters, print collateral and internal communication.",
             "It stayed grounded in the existing Expondo identity: playful enough to be memorable, but never detached from a company built around real tools and real work."
-          ],
-          "src": "12.jpg"
+          ]
         }
       ]
     },
     {
-      "type": "gallery",
-      "variant": "grid-3",
-      "items": [
-        {
-          "src": "04.jpg"
-        },
-        {
-          "src": "05.jpg"
-        },
-        {
-          "src": "06.jpg"
-        }
-      ]
-    },
-    {
-      "type": "figure",
-      "src": "07.jpg",
-      "width": "full-bleed"
-    },
-    {
-      "type": "story",
-      "items": [
-        {
-          "eyebrow": "The result",
-          "body": [
-            "An abstract list of values became one word people could actually use. The DOer became a recognisable internal voice for announcements, onboarding, presentations and updates.",
-            "The useful part of the project wasn’t making a mascot. It was making the culture easier to recognise."
-          ],
-          "src": "13.jpg"
-        }
-      ]
+      "type": "text",
+      "eyebrow": "The result",
+      "statement": "The useful part of the project wasn’t making a mascot. It was making the culture easier to recognise.",
+      "body": [
+        "An abstract list of values became one word people could actually use. The DOer became a recognisable internal voice for announcements, onboarding, presentations and updates."
+      ],
+      "variant": "wide"
     }
   ]
 }

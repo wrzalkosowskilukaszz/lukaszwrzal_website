@@ -174,6 +174,19 @@ function cardHeroVideo(doc: ProjectDoc): string | undefined {
   return undefined;
 }
 
+/* The hero figure's Lottie animation (e.g. 01.json) — the reel plays it in
+   place of a video when the hero is an animation. Only the FIRST moving
+   figure counts as the hero: a mid-page Lottie (AuraGen's 08.json) must not
+   hijack a project whose hero is a video. */
+function cardHeroLottie(doc: ProjectDoc): string | undefined {
+  for (const b of doc.blocks) {
+    if (b.type !== "figure" || b.missing !== false) continue;
+    if (/\.(mp4|webm)$/i.test(b.src)) return undefined;
+    if (/\.json$/i.test(b.src)) return `/work/${doc.slug}/${b.src}`;
+  }
+  return undefined;
+}
+
 /* Drop a `tile.mp4` into the project folder and its grid tile comes alive
    on hover — fetched only then (preload=none), the card image standing in
    as poster until. */
@@ -188,6 +201,7 @@ export function toCard(doc: ProjectDoc, locale: Locale): ProjectCard {
   const image = cardImage(doc);
   const video = cardVideo(doc);
   const heroVideo = cardHeroVideo(doc);
+  const heroLottie = cardHeroLottie(doc);
   return {
     slug: doc.slug,
     cat: doc.cat,
@@ -198,6 +212,7 @@ export function toCard(doc: ProjectDoc, locale: Locale): ProjectCard {
     ...(image ? { image } : {}),
     ...(video ? { video } : {}),
     ...(heroVideo ? { heroVideo } : {}),
+    ...(heroLottie ? { heroLottie } : {}),
   };
 }
 

@@ -26,6 +26,9 @@ export interface Media {
   alt?: Localised;
   /** For video media: the still shown before playback (e.g. "01.jpg"). */
   poster?: string;
+  /** For Lottie media: `cover` crops to fill the frame (like a video's
+      object-fit) instead of the default letterboxed fit. */
+  fit?: "contain" | "cover";
   /** Set by the loader when the file is not in public/work/<slug>/ yet. */
   missing?: boolean;
 }

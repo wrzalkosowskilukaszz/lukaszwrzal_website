@@ -170,7 +170,10 @@ Tests cover the block registry invariants and lowercase-filename rule
 - Three projects want one real metric each: Expondo Blackout, Rennes,
   Resi4Rent Website.
 - AuraGen is the finished reference page (real copy, images, video,
-  Lottie). The other 15 await Luke's new copy — rebuild each around its
-  own structure the way AuraGen was, not the migration template.
+  Lottie). The other 15 now follow its structural language (single-chapter
+  stories alternating left/right, statements, wide text close — done
+  2026-08-31, existing copy recomposed verbatim), but they still await
+  Luke's new copy; when it lands, rebuild each around its own structure
+  the way AuraGen was.
 - Gallery rhythm is uniform across projects (migration artifact); vary
   per project (masonry/strip/full-bleed) once real images land.

@@ -106,6 +106,7 @@
 .heroCentred { text-align: center; }
 .heroCentred .heroLede { margin-inline: auto; }
 .heroTitle { margin: 14px 0 18px; }
+.heroTitleLong { font-size: var(--t-xl-long); line-height: 1.1; }
 .heroLede {
   max-width: 60ch;
   font-size: var(--t-md);

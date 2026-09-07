@@ -139,6 +139,7 @@
   letter-spacing: var(--lw-display-track);
   transition: transform 340ms var(--lw-ease-playful);
 }
+.nextNameLong { font-size: var(--t-xl-long); }
 .nextDisc {
   display: inline-flex;
   align-items: center;

@@ -128,7 +128,11 @@ export function ProjectPage({
         <div className={styles.nextInner}>
           <p className="lw-eyebrow">{t(locale, "nextProject")}</p>
           <Link href={`/${locale}/work/${next.slug}`} className={styles.nextLink}>
-            <span className={styles.nextName}>{next.title}</span>
+            <span
+              className={`${styles.nextName} ${next.title.length > 16 ? styles.nextNameLong : ""}`}
+            >
+              {next.title}
+            </span>
             <span className={styles.nextDisc} aria-hidden="true">
               <ArrowRight size={18} />
             </span>

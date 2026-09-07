@@ -312,6 +312,17 @@
                 "href"
               ],
               "additionalProperties": false
+            },
+            "fit": {
+              "enum": [
+                "contain",
+                "cover"
+              ],
+              "description": "Lottie only: cover crops to fill the frame like a video; default letterboxes."
+            },
+            "poster": {
+              "type": "string",
+              "description": "Video/Lottie still: shown before playback and used as the grid-tile image."
             }
           }
         },

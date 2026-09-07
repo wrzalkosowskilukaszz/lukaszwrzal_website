@@ -8,10 +8,14 @@ import type {
 
 export function Hero({ block, ctx }: { block: HeroBlock; ctx: BlockContext }) {
   const centred = (block.variant ?? "centred") === "centred";
+  // Long titles drop one display step (72px cap → 60px cap) so they never
+  // wrap into a wall of type. 16 chars keeps "Teatr Nowe Formy" on the
+  // short step and moves "Rennes School of Business" to the long one.
+  const long = block.title.length > 16;
   return (
     <header className={`${s.hero} ${centred ? s.heroCentred : ""}`}>
       {block.eyebrow ? <p className={s.eyebrow}>{tx(block.eyebrow, ctx.locale)}</p> : null}
-      <h1 className={s.heroTitle}>{block.title}</h1>
+      <h1 className={`${s.heroTitle} ${long ? s.heroTitleLong : ""}`}>{block.title}</h1>
       {block.lede ? <p className={s.heroLede}>{tx(block.lede, ctx.locale)}</p> : null}
     </header>
   );

@@ -39,6 +39,8 @@
   height: 100%;
   object-fit: cover;
 }
+.lottieBox { position: absolute; inset: 0; }
+.lottieBox svg { width: 100%; height: 100%; display: block; }
 
 /* The bar itself never moves. Only the type inside it cycles — that stillness
    is what makes it read as furniture rather than a carousel caption. */

@@ -46,16 +46,20 @@
           "body": [
             "Black backgrounds. Red accents. Giant discounts. Increasingly desperate typography.",
             "The category had spent so long trying to look urgent that urgency itself had become invisible."
-          ],
-          "src": "10.jpg"
-        },
+          ]
+        }
+      ]
+    },
+    {
+      "type": "story",
+      "side": "left",
+      "items": [
         {
           "eyebrow": "The idea",
           "body": [
             "Instead of making Expondo shout louder, I wanted to make people notice the moment something went quiet.",
             "A solar eclipse gave the campaign a built-in narrative: the light disappears slowly, everything goes dark, then the sale is revealed."
-          ],
-          "src": "11.jpg"
+          ]
         }
       ]
     },
@@ -64,18 +68,15 @@
       "items": [
         {
           "title": "The light disappears slowly",
-          "body": "The category shouts; the campaign begins by dimming. Everyday scenes lose their light one notch at a time.",
-          "src": "02.jpg"
+          "body": "The category shouts; the campaign begins by dimming. Everyday scenes lose their light one notch at a time."
         },
         {
           "title": "Everything goes dark",
-          "body": "Full eclipse. Darkness, atmospheric light, and the feeling that light itself is becoming scarce.",
-          "src": "03.jpg"
+          "body": "Full eclipse. Darkness, atmospheric light, and the feeling that light itself is becoming scarce."
         },
         {
           "title": "The sale is revealed",
-          "body": "The light returns as the offer. One event across motion, landing pages and email — not a pile of channel adaptations.",
-          "src": "04.jpg"
+          "body": "The light returns as the offer. One event across motion, landing pages and email — not a pile of channel adaptations."
         }
       ]
     },
@@ -92,39 +93,17 @@
           "body": [
             "A full visual world built around darkness, atmospheric light and the feeling that light itself was becoming scarce.",
             "Motion, landing pages and email followed the same three-stage structure, so the campaign felt like one event rather than a pile of channel adaptations."
-          ],
-          "src": "12.jpg"
+          ]
         }
       ]
     },
     {
-      "type": "gallery",
-      "variant": "grid-2",
-      "items": [
-        {
-          "src": "05.jpg"
-        },
-        {
-          "src": "06.jpg"
-        }
-      ]
-    },
-    {
-      "type": "figure",
-      "src": "07.jpg",
-      "width": "full-bleed"
-    },
-    {
-      "type": "story",
-      "items": [
-        {
-          "eyebrow": "The result",
-          "body": [
-            "The campaign became one of Expondo’s key creative drivers for Black Week and was associated with a noticeably improved sales period."
-          ],
-          "src": "13.jpg"
-        }
-      ]
+      "type": "text",
+      "eyebrow": "The result",
+      "body": [
+        "The campaign became one of Expondo’s key creative drivers for Black Week and was associated with a noticeably improved sales period."
+      ],
+      "variant": "wide"
     }
   ]
 }

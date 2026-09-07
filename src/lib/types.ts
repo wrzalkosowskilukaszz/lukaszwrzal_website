@@ -37,5 +37,8 @@ export interface ProjectCard {
   video?: string;
   /** The hero figure's video at full size, for the homepage reel. */
   heroVideo?: string;
+  /** The hero figure's Lottie animation — plays on the reel plane when the
+      hero is an animation rather than a video. */
+  heroLottie?: string;
 }
 

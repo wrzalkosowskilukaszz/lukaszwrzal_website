@@ -29,6 +29,12 @@
   padding: clamp(3rem, 6vw, 5.5rem) 0 clamp(1.75rem, 3.5vw, 2.75rem);
 }
 
+/* Section display, one step below the page title — same as About/Clients. */
+.head h2 {
+  font-size: var(--t-lg);
+  line-height: var(--lh-lg);
+}
+
 .showAllWrap { text-align: right; flex: none; }
 
 .showAll {
@@ -66,8 +72,8 @@
 .wide   { grid-column: span 7; height: clamp(220px, 25vw, 400px); }
 .narrow { grid-column: span 5; height: clamp(220px, 25vw, 400px); }
 
-/* Lead tile earns bigger type. */
-.lead :global(.tileName) { font-size: var(--t-lg); }
+/* The lead tile earns its weight through SIZE alone — its name sits on the
+   same --t-md step as every other tile, so the grid reads as one system. */
 
 @media (max-width: 1000px) {
   .lead, .wide, .narrow { grid-column: span 12; }

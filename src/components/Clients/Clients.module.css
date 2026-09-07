@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: clamp(2rem, 5vw, 4rem);
-  width: min(var(--lw-stage-max), 100% - 48px);
+  width: min(var(--lw-read-max), 100% - 48px);
   margin: clamp(4rem, 8vw, 7.5rem) auto 0;
 }
 
@@ -11,8 +11,8 @@
 
 .title {
   margin: 12px 0 14px;
-  font-size: var(--t-xl);
-  line-height: 1.12;
+  font-size: var(--t-lg);
+  line-height: var(--lh-lg);
 }
 
 .intro {

@@ -19,8 +19,8 @@
 .lockup { justify-content: center; margin-bottom: clamp(1.5rem, 3vw, 2.25rem); }
 
 .title {
-  font-size: var(--t-xl);
-  line-height: 1.12;
+  font-size: var(--t-lg);
+  line-height: var(--lh-lg);
   margin-bottom: 1rem;
 }
 
